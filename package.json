@@ -1,26 +1,33 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.1.4",
-  "description": "A sample Node.js app using Express 4",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
+  "name": "aether",
+  "version": "1.0.0",
+  "description": "...",
+  "main": "start.js",
   "dependencies": {
-    "ejs": "^2.3.1",
-    "express": "~4.9.x"
+    "babel-cli": "^6.11.4",
+    "babel-core": "^6.13.2",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.13.2",
+    "babel-preset-es2016": "^6.11.3",
+    "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.11.6",
+    "express": "^4.14.0"
   },
   "engines": {
-    "node": "0.12.2"
+    "node": "6.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node start.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "git+https://github.com/awitherow/aether.git"
   },
-  "keywords": [
-    "node",
-    "heroku",
-    "express"
-  ],
-  "license": "MIT"
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/awitherow/aether/issues"
+  },
+  "homepage": "https://github.com/awitherow/aether#readme"
 }
