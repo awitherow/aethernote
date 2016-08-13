@@ -2,7 +2,18 @@
   "name": "aether",
   "version": "1.0.0",
   "description": "...",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awitherow/aether.git"
+  },
   "main": "start.js",
+  "engines": {
+    "node": "6.3.0"
+  },
+  "scripts": {
+    "start": "node start.js",
+    "dev": "nodemon start.js"
+  },
   "dependencies": {
     "babel-cli": "^6.11.4",
     "babel-core": "^6.13.2",
@@ -14,24 +25,11 @@
     "express": "^4.14.0",
     "pg": "6.1.0"
   },
-  "engines": {
-    "node": "6.3.0"
-  },
   "devDependencies": {
     "nodemon": "^1.10.0"
   },
-  "scripts": {
-    "start": "node start.js",
-    "dev": "nodemon start.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/awitherow/aether.git"
-  },
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/awitherow/aether/issues"
-  },
-  "homepage": "https://github.com/awitherow/aether#readme"
+  }
 }
