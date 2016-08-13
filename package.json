@@ -12,6 +12,9 @@
   },
   "scripts": {
     "start": "node start.js",
+    "prepush": "npm run test",
+    "test": "npm run lint",
+    "lint": "eslint . --ext .js --ext .jsx --fix",
     "dev": "nodemon start.js"
   },
   "dependencies": {
@@ -27,6 +30,12 @@
     "pg-promise": "^5.2.8"
   },
   "devDependencies": {
+    "babel-eslint": "^6.1.2",
+    "eslint": "^3.3.0",
+    "eslint-config-costadigital": "git+https://e4d1a5004e95d36dd8708eaa18cf212f5aac75dd:x-oauth-basic@github.com/costacruise/javascript.git#0.3.1",
+    "eslint-config-es2015": "^1.1.0",
+    "eslint-plugin-react": "^6.0.0",
+    "husky": "^0.11.6",
     "nodemon": "^1.10.0"
   },
   "license": "ISC",
