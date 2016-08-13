@@ -22,8 +22,9 @@
     "babel-preset-es2016": "^6.11.3",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.11.6",
+    "bluebird": "^3.4.1",
     "express": "^4.14.0",
-    "pg": "6.1.0"
+    "pg-promise": "^5.2.8"
   },
   "devDependencies": {
     "nodemon": "^1.10.0"
