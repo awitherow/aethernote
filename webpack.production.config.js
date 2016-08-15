@@ -1,6 +1,6 @@
 module.exports = {
   devtool: 'cheap-module-source-map',
-  entry: './app/main.js',
+  entry: './app/index.js',
   output: {
     path: 'public/',
     filename: 'index.js',

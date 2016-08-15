@@ -1,6 +1,6 @@
 module.exports = {
   devtool: 'eval',
-  entry: './app/main.js',
+  entry: './app/index.js',
   output: {
     path: 'public/',
     filename: 'index.js',
