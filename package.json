@@ -20,6 +20,7 @@
     "express-dev": "DATABASE_URL=$(heroku config:get DATABASE_URL -a aethernote) nodemon start.js"
   },
   "dependencies": {
+    "babel": "^6.5.2",
     "babel-cli": "^6.11.4",
     "babel-core": "^6.13.2",
     "babel-loader": "^6.2.4",
@@ -33,17 +34,16 @@
     "express": "^4.14.0",
     "pg-promise": "^5.2.8",
     "react": "^15.3.0",
-    "react-dom": "^15.3.0"
+    "react-dom": "^15.3.0",
+    "webpack": "^1.13.1"
   },
   "devDependencies": {
-    "babel": "^6.5.2",
     "babel-eslint": "^6.1.2",
     "eslint": "^3.3.0",
     "eslint-config-es2015": "^1.1.0",
     "eslint-plugin-react": "^6.1.0",
     "husky": "^0.11.6",
-    "nodemon": "^1.10.0",
-    "webpack": "^1.13.1"
+    "nodemon": "^1.10.0"
   },
   "license": "ISC",
   "bugs": {
