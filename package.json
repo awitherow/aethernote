@@ -11,11 +11,13 @@
     "node": "6.3.0"
   },
   "scripts": {
-    "start": "node start.js",
+    "start": "webpack -p --config webpack.production.config.js & node start.js",
     "prepush": "npm run test",
     "test": "npm run lint",
     "lint": "eslint . --ext .js --ext .jsx --fix",
-    "dev": "DATABASE_URL=$(heroku config:get DATABASE_URL -a aethernote) nodemon start.js"
+    "dev": "npm run express-dev & npm run webpack-dev",
+    "webpack-dev": "webpack -d --config webpack.config.js --watch --colors",
+    "express-dev": "DATABASE_URL=$(heroku config:get DATABASE_URL -a aethernote) nodemon start.js"
   },
   "dependencies": {
     "babel-cli": "^6.11.4",
@@ -23,21 +25,25 @@
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-es2016": "^6.11.3",
+    "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.11.6",
     "bluebird": "^3.4.1",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "pg-promise": "^5.2.8"
+    "pg-promise": "^5.2.8",
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0"
   },
   "devDependencies": {
+    "babel": "^6.5.2",
     "babel-eslint": "^6.1.2",
     "eslint": "^3.3.0",
-    "eslint-config-costadigital": "git+https://e4d1a5004e95d36dd8708eaa18cf212f5aac75dd:x-oauth-basic@github.com/costacruise/javascript.git#0.3.1",
     "eslint-config-es2015": "^1.1.0",
-    "eslint-plugin-react": "^6.0.0",
+    "eslint-plugin-react": "^6.1.0",
     "husky": "^0.11.6",
-    "nodemon": "^1.10.0"
+    "nodemon": "^1.10.0",
+    "webpack": "^1.13.1"
   },
   "license": "ISC",
   "bugs": {

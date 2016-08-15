@@ -4,3 +4,6 @@ Dockerfile
 docker-compose.yml
 
 npm-debug.log
+
+public/index.js
+public/index.js.map
