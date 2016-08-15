@@ -1,12 +1,8 @@
 module.exports = {
   entry: './app/main.js',
   output: {
-    path: './public/',
+    path: 'public/',
     filename: 'index.js',
-  },
-  devServer: {
-    inline: true,
-    port: 3000,
   },
   module: {
     loaders: [
