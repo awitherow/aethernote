@@ -10,7 +10,7 @@
     "mocha": true,
     "browser": true
   },
-  extends: ["eslint:recommended"],
   parser: "babel-eslint",
-  plugins: ['react']
+  "plugins": ["react"],
+  "extends": ["eslint:recommended", "plugin:react/recommended"]
 }
