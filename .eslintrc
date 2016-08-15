@@ -1,9 +1,15 @@
 {
-  "rules": {},
+  "rules": {
+    "comma-dangle": ["warn", "always-multiline"],
+    "indent": ["error", 2, {"SwitchCase": 1}],
+    "no-console": "warn",
+    "semi": ["error", "always"]
+  },
   "env": {
     "node": true,
     "mocha": true,
     "browser": true
   },
-  "extends": ["costadigital"]
+  extends: ["eslint:recommended"],
+  parser: "babel-eslint"
 }
