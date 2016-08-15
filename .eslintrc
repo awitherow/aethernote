@@ -11,5 +11,6 @@
     "browser": true
   },
   extends: ["eslint:recommended"],
-  parser: "babel-eslint"
+  parser: "babel-eslint",
+  plugins: ['react']
 }
