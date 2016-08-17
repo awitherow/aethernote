@@ -1,5 +1,9 @@
-module.exports = {
-  devtool: 'eval',
+var webpack = require('webpack');
+
+var nodeEnv = process.env.NODE_ENV;
+
+var config = {
+  devtool: nodeEnv === 'production' ? 'cheap-module-source-map' : 'source-map',
   entry: './app/index.js',
   output: {
     path: 'public/',
@@ -18,3 +22,20 @@ module.exports = {
     ],
   },
 };
+
+if (nodeEnv === 'production') {
+  config.plugins = [].concat([
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(true),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false },
+      sourceMap: false,
+      comments: false,
+    }),
+    new webpack.DefinePlugin({
+      'process.env': { NODE_ENV: JSON.stringify("production") },
+    }),
+  ]);
+}
+
+module.exports = config;
