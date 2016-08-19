@@ -4,7 +4,7 @@ import { getAllEntries } from './servants/entries';
 
 class App extends Component {
   componentDidMount() {
-    const entries = getAllEntries();
+    // const entries = getAllEntries();
   }
 
   render() {
