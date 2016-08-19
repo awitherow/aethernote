@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { getAllEntries } from './servants/entries';
+//import { getAllEntries } from './servants/entries';
 
 class App extends Component {
   componentDidMount() {
