@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Overlay from './components/Overlay';
+
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +24,7 @@ export default class App extends Component {
 
   render() {
     const { entries, loading } = this.state;
-    if (loading) return null;
+    if (loading) return <Overlay />;
 
     return (
       <div className="aether">
