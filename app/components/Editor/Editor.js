@@ -1,10 +1,12 @@
-import React, { Component } from 'React';
+import React from 'react';
 
 import { FormattedTime } from 'react-intl';
 
+const {string, number, bool, func} = React.PropTypes;
+
 export default function Editor({
   type, id, prio, archived, created, content,
-  onSubmit, onChange
+  onSubmit, onChange,
 }) {
   return (
     <form onSubmit={onSubmit}>
@@ -16,7 +18,7 @@ export default function Editor({
 
       <fieldset>
         <label htmlFor="prio">Prio:</label>
-        <select id="prio" value={prio}>
+        <select onChange={onChange} id="prio" value={prio}>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -43,3 +45,14 @@ export default function Editor({
     </form>
   );
 }
+
+Editor.propTypes = {
+  type: string.isRequired,
+  id: number.isRequired,
+  prio: number.isRequired,
+  archived: bool.isRequired,
+  created: string.isRequired,
+  content: string.isRequired,
+  onSubmit: func.isRequired,
+  onChange: func.isRequired,
+};

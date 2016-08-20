@@ -42,7 +42,7 @@ export default class App extends Component {
   }
 
   commitEntry() {
-    console.log('entry committed')
+    console.log('entry committed');
   }
 
   addEntry() {
