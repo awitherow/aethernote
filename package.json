@@ -37,7 +37,8 @@
     "pg-promise": "^5.2.8",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.1",
+    "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
