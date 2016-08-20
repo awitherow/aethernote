@@ -7,7 +7,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       loading: true,
-      entryInput: null,
+      entryInput: "",
     };
   }
 
@@ -47,7 +47,7 @@ export default class App extends Component {
       }),
     }).then(() => this.fetchEntries());
 
-    this.setState({ entryInput: null });
+    this.setState({ entryInput: "" });
   }
 
   render() {
