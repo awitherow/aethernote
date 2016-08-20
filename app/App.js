@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedTime } from 'react-intl';
 
 import Overlay from './components/Overlay';
 
@@ -94,7 +95,7 @@ export default class App extends Component {
                 />
               <label htmlFor="archived">Archived</label>
             </fieldset>
-            <div>{created}</div>
+            <FormattedTime value={created} />
             <textarea value={content}></textarea>
             <button>Submit</button>
           </form>
