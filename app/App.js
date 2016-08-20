@@ -4,7 +4,15 @@ import React, { Component } from 'react';
 
 class App extends Component {
   componentDidMount() {
-    // const entries = getAllEntries();
+    fetch('/api/entries')
+      .then(r => r.json())
+      .then(res => {
+        this.setState({
+          entries: res.data,
+          entriesLoading: false,
+        });
+      })
+      .catch(e => console.log(e));
   }
 
   render() {
