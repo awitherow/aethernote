@@ -26,6 +26,7 @@ export default class App extends Component {
 
     return (
       <div className="aether">
+
         <header>
           <h1>Aether</h1>
         </header>
