@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { FormattedTime } from 'react-intl';
 
 import Overlay from './components/Overlay';
+import Editor from './components/Editor';
 
 export default class App extends Component {
   constructor(props) {
@@ -73,39 +73,13 @@ export default class App extends Component {
       if (edit.content.type === 'entry') {
         let entry = entries.filter(entry => entry.id === edit.content.id)[0];
         if (!entry) return;
-
-        const { archived, content, created, id, prio } = entry;
-        view = (
-          <form>
-            <h1>Edit entry (#{id})</h1>
-            <p>
-            Prio:
-            <select value={prio}>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-            </p>
-            <fieldset>
-              <input
-                id="archived"
-                name="archived"
-                type="checkbox"
-                checked={archived ? "checked" : null}
-                />
-              <label htmlFor="archived">Archived</label>
-            </fieldset>
-            <FormattedTime value={created} />
-            <textarea value={content}></textarea>
-            <button>Submit</button>
-          </form>
-        );
+        view = <Editor type='entry' {...entry } />;
       }
 
       if (view === 'no-view-found') return <Overlay type="error" />;
 
       return (
-        <div className="editor">
+        <div className="aether">
           {view}
         </div>
       );
