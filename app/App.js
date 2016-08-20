@@ -11,6 +11,7 @@ export default class App extends Component {
       edit: {
         on: false,
         content: {},
+        edits: {},
       },
     };
   }
@@ -71,9 +72,32 @@ export default class App extends Component {
       if (edit.content.type === 'entry') {
         let entry = entries.filter(entry => entry.id === edit.content.id)[0];
         if (!entry) return;
+
         const { archived, content, created, id, prio } = entry;
         view = (
-          <div>{archived}{content}{created}{id}{prio}</div>
+          <form>
+            <h1>Edit entry (#{id})</h1>
+            <p>
+            Prio:
+            <select value={prio}>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+            </p>
+            <fieldset>
+              <input
+                id="archived"
+                name="archived"
+                type="checkbox"
+                checked={archived ? "checked" : null}
+                />
+              <label htmlFor="archived">Archived</label>
+            </fieldset>
+            <div>{created}</div>
+            <textarea value={content}></textarea>
+            <button>Submit</button>
+          </form>
         );
       }
 
