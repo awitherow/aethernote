@@ -53,8 +53,9 @@ export default class App extends Component {
               id="entry"
               type="text"
               value={entryInput}
-              onChange={this.captureEntry}
+              onChange={this.captureEntry.bind(this)}
               />
+            <button onClick={this.addEntry.bind(this)}>+</button>
           </div>
         </div>
 
