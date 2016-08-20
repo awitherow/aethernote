@@ -12,6 +12,10 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    this.fetchEntries();
+  }
+
+  fetchEntries() {
     fetch('/api/entries')
       .then(r => r.json())
       .then(res => {
