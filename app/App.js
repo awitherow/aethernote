@@ -63,10 +63,10 @@ export default class App extends Component {
 
   render() {
     const { entries, loading, entryInput, edit } = this.state;
-    if (loading) return <Overlay />;
+    if (loading) return <Overlay type="spinner" />;
 
     if (edit.on) {
-      let view = <p>Error!</p>;
+      let view = 'no-view-found';
 
       if (edit.content.type === 'entry') {
         let entry = entries.filter(entry => entry.id === edit.content.id)[0];
@@ -76,6 +76,8 @@ export default class App extends Component {
           <div>{archived}{content}{created}{id}{prio}</div>
         );
       }
+
+      if (view === 'no-view-found') return <Overlay type="error" />;
 
       return (
         <div className="editor">

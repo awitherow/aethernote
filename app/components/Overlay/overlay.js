@@ -1,7 +1,15 @@
 import React from 'react';
 
-export default function Overlay() {
-  return <p>Hello!</p>;
+const { string } = React.PropTypes;
+
+export default function Overlay({ type }) {
+  let content = 'Spin';
+  if (type === 'error') content = 'error!';
+  return (
+     <p>{content}</p>
+  );
 }
 
-Overlay.propTypes = {};
+Overlay.propTypes = {
+  type: string.isRequired,
+};
