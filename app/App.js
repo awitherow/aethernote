@@ -50,6 +50,12 @@ export default class App extends Component {
     this.setState({ entryInput: "" });
   }
 
+  deleteEntry(id) {
+    fetch(`/api/entries/${id}`, {
+      method: 'DELETE',
+    }).then(() => this.fetchEntries());
+  }
+
   render() {
     const { entries, loading, entryInput } = this.state;
     if (loading) return <Overlay />;
@@ -66,7 +72,12 @@ export default class App extends Component {
           <ul className="entries-list">
             {entries.map(entry => {
               let { id, content } = entry;
-              return <li key={id}>{content}</li>;
+              return (
+                <li key={id}>
+                  <button onClick={this.deleteEntry.bind(this, id)}>x</button>
+                  {content}
+                </li>
+              );
             })}
           </ul>
           <div className="add-entry">
