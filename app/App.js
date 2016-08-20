@@ -37,6 +37,14 @@ export default class App extends Component {
     this.setState({ entryInput: e.target.value });
   }
 
+  storeEntry() {
+    console.log('entry stored');
+  }
+
+  commitEntry() {
+    console.log('entry committed')
+  }
+
   addEntry() {
     this.setState({ loading: true });
     const { entryInput } = this.state;
@@ -77,8 +85,8 @@ export default class App extends Component {
           <Editor
             type='entry'
             {...entry }
-            onChange={() => {}}
-            onSubmit={() => {}}
+            onChange={this.storeEntry.bind(this)}
+            onSubmit={this.commitEntry.bind(this)}
             />
         );
       }
