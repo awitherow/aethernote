@@ -16,6 +16,7 @@ export default class App extends Component {
   }
 
   fetchEntries() {
+    this.setState({ loading: true });
     fetch('/api/entries')
       .then(r => r.json())
       .then(res => {
@@ -44,10 +45,9 @@ export default class App extends Component {
         content: entryInput,
         prio: 2,
       }),
-    });
+    }).then(() => this.fetchEntries());
 
-    this.setState({ loading: true, entryInput: null });
-    this.fetchEntries();
+    this.setState({ entryInput: null });
   }
 
   render() {
