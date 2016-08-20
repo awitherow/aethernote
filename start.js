@@ -1,3 +1,3 @@
 require('babel-polyfill');
 require('babel-register');
-require('./lib/index');
+require('./server/index');
