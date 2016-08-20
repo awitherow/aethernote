@@ -16,7 +16,6 @@ export default class App extends Component {
   }
 
   fetchEntries() {
-    this.setState({ loading: true });
     fetch('/api/entries')
       .then(r => r.json())
       .then(res => {
@@ -33,6 +32,7 @@ export default class App extends Component {
   }
 
   addEntry() {
+    this.setState({ loading: true });
     const { entryInput } = this.state;
 
     fetch('/api/entries', {
@@ -51,6 +51,7 @@ export default class App extends Component {
   }
 
   deleteEntry(id) {
+    this.setState({ loading: true });
     fetch(`/api/entries/${id}`, {
       method: 'DELETE',
     }).then(() => this.fetchEntries());
