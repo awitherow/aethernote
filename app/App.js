@@ -7,6 +7,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       loading: true,
+      entryInput: null,
     };
   }
 
@@ -22,8 +23,13 @@ export default class App extends Component {
       .catch(e => console.log(e));
   }
 
+  captureEntry(e) {
+    this.setState({ entryInput: e.target.value });
+  }
+
+
   render() {
-    const { entries, loading } = this.state;
+    const { entries, loading, entryInput } = this.state;
     if (loading) return <Overlay />;
 
     return (
@@ -41,6 +47,15 @@ export default class App extends Component {
               return <li key={id}>{content}</li>;
             })}
           </ul>
+          <div className="add-entry">
+            <label htmlFor="entry">How can I help you? </label>
+            <input
+              id="entry"
+              type="text"
+              value={entryInput}
+              onChange={this.captureEntry}
+              />
+          </div>
         </div>
 
       </div>
