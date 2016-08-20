@@ -25,12 +25,21 @@ export default class App extends Component {
     if (loading) return null;
 
     return (
-      <ul>
-        {entries.map(entry => {
-          let { id, content } = entry;
-          return <li key={id}>{content}</li>;
-        })}
-      </ul>
+      <div className="aether">
+        <header>
+          <h1>Aether</h1>
+        </header>
+
+        <div className="main">
+          <ul className="entries-list">
+            {entries.map(entry => {
+              let { id, content } = entry;
+              return <li key={id}>{content}</li>;
+            })}
+          </ul>
+        </div>
+
+      </div>
     );
   }
 }
