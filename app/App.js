@@ -3,6 +3,13 @@ import React, { Component } from 'react';
 //import { getAllEntries } from './servants/entries';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      entriesLoading: true,
+    };
+  }
+
   componentDidMount() {
     fetch('/api/entries')
       .then(r => r.json())
@@ -17,6 +24,7 @@ class App extends Component {
 
   render() {
     return <p>Hello!</p>;
+    const { entries, entriesLoading } = this.state;
   }
 }
 
