@@ -81,7 +81,7 @@ export default class App extends Component {
             })}
           </ul>
           <div className="add-entry">
-            <label htmlFor="entry">How can I help you? </label>
+            <label htmlFor="entry">Awaiting Entry... </label>
             <input
               id="entry"
               type="text"
