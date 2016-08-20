@@ -6,16 +6,22 @@ export default function Editor({
   type, id, prio, archived, created, content
 }) {
   return (
-    <form>
-      <h1>Edit {type} (#{id})</h1>
-      <p>
-      Prio:
-      <select value={prio}>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-      </select>
-      </p>
+    <form onSubmit={onSubmit}>
+
+      <header>
+        <h1>Edit {type} #{id}</h1>
+        <FormattedTime value={created} />
+      </header>
+
+      <fieldset>
+        <label htmlFor="prio">Prio:</label>
+        <select id="prio" value={prio}>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+      </fieldset>
+
       <fieldset>
         <input
           id="archived"
@@ -25,9 +31,14 @@ export default function Editor({
           />
         <label htmlFor="archived">Archived</label>
       </fieldset>
-      <FormattedTime value={created} />
-      <textarea value={content}></textarea>
+
+      <fieldset>
+        <label htmlFor="content">Contents</label>
+        <textarea id="content" value={content}></textarea>
+      </fieldset>
+
       <button>Submit</button>
+
     </form>
   );
 }
