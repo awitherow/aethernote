@@ -31,6 +31,7 @@ export default class App extends Component {
         </header>
 
         <div className="main">
+          <h2>Entries <span>({entries.length})</span></h2>
           <ul className="entries-list">
             {entries.map(entry => {
               let { id, content } = entry;
