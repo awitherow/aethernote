@@ -22,6 +22,8 @@ class App extends Component {
 
   render() {
     const { entries, entriesLoading } = this.state;
+    if (entriesLoading) return null;
+
     return (
       <ul>
         {entries.map(entry => {
