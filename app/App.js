@@ -73,7 +73,14 @@ export default class App extends Component {
       if (edit.content.type === 'entry') {
         let entry = entries.filter(entry => entry.id === edit.content.id)[0];
         if (!entry) return;
-        view = <Editor type='entry' {...entry } />;
+        view = (
+          <Editor
+            type='entry'
+            {...entry }
+            onChange={() => {}}
+            onSubmit={() => {}}
+            />
+        );
       }
 
       if (view === 'no-view-found') return <Overlay type="error" />;

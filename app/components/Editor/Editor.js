@@ -3,7 +3,8 @@ import React, { Component } from 'React';
 import { FormattedTime } from 'react-intl';
 
 export default function Editor({
-  type, id, prio, archived, created, content
+  type, id, prio, archived, created, content,
+  onSubmit, onChange
 }) {
   return (
     <form onSubmit={onSubmit}>
