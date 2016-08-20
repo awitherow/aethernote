@@ -8,6 +8,10 @@ export default class App extends Component {
     this.state = {
       loading: true,
       entryInput: "",
+      edit: {
+        on: false,
+        content: {},
+      },
     };
   }
 
@@ -58,8 +62,27 @@ export default class App extends Component {
   }
 
   render() {
-    const { entries, loading, entryInput } = this.state;
+    const { entries, loading, entryInput, edit } = this.state;
     if (loading) return <Overlay />;
+
+    if (edit.on) {
+      let view = <p>Error!</p>;
+
+      if (edit.content.type === 'entry') {
+        let entry = entries.filter(entry => entry.id === edit.content.id)[0];
+        if (!entry) return;
+        const { archived, content, created, id, prio } = entry;
+        view = (
+          <div>{archived}{content}{created}{id}{prio}</div>
+        );
+      }
+
+      return (
+        <div className="editor">
+          {view}
+        </div>
+      );
+    }
 
     return (
       <div className="aether">
@@ -76,7 +99,16 @@ export default class App extends Component {
               return (
                 <li key={id}>
                   <button onClick={this.deleteEntry.bind(this, id)}>x</button>
-                  {content}
+                  <span
+                    className="content"
+                    onClick={() => this.setState({ edit: {
+                      on: true,
+                      content: {
+                        type: 'entry',
+                        id,
+                      },
+                    }})}
+                    >{content}</span>
                 </li>
               );
             })}
