@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-//import { getAllEntries } from './servants/entries';
-
 class App extends Component {
   constructor(props) {
     super(props);
