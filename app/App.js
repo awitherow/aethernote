@@ -4,7 +4,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      entriesLoading: true,
+      loading: true,
     };
   }
 
@@ -14,15 +14,15 @@ export default class App extends Component {
       .then(res => {
         this.setState({
           entries: res.data,
-          entriesLoading: false,
+          loading: false,
         });
       })
       .catch(e => console.log(e));
   }
 
   render() {
-    const { entries, entriesLoading } = this.state;
-    if (entriesLoading) return null;
+    const { entries, loading } = this.state;
+    if (loading) return null;
 
     return (
       <ul>
