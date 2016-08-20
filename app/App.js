@@ -23,8 +23,15 @@ class App extends Component {
   }
 
   render() {
-    return <p>Hello!</p>;
     const { entries, entriesLoading } = this.state;
+    return (
+      <ul>
+        {entries.map(entry => {
+          let { id, content } = entry;
+          return <li key={id}>{content}</li>;
+        })}
+      </ul>
+    );
   }
 }
 
