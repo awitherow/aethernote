@@ -115,16 +115,14 @@ export default class App extends Component {
               return (
                 <li key={id}>
                   <button onClick={this.deleteEntry.bind(this, id)}>x</button>
-                  <span
-                    className="content"
-                    onClick={() => this.setState({ edit: {
-                      on: true,
-                      content: {
-                        type: 'entry',
-                        id,
-                      },
-                    }})}
-                    >{content}</span>
+                  <span className="content">{content}</span>
+                  <button onClick={() => this.setState({ edit: {
+                    on: true,
+                    content: {
+                      type: 'entry',
+                      id,
+                    },
+                  }})}>EDIT</button>
                 </li>
               );
             })}
