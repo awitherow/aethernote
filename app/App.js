@@ -50,9 +50,9 @@ export default class App extends Component {
     this.setState({ noteInput: "" });
   }
 
-  deletenote(id) {
+  removeNote(id) {
     this.setState({ loading: true });
-    notes.delete(id, () => this.getnotes());
+    notes.remove(id, () => this.getnotes());
   }
 
   render() {
@@ -98,7 +98,7 @@ export default class App extends Component {
               let { id, content } = note;
               return (
                 <li key={id}>
-                  <button onClick={this.deletenote.bind(this, id)}>x</button>
+                  <button onClick={this.removeNote.bind(this, id)}>x</button>
                   <span className="content">{content}</span>
                   <button onClick={() => this.setState({ edit: {
                     on: true,

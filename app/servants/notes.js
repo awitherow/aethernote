@@ -18,7 +18,14 @@ function add(entry, cb) {
   }).then(cb);
 }
 
+function remove(id, cb) {
+  fetch(`/api/notes/${id}`, {
+    method: 'DELETE',
+  }).then(cb);
+}
+
 export {
   get,
   add,
+  remove,
 };
