@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as entries from './servants/entries';
+import * as notes from './servants/notes';
 
 import Overlay from './components/Overlay';
 import Editor from './components/Editor';
@@ -9,8 +9,8 @@ export default class App extends Component {
     super(props);
     this.state = {
       loading: true,
-      entryInput: "",
-      entries: {},
+      noteInput: "",
+      notes: {},
       edit: {
         on: false,
         content: {},
@@ -20,59 +20,57 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this.getEntries();
+    this.getnotes();
   }
 
-  getEntries() {
+  getnotes() {
     this.setState({ loading: true });
-    entries.get(entries => {
-      this.setState({ entries, loading: false });
+    notes.get(notes => {
+      this.setState({ notes, loading: false });
     });
   }
 
-  captureEntry(e) {
-    this.setState({ entryInput: e.target.value });
+  capturenote(e) {
+    this.setState({ noteInput: e.target.value });
   }
 
-  storeEntry() {
-    console.log('entry stored');
+  storenote() {
+    console.log('note stored');
   }
 
-  commitEntry() {
-    console.log('entry committed');
+  commitnote() {
+    console.log('note committed');
   }
 
-  addEntry() {
-    entries.add({
-      content: this.state.entryInput,
+  addnote() {
+    notes.add({
+      content: this.state.noteInput,
       prio: 2,
-    }, () => this.getEntries());
-    this.setState({ entryInput: "" });
+    }, () => this.getnotes());
+    this.setState({ noteInput: "" });
   }
 
-  deleteEntry(id) {
+  deletenote(id) {
     this.setState({ loading: true });
-    fetch(`/api/entries/${id}`, {
-      method: 'DELETE',
-    }).then(() => this.getEntries());
+    notes.delete(id, () => this.getnotes());
   }
 
   render() {
-    const { entries, loading, entryInput, edit } = this.state;
+    const { notes, loading, noteInput, edit } = this.state;
     if (loading) return <Overlay type="spinner" />;
 
     if (edit.on) {
       let view = 'no-view-found';
 
-      if (edit.content.type === 'entry') {
-        let entry = entries.filter(entry => entry.id === edit.content.id)[0];
-        if (!entry) return;
+      if (edit.content.type === 'note') {
+        let note = notes.filter(note => note.id === edit.content.id)[0];
+        if (!note) return;
         view = (
           <Editor
-            type='entry'
-            {...entry }
-            onChange={this.storeEntry.bind(this)}
-            onSubmit={this.commitEntry.bind(this)}
+            type='note'
+            {...note }
+            onChange={this.storenote.bind(this)}
+            onSubmit={this.commitnote.bind(this)}
             />
         );
       }
@@ -94,18 +92,18 @@ export default class App extends Component {
         </header>
 
         <div className="main">
-          <h2>Entries <span>({entries.length})</span></h2>
-          <ul className="entries-list">
-            {entries.map(entry => {
-              let { id, content } = entry;
+          <h2>notes <span>({notes.length})</span></h2>
+          <ul className="notes-list">
+            {notes.map(note => {
+              let { id, content } = note;
               return (
                 <li key={id}>
-                  <button onClick={this.deleteEntry.bind(this, id)}>x</button>
+                  <button onClick={this.deletenote.bind(this, id)}>x</button>
                   <span className="content">{content}</span>
                   <button onClick={() => this.setState({ edit: {
                     on: true,
                     content: {
-                      type: 'entry',
+                      type: 'note',
                       id,
                     },
                   }})}>EDIT</button>
@@ -113,15 +111,15 @@ export default class App extends Component {
               );
             })}
           </ul>
-          <div className="add-entry">
-            <label htmlFor="entry">Awaiting Entry... </label>
+          <div className="add-note">
+            <label htmlFor="note">Awaiting note... </label>
             <input
-              id="entry"
+              id="note"
               type="text"
-              value={entryInput}
-              onChange={this.captureEntry.bind(this)}
+              value={noteInput}
+              onChange={this.capturenote.bind(this)}
               />
-            <button onClick={this.addEntry.bind(this)}>+</button>
+            <button onClick={this.addnote.bind(this)}>+</button>
           </div>
         </div>
 

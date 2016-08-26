@@ -7,11 +7,11 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/api/entries', api.getEntries);
-app.get('/api/entries/:id', api.getEntry);
-app.post('/api/entries', api.createEntry);
-app.put('/api/entries/:id', api.updateEntry);
-app.delete('/api/entries/:id', api.removeEntry);
+app.get('/api/notes', api.getNotes);
+app.get('/api/notes/:id', api.getNote);
+app.post('/api/notes', api.createNote);
+app.put('/api/notes/:id', api.updateNote);
+app.delete('/api/notes/:id', api.removeNote);
 
 app.use(express.static('public'));
 

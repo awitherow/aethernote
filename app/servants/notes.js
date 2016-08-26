@@ -1,5 +1,5 @@
 function get(cb) {
-  fetch('/api/entries')
+  fetch('/api/notes')
     .then(r => r.json())
     .then(res => {
       cb(res.data);
@@ -8,7 +8,7 @@ function get(cb) {
 }
 
 function add(entry, cb) {
-  fetch('/api/entries', {
+  fetch('/api/notes', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

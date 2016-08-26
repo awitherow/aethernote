@@ -8,7 +8,7 @@ const pgp = pg({
 pgp.pg.defaults.ssl = true;
 const db = pgp(process.env.DATABASE_URL);
 
-export const getEntries = (req, res, next) => {
+export const getNotes = (req, res, next) => {
   db.any('select * from entries')
   .then(data => {
     res.status(200)
@@ -20,7 +20,7 @@ export const getEntries = (req, res, next) => {
   }).catch(err => next(err));
 };
 
-export const getEntry = (req, res, next) => {
+export const getNote = (req, res, next) => {
   const {id} = req.params;
   db.one(`select * from entries where id = ${id}`)
   .then(data => {
@@ -33,7 +33,7 @@ export const getEntry = (req, res, next) => {
   }).catch(err => next(err));
 };
 
-export const createEntry = (req, res, next) => {
+export const createNote = (req, res, next) => {
   req.body.prio = parseInt(req.body.prio);
   db.none('insert into entries(content, prio)' +
       'values(${content}, ${prio})',
@@ -47,7 +47,7 @@ export const createEntry = (req, res, next) => {
   }).catch(err => next(err));
 };
 
-export const updateEntry = (req, res, next) => {
+export const updateNote = (req, res, next) => {
   let { content, prio, archived } = req.body;
 
   // TODO: how to handle empty content?
@@ -67,7 +67,7 @@ export const updateEntry = (req, res, next) => {
   }).catch(err => next(err));
 };
 
-export const removeEntry = (req, res, next) => {
+export const removeNote = (req, res, next) => {
   const id = parseInt(req.params.id);
   db.result(`delete from entries where id = ${id}`)
   .then(result => {
