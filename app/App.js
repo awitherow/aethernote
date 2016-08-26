@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as entries from './servants/entries';
 
 import Overlay from './components/Overlay';
 import Editor from './components/Editor';
@@ -18,19 +19,12 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this.fetchEntries();
-  }
-
-  fetchEntries() {
-    fetch('/api/entries')
-      .then(r => r.json())
-      .then(res => {
-        this.setState({
-          entries: res.data,
-          loading: false,
-        });
-      })
-      .catch(e => console.log(e));
+    entries.get(entries => {
+      this.setState({
+        entries: entries.data,
+        loading: false,
+      });
+    });
   }
 
   captureEntry(e) {
