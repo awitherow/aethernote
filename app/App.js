@@ -16,6 +16,7 @@ export default class App extends Component {
         content: {},
         edits: {},
       },
+      view: 'notelist',
     };
   }
 
@@ -56,8 +57,47 @@ export default class App extends Component {
   }
 
   render() {
-    const { notes, loading, noteInput, edit } = this.state;
+    const { notes, loading, noteInput, edit, view } = this.state;
     if (loading) return <Overlay type="spinner" />;
+    
+    let MAINVIEW;
+    switch(view) {
+      case 'notelist': {
+        MAINVIEW = (
+          <div className="main">
+            <h2>notes <span>({notes.length})</span></h2>
+            <ul className="notes-list">
+              {notes.map(note => {
+                let { id, content } = note;
+                return (
+                  <li key={id}>
+                    <button onClick={this.removeNote.bind(this, id)}>x</button>
+                    <span className="content">{content}</span>
+                    <button onClick={() => this.setState({ edit: {
+                      on: true,
+                      content: {
+                        type: 'note',
+                        id,
+                      },
+                    }})}>EDIT</button>
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="add-note">
+              <label htmlFor="note">Awaiting note... </label>
+              <input
+                id="note"
+                type="text"
+                value={noteInput}
+                onChange={this.capturenote.bind(this)}
+                />
+              <button onClick={this.addNote.bind(this)}>+</button>
+            </div>
+          </div>
+        );
+      }
+    }
 
     if (edit.on) {
       let view = 'no-view-found';
@@ -91,37 +131,7 @@ export default class App extends Component {
           <h1>Aether</h1>
         </header>
 
-        <div className="main">
-          <h2>notes <span>({notes.length})</span></h2>
-          <ul className="notes-list">
-            {notes.map(note => {
-              let { id, content } = note;
-              return (
-                <li key={id}>
-                  <button onClick={this.removeNote.bind(this, id)}>x</button>
-                  <span className="content">{content}</span>
-                  <button onClick={() => this.setState({ edit: {
-                    on: true,
-                    content: {
-                      type: 'note',
-                      id,
-                    },
-                  }})}>EDIT</button>
-                </li>
-              );
-            })}
-          </ul>
-          <div className="add-note">
-            <label htmlFor="note">Awaiting note... </label>
-            <input
-              id="note"
-              type="text"
-              value={noteInput}
-              onChange={this.capturenote.bind(this)}
-              />
-            <button onClick={this.addNote.bind(this)}>+</button>
-          </div>
-        </div>
+        { MAINVIEW }
 
       </div>
     );
