@@ -10,6 +10,7 @@ export default class App extends Component {
     this.state = {
       loading: true,
       entryInput: "",
+      entries: {},
       edit: {
         on: false,
         content: {},
@@ -19,11 +20,13 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    this.getEntries();
+  }
+
+  getEntries() {
+    this.setState({ loading: true });
     entries.get(entries => {
-      this.setState({
-        entries: entries.data,
-        loading: false,
-      });
+      this.setState({ entries, loading: false });
     });
   }
 
@@ -62,7 +65,7 @@ export default class App extends Component {
     this.setState({ loading: true });
     fetch(`/api/entries/${id}`, {
       method: 'DELETE',
-    }).then(() => this.fetchEntries());
+    }).then(() => this.getEntries());
   }
 
   render() {
