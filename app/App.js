@@ -20,10 +20,10 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this.getnotes();
+    this.getNotes();
   }
 
-  getnotes() {
+  getNotes() {
     this.setState({ loading: true });
     notes.get(notes => {
       this.setState({ notes, loading: false });
@@ -46,13 +46,13 @@ export default class App extends Component {
     notes.add({
       content: this.state.noteInput,
       prio: 2,
-    }, () => this.getnotes());
+    }, () => this.getNotes());
     this.setState({ noteInput: "" });
   }
 
   removeNote(id) {
     this.setState({ loading: true });
-    notes.remove(id, () => this.getnotes());
+    notes.remove(id, () => this.getNotes());
   }
 
   render() {
