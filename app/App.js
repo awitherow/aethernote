@@ -42,7 +42,7 @@ export default class App extends Component {
     console.log('note committed');
   }
 
-  addnote() {
+  addNote() {
     notes.add({
       content: this.state.noteInput,
       prio: 2,
@@ -119,7 +119,7 @@ export default class App extends Component {
               value={noteInput}
               onChange={this.capturenote.bind(this)}
               />
-            <button onClick={this.addnote.bind(this)}>+</button>
+            <button onClick={this.addNote.bind(this)}>+</button>
           </div>
         </div>
 
