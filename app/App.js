@@ -43,21 +43,10 @@ export default class App extends Component {
   }
 
   addEntry() {
-    this.setState({ loading: true });
-    const { entryInput } = this.state;
-
-    fetch('/api/entries', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        content: entryInput,
-        prio: 2,
-      }),
-    }).then(() => this.fetchEntries());
-
+    entries.add({
+      content: this.state.entryInput,
+      prio: 2,
+    }, () => this.getEntries());
     this.setState({ entryInput: "" });
   }
 
