@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import * as notes from './servants/notes';
 
 import Overlay from './components/Overlay';
 import Editor from './components/Editor';
+import NoteList from './components/NoteList';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
-      noteInput: "",
-      notes: {},
       edit: {
         on: false,
         content: {},
@@ -18,21 +16,6 @@ export default class App extends Component {
       },
       view: 'notelist',
     };
-  }
-
-  componentDidMount() {
-    this.getNotes();
-  }
-
-  getNotes() {
-    this.setState({ loading: true });
-    notes.get(notes => {
-      this.setState({ notes, loading: false });
-    });
-  }
-
-  captureNote(e) {
-    this.setState({ noteInput: e.target.value });
   }
 
   storeNote() {
@@ -43,59 +26,14 @@ export default class App extends Component {
     console.log('note committed');
   }
 
-  addNote() {
-    notes.add({
-      content: this.state.noteInput,
-      prio: 2,
-    }, () => this.getNotes());
-    this.setState({ noteInput: "" });
-  }
-
-  removeNote(id) {
-    this.setState({ loading: true });
-    notes.remove(id, () => this.getNotes());
-  }
-
   render() {
-    const { notes, loading, noteInput, edit, view } = this.state;
-    if (loading) return <Overlay type="spinner" />;
+    const { notes, loading, edit, view } = this.state;
+    //if (loading) return <Overlay type="spinner" />;
 
     let MAINVIEW;
     switch(view) {
       case 'notelist': {
-        MAINVIEW = (
-          <div className="main">
-            <h2>notes <span>({notes.length})</span></h2>
-            <ul className="notes-list">
-              {notes.map(note => {
-                let { id, content } = note;
-                return (
-                  <li key={id}>
-                    <button onClick={this.removeNote.bind(this, id)}>x</button>
-                    <span className="content">{content}</span>
-                    <button onClick={() => this.setState({ edit: {
-                      on: true,
-                      content: {
-                        type: 'note',
-                        id,
-                      },
-                    }})}>EDIT</button>
-                  </li>
-                );
-              })}
-            </ul>
-            <div className="add-note">
-              <label htmlFor="note">Awaiting note... </label>
-              <input
-                id="note"
-                type="text"
-                value={noteInput}
-                onChange={this.captureNote.bind(this)}
-                />
-              <button onClick={this.addNote.bind(this)}>+</button>
-            </div>
-          </div>
-        );
+        MAINVIEW = <NoteList />;
       }
     }
 
