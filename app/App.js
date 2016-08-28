@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
-import Overlay from './components/Overlay';
-import Editor from './components/Editor';
-import NoteList from './components/NoteList';
+import Overlay from './views/Overlay';
+import Editor from './views/Editor';
+import NoteList from './views/NoteList';
 
 export default class App extends Component {
   constructor(props) {
