@@ -31,15 +31,15 @@ export default class App extends Component {
     });
   }
 
-  capturenote(e) {
+  captureNote(e) {
     this.setState({ noteInput: e.target.value });
   }
 
-  storenote() {
+  storeNote() {
     console.log('note stored');
   }
 
-  commitnote() {
+  commitNote() {
     console.log('note committed');
   }
 
@@ -59,7 +59,7 @@ export default class App extends Component {
   render() {
     const { notes, loading, noteInput, edit, view } = this.state;
     if (loading) return <Overlay type="spinner" />;
-    
+
     let MAINVIEW;
     switch(view) {
       case 'notelist': {
@@ -90,7 +90,7 @@ export default class App extends Component {
                 id="note"
                 type="text"
                 value={noteInput}
-                onChange={this.capturenote.bind(this)}
+                onChange={this.captureNote.bind(this)}
                 />
               <button onClick={this.addNote.bind(this)}>+</button>
             </div>
@@ -109,8 +109,8 @@ export default class App extends Component {
           <Editor
             type='note'
             {...note }
-            onChange={this.storenote.bind(this)}
-            onSubmit={this.commitnote.bind(this)}
+            onChange={this.storeNote.bind(this)}
+            onSubmit={this.commitNote.bind(this)}
             />
         );
       }
