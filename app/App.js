@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 import Overlay from './components/Overlay';
 import Editor from './components/Editor';
@@ -8,7 +8,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true,
+      loading: false,
       edit: {
         on: false,
         content: {},
@@ -16,6 +16,20 @@ export default class App extends Component {
       },
       view: 'notelist',
     };
+  }
+
+  getChildContext() {
+    return {
+      update: this.update.bind(this),
+    };
+  }
+
+  update(action, data) {
+    let payload;
+    switch(action) {
+      case 'loading': payload = { loading: data }; break;
+    }
+    this.setState(payload);
   }
 
   storeNote() {
@@ -28,7 +42,7 @@ export default class App extends Component {
 
   render() {
     const { notes, loading, edit, view } = this.state;
-    //if (loading) return <Overlay type="spinner" />;
+    if (loading) return <Overlay type="spinner" />;
 
     let MAINVIEW;
     switch(view) {
@@ -75,3 +89,7 @@ export default class App extends Component {
     );
   }
 }
+
+App.childContextTypes = {
+  update: PropTypes.func,
+};

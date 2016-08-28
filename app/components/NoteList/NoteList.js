@@ -16,9 +16,8 @@ export default class NoteList extends Component {
   }
 
   getNotes() {
-    this.setState({ loading: true });
     notes.get(notes => {
-      this.setState({ notes, loading: false });
+      this.setState({ notes });
     });
   }
 
@@ -27,7 +26,6 @@ export default class NoteList extends Component {
   }
 
   removeNote(id) {
-    this.setState({ loading: true });
     notes.remove(id, () => this.getNotes());
   }
 
