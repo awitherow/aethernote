@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import * as notes from '../../servants/notes';
+import * as notes from './servants/notes';
+
+import Note from './components/note';
 
 export default class NoteList extends Component {
   constructor(props) {
@@ -43,19 +45,12 @@ export default class NoteList extends Component {
         <h2>notes <span>({notes.length})</span></h2>
         <ul className="notes-list">
           {notes.map(note => {
-            let { id, content } = note;
             return (
-              <li key={id}>
-                <button onClick={this.removeNote.bind(this, id)}>x</button>
-                <span className="content">{content}</span>
-                <button onClick={() => this.setState({ edit: {
-                  on: true,
-                  content: {
-                    type: 'note',
-                    id,
-                  },
-                }})}>EDIT</button>
-              </li>
+              <Note
+                key={note.id}
+                note={note}
+                removeNote={this.removeNote.bind(this)}
+                />
             );
           })}
         </ul>
