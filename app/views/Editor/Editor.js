@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import { FormattedTime } from 'react-intl';
 
-const {string, number, bool, func} = React.PropTypes;
-
 export default function Editor({
-  type, id, prio, archived, created, content,
-  onSubmit, onChange,
+  type, note, hidden,
+  onSubmit, onChange, onClose,
 }) {
+  let classNames = hidden ? `editor ${hidden}` : `editor`;
+  const { id, content, created, prio, archived } = note;
   return (
-    <form onSubmit={onSubmit}>
+    <form className={classNames} onSubmit={onSubmit}>
 
       <header>
         <h1>Edit {type} #{id}</h1>
         <FormattedTime value={created} />
+        <button onClick={onClose}>X</button>
       </header>
 
       <fieldset>
@@ -47,12 +48,10 @@ export default function Editor({
 }
 
 Editor.propTypes = {
-  type: string.isRequired,
-  id: number.isRequired,
-  prio: number.isRequired,
-  archived: bool.isRequired,
-  created: string.isRequired,
-  content: string.isRequired,
-  onSubmit: func.isRequired,
-  onChange: func.isRequired,
+  type: PropTypes.string.isRequired,
+  note: PropTypes.object.isRequired,
+  hidden: PropTypes.bool.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };

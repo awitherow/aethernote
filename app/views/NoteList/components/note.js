@@ -1,14 +1,15 @@
 import React, { PropTypes } from 'react';
 
 export default function Note({
-  note, removeNote,
+  note, removeNote, editNote
 }) {
-  const { id, content } = note;
+  const { id, content, prio } = note;
   return (
       <li>
         <button onClick={() => removeNote(id)}>x</button>
+        <span className="priority">{ prio ? '!' : null}</span>
         <span className="content">{content}</span>
-        <button onClick={() => console.log('hello!')}>EDIT</button>
+        <button onClick={() => editNote(id)}>EDIT</button>
       </li>
 
   );

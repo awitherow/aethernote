@@ -4,6 +4,7 @@ import * as noteService from './servants/notes';
 import TextInput from '../../elements/TextInput';
 import CheckboxInput from '../../elements/CheckboxInput';
 import Note from './components/note';
+import Editor from '../Editor';
 
 export default class NoteList extends Component {
   constructor(props) {
@@ -13,6 +14,10 @@ export default class NoteList extends Component {
       noteInput: "",
       priority: false,
       notes: [],
+      editor: {
+        hidden: true,
+        note: {},
+      },
     };
   }
 
@@ -43,11 +48,45 @@ export default class NoteList extends Component {
     this.setState({ noteInput: "", priority: false });
   }
 
+  editNote(id) {
+    const { notes } = this.state;
+    let note = notes.filter(note => note.id === id)[0];
+    if (!note) return;
+    this.setState({
+      editor: {
+        hidden: false,
+        note,
+      },
+    });
+  }
+
+  storeNote() {
+    console.log('note stored');
+  }
+
+  commitNote() {
+    console.log('note committed');
+  }
+
+  closeEditor(){
+    console.log('closed editor');
+  }
+
   render() {
-    const { notes, noteInput, priority } = this.state;
+    const { editor, notes, noteInput, priority } = this.state;
 
     return (
       <div className="main">
+
+      <Editor
+        type="note"
+        hidden={editor.hidden}
+        note={editor.note}
+        onChange={this.storeNote.bind(this)}
+        onSubmit={this.commitNote.bind(this)}
+        onClose={this.closeEditor.bind(this)}
+        />
+
         <h2>notes <span>({notes.length})</span></h2>
         <ul className="notes-list">
           {notes.map(note =>
@@ -55,6 +94,7 @@ export default class NoteList extends Component {
               key={note.id}
               note={note}
               removeNote={this.removeNote.bind(this)}
+              editNote={this.editNote.bind(this)}
               />
           )}
         </ul>
