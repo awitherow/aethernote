@@ -1,50 +1,66 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { FormattedDate } from 'react-intl';
 
-import { FormattedTime } from 'react-intl';
+import CheckboxInput from '../../elements/CheckboxInput';
 
-export default function Editor({
-  type, note, hidden,
-  onSubmit, onChange, onClose,
-}) {
-  let classNames = hidden ? `editor ${hidden}` : `editor`;
-  const { id, content, created, prio, archived } = note;
-  return (
-    <form className={classNames} onSubmit={onSubmit}>
+export default class Editor extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-      <header>
-        <h1>Edit {type} #{id}</h1>
-        <FormattedTime value={created} />
-        <button onClick={onClose}>X</button>
-      </header>
+  save = () => {}
+  close = () => {
+    this.props.onClose();
+  }
+  rePrioritize = () => {}
+  updateContent = () => {}
 
-      <fieldset>
-        <label htmlFor="prio">Prio:</label>
-        <select onChange={onChange} id="prio" value={prio}>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-        </select>
-      </fieldset>
+  render() {
+    if (this.props.hidden) return null;
 
-      <fieldset>
-        <input
+    const { id, content, created, prio, archived } = this.props.note;
+    const { type } = this.props;
+
+    return (
+      <form className="editor" onSubmit={this.save.bind(this)}>
+
+        <header>
+          <h1>Edit {type} #{id}</h1>
+          <FormattedDate value={created} />
+          <button onClick={this.close.bind(this)}>X</button>
+        </header>
+
+        <fieldset>
+          <label htmlFor="prio">Prio:</label>
+          <select onChange={this.rePrioritize.bind(this)} id="prio" value={prio}>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </fieldset>
+
+        <CheckboxInput
           id="archived"
-          name="archived"
-          type="checkbox"
+          label="Archived"
           checked={archived ? "checked" : null}
+          onClick={() => this.setState({ archived: !archived })}
           />
-        <label htmlFor="archived">Archived</label>
-      </fieldset>
 
-      <fieldset>
-        <label htmlFor="content">Contents</label>
-        <textarea id="content" value={content}></textarea>
-      </fieldset>
+        <fieldset>
+          <label htmlFor="content">Contents</label>
+          <textarea
+            id="content"
+            value={content}
+            onChange={this.updateContent.bind(this)}
+            ></textarea>
+        </fieldset>
 
-      <button>Submit</button>
+        <button>Submit</button>
 
-    </form>
-  );
+      </form>
+    );
+  }
 }
 
 Editor.propTypes = {
