@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as notes from './servants/notes';
+import * as noteService from './servants/notes';
 
 import TextInput from '../../elements/TextInput';
 import Note from './components/note';
@@ -19,7 +19,7 @@ export default class NoteList extends Component {
   }
 
   getNotes() {
-    notes.get(notes => this.setState({ notes }));
+    noteService.get(notes => this.setState({ notes }));
   }
 
   captureNote(e) {
@@ -27,12 +27,12 @@ export default class NoteList extends Component {
   }
 
   removeNote(id) {
-    notes.remove(id, () => this.getNotes());
+    noteService.remove(id, () => this.getNotes());
   }
 
   addNote(e) {
     e.preventDefault();
-    notes.add({
+    noteService.add({
       content: this.state.noteInput,
       prio: 2,
     }, () => this.getNotes());
