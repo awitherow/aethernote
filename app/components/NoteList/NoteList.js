@@ -44,15 +44,13 @@ export default class NoteList extends Component {
       <div className="main">
         <h2>notes <span>({notes.length})</span></h2>
         <ul className="notes-list">
-          {notes.map(note => {
-            return (
-              <Note
-                key={note.id}
-                note={note}
-                removeNote={this.removeNote.bind(this)}
-                />
-            );
-          })}
+          {notes.map(note =>
+            <Note
+              key={note.id}
+              note={note}
+              removeNote={this.removeNote.bind(this)}
+              />
+          )}
         </ul>
         <div className="add-note">
           <label htmlFor="note">Awaiting note... </label>
