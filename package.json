@@ -37,6 +37,7 @@
     "pg-promise": "^5.2.8",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
+    "react-intl": "^2.1.4",
     "webpack": "^1.13.1",
     "whatwg-fetch": "^1.0.0"
   },
