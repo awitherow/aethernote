@@ -16,9 +16,7 @@ export default class NoteList extends Component {
   }
 
   getNotes() {
-    notes.get(notes => {
-      this.setState({ notes });
-    });
+    notes.get(notes => this.setState({ notes }));
   }
 
   captureNote(e) {
