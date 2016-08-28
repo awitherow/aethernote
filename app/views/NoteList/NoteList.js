@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as notes from './servants/notes';
 
+import TextInput from '../../elements/TextInput';
 import Note from './components/note';
 
 export default class NoteList extends Component {
@@ -29,7 +30,8 @@ export default class NoteList extends Component {
     notes.remove(id, () => this.getNotes());
   }
 
-  addNote() {
+  addNote(e) {
+    e.preventDefault();
     notes.add({
       content: this.state.noteInput,
       prio: 2,
@@ -52,16 +54,15 @@ export default class NoteList extends Component {
               />
           )}
         </ul>
-        <div className="add-note">
-          <label htmlFor="note">Awaiting note... </label>
-          <input
+        <form onSubmit={this.addNote.bind(this)} className="add-note">
+          <TextInput
             id="note"
-            type="text"
+            label="Awaiting changes..."
             value={noteInput}
             onChange={this.captureNote.bind(this)}
             />
-          <button onClick={this.addNote.bind(this)}>+</button>
-        </div>
+          <input type="submit" />
+        </form>
       </div>
     );
   }
