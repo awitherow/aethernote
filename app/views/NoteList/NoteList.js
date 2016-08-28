@@ -3,6 +3,7 @@ import * as noteService from './servants/notes';
 
 import TextInput from '../../elements/TextInput';
 import CheckboxInput from '../../elements/CheckboxInput';
+
 import Note from './components/note';
 import Editor from '../Editor';
 
