@@ -12,6 +12,8 @@ export default class NoteList extends Component {
       noteInput: "",
       notes: [],
     };
+
+    this.update = this.context.update;
   }
 
   componentDidMount() {
@@ -19,10 +21,10 @@ export default class NoteList extends Component {
   }
 
   getNotes() {
-    this.context.update('loading', true);
+    this.update('loading', true);
     noteService.get(notes => {
       this.setState({ notes });
-      this.context.update('loading', false);
+      this.update('loading', false);
     });
   }
 
@@ -31,7 +33,7 @@ export default class NoteList extends Component {
   }
 
   removeNote(id) {
-    this.context.update('loading', true);
+    this.update('loading', true);
     noteService.remove(id, () => this.getNotes());
   }
 
@@ -59,7 +61,7 @@ export default class NoteList extends Component {
               />
           )}
         </ul>
-        <form onSubmit={this.addNote.bind(this)} className="add-note">
+        <form className="add-note" onSubmit={this.addNote.bind(this)}>
           <TextInput
             id="note"
             label="Awaiting changes..."
