@@ -40,7 +40,7 @@ export default class NoteList extends Component {
       content: noteInput,
       prio: priority,
     }, () => this.getNotes());
-    this.setState({ noteInput: "" });
+    this.setState({ noteInput: "", priority: false });
   }
 
   render() {
