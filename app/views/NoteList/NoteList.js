@@ -12,8 +12,6 @@ export default class NoteList extends Component {
       noteInput: "",
       notes: [],
     };
-
-    this.update = this.context.update;
   }
 
   componentDidMount() {
@@ -21,10 +19,10 @@ export default class NoteList extends Component {
   }
 
   getNotes() {
-    this.update('loading', true);
+    this.context.update('loading', true);
     noteService.get(notes => {
       this.setState({ notes });
-      this.update('loading', false);
+      this.context.update('loading', false);
     });
   }
 
@@ -33,7 +31,7 @@ export default class NoteList extends Component {
   }
 
   removeNote(id) {
-    this.update('loading', true);
+    this.context.update('loading', true);
     noteService.remove(id, () => this.getNotes());
   }
 
