@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import * as noteService from './servants/notes';
 
 import TextInput from '../../elements/TextInput';
+import CheckboxInput from '../../elements/CheckboxInput';
 import Note from './components/note';
 
 export default class NoteList extends Component {
@@ -10,6 +11,7 @@ export default class NoteList extends Component {
 
     this.state = {
       noteInput: "",
+      priority: false,
       notes: [],
     };
   }
@@ -26,10 +28,6 @@ export default class NoteList extends Component {
     });
   }
 
-  captureNote(e) {
-    this.setState({ noteInput: e.target.value });
-  }
-
   removeNote(id) {
     this.context.update('loading', true);
     noteService.remove(id, () => this.getNotes());
@@ -37,15 +35,16 @@ export default class NoteList extends Component {
 
   addNote(e) {
     e.preventDefault();
+    const { noteInput, priority } = this.state;
     noteService.add({
-      content: this.state.noteInput,
-      prio: 2,
+      content: noteInput,
+      prio: priority,
     }, () => this.getNotes());
     this.setState({ noteInput: "" });
   }
 
   render() {
-    const { notes, noteInput } = this.state;
+    const { notes, noteInput, priority } = this.state;
 
     return (
       <div className="main">
@@ -64,7 +63,15 @@ export default class NoteList extends Component {
             id="note"
             label="Awaiting changes..."
             value={noteInput}
-            onChange={this.captureNote.bind(this)}
+            onChange={(e) => this.setState({ noteInput: e.target.value })}
+            />
+          <CheckboxInput
+            id="priority"
+            label="Important task?"
+            checked={priority}
+            onClick={() => {
+              this.setState({ priority: !this.state.priority });
+            }}
             />
           <input type="submit" />
         </form>

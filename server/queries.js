@@ -34,7 +34,6 @@ export const getNote = (req, res, next) => {
 };
 
 export const createNote = (req, res, next) => {
-  req.body.prio = parseInt(req.body.prio);
   db.none('insert into entries(content, prio)' +
       'values(${content}, ${prio})',
     req.body)
