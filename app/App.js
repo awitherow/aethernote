@@ -42,7 +42,6 @@ export default class App extends Component {
 
   render() {
     const { notes, loading, edit, view } = this.state;
-    if (loading) return <Overlay type="spinner" />;
 
     let MAINVIEW;
     switch(view) {
@@ -78,6 +77,7 @@ export default class App extends Component {
 
     return (
       <div className="aether">
+        { loading ? <Overlay type="spinner" /> : null }
 
         <header>
           <h1>Aether</h1>

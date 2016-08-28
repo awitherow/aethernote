@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import * as noteService from './servants/notes';
 
 import TextInput from '../../elements/TextInput';
@@ -19,7 +19,11 @@ export default class NoteList extends Component {
   }
 
   getNotes() {
-    noteService.get(notes => this.setState({ notes }));
+    this.context.update('loading', true);
+    noteService.get(notes => {
+      this.setState({ notes });
+      this.context.update('loading', false);
+    });
   }
 
   captureNote(e) {
@@ -27,6 +31,7 @@ export default class NoteList extends Component {
   }
 
   removeNote(id) {
+    this.context.update('loading', true);
     noteService.remove(id, () => this.getNotes());
   }
 
@@ -67,3 +72,7 @@ export default class NoteList extends Component {
     );
   }
 }
+
+NoteList.contextTypes = {
+  update: PropTypes.func.isRequired,
+};
