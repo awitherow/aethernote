@@ -14,15 +14,14 @@ export default class Editor extends Component {
     if (this.props.hidden) return null;
 
     const { id, content, created, prio, archived } = this.props.note;
-    const { type } = this.props;
+    const { type, onClose } = this.props;
 
     return (
-      <form className="editor" onSubmit={() => console.log('saved!')}>
-
+      <div className="editor">
         <header>
           <h1>Edit {type} #{id}</h1>
           <FormattedDate value={created} />
-          <button onClick={() => console.log('closed!')}>X</button>
+          <button onClick={onClose}>X</button>
         </header>
 
         <form onSubmit={this.onSubmit.bind(this)}>
@@ -34,23 +33,24 @@ export default class Editor extends Component {
             onClick={(e) => this.setState({ prio: e.target.checked })}
             />
 
-        <CheckboxInput
-          id="archived"
-          label="Archived"
-          defaultChecked={archived}
-          onClick={() => this.setState({ archived: !archived })}
-          />
+          <CheckboxInput
+            id="archived"
+            label="Archived"
+            defaultChecked={archived}
+            onClick={(e) => this.setState({ archived: e.target.checked })}
+            />
 
-        <TextInput
-          id="content"
-          label="Contents"
-          defaultValue={content}
-          onChange={(e) => this.setState({ content: e.target.value })}
-          />
+          <TextInput
+            id="content"
+            label="Contents"
+            defaultValue={content}
+            onChange={(e) => this.setState({ content: e.target.value })}
+            />
 
-        <button>Submit</button>
+          <button>Submit</button>
 
-      </form>
+        </form>
+      </div>
     );
   }
 }
@@ -60,6 +60,5 @@ Editor.propTypes = {
   note: PropTypes.object.isRequired,
   hidden: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
 };
