@@ -25,14 +25,14 @@ export default class Editor extends Component {
           <button onClick={() => console.log('closed!')}>X</button>
         </header>
 
-        <fieldset>
-          <label htmlFor="prio">Prio:</label>
-          <select onChange={() => console.log('priod!')} id="prio" value={prio}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-          </select>
-        </fieldset>
+        <form onSubmit={this.onSubmit.bind(this)}>
+
+          <CheckboxInput
+            id="prio"
+            label="Priority Item?"
+            defaultChecked={prio}
+            onClick={(e) => this.setState({ prio: e.target.checked })}
+            />
 
         <CheckboxInput
           id="archived"
