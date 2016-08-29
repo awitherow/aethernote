@@ -61,16 +61,18 @@ export default class NoteList extends Component {
     });
   }
 
-  storeNote() {
-    console.log('note stored');
-  }
-
-  commitNote() {
+  submitEdit(edit) {
+    console.log(edit);
     console.log('note committed');
   }
 
   closeEditor(){
-    console.log('closed editor');
+    this.setState({
+      editor: {
+        hidden: true,
+        note: {},
+      },
+    });
   }
 
   render() {
@@ -83,8 +85,7 @@ export default class NoteList extends Component {
         type="note"
         hidden={editor.hidden}
         note={editor.note}
-        onChange={this.storeNote.bind(this)}
-        onSubmit={this.commitNote.bind(this)}
+        onSubmit={this.submitEdit.bind(this)}
         onClose={this.closeEditor.bind(this)}
         />
 
