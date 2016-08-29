@@ -2,19 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { FormattedDate } from 'react-intl';
 
 import CheckboxInput from '../../elements/CheckboxInput';
+import TextInput from '../../elements/TextInput';
 
 export default class Editor extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-
-  save = () => {}
-  close = () => {
-    this.props.onClose();
-  }
-  rePrioritize = () => {}
-  updateContent = () => {}
 
   render() {
     if (this.props.hidden) return null;
@@ -23,17 +17,17 @@ export default class Editor extends Component {
     const { type } = this.props;
 
     return (
-      <form className="editor" onSubmit={this.save.bind(this)}>
+      <form className="editor" onSubmit={() => console.log('saved!')}>
 
         <header>
           <h1>Edit {type} #{id}</h1>
           <FormattedDate value={created} />
-          <button onClick={this.close.bind(this)}>X</button>
+          <button onClick={() => console.log('closed!')}>X</button>
         </header>
 
         <fieldset>
           <label htmlFor="prio">Prio:</label>
-          <select onChange={this.rePrioritize.bind(this)} id="prio" value={prio}>
+          <select onChange={() => console.log('priod!')} id="prio" value={prio}>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
@@ -43,18 +37,16 @@ export default class Editor extends Component {
         <CheckboxInput
           id="archived"
           label="Archived"
-          checked={archived ? "checked" : null}
+          checked={archived}
           onClick={() => this.setState({ archived: !archived })}
           />
 
-        <fieldset>
-          <label htmlFor="content">Contents</label>
-          <textarea
-            id="content"
-            value={content}
-            onChange={this.updateContent.bind(this)}
-            ></textarea>
-        </fieldset>
+        <TextInput
+          id="content"
+          label="Contents"
+          defaultValue={content}
+          onChange={(e) => this.setState({ content: e.target.value })}
+          />
 
         <button>Submit</button>
 
