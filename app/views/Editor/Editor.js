@@ -7,7 +7,12 @@ import TextInput from '../../elements/TextInput';
 export default class Editor extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    this.props.onSubmit(this.state);
+    this.props.onClose();
   }
 
   render() {
