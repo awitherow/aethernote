@@ -21,7 +21,7 @@ export const getNotes = (req, res, next) => {
 };
 
 export const getNote = (req, res, next) => {
-  const {id} = req.params;
+  const { id } = req.params;
   db.one(`select * from entries where id = ${id}`)
   .then(data => {
     res.status(200)
@@ -47,7 +47,7 @@ export const createNote = (req, res, next) => {
 };
 
 export const updateNote = (req, res, next) => {
-  const { id, content, prio, archived} = req.params.note;
+  const { id, content, prio, archived} = req.body.update;
   db.none(
     'update entries ' +
     'set content=$1, prio=$2, archived=$3 ' +

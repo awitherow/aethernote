@@ -25,8 +25,16 @@ function remove(id, cb) {
 }
 
 function update(orig, diff, cb) {
-  fetch(`/api/notes/${Object.assign(orig, diff)}`, {
+  const update = Object.assign(orig, diff);
+  fetch(`/api/notes/${orig.id}`, {
     method: 'PUT',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      update,
+    }),
   }).then(cb);
 }
 
