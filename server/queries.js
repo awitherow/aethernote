@@ -47,16 +47,12 @@ export const createNote = (req, res, next) => {
 };
 
 export const updateNote = (req, res, next) => {
-  let { content, prio, archived } = req.body;
-
-  // TODO: how to handle empty content?
-
-  if (!prio) prio = 1;
-  if (!archived) archived = false;
-
+  const { id, content, prio, archived} = req.params.note;
   db.none(
-    'update entries set content=$1, prio=$2, archived=$3',
-    [content, parseInt(prio), archived]
+    'update entries ' +
+    'set content=$1, prio=$2, archived=$3 ' +
+    'where id=$4',
+    [content, prio, archived, id]
   ).then(() => {
     res.status(200)
     .json({

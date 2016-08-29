@@ -61,9 +61,8 @@ export default class NoteList extends Component {
     });
   }
 
-  submitEdit(edit) {
-    console.log(edit);
-    console.log('note committed');
+  submitEdit(edits) {
+    noteService.update(this.state.editor.note, edits, () => this.closeEditor())
   }
 
   closeEditor(){

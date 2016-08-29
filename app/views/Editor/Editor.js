@@ -11,10 +11,7 @@ export default class Editor extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.props.onSubmit({
-      orig: this.props.note,
-      diff: this.state,
-    });
+    this.props.onSubmit(this.state);
     this.props.onClose();
   }
 

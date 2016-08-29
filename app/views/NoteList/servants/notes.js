@@ -24,8 +24,15 @@ function remove(id, cb) {
   }).then(cb);
 }
 
+function update(orig, diff, cb) {
+  fetch(`/api/notes/${Object.assign(orig, diff)}`, {
+    method: 'PUT',
+  }).then(cb);
+}
+
 export {
   get,
   add,
   remove,
+  update,
 };
