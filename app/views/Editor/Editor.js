@@ -37,7 +37,7 @@ export default class Editor extends Component {
         <CheckboxInput
           id="archived"
           label="Archived"
-          checked={archived}
+          defaultChecked={archived}
           onClick={() => this.setState({ archived: !archived })}
           />
 

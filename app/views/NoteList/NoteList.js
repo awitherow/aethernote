@@ -103,13 +103,13 @@ export default class NoteList extends Component {
           <TextInput
             id="note"
             label="Awaiting changes..."
-            value={noteInput}
+            defaultValue={noteInput}
             onChange={(e) => this.setState({ noteInput: e.target.value })}
             />
           <CheckboxInput
             id="priority"
             label="Important task?"
-            checked={priority}
+            defaultChecked={priority}
             onClick={() => {
               this.setState({ priority: !this.state.priority });
             }}
