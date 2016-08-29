@@ -110,8 +110,8 @@ export default class NoteList extends Component {
             id="priority"
             label="Important task?"
             defaultChecked={priority}
-            onClick={() => {
-              this.setState({ priority: !this.state.priority });
+            onClick={(e) => {
+              this.setState({ priority: e.target.checked });
             }}
             />
           <input type="submit" />
