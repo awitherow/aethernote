@@ -31,26 +31,26 @@ export default class App extends Component {
     this.setState(payload);
   }
 
+  renderContent(view) {
+    switch(view) {
+      case 'notelist': return <NoteList />;
+      default: return <NoteList />;
+    }
+  }
+
   render() {
     const { loading, view } = this.state;
-
-    let MAINVIEW;
-    switch(view) {
-      case 'notelist': {
-        MAINVIEW = <NoteList />;
-      }
-    }
 
     return (
       <div className="aether">
 
-        { loading ? <Overlay type="spinner" /> : null }
+        { loading ? <Overlay type="loading" /> : null }
 
         <header>
           <h1>Aether</h1>
         </header>
 
-        { MAINVIEW }
+        { this.renderContent(view) }
 
       </div>
     );
