@@ -7,7 +7,6 @@ var config = {
   debug: true,
   devtool: nodeEnv === 'production' ? 'cheap-module-eval-source-map' : 'source-map',
   entry: [
-    'eventsource-polyfill',
     'webpack-hot-middleware/client?reload=true',
     './src/app/index.js',
   ],
