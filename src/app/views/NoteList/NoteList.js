@@ -17,11 +17,11 @@ export default class NoteList extends Component {
       notes: [],
       editor: {
         hidden: true,
-        note: {},
+        note: {}
       },
       filters: {
-        archived: false,
-      },
+        archived: false
+      }
     };
   }
 
@@ -47,7 +47,7 @@ export default class NoteList extends Component {
     const { noteInput, priority } = this.state;
     noteService.add({
       content: noteInput,
-      prio: priority,
+      prio: priority
     }, () => this.getNotes());
     this.setState({ noteInput: "", priority: false });
   }
@@ -59,8 +59,8 @@ export default class NoteList extends Component {
     this.setState({
       editor: {
         hidden: false,
-        note,
-      },
+        note
+      }
     });
   }
 
@@ -72,8 +72,8 @@ export default class NoteList extends Component {
     this.setState({
       editor: {
         hidden: true,
-        note: {},
-      },
+        note: {}
+      }
     });
     this.getNotes();
   }
@@ -144,5 +144,5 @@ export default class NoteList extends Component {
 }
 
 NoteList.contextTypes = {
-  update: PropTypes.func.isRequired,
+  update: PropTypes.func.isRequired
 };

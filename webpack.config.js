@@ -1,35 +1,38 @@
-var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+import webpack from 'webpack';
+import path from 'path';
 
-var nodeEnv = process.env.NODE_ENV;
+let nodeEnv = process.env.NODE_ENV;
 
-var config = {
-  devtool: nodeEnv === 'production' ? 'cheap-module-source-map' : 'source-map',
-  entry: {
-    index: './app/index.js',
-  },
+let config = {
+  debug: true,
+  devtool: nodeEnv === 'production' ? 'cheap-module-eval-source-map' : 'source-map',
+  entry: [
+    'webpack-hot-middleware/client?reload=true',
+    './src/app/index.js'
+  ],
+  target: 'web',
   output: {
-    path: 'public/',
-    filename: '[name].js',
-    chunkFilename: "[id].js",
+    path: __dirname + '/public',
+    publicPath: '/',
+    filename: 'bundle.js'
+  },
+  devServer: {
+    contentBase: './src'
   },
   module: {
     loaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel',
-        query: { presets: ['es2015', 'react'] },
-      },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
-      },
-    ],
+      {test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel']},
+      {test: /(\.css)$/, loaders: ['style', 'css']},
+      {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'},
+      {test: /\.(woff|woff2)$/, loader: 'url?prefix=font/&limit=5000'},
+      {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
+      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'}
+    ]
   },
   plugins: [
-    new ExtractTextPlugin("[name].css"),
-  ],
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ]
 };
 
 if (nodeEnv === 'production') {
@@ -39,12 +42,12 @@ if (nodeEnv === 'production') {
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false },
       sourceMap: false,
-      comments: false,
+      comments: false
     }),
     new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: JSON.stringify("production") },
-    }),
+      'process.env': { NODE_ENV: JSON.stringify("production") }
+    })
   ]);
 }
 
-module.exports = config;
+export default config;

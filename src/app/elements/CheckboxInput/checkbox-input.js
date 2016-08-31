@@ -4,7 +4,7 @@ export default function CheckboxInput({
   id,
   label,
   defaultChecked,
-  onClick,
+  onClick
 }){
   return (
     <fieldset>
@@ -23,5 +23,5 @@ CheckboxInput.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   defaultChecked: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired
 };

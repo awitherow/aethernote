@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import favicon from 'serve-favicon';
-import * as api from './queries';
+import * as api from './db/queries';
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.delete('/api/notes/:id', api.removeNote);
 app.use(express.static('public'));
 app.use(favicon('public/favicon.ico'));
 
-app.set('port', (process.env.PORT || 3333));
+app.set('port', (process.env.PORT || 8080));
 
 app.listen(app.get('port'), () => {
   console.log('Node app is running on port', app.get('port'));

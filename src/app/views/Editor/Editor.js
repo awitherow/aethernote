@@ -65,5 +65,5 @@ Editor.propTypes = {
   note: PropTypes.object.isRequired,
   hidden: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired
 };

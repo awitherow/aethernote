@@ -11,15 +11,15 @@ export default class App extends Component {
       edit: {
         on: false,
         content: {},
-        edits: {},
+        edits: {}
       },
-      view: 'notelist',
+      view: 'notelist'
     };
   }
 
   getChildContext() {
     return {
-      update: this.update.bind(this),
+      update: this.update.bind(this)
     };
   }
 
@@ -44,13 +44,13 @@ export default class App extends Component {
     return (
       <div className="aether">
 
-        { loading ? <Overlay type="loading" /> : null }
+        {loading ? <Overlay type="loading" /> : null}
 
         <header>
           <h1>Aether</h1>
         </header>
 
-        { this.renderContent(view) }
+        {this.renderContent(view)}
 
       </div>
     );
@@ -58,5 +58,5 @@ export default class App extends Component {
 }
 
 App.childContextTypes = {
-  update: PropTypes.func,
+  update: PropTypes.func
 };
