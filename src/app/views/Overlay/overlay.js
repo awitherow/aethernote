@@ -13,5 +13,5 @@ export default function Overlay({ type }) {
 }
 
 Overlay.propTypes = {
-  type: string.isRequired,
+  type: string.isRequired
 };

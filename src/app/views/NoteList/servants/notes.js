@@ -12,15 +12,15 @@ function add(entry, cb) {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify(entry),
+    body: JSON.stringify(entry)
   }).then(cb);
 }
 
 function remove(id, cb) {
   fetch(`/api/notes/${id}`, {
-    method: 'DELETE',
+    method: 'DELETE'
   }).then(cb);
 }
 
@@ -30,11 +30,11 @@ function update(orig, diff, cb) {
     method: 'PUT',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      update,
-    }),
+      update
+    })
   }).then(cb);
 }
 
@@ -42,5 +42,5 @@ export {
   get,
   add,
   remove,
-  update,
+  update
 };

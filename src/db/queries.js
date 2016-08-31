@@ -2,7 +2,7 @@ import promiseLib from 'bluebird';
 import pg from 'pg-promise';
 
 const pgp = pg({
-  promiseLib,
+  promiseLib
 });
 
 pgp.pg.defaults.ssl = true;
@@ -15,7 +15,7 @@ export const getNotes = (req, res, next) => {
     .json({
       status: 'success',
       data,
-      message: 'Retrieved all tasks',
+      message: 'Retrieved all tasks'
     });
   }).catch(err => next(err));
 };
@@ -28,7 +28,7 @@ export const getNote = (req, res, next) => {
     .json({
       status: 'success',
       data,
-      message: 'Retrieved entry',
+      message: 'Retrieved entry'
     });
   }).catch(err => next(err));
 };
@@ -41,7 +41,7 @@ export const createNote = (req, res, next) => {
     res.status(200)
     .json({
       status: 'success',
-      message: 'Inserted one entry',
+      message: 'Inserted one entry'
     });
   }).catch(err => next(err));
 };
@@ -57,7 +57,7 @@ export const updateNote = (req, res, next) => {
     res.status(200)
     .json({
       status: 'success',
-      message: 'Updated entry',
+      message: 'Updated entry'
     });
   }).catch(err => next(err));
 };
@@ -69,7 +69,7 @@ export const removeNote = (req, res, next) => {
     res.status(200)
     .json({
       status: 'success',
-      message: `Removed ${result.rowCount} entry`,
+      message: `Removed ${result.rowCount} entry`
     });
   }).catch(err => next(err));
 };

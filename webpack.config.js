@@ -8,16 +8,16 @@ var config = {
   devtool: nodeEnv === 'production' ? 'cheap-module-eval-source-map' : 'source-map',
   entry: [
     'webpack-hot-middleware/client?reload=true',
-    './src/app/index.js',
+    './src/app/index.js'
   ],
   target: 'web',
   output: {
     path: 'public/',
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './src',
+    contentBase: './src'
   },
   module: {
     loaders: [
@@ -26,13 +26,13 @@ var config = {
       {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'},
       {test: /\.(woff|woff2)$/, loader: 'url?prefix=font/&limit=5000'},
       {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
-      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'},
-    ],
+      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'}
+    ]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-  ],
+    new webpack.NoErrorsPlugin()
+  ]
 };
 
 if (nodeEnv === 'production') {
@@ -42,11 +42,11 @@ if (nodeEnv === 'production') {
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false },
       sourceMap: false,
-      comments: false,
+      comments: false
     }),
     new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: JSON.stringify("production") },
-    }),
+      'process.env': { NODE_ENV: JSON.stringify("production") }
+    })
   ]);
 }
 
