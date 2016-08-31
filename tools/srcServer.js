@@ -1,14 +1,26 @@
 import express from 'express';
 import webpack from 'webpack';
+import bodyParser from 'body-parser';
+import favicon from 'serve-favicon';
 import path from 'path';
-import config from '../webpack.config.dev';
+import config from '../webpack.config';
 import open from 'open';
+import * as api from '../src/db/queries';
 
 /* eslint-disable no-console */
 
 const port = 3000;
 const app = express();
 const compiler = webpack(config);
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get('/api/notes', api.getNotes);
+app.get('/api/notes/:id', api.getNote);
+app.post('/api/notes', api.createNote);
+app.put('/api/notes/:id', api.updateNote);
+app.delete('/api/notes/:id', api.removeNote);
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,

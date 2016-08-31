@@ -1,9 +1,9 @@
-var webpack = require('webpack');
-var path = require('path');
+import webpack from 'webpack';
+import path from 'path';
 
-var nodeEnv = process.env.NODE_ENV;
+let nodeEnv = process.env.NODE_ENV;
 
-var config = {
+let config = {
   debug: true,
   devtool: nodeEnv === 'production' ? 'cheap-module-eval-source-map' : 'source-map',
   entry: [
@@ -12,7 +12,7 @@ var config = {
   ],
   target: 'web',
   output: {
-    path: 'public/',
+    path: __dirname + '/public',
     publicPath: '/',
     filename: 'bundle.js'
   },
@@ -50,4 +50,4 @@ if (nodeEnv === 'production') {
   ]);
 }
 
-module.exports = config;
+export default config;
