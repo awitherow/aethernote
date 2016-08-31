@@ -19,6 +19,9 @@ export default class NoteList extends Component {
         hidden: true,
         note: {},
       },
+      filters: {
+        archived: false,
+      },
     };
   }
 
@@ -75,8 +78,16 @@ export default class NoteList extends Component {
     this.getNotes();
   }
 
+  filter(notes) {
+    const { filters } = this.state;
+    for (var filter in filters) {
+      notes = notes.filter(note => note[filter] === filters[filter]);
+    }
+    return notes;
+  }
+
   render() {
-    const { editor, notes, noteInput, priority } = this.state;
+    const { editor, notes, noteInput, priority, filters } = this.state;
 
     return (
       <div className="main">
@@ -90,8 +101,18 @@ export default class NoteList extends Component {
         />
 
         <h2>notes <span>({notes.length})</span></h2>
+
+        <div className="note-list__sort">
+          <CheckboxInput
+            id="filter-archived"
+            label="View Archived"
+            defaultChecked={filters.archived}
+            onClick={() => this.setState({ filters: { archived: !filters.archived }})}
+            />
+        </div>
+
         <ul className="notes-list">
-          {notes.map(note =>
+          {this.filter(notes).map(note =>
             <Note
               key={note.id}
               note={note}
