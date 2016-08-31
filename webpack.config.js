@@ -4,7 +4,9 @@ var nodeEnv = process.env.NODE_ENV;
 
 var config = {
   devtool: nodeEnv === 'production' ? 'cheap-module-source-map' : 'source-map',
-  entry: './app/index.js',
+  entry: [
+    './app/index.js',
+  ],
   output: {
     path: 'public/',
     filename: 'index.js',
@@ -14,17 +16,35 @@ var config = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: ['es2015', 'react'],
-        },
+        loaders: [ 'react-hot', 'babel'],
       },
     ],
   },
+  plugins: [],
 };
 
+if (nodeEnv === 'development') {
+  addHotLoadServers();
+  defineDevelopmentPlugins();
+}
+
 if (nodeEnv === 'production') {
-  config.plugins = [].concat([
+  defineProductionPlugins();
+}
+
+function addHotLoadServers() {
+  let devServer = [
+    'webpack-dev-server/client?http://0.0.0.0:3000',
+    'webpack/hot/only-dev-server',
+  ];
+
+  for (var i = 0, len = devServer.length; i < len; i++) {
+    config.entry.unshift(devServer[i]);
+  }
+}
+
+function defineProductionPlugins() {
+  config.plugins = config.plugins.concat([
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.optimize.UglifyJsPlugin({
@@ -35,6 +55,12 @@ if (nodeEnv === 'production') {
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify("production") },
     }),
+  ]);
+}
+
+function defineDevelopmentPlugins() {
+  config.plugins = config.plugins.concat([
+    new webpack.HotModuleReplacementPlugin(),
   ]);
 }
 
