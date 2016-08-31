@@ -1,13 +1,17 @@
 var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var nodeEnv = process.env.NODE_ENV;
 
 var config = {
   devtool: nodeEnv === 'production' ? 'cheap-module-source-map' : 'source-map',
-  entry: './app/index.js',
+  entry: {
+    index: './app/index.js',
+  },
   output: {
     path: 'public/',
-    filename: 'index.js',
+    filename: '[name].js',
+    chunkFilename: "[id].js",
   },
   module: {
     loaders: [
@@ -17,13 +21,19 @@ var config = {
         loader: 'babel',
         query: { presets: ['es2015', 'react'] },
       },
-      { test: /\.css$/, loader: "style-loader!css-loader" },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
+      },
     ],
   },
+  plugins: [
+    new ExtractTextPlugin("[name].css"),
+  ],
 };
 
 if (nodeEnv === 'production') {
-  config.plugins = [].concat([
+  config.plugins = config.plugins.concat([
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.optimize.UglifyJsPlugin({
