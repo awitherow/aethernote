@@ -1,34 +1,38 @@
 var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var path = require('path');
 
 var nodeEnv = process.env.NODE_ENV;
 
 var config = {
-  devtool: nodeEnv === 'production' ? 'cheap-module-source-map' : 'source-map',
-  entry: {
-    index: './app/index.js',
-  },
+  debug: true,
+  devtool: nodeEnv === 'production' ? 'cheap-module-eval-source-map' : 'source-map',
+  entry: [
+    'eventsource-polyfill',
+    'webpack-hot-middleware/client?reload=true',
+    './src/app/index.js',
+  ],
+  target: 'web',
   output: {
     path: 'public/',
-    filename: '[name].js',
-    chunkFilename: "[id].js",
+    publicPath: '/',
+    filename: 'bundle.js',
+  },
+  devServer: {
+    contentBase: './src',
   },
   module: {
     loaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel',
-        query: { presets: ['es2015', 'react'] },
-      },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
-      },
+      {test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel']},
+      {test: /(\.css)$/, loaders: ['style', 'css']},
+      {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'},
+      {test: /\.(woff|woff2)$/, loader: 'url?prefix=font/&limit=5000'},
+      {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
+      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'},
     ],
   },
   plugins: [
-    new ExtractTextPlugin("[name].css"),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
   ],
 };
 
