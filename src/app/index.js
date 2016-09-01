@@ -5,7 +5,7 @@ import { Router, browserHistory } from 'react-router';
 import routes from './routes';
 import { IntlProvider } from 'react-intl';
 
-import App from './components/App';
+import App from './App';
 
 render(
   <IntlProvider locale="en">

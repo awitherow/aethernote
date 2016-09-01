@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import * as noteService from '../../../servants/notes';
+import * as noteService from '../../servants/notes';
 
 import TextInput from '../../elements/TextInput';
 import CheckboxInput from '../../elements/CheckboxInput';
@@ -23,6 +23,12 @@ export default class NoteList extends Component {
         archived: false
       }
     };
+
+    this.submit = this.submitEdit.bind(this);
+    this.closeEditor = this.closeEditor.bind(this);
+    this.removeNote = this.removeNote.bind(this);
+    this.editNote = this.editNote.bind(this);
+    this.addNote = this.addNote.bind(this);
   }
 
   componentDidMount() {
@@ -68,6 +74,19 @@ export default class NoteList extends Component {
     noteService.update(this.state.editor.note, edits, () => this.closeEditor());
   }
 
+  toggleArchive() {
+    const { filters } = this.state.filters;
+    this.setState({ filters: { archived: !filters.archived }});
+  }
+
+  captureInput(e) {
+    this.setState({ noteInput: e.target.value });
+  }
+
+  prioritizeInput(e) {
+    this.setState({ priority: e.target.checked });
+  }
+
   closeEditor(){
     this.setState({
       editor: {
@@ -80,7 +99,7 @@ export default class NoteList extends Component {
 
   filter(notes) {
     const { filters } = this.state;
-    for (var filter in filters) {
+    for (let filter in filters) {
       notes = notes.filter(note => note[filter] === filters[filter]);
     }
     return notes;
@@ -96,8 +115,8 @@ export default class NoteList extends Component {
         type="note"
         hidden={editor.hidden}
         note={editor.note}
-        onSubmit={this.submitEdit.bind(this)}
-        onClose={this.closeEditor.bind(this)}
+        onSubmit={this.submitEdit}
+        onClose={this.closeEditor}
         />
 
         <h2>notes <span>({notes.length})</span></h2>
@@ -107,7 +126,7 @@ export default class NoteList extends Component {
             id="filter-archived"
             label="View Archived"
             defaultChecked={filters.archived}
-            onClick={() => this.setState({ filters: { archived: !filters.archived }})}
+            onClick={this.toggleArchive}
             />
         </div>
 
@@ -116,25 +135,23 @@ export default class NoteList extends Component {
             <Note
               key={note.id}
               note={note}
-              removeNote={this.removeNote.bind(this)}
-              editNote={this.editNote.bind(this)}
+              removeNote={this.removeNote}
+              editNote={this.editNote}
               />
           )}
         </ul>
-        <form className="add-note" onSubmit={this.addNote.bind(this)}>
+        <form className="add-note" onSubmit={this.addNote}>
           <TextInput
             id="note"
             label="Awaiting changes..."
             defaultValue={noteInput}
-            onChange={(e) => this.setState({ noteInput: e.target.value })}
+            onChange={function(e) {this.captureInput(e);}}
             />
           <CheckboxInput
             id="priority"
             label="Important task?"
             defaultChecked={priority}
-            onClick={(e) => {
-              this.setState({ priority: e.target.checked });
-            }}
+            onClick={function(e) {this.prioritizeInput(e);}}
             />
           <input type="submit" />
         </form>
