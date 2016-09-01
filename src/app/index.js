@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { IntlProvider } from 'react-intl';
 
-import App from './App';
+import App from './components/App';
 
 render(
   <IntlProvider locale="en">
