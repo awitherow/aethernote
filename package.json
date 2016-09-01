@@ -15,7 +15,8 @@
     "webpack": "NODE_ENV='production' webpack -p",
     "express": "NODE_ENV='production' node start.js",
     "prepush": "npm run test",
-    "test": "npm run lint",
+    "test": "npm run lint && npm run mocha",
+    "mocha": "mocha --reporter progress tools/testSetup.js \"src/**/*.test.js\"",
     "lint": "eslint . --ext .js --ext .jsx --fix",
     "dev": "DATABASE_URL=$(heroku config:get DATABASE_URL -a aethernote) babel-node tools/srcServer.js"
   },
