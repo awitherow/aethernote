@@ -56,7 +56,6 @@
     "nodemon": "^1.10.0",
     "style-loader": "^0.13.1",
     "babel-register": "6.8.0",
-    "colors": "1.1.2",
     "compression": "1.6.1",
     "cross-env": "1.0.7",
     "css-loader": "0.23.1",
