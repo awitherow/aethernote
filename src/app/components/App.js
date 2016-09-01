@@ -12,8 +12,7 @@ export default class App extends Component {
         on: false,
         content: {},
         edits: {}
-      },
-      view: 'notelist'
+      }
     };
   }
 
@@ -31,15 +30,8 @@ export default class App extends Component {
     this.setState(payload);
   }
 
-  renderContent(view) {
-    switch(view) {
-      case 'notelist': return <NoteList />;
-      default: return <NoteList />;
-    }
-  }
-
   render() {
-    const { loading, view } = this.state;
+    const { loading } = this.state;
 
     return (
       <div className="aether">
@@ -50,12 +42,16 @@ export default class App extends Component {
           <h1>Aether</h1>
         </header>
 
-        {this.renderContent(view)}
+        {this.props.children}
 
       </div>
     );
   }
 }
+
+App.propTypes = {
+  children: PropTypes.object.isRequired
+};
 
 App.childContextTypes = {
   update: PropTypes.func
