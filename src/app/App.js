@@ -1,18 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 
 import Overlay from './views/Overlay';
-import NoteList from './views/NoteList';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false,
-      edit: {
-        on: false,
-        content: {},
-        edits: {}
-      }
+      loading: false
     };
   }
 
