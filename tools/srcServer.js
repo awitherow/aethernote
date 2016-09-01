@@ -5,7 +5,7 @@ import favicon from 'serve-favicon';
 import path from 'path';
 import config from '../webpack.config';
 import open from 'open';
-import * as api from '../src/db/queries';
+import * as api from '../src/server/queries';
 
 /* eslint-disable no-console */
 

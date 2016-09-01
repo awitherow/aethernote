@@ -1,7 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import favicon from 'serve-favicon';
-import * as api from './db/queries';
+import * as api from './queries';
 
 const app = express();
 
