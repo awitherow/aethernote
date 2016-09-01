@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import Overlay from './views/Overlay';
+import Header from './elements/Header';
 
 export default class App extends Component {
   constructor(props) {
@@ -32,9 +33,7 @@ export default class App extends Component {
 
         {loading ? <Overlay type="loading" /> : null}
 
-        <header>
-          <h1>Aether</h1>
-        </header>
+        <Header />
 
         {this.props.children}
 
