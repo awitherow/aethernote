@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import * as noteService from '../../api/notes';
+import * as noteService from '../../../api/notes';
 
 import TextInput from '../../elements/TextInput';
 import CheckboxInput from '../../elements/CheckboxInput';

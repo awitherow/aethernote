@@ -7,8 +7,7 @@ export default class Journal extends Component {
 
     this.state = {
       entry: {
-        title: '',
-        type: 'journal'
+        title: ''
       }
     };
 
@@ -23,7 +22,7 @@ export default class Journal extends Component {
   }
 
   onClickSave() {
-    alert(`saving ${this.state.entry.title}`)
+    alert(`saving ${this.state.entry.title}`);
   }
 
   render() {

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
-import Overlay from './views/Overlay';
-import Header from './elements/Header';
+import Overlay from './components/views/Overlay';
+import Header from './components/elements/Header';
 
 export default class App extends Component {
   constructor(props) {
