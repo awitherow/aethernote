@@ -23,12 +23,6 @@ export default class NoteList extends Component {
         archived: false
       }
     };
-
-    this.submit = this.submitEdit.bind(this);
-    this.closeEditor = this.closeEditor.bind(this);
-    this.removeNote = this.removeNote.bind(this);
-    this.editNote = this.editNote.bind(this);
-    this.addNote = this.addNote.bind(this);
   }
 
   componentDidMount() {
@@ -79,14 +73,6 @@ export default class NoteList extends Component {
     this.setState({ filters: { archived: !filters.archived }});
   }
 
-  captureInput(e) {
-    this.setState({ noteInput: e.target.value });
-  }
-
-  prioritizeInput(e) {
-    this.setState({ priority: e.target.checked });
-  }
-
   closeEditor(){
     this.setState({
       editor: {
@@ -126,7 +112,7 @@ export default class NoteList extends Component {
             id="filter-archived"
             label="View Archived"
             defaultChecked={filters.archived}
-            onClick={this.toggleArchive}
+            onClick={this.toggleArchive.bind(this)}
             />
         </div>
 
@@ -135,23 +121,23 @@ export default class NoteList extends Component {
             <Note
               key={note.id}
               note={note}
-              removeNote={this.removeNote}
-              editNote={this.editNote}
+              removeNote={this.removeNote.bind(this)}
+              editNote={this.editNote.bind(this)}
               />
           )}
         </ul>
-        <form className="add-note" onSubmit={this.addNote}>
+        <form className="add-note" onSubmit={this.addNote.bind(this)}>
           <TextInput
             id="note"
             label="Awaiting changes..."
             defaultValue={noteInput}
-            onChange={function(e) {this.captureInput(e);}}
+            onChange={(e) => this.setState({ noteInput: e.target.value })}
             />
           <CheckboxInput
             id="priority"
             label="Important task?"
             defaultChecked={priority}
-            onClick={function(e) {this.prioritizeInput(e);}}
+            onClick={(e) => this.setState({ priority: e.target.checked })}
             />
           <input type="submit" />
         </form>
