@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { IndexLink, Link } from 'react-router';
+import { IndexLink, Link } from 'react-router';
 
 export default function Header(props) {
   return (
