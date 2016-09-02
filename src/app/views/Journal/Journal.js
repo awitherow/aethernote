@@ -7,10 +7,13 @@ export default class Journal extends Component {
 
     this.state = {
       entry: {
-        title: null,
+        title: '',
         type: 'journal'
       }
     };
+
+    this.onTitleChange = this.onTitleChange.bind(this);
+    this.onClickSave = this.onClickSave.bind(this);
   }
 
   onTitleChange(e) {

@@ -29,6 +29,8 @@ export default class NoteList extends Component {
     this.removeNote = this.removeNote.bind(this);
     this.editNote = this.editNote.bind(this);
     this.addNote = this.addNote.bind(this);
+    this.captureInput = this.captureInput.bind(this);
+    this.prioritizeInput = this.prioritizeInput.bind(this);
   }
 
   componentDidMount() {
@@ -145,13 +147,13 @@ export default class NoteList extends Component {
             id="note"
             label="Awaiting changes..."
             defaultValue={noteInput}
-            onChange={function(e) {this.captureInput(e);}}
+            onChange={this.captureInput}
             />
           <CheckboxInput
             id="priority"
             label="Important task?"
             defaultChecked={priority}
-            onClick={function(e) {this.prioritizeInput(e);}}
+            onClick={this.prioritizeInput}
             />
           <input type="submit" />
         </form>
