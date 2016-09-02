@@ -7,7 +7,8 @@ export default class Journal extends Component {
 
     this.state = {
       entry: {
-        title: ''
+        title: '',
+        type: 'journal'
       }
     };
 
