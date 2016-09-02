@@ -7,6 +7,7 @@ export default function Header(props) {
       <h1>Aether</h1>
       <ul>
         <IndexLink to="/" activeClassName="active">Notes</IndexLink>
+        <Link to="/journal" activeClassName="active">Journal</Link>
       </ul>
     </header>
   );

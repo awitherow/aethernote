@@ -13,6 +13,16 @@ export default class Journal extends Component {
     };
   }
 
+  onTitleChange(e) {
+    const entry = this.state.entry;
+    entry.title = e.target.value;
+    this.setState({ entry });
+  }
+
+  onClickSave() {
+    alert(`saving ${this.state.entry.title}`)
+  }
+
   render() {
     return (
       <div className="journal">
