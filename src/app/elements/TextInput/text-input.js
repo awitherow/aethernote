@@ -12,7 +12,7 @@ export default function TextInput({
       <input
         id={id}
         type="text"
-        defaultValue={defaultValue}
+        defaultValue={defaultValue || ''}
         onChange={onChange}
         />
     </fieldset>
@@ -22,6 +22,6 @@ export default function TextInput({
 TextInput.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  defaultValue: PropTypes.string.isRequired,
+  defaultValue: PropTypes.string,
   onChange: PropTypes.func.isRequired
 };
