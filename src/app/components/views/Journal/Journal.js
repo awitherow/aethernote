@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as journalActions from '../../../actions/journalActions';
+
 import TextInput from '../../elements/TextInput';
 
-export default class Journal extends Component {
+class Journal extends Component {
   constructor(props) {
     super(props);
 
@@ -23,7 +26,7 @@ export default class Journal extends Component {
   }
 
   onClickSave() {
-    alert(`saving ${this.state.entry.title}`);
+    this.props.dispatch(journalActions.createEntry(this.state.entry));
   }
 
   render() {
@@ -49,3 +52,13 @@ export default class Journal extends Component {
     );
   }
 }
+
+function mapStateToProps(state, ownProps) {
+  return {
+    journal: state.journal
+  };
+}
+
+export default connect(
+  mapStateToProps
+)(Journal);
