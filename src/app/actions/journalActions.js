@@ -1,6 +1,8 @@
+import * as types from './actionTypes';
+
 export function createEntry(entry) {
   return {
-    type: 'CREATE_ENTRY',
+    type: types.CREATE_ENTRY,
     entry
   };
 }
