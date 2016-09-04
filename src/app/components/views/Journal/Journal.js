@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import * as journalActions from '../../../actions/journalActions';
 
@@ -52,6 +52,10 @@ class Journal extends Component {
     );
   }
 }
+
+Journal.propTypes = {
+  dispatch: PropTypes.func.isRequired
+};
 
 function mapStateToProps(state, ownProps) {
   return {
