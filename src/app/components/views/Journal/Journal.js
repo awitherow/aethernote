@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as journalActions from '../../../actions/journalActions';
 
 import TextInput from '../../elements/TextInput';
@@ -25,14 +26,26 @@ class Journal extends Component {
     this.setState({ entry });
   }
 
-  onClickSave() {
-    this.props.dispatch(journalActions.createEntry(this.state.entry));
+  onClickSave(e) {
+    e.preventDefault();
+    this.props.actions.createEntry(this.state.entry);
+  }
+
+  journalEntryRow(entry, index) {
+    return (
+      <div key={index}>
+        {entry.title}
+      </div>
+    );
   }
 
   render() {
     return (
       <div className="journal">
         <h1>Journal Entries</h1>
+
+        {this.props.journal.map(this.journalEntryRow)}
+
         <h2>Add Journal Entry</h2>
         <form className="add-journal__form">
           <TextInput
@@ -54,7 +67,8 @@ class Journal extends Component {
 }
 
 Journal.propTypes = {
-  dispatch: PropTypes.func.isRequired
+  actions: PropTypes.object.isRequired,
+  journal: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
@@ -63,6 +77,13 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    actions : bindActionCreators(journalActions, dispatch)
+  };
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Journal);
