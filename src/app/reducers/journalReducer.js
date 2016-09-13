@@ -7,6 +7,8 @@ export default function(state = [], action) {
         ...state,
         Object.assign({}, action.entry)
       ];
+    case types.LOAD_ENTRIES_SUCCESS:
+      return action.entries;
     default:
       return state;
   }

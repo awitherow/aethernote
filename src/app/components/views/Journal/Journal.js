@@ -10,6 +10,10 @@ class Journal extends Component {
     super(props, context);
   }
 
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   journalEntryRow(entry, index) {
     return (
       <div key={index}>
@@ -21,7 +25,7 @@ class Journal extends Component {
   render() {
     return (
       <div className="journal">
-      
+
         <h1>Journal Entries</h1>
 
         {this.props.journal.map(this.journalEntryRow)}
