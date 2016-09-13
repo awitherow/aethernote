@@ -14,7 +14,7 @@ const db = pgp(process.env.DATABASE_URL);
  */
 
 export const getNotes = (req, res, next) => {
-  db.any('select * from entries')
+  db.any("SELECT * FROM entries WHERE type = 'note'")
   .then(data => {
     res.status(200)
     .json({
