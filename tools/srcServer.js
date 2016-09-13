@@ -22,6 +22,8 @@ app.post('/api/notes', api.createNote);
 app.put('/api/notes/:id', api.updateNote);
 app.delete('/api/notes/:id', api.removeNote);
 
+app.get('/api/journalEntries', api.getJournalEntries);
+
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
   publicPath: config.output.publicPath
