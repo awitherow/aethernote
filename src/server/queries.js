@@ -8,6 +8,11 @@ const pgp = pg({
 pgp.pg.defaults.ssl = true;
 const db = pgp(process.env.DATABASE_URL);
 
+/* table of contents
+ * 1. note database calls
+ * 2. journal database calls
+ */
+
 export const getNotes = (req, res, next) => {
   db.any('select * from entries')
   .then(data => {
