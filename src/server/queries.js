@@ -78,3 +78,18 @@ export const removeNote = (req, res, next) => {
     });
   }).catch(err => next(err));
 };
+
+
+// 2. journal database calls
+
+export const getJournalEntries = (req, res, next) => {
+  db.any("SELECT * FROM entries WHERE type = 'journal'")
+  .then(data => {
+    res.status(200)
+    .json({
+      status: 'success',
+      data,
+      message: 'Retrieved all journal entries'
+    });
+  }).catch(err => next(err));
+};
