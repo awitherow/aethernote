@@ -1,4 +1,4 @@
-function get(cb) {
+function getEntries(cb) {
   fetch('/api/journalEntries')
     .then(r => r.json())
     .then(res => {
@@ -8,5 +8,5 @@ function get(cb) {
 }
 
 export {
-  get
+  getEntries
 };

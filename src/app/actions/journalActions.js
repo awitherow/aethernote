@@ -17,7 +17,7 @@ export function loadEntriesSuccess(entries) {
 
 export function loadJournalEntries() {
   return function(dispatch) {
-    return journalApi.get(entries => {
+    return journalApi.getEntries(entries => {
       dispatch(loadEntriesSuccess(entries));
     });
   };
