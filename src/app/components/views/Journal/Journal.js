@@ -7,21 +7,22 @@ import EntriesList from './components/EntriesList';
 class Journal extends Component {
   constructor(props, context) {
     super(props, context);
+    this.loadEntries = this.props.actions.loadJournalEntries;
   }
 
   componentDidMount() {
-    this.props.actions.loadJournalEntries();
+    this.loadEntries();
   }
 
   render() {
+    const { journal } = this.props;
+
     return (
       <div className="journal">
 
         <h1>Journal Entries</h1>
 
-        <EntriesList
-          entries={this.props.journal}
-          />
+        <EntriesList entries={journal} />
 
       </div>
     );
