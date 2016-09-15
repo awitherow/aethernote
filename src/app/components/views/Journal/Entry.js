@@ -13,6 +13,15 @@ class Entry extends Component {
       entry: Object.assign({}, props.entry),
       errors: {}
     };
+
+    this.updateState = this.updateState.bind(this);
+  }
+
+  updateState(e) {
+    const field = e.target.id;
+    let entry = this.state.entry;
+    entry[field] = e.target.value;
+    return this.setState({ entry });
   }
 
   render() {
@@ -23,6 +32,7 @@ class Entry extends Component {
         <EntryForm
           entry={this.state.entry}
           errors={this.state.errors}
+          onChange={this.updateState}
           />
       </div>
     );
