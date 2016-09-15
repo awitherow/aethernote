@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as journalActions from '../../../actions/journalActions';
-import EntriesList from './EntriesList';
+import EntriesList from './components/EntriesList';
 
 class Journal extends Component {
   constructor(props, context) {
