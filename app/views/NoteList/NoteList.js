@@ -3,9 +3,8 @@ import * as noteService from './servants/notes';
 
 import TextInput from '../../elements/TextInput';
 import CheckboxInput from '../../elements/CheckboxInput';
-
-import Note from './components/note';
-import Editor from '../Editor';
+import NoteItem from './components/NoteItem';
+import EditNote from '../EditNote';
 
 export default class NoteList extends Component {
   constructor(props) {
@@ -92,7 +91,7 @@ export default class NoteList extends Component {
     return (
       <div className="main">
 
-      <Editor
+      <EditNote
         type="note"
         hidden={editor.hidden}
         note={editor.note}
@@ -113,7 +112,7 @@ export default class NoteList extends Component {
 
         <ul className="notes-list">
           {this.filter(notes).map(note =>
-            <Note
+            <NoteItem
               key={note.id}
               note={note}
               removeNote={this.removeNote.bind(this)}

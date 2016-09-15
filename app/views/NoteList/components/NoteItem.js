@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 
-export default function Note({
+const NoteItem = ({
   note, removeNote, editNote,
-}) {
+}) => {
   const { id, content, prio } = note;
   return (
       <li>
@@ -13,10 +13,12 @@ export default function Note({
       </li>
 
   );
-}
+};
 
-Note.propTypes = {
+NoteItem.propTypes = {
   note: PropTypes.object.isRequired,
   removeNote: PropTypes.func.isRequired,
   editNote: PropTypes.func.isRequired,
 };
+
+export default NoteItem;

@@ -7,6 +7,7 @@ import TextInput from '../../elements/TextInput';
 export default class Editor extends Component {
   constructor(props) {
     super(props);
+    this.onSubmit = this.submit.bind(this);
   }
 
   onSubmit(e) {
@@ -29,7 +30,7 @@ export default class Editor extends Component {
           <button onClick={onClose}>X</button>
         </header>
 
-        <form onSubmit={this.onSubmit.bind(this)}>
+        <form onSubmit={this.onSubmit}>
 
           <CheckboxInput
             id="prio"
