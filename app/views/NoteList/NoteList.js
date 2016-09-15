@@ -3,8 +3,9 @@ import * as noteService from './servants/notes';
 
 import TextInput from '../../elements/TextInput';
 import CheckboxInput from '../../elements/CheckboxInput';
+
 import NoteItem from './components/NoteItem';
-import EditNote from '../EditNote';
+import EditNote from './components/EditNote';
 
 export default class NoteList extends Component {
   constructor(props) {

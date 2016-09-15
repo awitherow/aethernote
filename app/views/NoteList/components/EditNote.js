@@ -1,13 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedDate } from 'react-intl';
 
-import CheckboxInput from '../../elements/CheckboxInput';
-import TextInput from '../../elements/TextInput';
+import CheckboxInput from '../../../elements/CheckboxInput';
+import TextInput from '../../../elements/TextInput';
 
-export default class Editor extends Component {
+export default class EditNote extends Component {
   constructor(props) {
     super(props);
-    this.onSubmit = this.submit.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onSubmit(e) {
@@ -61,7 +61,7 @@ export default class Editor extends Component {
   }
 }
 
-Editor.propTypes = {
+EditNote.propTypes = {
   type: PropTypes.string.isRequired,
   note: PropTypes.object.isRequired,
   hidden: PropTypes.bool.isRequired,
