@@ -10,6 +10,10 @@ class Journal extends Component {
     super(props, context);
   }
 
+  componentDidMount() {
+    this.props.actions.loadJournalEntries();
+  }
+
   render() {
     return (
       <div className="journal">
