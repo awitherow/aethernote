@@ -31,6 +31,7 @@ export default class NoteList extends Component {
     this.addNote = this.addNote.bind(this);
     this.captureInput = this.captureInput.bind(this);
     this.prioritizeInput = this.prioritizeInput.bind(this);
+    this.toggleArchive = this.toggleArchive.bind(this);
   }
 
   componentDidMount() {
@@ -77,7 +78,7 @@ export default class NoteList extends Component {
   }
 
   toggleArchive() {
-    const { filters } = this.state.filters;
+    const { filters } = this.state;
     this.setState({ filters: { archived: !filters.archived }});
   }
 
@@ -117,7 +118,7 @@ export default class NoteList extends Component {
         type="note"
         hidden={editor.hidden}
         note={editor.note}
-        onSubmit={this.submitEdit}
+        onSubmit={this.submit}
         onClose={this.closeEditor}
         />
 
