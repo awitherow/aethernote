@@ -11,6 +11,7 @@ import { IntlProvider } from 'react-intl';
 import App from './App';
 
 const store = configureStore();
+store.dispatch(journalActions.loadJournalEntries());
 
 render(
   <Provider store={store}>
