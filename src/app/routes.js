@@ -10,5 +10,6 @@ export default (
     <IndexRoute component={NoteList}/>
     <Route path="/journal" component={Journal}/>
     <Route path="/journal-entry" component={JournalEntry}/>
+    <Route path="/journal-entry/:id" component={JournalEntry}/>
   </Route>
 );
