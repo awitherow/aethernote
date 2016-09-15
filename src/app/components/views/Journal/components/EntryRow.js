@@ -1,11 +1,13 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 
 const Entry = ({
   entry
 }) => {
   return (
     <div className="entry">
-      {entry.content}
+      <span>{entry.content}</span>
+      <Link to={`/journal-entry/${entry.id}`}>View Entry</Link>
     </div>
   );
 };
