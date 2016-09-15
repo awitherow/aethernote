@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Entry from './Entry';
+import Entry from './EntryRow';
 
 const EntriesList = ({
   entries
