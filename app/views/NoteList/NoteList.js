@@ -48,8 +48,10 @@ export default class NoteList extends Component {
     noteService.add({
       content: noteInput,
       prio: priority,
-    }, () => this.getNotes());
-    this.setState({ noteInput: "", priority: false });
+    }, () => {
+      this.setState({ noteInput: "", priority: false });
+      this.getNotes();
+    });
   }
 
   editNote(id) {
@@ -87,7 +89,7 @@ export default class NoteList extends Component {
   }
 
   render() {
-    const { editor, notes, noteInput, priority, filters } = this.state;
+    const { editor, notes, filters } = this.state;
 
     return (
       <div className="main">
@@ -121,23 +123,25 @@ export default class NoteList extends Component {
               />
           )}
         </ul>
+
         <form className="add-note" onSubmit={this.addNote.bind(this)}>
           <TextInput
             id="note"
             label="Awaiting changes..."
-            defaultValue={noteInput}
+            defaultValue=""
             onChange={(e) => this.setState({ noteInput: e.target.value })}
             />
           <CheckboxInput
             id="priority"
             label="Important task?"
-            defaultChecked={priority}
+            defaultChecked={false}
             onClick={(e) => {
               this.setState({ priority: e.target.checked });
             }}
             />
           <input type="submit" />
         </form>
+
       </div>
     );
   }
