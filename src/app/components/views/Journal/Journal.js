@@ -2,8 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as journalActions from '../../../actions/journalActions';
-
-import TextInput from '../../elements/TextInput';
+import EntriesList from './EntriesList';
 
 class Journal extends Component {
   constructor(props, context) {
@@ -20,13 +19,9 @@ class Journal extends Component {
 
         <h1>Journal Entries</h1>
 
-        {this.props.journal.map((entry, index) => {
-          return (
-            <div key={index}>
-              {entry.content}
-            </div>
-          );
-        })}
+        <EntriesList
+          entries={this.props.journal}
+          />
 
       </div>
     );
