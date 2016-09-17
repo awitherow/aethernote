@@ -54,8 +54,7 @@ Entry.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   let entry = {
-    content: '',
-    type: 'journal'
+    content: ''
   };
 
   return {
