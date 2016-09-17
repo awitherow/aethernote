@@ -57,8 +57,8 @@ Entry.contextTypes = {
 };
 
 function getEntryById(entries, id) {
-  const entry = entries.filter(entry => entry.id === id);
-  if (entry) return entries[0];
+  const entry = entries.filter(entry => entry.id == id)[0];
+  if (entry) return entry;
   return null;
 }
 
@@ -67,7 +67,7 @@ function mapStateToProps(state, ownProps) {
 
   let entry;
 
-  if (entryId) {
+  if (entryId && state.journal.length > 0) {
     entry = getEntryById(state.journal, entryId);
   } else {
     entry = { content: '' };
