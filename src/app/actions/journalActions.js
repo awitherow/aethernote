@@ -19,8 +19,8 @@ export function saveJournalSucess(entry) {
 
 export function saveJournalEntry(entry) {
   return function(dispatch, getState) {
-    return journalApi.saveEntry(savedEntry => {
-      dispatch(saveJournalSucess(savedEntry));
+    return journalApi.saveEntry(entry, () => {
+      dispatch(saveJournalSucess(entry));
     });
   };
 }
