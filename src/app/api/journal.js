@@ -7,6 +7,7 @@ function getEntries(cb) {
 }
 
 function saveEntry(entry, cb) {
+  entry.prio = false;
   fetch('/api/journalEntries', {
     method: 'POST',
     headers: {
