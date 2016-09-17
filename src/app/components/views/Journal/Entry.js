@@ -18,6 +18,13 @@ class Entry extends Component {
     this.saveEntry = this.saveEntry.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    // has entry changed? yes, do it. ensures will reset state on reload.
+    if (this.props.entry.id != nextProps.entry.id) {
+      this.setState({ entry: Object.assign({}, nextProps.entry)});
+    }
+  }
+
   updateState(e) {
     const field = e.target.id;
     let entry = this.state.entry;
