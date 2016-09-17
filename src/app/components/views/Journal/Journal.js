@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as journalActions from '../../../actions/journalActions';
+
 import EntriesList from './components/EntriesList';
 
 class Journal extends Component {
@@ -23,6 +25,8 @@ class Journal extends Component {
         <h1>Journal Entries</h1>
 
         <EntriesList entries={journal} />
+
+        <Link to="/journal-entry">Add Entry</Link>
 
       </div>
     );
