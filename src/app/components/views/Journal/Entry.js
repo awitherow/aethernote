@@ -56,10 +56,22 @@ Entry.contextTypes = {
   router: PropTypes.object
 };
 
+function getEntryById(entries, id) {
+  const entry = entries.filter(entry => entry.id === id);
+  if (entry) return entries[0];
+  return null;
+}
+
 function mapStateToProps(state, ownProps) {
-  let entry = {
-    content: ''
-  };
+  const entryId = ownProps.params.id;
+
+  let entry;
+
+  if (entryId) {
+    entry = getEntryById(state.journal, entryId);
+  } else {
+    entry = { content: '' };
+  }
 
   return {
     entry
