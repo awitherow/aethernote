@@ -7,6 +7,18 @@ function getEntries(cb) {
     .catch(e => console.log(e));
 }
 
+function saveEntry(entry, cb) {
+  fetch('/api/saveJournalEntry', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(entry)
+  }).then(cb);
+}
+
 export {
-  getEntries
+  getEntries,
+  saveEntry
 };
