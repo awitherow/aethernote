@@ -28,11 +28,11 @@ const EntryForm = ({
 };
 
 EntryForm.propTypes = {
-  entry: PropTypes.string.isRequired,
-  onSave: PropTypes.string.isRequired,
-  onChange: PropTypes.string.isRequired,
-  loading: PropTypes.string.isRequired,
-  errors: PropTypes.string.isRequired
+  entry: PropTypes.object.isRequired,
+  onSave: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 export default EntryForm;
