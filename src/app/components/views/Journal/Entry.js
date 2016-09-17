@@ -15,6 +15,8 @@ class Entry extends Component {
     };
 
     this.updateState = this.updateState.bind(this);
+    this.saveEntry = this.saveEntry.bind(this);
+    this.saveJournalEntry = this.props.actions.saveJournalEntry;
   }
 
   updateState(e) {
@@ -22,6 +24,11 @@ class Entry extends Component {
     let entry = this.state.entry;
     entry[field] = e.target.value;
     return this.setState({ entry });
+  }
+
+  saveEntry(e) {
+    e.preventDefault();
+    this.saveJournalEntry(this.state.entry);
   }
 
   render() {
@@ -33,6 +40,7 @@ class Entry extends Component {
           entry={this.state.entry}
           errors={this.state.errors}
           onChange={this.updateState}
+          onSave={this.saveEntry}
           />
       </div>
     );
@@ -40,7 +48,8 @@ class Entry extends Component {
 }
 
 Entry.propTypes = {
-  entry: PropTypes.object.isRequired
+  entry: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
