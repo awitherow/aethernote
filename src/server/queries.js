@@ -93,3 +93,17 @@ export const getJournalEntries = (req, res, next) => {
     });
   }).catch(err => next(err));
 };
+
+export const saveJournalEntry = (req, res, next) => {
+  req.body.type = 'journal';
+  db.none('insert into entries(content, prio, type)' +
+      'values(${content}, ${prio}, ${type})',
+    req.body)
+  .then(() => {
+    res.status(200)
+    .json({
+      status: 'success',
+      message: 'Inserted one journal entry'
+    });
+  }).catch(err => next(err));
+};
