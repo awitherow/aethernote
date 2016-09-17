@@ -7,13 +7,8 @@ import * as journalActions from '../../../actions/journalActions';
 import EntriesList from './components/EntriesList';
 
 class Journal extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.loadEntries = this.props.actions.loadJournalEntries;
-  }
-
   componentDidMount() {
-    this.loadEntries();
+    this.props.actions.loadJournalEntries();
   }
 
   render() {

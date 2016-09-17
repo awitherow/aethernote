@@ -16,7 +16,6 @@ class Entry extends Component {
 
     this.updateState = this.updateState.bind(this);
     this.saveEntry = this.saveEntry.bind(this);
-    this.saveJournalEntry = this.props.actions.saveJournalEntry;
   }
 
   updateState(e) {
@@ -28,7 +27,7 @@ class Entry extends Component {
 
   saveEntry(e) {
     e.preventDefault();
-    this.saveJournalEntry(this.state.entry);
+    this.props.actions.saveJournalEntry(this.state.entry);
     this.context.router.push('/journal');
   }
 
