@@ -19,9 +19,9 @@ class Journal extends Component {
 
         <h1>Journal Entries</h1>
 
-        <EntriesList entries={journal} />
-
         <Link to="/journal-entry">Add Entry</Link>
+
+        <EntriesList entries={journal} />
 
       </div>
     );
