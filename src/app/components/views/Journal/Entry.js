@@ -29,6 +29,7 @@ class Entry extends Component {
   saveEntry(e) {
     e.preventDefault();
     this.saveJournalEntry(this.state.entry);
+    this.context.router.push('/journal');
   }
 
   render() {
@@ -50,6 +51,10 @@ class Entry extends Component {
 Entry.propTypes = {
   entry: PropTypes.object.isRequired,
   actions: PropTypes.object.isRequired
+};
+
+Entry.contextTypes = {
+  router: PropTypes.object
 };
 
 function mapStateToProps(state, ownProps) {
