@@ -23,6 +23,7 @@ app.put('/api/notes/:id', api.updateNote);
 app.delete('/api/notes/:id', api.removeNote);
 
 app.get('/api/journalEntries', api.getJournalEntries);
+app.post('/api/journalEntries', api.saveJournalEntry);
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
