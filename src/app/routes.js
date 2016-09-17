@@ -8,8 +8,8 @@ import JournalEntry from './components/views/Journal/Entry';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={NoteList}/>
-    <Route path="/journal" component={Journal}/>
-    <Route path="/journal-entry" component={JournalEntry}/>
-    <Route path="/journal-entry/:id" component={JournalEntry}/>
+    <Route path="journal" component={Journal}/>
+    <Route path="journal-entry" component={JournalEntry}/>
+    <Route path="journal-entry/:id" component={JournalEntry}/>
   </Route>
 );
