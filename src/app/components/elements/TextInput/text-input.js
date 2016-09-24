@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 export default function TextInput({
   id,
   label,
-  defaultValue,
+  value,
   onChange
 }){
   return (
@@ -12,7 +12,7 @@ export default function TextInput({
       <input
         id={id}
         type="text"
-        defaultValue={defaultValue || ''}
+        value={value}
         onChange={onChange}
         />
     </fieldset>
@@ -22,6 +22,6 @@ export default function TextInput({
 TextInput.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  defaultValue: PropTypes.string,
+  value: PropTypes.string,
   onChange: PropTypes.func.isRequired
 };

@@ -48,7 +48,7 @@ export default class Editor extends Component {
           <TextInput
             id="content"
             label="Contents"
-            defaultValue={content}
+            value={content}
             onChange={(e) => this.setState({ content: e.target.value })}
             />
 

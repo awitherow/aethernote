@@ -13,7 +13,7 @@ const EntryForm = ({
       <TextInput
         id="content"
         label="content"
-        defaultValue={entry.content}
+        value={entry.content}
         onChange={onChange}
         />
       <input

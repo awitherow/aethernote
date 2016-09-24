@@ -57,8 +57,10 @@ export default class NoteList extends Component {
     noteService.add({
       content: noteInput,
       prio: priority
-    }, () => this.getNotes());
-    this.setState({ noteInput: "", priority: false });
+    }, () => {
+      this.setState({ noteInput: "", priority: false });
+      this.getNotes();
+    });
   }
 
   editNote(id) {
@@ -147,7 +149,7 @@ export default class NoteList extends Component {
           <TextInput
             id="note"
             label="Awaiting changes..."
-            defaultValue={noteInput}
+            value={noteInput}
             onChange={this.captureInput}
             />
           <CheckboxInput
