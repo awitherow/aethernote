@@ -2,13 +2,13 @@ import React, { Component, PropTypes } from 'react';
 
 import Overlay from './views/Overlay';
 import NoteList from './views/NoteList';
+import Header from './elements/Header';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
-      view: 'notelist',
     };
   }
 
@@ -27,16 +27,14 @@ export default class App extends Component {
   }
 
   render() {
-    const { loading, view } = this.state;
+    const { loading } = this.state;
 
     return (
       <div className="aether">
 
         { loading ? <Overlay type="loading" /> : null }
 
-        <header>
-          <h1>Aether</h1>
-        </header>
+        <Header />
 
         <NoteList />
 
