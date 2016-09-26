@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import './styles/text-area.css';
 
 export default function TextAreaInput({
   id,
