@@ -8,7 +8,7 @@ var config = {
   entry: './app/index.js',
   output: {
     path: 'public',
-    filename: 'index.js'
+    filename: 'index.js',
   },
   module: {
     loaders: [
