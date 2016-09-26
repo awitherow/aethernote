@@ -8,11 +8,6 @@ export default class App extends Component {
     super(props);
     this.state = {
       loading: false,
-      edit: {
-        on: false,
-        content: {},
-        edits: {},
-      },
       view: 'notelist',
     };
   }
