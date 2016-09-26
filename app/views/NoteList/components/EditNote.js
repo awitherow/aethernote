@@ -3,6 +3,7 @@ import { FormattedDate } from 'react-intl';
 
 import CheckboxInput from '../../../elements/CheckboxInput';
 import TextInput from '../../../elements/TextInput';
+import TextAreaInput from '../../../elements/TextAreaInput';
 
 export default class EditNote extends Component {
   constructor(props) {
@@ -53,7 +54,7 @@ export default class EditNote extends Component {
             onChange={(e) => this.setState({ title: e.target.value })}
             />
 
-          <TextInput
+          <TextAreaInput
             id="content"
             label="Contents"
             defaultValue={content}
