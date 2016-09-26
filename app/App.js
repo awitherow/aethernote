@@ -26,13 +26,6 @@ export default class App extends Component {
     this.setState(payload);
   }
 
-  renderContent(view) {
-    switch(view) {
-      case 'notelist': return <NoteList />;
-      default: return <NoteList />;
-    }
-  }
-
   render() {
     const { loading, view } = this.state;
 
@@ -45,7 +38,7 @@ export default class App extends Component {
           <h1>Aether</h1>
         </header>
 
-        { this.renderContent(view) }
+        <NoteList />
 
       </div>
     );
