@@ -19,7 +19,7 @@ export default class EditNote extends Component {
   render() {
     if (this.props.hidden) return null;
 
-    const { id, content, created, prio, archived } = this.props.note;
+    const { id, content, created, prio, archived, title } = this.props.note;
     const { type, onClose } = this.props;
 
     return (
@@ -44,6 +44,13 @@ export default class EditNote extends Component {
             label="Archived"
             defaultChecked={archived}
             onClick={(e) => this.setState({ archived: e.target.checked })}
+            />
+
+          <TextInput
+            id="title"
+            label="Title"
+            defaultValue={title}
+            onChange={(e) => this.setState({ title: e.target.value })}
             />
 
           <TextInput
