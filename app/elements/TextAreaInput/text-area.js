@@ -23,6 +23,6 @@ export default function TextAreaInput({
 TextAreaInput.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  defaultValue: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
