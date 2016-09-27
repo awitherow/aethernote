@@ -34,8 +34,8 @@ export const getNote = (req, res, next) => {
 };
 
 export const createNote = (req, res, next) => {
-  db.none('insert into entries(content, prio)' +
-      'values(${content}, ${prio})',
+  db.none('insert into entries(title, content, prio)' +
+      'values( ${title}, ${content}, ${prio})',
     req.body)
   .then(() => {
     res.status(200)
@@ -47,12 +47,12 @@ export const createNote = (req, res, next) => {
 };
 
 export const updateNote = (req, res, next) => {
-  const { id, content, prio, archived} = req.body.update;
+  const { id, title, content, prio, archived} = req.body.update;
   db.none(
     'update entries ' +
-    'set content=$1, prio=$2, archived=$3 ' +
-    'where id=$4',
-    [content, prio, archived, id]
+    'set title=$1, content=$2, prio=$3, archived=$4 ' +
+    'where id=$5',
+    [title, content, prio, archived, id]
   ).then(() => {
     res.status(200)
     .json({

@@ -1,17 +1,13 @@
 var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var nodeEnv = process.env.NODE_ENV;
 
 var config = {
   devtool: nodeEnv === 'production' ? 'cheap-module-source-map' : 'source-map',
-  entry: {
-    index: './app/index.js',
-  },
+  entry: './app/index.js',
   output: {
-    path: 'public/',
-    filename: '[name].js',
-    chunkFilename: "[id].js",
+    path: 'public',
+    filename: 'index.js',
   },
   module: {
     loaders: [
@@ -23,13 +19,10 @@ var config = {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
+        loader: "style-loader!css-loader",
       },
     ],
   },
-  plugins: [
-    new ExtractTextPlugin("[name].css"),
-  ],
 };
 
 if (nodeEnv === 'production') {

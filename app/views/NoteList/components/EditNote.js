@@ -3,6 +3,7 @@ import { FormattedDate } from 'react-intl';
 
 import CheckboxInput from '../../../elements/CheckboxInput';
 import TextInput from '../../../elements/TextInput';
+import TextAreaInput from '../../../elements/TextAreaInput';
 
 export default class EditNote extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export default class EditNote extends Component {
   render() {
     if (this.props.hidden) return null;
 
-    const { id, content, created, prio, archived } = this.props.note;
+    const { id, title, content, created, prio, archived } = this.props.note;
     const { type, onClose } = this.props;
 
     return (
@@ -47,9 +48,16 @@ export default class EditNote extends Component {
             />
 
           <TextInput
+            id="title"
+            label="Title"
+            defaultValue={title}
+            onChange={(e) => this.setState({ title: e.target.value })}
+            />
+
+          <TextAreaInput
             id="content"
             label="Contents"
-            defaultValue={content}
+            value={content}
             onChange={(e) => this.setState({ content: e.target.value })}
             />
 

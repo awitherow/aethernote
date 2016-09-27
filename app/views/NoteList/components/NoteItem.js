@@ -3,12 +3,12 @@ import React, { PropTypes } from 'react';
 const NoteItem = ({
   note, removeNote, editNote,
 }) => {
-  const { id, content, prio } = note;
+  const { id, title, prio } = note;
   return (
       <li>
         <button onClick={() => removeNote(id)}>x</button>
         <span className="priority">{ prio ? '!' : null}</span>
-        <span className="content">{content}</span>
+        <span className="title">{title}</span>
         <button onClick={() => editNote(id)}>EDIT</button>
       </li>
 
