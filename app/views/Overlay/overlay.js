@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles/overlay.css';
+import './styles/overlay.scss';
 
 const { string } = React.PropTypes;
 
