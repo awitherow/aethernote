@@ -13,9 +13,8 @@ export default function TextAreaInput({
       <textarea
         id={id}
         type="text"
-        value={value}
         onChange={onChange}
-        />
+        >{value}</textarea>
     </fieldset>
   );
 }
