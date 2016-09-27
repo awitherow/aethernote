@@ -14,7 +14,8 @@ export default function TextAreaInput({
         id={id}
         type="text"
         onChange={onChange}
-        >{value}</textarea>
+        defaultValue={value}
+        />
     </fieldset>
   );
 }
