@@ -23,6 +23,9 @@ var config = {
       },
     ],
   },
+  resolve: {
+      extensions: ['', '.js', '.css']
+  }
 };
 
 if (nodeEnv === 'production') {
