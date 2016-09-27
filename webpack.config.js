@@ -26,7 +26,7 @@ var config = {
 };
 
 if (nodeEnv === 'production') {
-  config.plugins = config.plugins.concat([
+  config.plugins = [].concat([
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.optimize.UglifyJsPlugin({
