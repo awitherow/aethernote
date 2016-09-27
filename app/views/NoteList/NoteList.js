@@ -104,7 +104,7 @@ export default class NoteList extends Component {
         onClose={this.closeEditor.bind(this)}
         />
 
-        <h2>notes <span>({notes.length})</span></h2>
+        <h2>Notes <span>({notes.length})</span></h2>
 
         <div className="note-list__sort">
           <CheckboxInput
