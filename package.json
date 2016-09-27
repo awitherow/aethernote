@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "npm run webpack & npm run express",
-    "webpack": "NODE_ENV='production' webpack -p",
+    "webpack": "NODE_ENV='production' webpack",
     "express": "NODE_ENV='production' node start.js",
     "prepush": "npm run test",
     "test": "npm run lint",
