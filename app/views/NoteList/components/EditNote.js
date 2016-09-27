@@ -20,7 +20,7 @@ export default class EditNote extends Component {
   render() {
     if (this.props.hidden) return null;
 
-    const { id, content, created, prio, archived, title } = this.props.note;
+    const { id, title, content, created, prio, archived } = this.props.note;
     const { type, onClose } = this.props;
 
     return (

@@ -47,7 +47,7 @@ export const createNote = (req, res, next) => {
 };
 
 export const updateNote = (req, res, next) => {
-  const { id, content, prio, archived, title} = req.body.update;
+  const { id, title, content, prio, archived} = req.body.update;
   db.none(
     'update entries ' +
     'set title=$1, content=$2, prio=$3, archived=$4 ' +
