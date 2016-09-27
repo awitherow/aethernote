@@ -4,7 +4,7 @@ import './styles/text-area.css';
 export default function TextAreaInput({
   id,
   label,
-  defaultValue,
+  value,
   onChange,
 }){
   return (
@@ -13,7 +13,7 @@ export default function TextAreaInput({
       <textarea
         id={id}
         type="text"
-        defaultValue={defaultValue}
+        value={value}
         onChange={onChange}
         />
     </fieldset>

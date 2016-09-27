@@ -57,7 +57,7 @@ export default class EditNote extends Component {
           <TextAreaInput
             id="content"
             label="Contents"
-            defaultValue={content}
+            value={content}
             onChange={(e) => this.setState({ content: e.target.value })}
             />
 
