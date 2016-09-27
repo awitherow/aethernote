@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedDate } from 'react-intl';
 
+import { convertToMarkdown } from '../../../common/helpers';
+
 import CheckboxInput from '../../../elements/CheckboxInput';
 import TextInput from '../../../elements/TextInput';
 import TextAreaInput from '../../../elements/TextAreaInput';
@@ -53,6 +55,8 @@ export default class EditNote extends Component {
             defaultValue={title}
             onChange={(e) => this.setState({ title: e.target.value })}
             />
+
+          <span dangerouslySetInnerHTML={convertToMarkdown(content)} />
 
           <TextAreaInput
             id="content"
