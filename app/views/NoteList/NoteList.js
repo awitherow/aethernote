@@ -67,7 +67,10 @@ export default class NoteList extends Component {
   }
 
   submitEdit(edits) {
-    noteService.update(this.state.editor.note, edits, () => this.closeEditor());
+    noteService.update(this.state.editor.note, edits, () => {
+      this.closeEditor();
+      this.getNotes();
+    });
   }
 
   closeEditor(){
@@ -77,7 +80,6 @@ export default class NoteList extends Component {
         note: {},
       },
     });
-    this.getNotes();
   }
 
   filter(notes) {
