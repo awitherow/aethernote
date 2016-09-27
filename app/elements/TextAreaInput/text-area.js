@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import './styles/text-area.css';
+import './styles/text-area.scss';
 
 export default function TextAreaInput({
   id,
@@ -13,8 +13,8 @@ export default function TextAreaInput({
       <textarea
         id={id}
         type="text"
-        value={value}
         onChange={onChange}
+        defaultValue={value}
         />
     </fieldset>
   );

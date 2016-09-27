@@ -1,5 +1,8 @@
+import '../styles/edit.scss';
 import React, { Component, PropTypes } from 'react';
 import { FormattedDate } from 'react-intl';
+
+import { convertToMarkdown } from '../../../common/helpers';
 
 import CheckboxInput from '../../../elements/CheckboxInput';
 import TextInput from '../../../elements/TextInput';
@@ -28,7 +31,7 @@ export default class EditNote extends Component {
         <header>
           <h1>Edit {type} #{id}</h1>
           <FormattedDate value={created} />
-          <button onClick={onClose}>X</button>
+          <button className="close" onClick={onClose}>X</button>
         </header>
 
         <form onSubmit={this.onSubmit}>
@@ -53,6 +56,9 @@ export default class EditNote extends Component {
             defaultValue={title}
             onChange={(e) => this.setState({ title: e.target.value })}
             />
+
+          <span // eslint-disable-next-line
+            dangerouslySetInnerHTML={convertToMarkdown(content)} />
 
           <TextAreaInput
             id="content"
