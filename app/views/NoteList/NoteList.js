@@ -1,3 +1,4 @@
+import './styles/note-list.scss';
 import React, { Component, PropTypes } from 'react';
 import * as noteService from '../../api/notes';
 
@@ -67,7 +68,10 @@ export default class NoteList extends Component {
   }
 
   submitEdit(edits) {
-    noteService.update(this.state.editor.note, edits, () => this.closeEditor());
+    noteService.update(this.state.editor.note, edits, () => {
+      this.closeEditor();
+      this.getNotes();
+    });
   }
 
   closeEditor(){
@@ -77,7 +81,6 @@ export default class NoteList extends Component {
         note: {},
       },
     });
-    this.getNotes();
   }
 
   filter(notes) {
@@ -92,7 +95,7 @@ export default class NoteList extends Component {
     const { editor, notes, filters } = this.state;
 
     return (
-      <div className="main">
+      <div className="note-list">
 
       <EditNote
         type="note"
@@ -102,7 +105,9 @@ export default class NoteList extends Component {
         onClose={this.closeEditor.bind(this)}
         />
 
-        <h2>notes <span>({notes.length})</span></h2>
+        <h2 className="note-list__page-title">
+          Notes <span>({notes.length})</span>
+        </h2>
 
         <div className="note-list__sort">
           <CheckboxInput
@@ -113,7 +118,7 @@ export default class NoteList extends Component {
             />
         </div>
 
-        <ul className="notes-list">
+        <ul className="note-list__list">
           {this.filter(notes).map(note =>
             <NoteItem
               key={note.id}
@@ -124,7 +129,7 @@ export default class NoteList extends Component {
           )}
         </ul>
 
-        <form className="add-note" onSubmit={this.addNote.bind(this)}>
+        <form className="note-list__add-note" onSubmit={this.addNote.bind(this)}>
           <TextInput
             id="note"
             label="Awaiting changes..."
