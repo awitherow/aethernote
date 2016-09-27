@@ -1,3 +1,4 @@
+import './common/styles.scss';
 import React, { Component, PropTypes } from 'react';
 
 import Overlay from './views/Overlay';
