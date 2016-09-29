@@ -1,7 +1,7 @@
 import './common/styles.scss';
 import React, { Component, PropTypes } from 'react';
 
-import Overlay from './views/Overlay';
+import Overlay from './elements/Overlay';
 import NoteList from './views/NoteList';
 import Header from './elements/Header';
 
