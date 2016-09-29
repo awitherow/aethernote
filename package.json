@@ -45,7 +45,9 @@
     "serve-favicon": "^2.3.0",
     "style-loader": "^0.13.1",
     "synceddb-client": "0.0.8",
-    "webpack": "^1.13.1",
+    "synceddb-persistence-postgres": "0.0.2",
+    "synceddb-server": "0.0.5",
+    "webpack": "^1.13.1"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
