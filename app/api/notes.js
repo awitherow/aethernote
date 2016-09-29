@@ -17,11 +17,7 @@ function add(entry, cb) {
   db.notes.put(entry).then(cb);
 }
 
-function remove(id, cb) {
-  fetch(`/api/notes/${id}`, {
-    method: 'DELETE',
-  }).then(cb);
-}
+const remove = (id, cb) =>  db.notes.delete(id).then(cb);
 
 function update(orig, diff, cb) {
   const update = Object.assign(orig, diff);
