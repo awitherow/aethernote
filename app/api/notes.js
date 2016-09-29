@@ -21,16 +21,7 @@ const remove = (id, cb) =>  db.notes.delete(id).then(cb);
 
 function update(orig, diff, cb) {
   const update = Object.assign(orig, diff);
-  fetch(`/api/notes/${orig.id}`, {
-    method: 'PUT',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      update,
-    }),
-  }).then(cb);
+  db.notes.put(update).then(cb);
 }
 
 export {
