@@ -8,12 +8,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/api/notes', api.getNotes);
-app.get('/api/notes/:id', api.getNote);
-app.post('/api/notes', api.createNote);
-app.put('/api/notes/:id', api.updateNote);
-app.delete('/api/notes/:id', api.removeNote);
-
 app.use(express.static('public'));
 app.use(favicon('public/favicon.ico'));
 
