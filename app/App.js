@@ -4,8 +4,9 @@ import React, { Component, PropTypes } from 'react';
 import checkAuthentication from './common/auth';
 
 import Overlay from './elements/Overlay';
-import NoteList from './views/NoteList';
 import Header from './elements/Header';
+
+import NoteList from './views/NoteList';
 import Login from './views/Login';
 
 export default class App extends Component {
