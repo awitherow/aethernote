@@ -4,12 +4,14 @@ import React, { Component, PropTypes } from 'react';
 import Overlay from './elements/Overlay';
 import NoteList from './views/NoteList';
 import Header from './elements/Header';
+import Login from './views/Login';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
+      authenticated: false,
     };
   }
 
@@ -28,7 +30,11 @@ export default class App extends Component {
   }
 
   render() {
-    const { loading } = this.state;
+    const { loading, authenticated } = this.state;
+
+    if (!authenticated) {
+      return <Login />;
+    }
 
     return (
       <div className="aether">
