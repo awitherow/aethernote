@@ -1,9 +1,8 @@
+import { db } from './store';
+
 function get(cb) {
-  fetch('/api/notes')
-    .then(r => r.json())
-    .then(res => {
-      cb(res.data);
-    })
+  db.notes.getAll()
+    .then(records => cb(records))
     .catch(e => console.log(e));
 }
 
@@ -15,34 +14,14 @@ function add(entry, cb) {
     entry.title = `${entry.content.substring(0, length)}`;
   }
 
-  fetch('/api/notes', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(entry),
-  }).then(cb);
+  db.notes.put(entry).then(cb);
 }
 
-function remove(id, cb) {
-  fetch(`/api/notes/${id}`, {
-    method: 'DELETE',
-  }).then(cb);
-}
+const remove = (id, cb) =>  db.notes.delete(id).then(cb);
 
 function update(orig, diff, cb) {
   const update = Object.assign(orig, diff);
-  fetch(`/api/notes/${orig.id}`, {
-    method: 'PUT',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      update,
-    }),
-  }).then(cb);
+  db.notes.put(update).then(cb);
 }
 
 export {
