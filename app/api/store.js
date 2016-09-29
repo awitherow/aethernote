@@ -10,3 +10,5 @@ export const db = syncedDb.open({
   stores,
   remote: process.env.DATABASE_URL,
 });
+
+db.sync('tasks', {continuously: true});
