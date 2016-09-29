@@ -1,7 +1,20 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import favicon from 'serve-favicon';
-import * as api from './queries';
+
+import dbServer from 'synceddb-server';
+import pgPersistence from 'synceddb-persistence-postgres';
+
+
+pgPersistence.create({
+  conString: process.env.DATABASE_URL,
+  ssl: true,
+}).then(p => {
+  new dbServer({
+    port: 8080,
+    store: p,
+  });
+});
 
 const app = express();
 
