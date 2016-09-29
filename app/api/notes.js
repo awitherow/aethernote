@@ -1,9 +1,8 @@
+import { db } from './store';
+
 function get(cb) {
-  fetch('/api/notes')
-    .then(r => r.json())
-    .then(res => {
-      cb(res.data);
-    })
+  db.notes.getAll()
+    .then(records => cb(records))
     .catch(e => console.log(e));
 }
 
