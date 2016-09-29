@@ -46,7 +46,6 @@
     "style-loader": "^0.13.1",
     "synceddb-client": "0.0.8",
     "webpack": "^1.13.1",
-    "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
