@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 
-import checkAuthentication from './common/auth';
+import checkAuthentication from '../../common/auth';
 
-export default class Login extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,7 +38,6 @@ export default class Login extends Component {
 }
 
 Login.propTypes = {
-  test: PropTypes.string.isRequired,
 };
 
 Login.contextTypes = {

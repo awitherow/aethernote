@@ -1,7 +1,6 @@
 import './common/styles.scss';
 import React, { Component, PropTypes } from 'react';
 
-
 import Overlay from './elements/Overlay';
 import Header from './elements/Header';
 
