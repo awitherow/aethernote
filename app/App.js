@@ -1,7 +1,6 @@
 import './common/styles.scss';
 import React, { Component, PropTypes } from 'react';
 
-import checkAuthentication from './common/auth';
 
 import Overlay from './elements/Overlay';
 import Header from './elements/Header';
@@ -35,7 +34,7 @@ export default class App extends Component {
   render() {
     const { loading, authenticated } = this.state;
 
-    if (!checkAuthentication()) {
+    if (!authenticated) {
       return <Login />;
     }
 
