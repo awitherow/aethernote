@@ -36,6 +36,13 @@ export default class EditNote extends Component {
 
         <form onSubmit={this.onSubmit}>
 
+          <TextInput
+            id="title"
+            label="Title"
+            defaultValue={title}
+            onChange={(e) => this.setState({ title: e.target.value })}
+            />
+
           <CheckboxInput
             id="prio"
             label="Priority Item?"
@@ -48,13 +55,6 @@ export default class EditNote extends Component {
             label="Archived"
             defaultChecked={archived}
             onClick={(e) => this.setState({ archived: e.target.checked })}
-            />
-
-          <TextInput
-            id="title"
-            label="Title"
-            defaultValue={title}
-            onChange={(e) => this.setState({ title: e.target.value })}
             />
 
           <div // eslint-disable-next-line
