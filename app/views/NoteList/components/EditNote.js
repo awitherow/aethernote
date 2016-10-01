@@ -77,7 +77,6 @@ export default class EditNote extends Component {
 }
 
 EditNote.propTypes = {
-  type: PropTypes.string.isRequired,
   note: PropTypes.object.isRequired,
   hidden: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
