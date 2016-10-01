@@ -6,8 +6,9 @@ export default function TextInput({
   defaultValue,
   onChange,
 }){
+  let fieldClass = `${id}-field`;
   return (
-    <fieldset>
+    <fieldset className={fieldClass}>
       <label htmlFor={id}>{label}</label>
       <input
         id={id}
