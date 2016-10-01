@@ -57,8 +57,9 @@ export default class EditNote extends Component {
             onChange={(e) => this.setState({ title: e.target.value })}
             />
 
-          <span // eslint-disable-next-line
-            dangerouslySetInnerHTML={convertToMarkdown(content)} />
+          <div // eslint-disable-next-line
+            dangerouslySetInnerHTML={convertToMarkdown(content)}
+            className="content-view"/>
 
           <TextAreaInput
             id="content"
