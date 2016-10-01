@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import { authenticateLogin } from '../../common/auth';
+import { checkAuth } from '../../api/security';
 
 import TextInput from '../../elements/TextInput';
 
@@ -17,21 +17,22 @@ class Login extends Component {
 
   authenticateLoginAttempt(e) {
     e.preventDefault();
-    const { userId, userKey } = this.state;
-    if (!authenticateLogin({ userId, userKey })) {
-      const { failureAttempts } = this.state;
+    const { userId, userKey, failureAttempts } = this.state;
 
-      if (failureAttempts >= 3) {
-        // set locked cookie.
-        // redirect to some messed up website.
+    checkAuth(userId, userKey, check => {
+      if (check) {
+        if (failureAttempts >= 3) {
+          // set locked cookie.
+          // redirect to some messed up website.
+        } else {
+          this.setState({
+            failureAttempts: failureAttempts + 1,
+          });
+        }
       } else {
-        this.setState({
-          failureAttempts: failureAttempts + 1,
-        });
+        this.context.update('auth', true);
       }
-    } else {
-      this.context.update('auth', true);
-    }
+    });
   }
 
   render() {
