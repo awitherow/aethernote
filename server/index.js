@@ -1,9 +1,11 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import favicon from 'serve-favicon';
+import dotenv from 'dotenv';
 import * as api from './queries';
 import * as auth from './auth';
 
+dotenv.config();
 const app = express();
 
 app.use(bodyParser.json());
