@@ -30,7 +30,9 @@ export default class EditNote extends Component {
       <div className="editor">
         <header>
           <h1>{title} | #{id}</h1>
-          <FormattedDate value={created} />
+          <span>
+            Date Created: <FormattedDate value={created} />
+          </span>
           <button className="close" onClick={onClose}>X</button>
         </header>
 
@@ -43,19 +45,23 @@ export default class EditNote extends Component {
             onChange={(e) => this.setState({ title: e.target.value })}
             />
 
-          <CheckboxInput
-            id="prio"
-            label="Priority Item?"
-            defaultChecked={prio}
-            onClick={(e) => this.setState({ prio: e.target.checked })}
-            />
+          <div className="row note-options">
+            <CheckboxInput
+              id="prio"
+              label="Priority Item?"
+              defaultChecked={prio}
+              onClick={(e) => this.setState({ prio: e.target.checked })}
+              />
 
-          <CheckboxInput
-            id="archived"
-            label="Archived"
-            defaultChecked={archived}
-            onClick={(e) => this.setState({ archived: e.target.checked })}
-            />
+            <CheckboxInput
+              id="archived"
+              label="Archived"
+              defaultChecked={archived}
+              onClick={(e) => this.setState({ archived: e.target.checked })}
+              />
+
+            <button>Save Changes</button>
+          </div>
 
           <div // eslint-disable-next-line
             dangerouslySetInnerHTML={convertToMarkdown(content)}
@@ -67,8 +73,6 @@ export default class EditNote extends Component {
             value={content}
             onChange={(e) => this.setState({ content: e.target.value })}
             />
-
-          <button>Submit</button>
 
         </form>
       </div>
