@@ -26,6 +26,7 @@ export default class App extends Component {
     let payload;
     switch(action) {
       case 'loading': payload = { loading: data }; break;
+      case 'auth': payload = { authenticated: data }; break;
     }
     this.setState(payload);
   }
