@@ -20,7 +20,7 @@ class Login extends Component {
     const { userId, userKey, failureAttempts } = this.state;
 
     checkAuth(userId, userKey, check => {
-      if (check) {
+      if (!check) {
         if (failureAttempts >= 3) {
           // set locked cookie.
           // redirect to some messed up website.
