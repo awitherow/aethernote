@@ -1,12 +1,14 @@
 fieldset {
   border: none;
+  padding: 0;
+  margin: 0 0 5px 0;
 }
 
 input[type="text"],
 input[type="password"]  {
   font: 16px Times New Roman;
   margin: 0 0 0 10px;
-  padding: 0;
+  padding: 5px 0;
   border: none;
   border-bottom: 1px solid purple;
 }
