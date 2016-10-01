@@ -60,9 +60,6 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
-};
-
 Login.contextTypes = {
   update: PropTypes.func.isRequired,
 };
