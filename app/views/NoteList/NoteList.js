@@ -98,7 +98,6 @@ export default class NoteList extends Component {
       <div className="note-list">
 
       <EditNote
-        type="note"
         hidden={editor.hidden}
         note={editor.note}
         onSubmit={this.submitEdit.bind(this)}

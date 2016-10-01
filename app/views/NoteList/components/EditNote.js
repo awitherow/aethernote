@@ -24,12 +24,12 @@ export default class EditNote extends Component {
     if (this.props.hidden) return null;
 
     const { id, title, content, created, prio, archived } = this.props.note;
-    const { type, onClose } = this.props;
+    const { onClose } = this.props;
 
     return (
       <div className="editor">
         <header>
-          <h1>Edit {type} #{id}</h1>
+          <h1>{title} | #{id}</h1>
           <FormattedDate value={created} />
           <button className="close" onClick={onClose}>X</button>
         </header>
