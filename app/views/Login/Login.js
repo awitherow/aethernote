@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import checkAuthentication from '../../common/auth';
+import { authenticateLogin } from '../../common/auth';
 
 import TextInput from '../../elements/TextInput';
 
@@ -18,7 +18,7 @@ class Login extends Component {
   authenticateLoginAttempt(e) {
     e.preventDefault();
     const { userId, userKey } = this.state;
-    if (!checkAuthentication({ userId, userKey })) {
+    if (!authenticateLogin({ userId, userKey })) {
       const { failureAttempts } = this.state;
 
       if (failureAttempts >= 3) {

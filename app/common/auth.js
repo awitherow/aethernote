@@ -1,4 +1,4 @@
-export default function checkAuthentication({ userId, userKey }) {
+export function authenticateLogin({ userId, userKey }) {
   const validUserId = "";
   const validUserKey = "";
   if (userId === validUserId && userKey === validUserKey) {
