@@ -19,7 +19,7 @@ app.put('/api/notes/:id', api.updateNote);
 app.delete('/api/notes/:id', api.removeNote);
 
 // security
-app.use('/api/auth/:username/:password', auth.checkAuth);
+app.use('/api/auth', auth.checkAuth);
 
 app.use(express.static('public'));
 app.use(favicon('public/favicon.ico'));
