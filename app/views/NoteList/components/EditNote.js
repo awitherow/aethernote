@@ -16,11 +16,19 @@ export default class EditNote extends Component {
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.closeEditor = this.closeEditor.bind(this);
   }
 
   onSubmit(e) {
     e.preventDefault();
     this.props.onSubmit(this.state);
+    this.closeEditor();
+  }
+
+  closeEditor() {
+    this.setState({
+      formUpdated: false,
+    });
     this.props.onClose();
   }
 
@@ -36,7 +44,6 @@ export default class EditNote extends Component {
     if (this.props.hidden) return null;
     const { formUpdated } = this.state;
     const { id, title, content, created, prio, archived } = this.props.note;
-    const { onClose } = this.props;
 
     return (
       <div className="editor">
@@ -45,7 +52,7 @@ export default class EditNote extends Component {
           <span>
             Date Created: <FormattedDate value={created} />
           </span>
-          <button className="close" onClick={onClose}>X</button>
+          <button className="close" onClick={this.closeEditor}>X</button>
         </header>
 
         <form onSubmit={this.onSubmit}>
