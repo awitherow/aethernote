@@ -11,13 +11,25 @@ import TextAreaInput from '../../../elements/TextAreaInput';
 export default class EditNote extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      formUpdated: false,
+    };
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   onSubmit(e) {
     e.preventDefault();
     this.props.onSubmit(this.state);
     this.props.onClose();
+  }
+
+  handleChange(updates) {
+    let newState = updates;
+    if (!this.state.formUpdated) {
+      newState.formUpdated = true;
+    }
+    this.setState(newState);
   }
 
   render() {
@@ -42,7 +54,7 @@ export default class EditNote extends Component {
             id="title"
             label="Title"
             defaultValue={title}
-            onChange={(e) => this.setState({ title: e.target.value })}
+            onChange={(e) => this.handleChange({ "title": e.target.value })}
             />
 
           <div className="row note-options">
