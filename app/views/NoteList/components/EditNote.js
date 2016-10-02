@@ -34,7 +34,7 @@ export default class EditNote extends Component {
 
   render() {
     if (this.props.hidden) return null;
-
+    const { formUpdated } = this.state;
     const { id, title, content, created, prio, archived } = this.props.note;
     const { onClose } = this.props;
 
@@ -62,17 +62,17 @@ export default class EditNote extends Component {
               id="prio"
               label="Priority Item?"
               defaultChecked={prio}
-              onClick={(e) => this.setState({ prio: e.target.checked })}
+              onClick={(e) => this.handleChange({ "prio": e.target.checked })}
               />
 
             <CheckboxInput
               id="archived"
               label="Archived"
               defaultChecked={archived}
-              onClick={(e) => this.setState({ archived: e.target.checked })}
+              onClick={(e) => this.handleChange({ "archived": e.target.checked })}
               />
 
-            <button>Save Changes</button>
+            <button disabled={!formUpdated}>Save Changes</button>
           </div>
 
           <div // eslint-disable-next-line
@@ -83,7 +83,7 @@ export default class EditNote extends Component {
             id="content"
             label="Contents"
             value={content}
-            onChange={(e) => this.setState({ content: e.target.value })}
+            onChange={(e) => this.handleChange({ "content": e.target.value })}
             />
 
         </form>
