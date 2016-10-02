@@ -11,63 +11,87 @@ import TextAreaInput from '../../../elements/TextAreaInput';
 export default class EditNote extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      formUpdated: false,
+    };
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.closeEditor = this.closeEditor.bind(this);
   }
 
   onSubmit(e) {
     e.preventDefault();
     this.props.onSubmit(this.state);
+    this.closeEditor();
+  }
+
+  closeEditor() {
+    this.setState({
+      formUpdated: false,
+    });
     this.props.onClose();
+  }
+
+  handleChange(updates) {
+    let newState = updates;
+    if (!this.state.formUpdated) {
+      newState.formUpdated = true;
+    }
+    this.setState(newState);
   }
 
   render() {
     if (this.props.hidden) return null;
-
+    const { formUpdated } = this.state;
     const { id, title, content, created, prio, archived } = this.props.note;
-    const { type, onClose } = this.props;
 
     return (
       <div className="editor">
         <header>
-          <h1>Edit {type} #{id}</h1>
-          <FormattedDate value={created} />
-          <button className="close" onClick={onClose}>X</button>
+          <h1>{title} | #{id}</h1>
+          <span>
+            Date Created: <FormattedDate value={created} />
+          </span>
+          <button className="close" onClick={this.closeEditor}>X</button>
         </header>
 
         <form onSubmit={this.onSubmit}>
-
-          <CheckboxInput
-            id="prio"
-            label="Priority Item?"
-            defaultChecked={prio}
-            onClick={(e) => this.setState({ prio: e.target.checked })}
-            />
-
-          <CheckboxInput
-            id="archived"
-            label="Archived"
-            defaultChecked={archived}
-            onClick={(e) => this.setState({ archived: e.target.checked })}
-            />
 
           <TextInput
             id="title"
             label="Title"
             defaultValue={title}
-            onChange={(e) => this.setState({ title: e.target.value })}
+            onChange={(e) => this.handleChange({ "title": e.target.value })}
             />
 
-          <span // eslint-disable-next-line
-            dangerouslySetInnerHTML={convertToMarkdown(content)} />
+          <div className="row note-options">
+            <CheckboxInput
+              id="prio"
+              label="Priority Item?"
+              defaultChecked={prio}
+              onClick={(e) => this.handleChange({ "prio": e.target.checked })}
+              />
+
+            <CheckboxInput
+              id="archived"
+              label="Archived"
+              defaultChecked={archived}
+              onClick={(e) => this.handleChange({ "archived": e.target.checked })}
+              />
+
+            <button disabled={!formUpdated}>Save Changes</button>
+          </div>
+
+          <div // eslint-disable-next-line
+            dangerouslySetInnerHTML={convertToMarkdown(content)}
+            className="content-view"/>
 
           <TextAreaInput
             id="content"
             label="Contents"
             value={content}
-            onChange={(e) => this.setState({ content: e.target.value })}
+            onChange={(e) => this.handleChange({ "content": e.target.value })}
             />
-
-          <button>Submit</button>
 
         </form>
       </div>
@@ -76,7 +100,6 @@ export default class EditNote extends Component {
 }
 
 EditNote.propTypes = {
-  type: PropTypes.string.isRequired,
   note: PropTypes.object.isRequired,
   hidden: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,

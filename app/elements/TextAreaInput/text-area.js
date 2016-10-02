@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import './styles/text-area.scss';
 
 export default function TextAreaInput({
   id,
@@ -7,8 +6,9 @@ export default function TextAreaInput({
   value,
   onChange,
 }){
+  const fieldsetClasses = `${id}-field`;
   return (
-    <fieldset>
+    <fieldset className={fieldsetClasses}>
       <label htmlFor={id}>{label}</label>
       <textarea
         id={id}
