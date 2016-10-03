@@ -134,7 +134,7 @@ export default class NoteList extends Component {
             id="note"
             label="Awaiting changes..."
             type="text"
-            value=""
+            defaultValue=""
             onChange={(e) => this.setState({ noteInput: e.target.value })}
             />
           <CheckboxInput
