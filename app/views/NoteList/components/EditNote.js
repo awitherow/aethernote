@@ -139,4 +139,5 @@ EditNote.propTypes = {
   hidden: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
 };

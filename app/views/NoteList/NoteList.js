@@ -102,6 +102,7 @@ export default class NoteList extends Component {
         note={editor.note}
         onSubmit={this.submitEdit.bind(this)}
         onClose={this.closeEditor.bind(this)}
+        onRemove={this.removeNote.bind(this)}
         />
 
         <h2 className="note-list__page-title">
