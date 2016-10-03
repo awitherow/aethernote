@@ -4,10 +4,12 @@ import { FormattedDate } from 'react-intl';
 import classnames from 'classnames';
 
 import { convertToMarkdown } from '../../../common/helpers';
+import { statusTypes } from '../config';
 
 import CheckboxInput from '../../../elements/CheckboxInput';
 import FlexibleInput from '../../../elements/FlexibleInput';
 import TextAreaInput from '../../../elements/TextAreaInput';
+import Dropdown from '../../../elements/Dropdown';
 
 import TagList from './TagList';
 
@@ -67,7 +69,7 @@ export default class EditNote extends Component {
   render() {
     if (this.props.hidden) return null;
     const { formUpdated, deleteWizardOpen } = this.state;
-    const { id, title, content, details, created, prio, archived } = this.props.note;
+    const { id, title, content, details, created, prio, archived, status } = this.props.note;
 
     const deleteNoteRequestClasses = classnames('deleteNote__request', {
       'hidden': deleteWizardOpen,
@@ -100,7 +102,7 @@ export default class EditNote extends Component {
           <div className="row note-options">
             <CheckboxInput
               id="prio"
-              label="Priority Item?"
+              label="Prio"
               defaultChecked={prio}
               onClick={(e) => this.handleChange('prio', e.target.checked)}
               />
@@ -110,6 +112,14 @@ export default class EditNote extends Component {
               label="Archived"
               defaultChecked={archived}
               onClick={(e) => this.handleChange('archived', e.target.checked)}
+              />
+
+            <Dropdown
+              id="status-types"
+              label="Status"
+              options={statusTypes}
+              defaultValue={status}
+              handleChange={e => this.handleChange('status', e.target.value)}
               />
 
             <button disabled={!formUpdated}>Save Changes</button>

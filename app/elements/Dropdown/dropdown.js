@@ -5,12 +5,17 @@ const Dropdown = ({
   label,
   options,
   handleChange,
+  defaultValue,
 }) => {
   const fieldsetClasses = `${id}-field`;
   return (
     <fieldset className={fieldsetClasses}>
       <label htmlFor={id}>{label}</label>
-      <select id={id} name="select" onChange={handleChange}>
+      <select
+        id={id}
+        name="select"
+        onChange={handleChange}
+        defaultValue={defaultValue || ""}>
         {options.map(option => {
           let key = options.indexOf(option);
           return <option key={key} value={option}>{option}</option>;
@@ -25,6 +30,7 @@ Dropdown.propTypes = {
   label: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
   handleChange: PropTypes.func.isRequired,
+  defaultValue: PropTypes.string,
 };
 
 export default Dropdown;
