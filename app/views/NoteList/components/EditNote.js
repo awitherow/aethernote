@@ -33,14 +33,18 @@ export default class EditNote extends Component {
   }
 
   handleChange(whatToChange, change) {
-    let newState = {};
+    let stateUpdate = {
+      details: {
+        tags: [],
+      },
+    };
     if (whatToChange !== 'tag') {
-      newState[whatToChange] = change;
+      stateUpdate[whatToChange] = change;
     } else {
-      newState.details.tags.push(change);
+      stateUpdate.details.tags.push(change);
     }
-    if (!this.state.formUpdated) newState.formUpdated = true;
-    this.setState(newState);
+    if (!this.state.formUpdated) stateUpdate.formUpdated = true;
+    this.setState(stateUpdate);
   }
 
   render() {
