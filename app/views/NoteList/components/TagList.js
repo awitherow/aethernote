@@ -1,3 +1,4 @@
+import '../styles/tag-list.scss';
 import React, { Component, PropTypes } from 'react';
 import TextInput from '../../../elements/TextInput';
 
