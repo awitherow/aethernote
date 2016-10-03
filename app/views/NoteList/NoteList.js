@@ -45,10 +45,11 @@ export default class NoteList extends Component {
 
   addNote(e) {
     e.preventDefault();
-    const { noteInput, priority } = this.state;
+    const { noteInput, priority, status } = this.state;
     noteService.add({
       content: noteInput,
       prio: priority,
+      status,
     }, () => {
       this.setState({ noteInput: "", priority: false });
       this.getNotes();
