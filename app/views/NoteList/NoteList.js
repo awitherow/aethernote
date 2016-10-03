@@ -1,9 +1,11 @@
 import './styles/note-list.scss';
 import React, { Component, PropTypes } from 'react';
 import * as noteService from '../../api/notes';
+import { statusTypes } from './config';
 
 import FlexibleInput from '../../elements/FlexibleInput';
 import CheckboxInput from '../../elements/CheckboxInput';
+import Dropdown from '../../elements/Dropdown';
 
 import NoteItem from './components/NoteItem';
 import EditNote from './components/EditNote';
@@ -20,6 +22,7 @@ export default class NoteList extends Component {
         hidden: true,
         note: {},
       },
+      status: 'inbox',
     };
   }
 
@@ -96,6 +99,12 @@ export default class NoteList extends Component {
 
         <h2 className="note-list__page-title">
           Notes <span>({notes.length})</span>
+          <Dropdown
+            id="status-types"
+            label="Status"
+            options={statusTypes}
+            handleChange={e => this.setState({ status: e.target.value })}
+            />
         </h2>
 
         <div className="note-list__sort">

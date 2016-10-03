@@ -1,9 +1,11 @@
-export const config = {
-  statusTypes : [
-    'inbox',
-    'backlog',
-    'soon',
-    'now',
-    'recent',
-  ],
+const statusTypes = [
+  'inbox',
+  'backlog',
+  'soon',
+  'now',
+  'recent',
+];
+
+export {
+  statusTypes,
 };
