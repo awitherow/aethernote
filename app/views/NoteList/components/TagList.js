@@ -33,6 +33,7 @@ export class TagList extends Component {
     e.preventDefault();
     let tagList = this.state.tags;
     tagList.splice(tagList.indexOf(tag), 1);
+    this.props.handleChange('removeTag', tag);
     this.setState({ tags: tagList });
   }
 
