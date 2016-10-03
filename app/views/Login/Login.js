@@ -43,14 +43,14 @@ class Login extends Component {
           id="userId"
           label="Username"
           type="text"
-          value={userId}
+          defaultValue={userId}
           onChange={(e) => this.setState({ userId: e.target.value })}
           />
         <FlexibleInput
           id="userKey"
           label="Password"
           type="password"
-          value={userKey}
+          defaultValue={userKey}
           onChange={(e) => this.setState({ userKey: e.target.value })}
           />
         <button>Submit</button>

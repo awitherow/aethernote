@@ -82,7 +82,7 @@ export default class EditNote extends Component {
         <header>
           <h1>{title} | #{id}</h1>
           <span>
-            Date Created: <FormattedDate value={created} />
+            Date Created: <FormattedDate defaultValue={created} />
           </span>
           <button className="close" onClick={this.closeEditor}>X</button>
         </header>
@@ -93,7 +93,7 @@ export default class EditNote extends Component {
             id="title"
             label="Title"
             type="text"
-            value={title}
+            defaultValue={title}
             onChange={(e) => this.handleChange('title', e.target.value)}
             />
 
@@ -127,7 +127,7 @@ export default class EditNote extends Component {
           <TextAreaInput
             id="content"
             label="Contents"
-            value={content}
+            defaultValue={content}
             onChange={(e) => this.handleChange('content', e.target.value)}
             />
 
