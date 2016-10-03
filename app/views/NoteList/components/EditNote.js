@@ -1,6 +1,7 @@
 import '../styles/edit.scss';
 import React, { Component, PropTypes } from 'react';
 import { FormattedDate } from 'react-intl';
+import classnames from 'classnames';
 
 import { convertToMarkdown } from '../../../common/helpers';
 
@@ -15,10 +16,14 @@ export default class EditNote extends Component {
     super(props);
     this.state = {
       formUpdated: false,
+      deleteWizardOpen: false,
     };
+
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.closeEditor = this.closeEditor.bind(this);
+    this.deleteNote = this.deleteNote.bind(this);
+    this.toggleWizard = this.toggleWizard.bind(this);
   }
 
   onSubmit(e) {
@@ -49,10 +54,28 @@ export default class EditNote extends Component {
     this.setState(stateUpdate);
   }
 
+  deleteNote() {
+    this.props.onRemove(this.props.note.id);
+    this.toggleWizard();
+    this.closeEditor();
+  }
+
+  toggleWizard() {
+    this.setState({ deleteWizardOpen: !this.state.deleteWizardOpen });
+  }
+
   render() {
     if (this.props.hidden) return null;
-    const { formUpdated } = this.state;
+    const { formUpdated, deleteWizardOpen } = this.state;
     const { id, title, content, details, created, prio, archived } = this.props.note;
+
+    const deleteNoteRequestClasses = classnames('deleteNote__request', {
+      'hidden': deleteWizardOpen,
+    });
+
+    const deleteNotePanelClasses = classnames('deleteNote__panel', {
+      'hidden': !deleteWizardOpen,
+    });
 
     return (
       <div className="editor">
@@ -108,6 +131,29 @@ export default class EditNote extends Component {
             />
 
         </form>
+
+        <div className="deleteNote">
+          <button className={deleteNoteRequestClasses}
+            onClick={this.toggleWizard}>
+            Delete Note
+          </button>
+
+          <div className={deleteNotePanelClasses}>
+            <span className="deleteNote__panel-ask">
+              Are you sure you want to delete this?
+            </span>
+
+            <button className="deleteNote__panel-yes"
+              onClick={this.deleteNote}>
+              Yes
+            </button>
+            <button className="deleteNote__panel-no"
+              onClick={this.toggleWizard}>
+              No
+            </button>
+          </div>
+        </div>
+
       </div>
     );
   }
@@ -118,4 +164,5 @@ EditNote.propTypes = {
   hidden: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
 };
