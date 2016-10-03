@@ -13,7 +13,6 @@ import EditNote from './components/EditNote';
 export default class NoteList extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       noteInput: "",
       priority: false,
