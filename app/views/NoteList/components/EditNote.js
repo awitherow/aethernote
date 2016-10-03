@@ -8,6 +8,8 @@ import CheckboxInput from '../../../elements/CheckboxInput';
 import TextInput from '../../../elements/TextInput';
 import TextAreaInput from '../../../elements/TextAreaInput';
 
+import TagList from './TagList';
+
 export default class EditNote extends Component {
   constructor(props) {
     super(props);
@@ -82,6 +84,11 @@ export default class EditNote extends Component {
 
             <button disabled={!formUpdated}>Save Changes</button>
           </div>
+
+          <TagList
+            handleChange={this.handleChange}
+            tags={details.tags}
+            />
 
           <div // eslint-disable-next-line
             dangerouslySetInnerHTML={convertToMarkdown(content)}
