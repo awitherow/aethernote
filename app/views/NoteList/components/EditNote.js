@@ -1,6 +1,7 @@
 import '../styles/edit.scss';
 import React, { Component, PropTypes } from 'react';
 import { FormattedDate } from 'react-intl';
+import classnames from 'classnames';
 
 import { convertToMarkdown } from '../../../common/helpers';
 
@@ -15,6 +16,7 @@ export default class EditNote extends Component {
     super(props);
     this.state = {
       formUpdated: false,
+      deleteWizardOpen: false,
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -52,8 +54,16 @@ export default class EditNote extends Component {
 
   render() {
     if (this.props.hidden) return null;
-    const { formUpdated } = this.state;
+    const { formUpdated, deleteWizardOpen } = this.state;
     const { id, title, content, details, created, prio, archived } = this.props.note;
+
+    const deleteNoteRequestClasses = classnames('deleteNote__request"', {
+      'hidden': deleteWizardOpen,
+    });
+
+    const deleteNotePanelClasses = classnames('deleteNote__panel"', {
+      'hidden': !deleteWizardOpen,
+    });
 
     return (
       <div className="editor">
@@ -110,9 +120,9 @@ export default class EditNote extends Component {
 
         </form>
         <div className="deleteNote">
-          <button className="deleteNote__request">Delete Note</button>
-          <div className="deleteNote__panel">
-            <span className="deleteNote__panel--ask">
+          <button className={deleteNoteRequestClasses}>Delete Note</button>
+          <div className={deleteNotePanelClasses}>
+            <span className="deleteNote__panel-ask">
               Are you sure you want to delete this?
             </span>
             <button className="deleteNote__panel-yes">Yes</button>
