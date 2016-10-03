@@ -60,7 +60,7 @@ export class TagList extends Component {
           <TextInput
             id="tag"
             label="New tag"
-            defaultValue={tagInput}
+            value={tagInput}
             onChange={(e) => this.captureTag('tagInput', e.target.value)}
             />
           <button onClick={this.addTag}>Add Tag</button>

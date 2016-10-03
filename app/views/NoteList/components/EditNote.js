@@ -92,7 +92,7 @@ export default class EditNote extends Component {
           <TextInput
             id="title"
             label="Title"
-            defaultValue={title}
+            value={title}
             onChange={(e) => this.handleChange('title', e.target.value)}
             />
 

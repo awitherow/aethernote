@@ -42,7 +42,7 @@ class Login extends Component {
         <TextInput
           id="userId"
           label="Username"
-          defaultValue={userId}
+          value={userId}
           onChange={(e) => this.setState({ userId: e.target.value })}
           />
         <fieldset>
@@ -50,7 +50,7 @@ class Login extends Component {
           <input
             id="userKey"
             type="password"
-            defaultValue={userKey}
+            value={userKey}
             onChange={(e) => this.setState({ userKey: e.target.value })}
             />
         </fieldset>
