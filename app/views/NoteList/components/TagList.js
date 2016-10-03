@@ -31,19 +31,26 @@ export class TagList extends Component {
   render() {
     const tagList = this.props.tags.concat(this.state.tags);
     return (
-      <ul>
+      <ul className="tag-list">
+
         {tagList.map(tag => {
-          return <li key={tagList.indexOf(tag)}>{tag}</li>;
+          return (
+            <li key={tagList.indexOf(tag)}>
+              {tag}
+            </li>
+          );
         })}
-        <li>
+
+        <li className="tag-list--input">
           <TextInput
             id="tag"
-            label="tag"
-            defaultValue="New tag..."
+            label="New tag"
+            defaultValue="..."
             onChange={(e) => this.captureTag('tagInput', e.target.value)}
             />
           <button onClick={this.addTag}>Add Tag</button>
         </li>
+
       </ul>
     );
   }
