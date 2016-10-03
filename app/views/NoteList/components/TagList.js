@@ -6,8 +6,8 @@ export class TagList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tagInput: '',
-      tags: [],
+      tagInput: '...',
+      tags: this.props.tags.slice(),
     };
 
     this.addTag = this.addTag.bind(this);
@@ -31,13 +31,13 @@ export class TagList extends Component {
 
   removeTag(e, tag) {
     e.preventDefault();
-    let tagList = this.state.tags.concat(this.props.tags);
+    let tagList = this.state.tags;
     tagList.splice(tagList.indexOf(tag), 1);
     this.setState({ tags: tagList });
   }
 
   render() {
-    const tagList = this.props.tags.concat(this.state.tags);
+    const tagList = this.state.tags;
     return (
       <ul className="tag-list">
 
