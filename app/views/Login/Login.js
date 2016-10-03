@@ -42,6 +42,7 @@ class Login extends Component {
         <FlexibleInput
           id="userId"
           label="Username"
+          type="text"
           value={userId}
           onChange={(e) => this.setState({ userId: e.target.value })}
           />

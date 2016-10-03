@@ -60,6 +60,7 @@ export class TagList extends Component {
           <FlexibleInput
             id="tag"
             label="New tag"
+            type="text"
             value={tagInput}
             onChange={(e) => this.captureTag('tagInput', e.target.value)}
             />

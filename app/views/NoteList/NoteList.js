@@ -133,6 +133,7 @@ export default class NoteList extends Component {
           <FlexibleInput
             id="note"
             label="Awaiting changes..."
+            type="text"
             value=""
             onChange={(e) => this.setState({ noteInput: e.target.value })}
             />

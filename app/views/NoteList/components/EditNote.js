@@ -92,6 +92,7 @@ export default class EditNote extends Component {
           <FlexibleInput
             id="title"
             label="Title"
+            type="text"
             value={title}
             onChange={(e) => this.handleChange('title', e.target.value)}
             />
