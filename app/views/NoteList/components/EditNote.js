@@ -69,11 +69,11 @@ export default class EditNote extends Component {
     const { formUpdated, deleteWizardOpen } = this.state;
     const { id, title, content, details, created, prio, archived } = this.props.note;
 
-    const deleteNoteRequestClasses = classnames('deleteNote__request"', {
+    const deleteNoteRequestClasses = classnames('deleteNote__request', {
       'hidden': deleteWizardOpen,
     });
 
-    const deleteNotePanelClasses = classnames('deleteNote__panel"', {
+    const deleteNotePanelClasses = classnames('deleteNote__panel', {
       'hidden': !deleteWizardOpen,
     });
 
