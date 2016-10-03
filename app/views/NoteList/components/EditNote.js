@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { convertToMarkdown } from '../../../common/helpers';
 
 import CheckboxInput from '../../../elements/CheckboxInput';
-import TextInput from '../../../elements/TextInput';
+import FlexibleInput from '../../../elements/FlexibleInput';
 import TextAreaInput from '../../../elements/TextAreaInput';
 
 import TagList from './TagList';
@@ -89,9 +89,10 @@ export default class EditNote extends Component {
 
         <form onSubmit={this.onSubmit}>
 
-          <TextInput
+          <FlexibleInput
             id="title"
             label="Title"
+            type="text"
             defaultValue={title}
             onChange={(e) => this.handleChange('title', e.target.value)}
             />

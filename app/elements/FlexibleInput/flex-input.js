@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 
-export default function TextInput({
+export default function FlexibleInput({
   id,
   label,
   defaultValue,
+  type,
   onChange,
 }){
   let fieldClass = `${id}-field`;
@@ -12,7 +13,7 @@ export default function TextInput({
       <label htmlFor={id}>{label}</label>
       <input
         id={id}
-        type="text"
+        type={type}
         defaultValue={defaultValue}
         onChange={onChange}
         />
@@ -20,9 +21,10 @@ export default function TextInput({
   );
 }
 
-TextInput.propTypes = {
+FlexibleInput.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   defaultValue: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };

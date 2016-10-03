@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import { checkAuth } from '../../api/security';
 
-import TextInput from '../../elements/TextInput';
+import FlexibleInput from '../../elements/FlexibleInput';
 
 class Login extends Component {
   constructor(props) {
@@ -39,21 +39,20 @@ class Login extends Component {
     const { userId, userKey } = this.state;
     return (
       <form onSubmit={this.authenticateLoginAttempt}>
-        <TextInput
+        <FlexibleInput
           id="userId"
           label="Username"
+          type="text"
           defaultValue={userId}
           onChange={(e) => this.setState({ userId: e.target.value })}
           />
-        <fieldset>
-          <label htmlFor="userKey">Password</label>
-          <input
-            id="userKey"
-            type="password"
-            defaultValue={userKey}
-            onChange={(e) => this.setState({ userKey: e.target.value })}
-            />
-        </fieldset>
+        <FlexibleInput
+          id="userKey"
+          label="Password"
+          type="password"
+          defaultValue={userKey}
+          onChange={(e) => this.setState({ userKey: e.target.value })}
+          />
         <button>Submit</button>
       </form>
     );

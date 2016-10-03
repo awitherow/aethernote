@@ -2,7 +2,7 @@ import './styles/note-list.scss';
 import React, { Component, PropTypes } from 'react';
 import * as noteService from '../../api/notes';
 
-import TextInput from '../../elements/TextInput';
+import FlexibleInput from '../../elements/FlexibleInput';
 import CheckboxInput from '../../elements/CheckboxInput';
 
 import NoteItem from './components/NoteItem';
@@ -130,9 +130,10 @@ export default class NoteList extends Component {
         </ul>
 
         <form className="note-list__add-note" onSubmit={this.addNote.bind(this)}>
-          <TextInput
+          <FlexibleInput
             id="note"
             label="Awaiting changes..."
+            type="text"
             defaultValue=""
             onChange={(e) => this.setState({ noteInput: e.target.value })}
             />
