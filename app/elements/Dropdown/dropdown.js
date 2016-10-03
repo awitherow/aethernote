@@ -12,7 +12,8 @@ const Dropdown = ({
       <label htmlFor={id}>{label}</label>
       <select id={id} name="select" onChange={handleChange}>
         {options.map(option => {
-          return <option value={option}>{option}</option>;
+          let key = options.indexOf(option);
+          return <option key={key} value={option}>{option}</option>;
         })}
       </select>
     </fieldset>
