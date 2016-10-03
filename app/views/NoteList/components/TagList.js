@@ -29,6 +29,13 @@ export class TagList extends Component {
     });
   }
 
+  removeTag(e, tag) {
+    e.preventDefault();
+    let tagList = this.state.tags.concat(this.props.tags);
+    tagList.splice(tagList.indexOf(tag), 1);
+    this.setState({ tags: tagList });
+  }
+
   render() {
     const tagList = this.props.tags.concat(this.state.tags);
     return (
@@ -37,7 +44,12 @@ export class TagList extends Component {
         {tagList.map(tag => {
           return (
             <li key={tagList.indexOf(tag)}>
-              {tag}
+              <button onClick={e => this.removeTag(e, tag)}>
+                X
+              </button>
+              <span>
+                {tag}
+              </span>
             </li>
           );
         })}
