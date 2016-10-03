@@ -16,6 +16,7 @@ export default class EditNote extends Component {
     this.state = {
       formUpdated: false,
     };
+
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.closeEditor = this.closeEditor.bind(this);
@@ -108,6 +109,16 @@ export default class EditNote extends Component {
             />
 
         </form>
+        <div className="deleteNote">
+          <button className="deleteNote__request">Delete Note</button>
+          <div className="deleteNote__panel">
+            <span className="deleteNote__panel--ask">
+              Are you sure you want to delete this?
+            </span>
+            <button className="deleteNote__panel--yes">Delete Note</button>
+            <button className="deleteNote__panel--no">Delete Note</button>
+          </div>
+        </div>
       </div>
     );
   }
