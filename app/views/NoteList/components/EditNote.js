@@ -36,7 +36,7 @@ export default class EditNote extends Component {
     let stateUpdate = { details: { tags: [] } };
 
     switch(whatToChange) {
-      case 'tag': stateUpdate.details.tags.push(change); break;
+      case 'addTag': stateUpdate.details.tags.push(change); break;
       case 'removeTag': {
         let tagList = stateUpdate.details.tags;
         tagList.splice(tagList.indexOf(change), 1);

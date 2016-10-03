@@ -22,7 +22,7 @@ export class TagList extends Component {
     const { tags, tagInput } = this.state;
     let tagList = tags;
     tagList.push(tagInput);
-    this.props.handleChange('tag', tagInput);
+    this.props.handleChange('addTag', tagInput);
     this.setState({
       tagInput: '...',
       tags: tagList,
@@ -38,14 +38,14 @@ export class TagList extends Component {
   }
 
   render() {
-    const tagList = this.state.tags;
+    const { tags } = this.state;
     const { tagInput } = this.state;
     return (
       <ul className="tag-list">
 
-        {tagList.map(tag => {
+        {tags.map(tag => {
           return (
-            <li key={tagList.indexOf(tag)}>
+            <li key={tags.indexOf(tag)}>
               <button onClick={e => this.removeTag(e, tag)}>
                 X
               </button>
