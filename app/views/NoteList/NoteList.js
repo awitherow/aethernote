@@ -22,6 +22,7 @@ export default class NoteList extends Component {
         note: {},
       },
       status: 'inbox',
+      notesWithStatusType: 0,
     };
   }
 
@@ -83,7 +84,11 @@ export default class NoteList extends Component {
   }
 
   filter(notes) {
-    return notes.filter(note => note.status === this.state.status);
+    let filteredNotes = notes.filter(note => note.status === this.state.status);
+    if (this.state.notesWithStatusType !== filteredNotes.length) {
+      this.setState({ notesWithStatusType: filteredNotes.length });
+    }
+    return filteredNotes;
   }
 
   render() {
