@@ -8,6 +8,8 @@ import CheckboxInput from '../../../elements/CheckboxInput';
 import TextInput from '../../../elements/TextInput';
 import TextAreaInput from '../../../elements/TextAreaInput';
 
+import TagList from './TagList';
+
 export default class EditNote extends Component {
   constructor(props) {
     super(props);
@@ -26,24 +28,31 @@ export default class EditNote extends Component {
   }
 
   closeEditor() {
-    this.setState({
-      formUpdated: false,
-    });
+    this.setState({ formUpdated: false });
     this.props.onClose();
   }
 
-  handleChange(updates) {
-    let newState = updates;
-    if (!this.state.formUpdated) {
-      newState.formUpdated = true;
+  handleChange(whatToChange, change) {
+    let stateUpdate = { details: { tags: [] } };
+
+    switch(whatToChange) {
+      case 'addTag': stateUpdate.details.tags.push(change); break;
+      case 'removeTag': {
+        let tagList = stateUpdate.details.tags;
+        tagList.splice(tagList.indexOf(change), 1);
+        break;
+      }
+      default: stateUpdate[whatToChange] = change; break;
     }
-    this.setState(newState);
+
+    if (!this.state.formUpdated) stateUpdate.formUpdated = true;
+    this.setState(stateUpdate);
   }
 
   render() {
     if (this.props.hidden) return null;
     const { formUpdated } = this.state;
-    const { id, title, content, created, prio, archived } = this.props.note;
+    const { id, title, content, details, created, prio, archived } = this.props.note;
 
     return (
       <div className="editor">
@@ -61,7 +70,7 @@ export default class EditNote extends Component {
             id="title"
             label="Title"
             defaultValue={title}
-            onChange={(e) => this.handleChange({ "title": e.target.value })}
+            onChange={(e) => this.handleChange('title', e.target.value)}
             />
 
           <div className="row note-options">
@@ -69,18 +78,23 @@ export default class EditNote extends Component {
               id="prio"
               label="Priority Item?"
               defaultChecked={prio}
-              onClick={(e) => this.handleChange({ "prio": e.target.checked })}
+              onClick={(e) => this.handleChange('prio', e.target.checked)}
               />
 
             <CheckboxInput
               id="archived"
               label="Archived"
               defaultChecked={archived}
-              onClick={(e) => this.handleChange({ "archived": e.target.checked })}
+              onClick={(e) => this.handleChange('archived', e.target.checked)}
               />
 
             <button disabled={!formUpdated}>Save Changes</button>
           </div>
+
+          <TagList
+            handleChange={this.handleChange}
+            tags={details.tags}
+            />
 
           <div // eslint-disable-next-line
             dangerouslySetInnerHTML={convertToMarkdown(content)}
@@ -90,7 +104,7 @@ export default class EditNote extends Component {
             id="content"
             label="Contents"
             value={content}
-            onChange={(e) => this.handleChange({ "content": e.target.value })}
+            onChange={(e) => this.handleChange('content', e.target.value)}
             />
 
         </form>
