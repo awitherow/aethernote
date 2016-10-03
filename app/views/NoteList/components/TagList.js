@@ -1,6 +1,6 @@
 import '../styles/tag-list.scss';
 import React, { Component, PropTypes } from 'react';
-import TextInput from '../../../elements/TextInput';
+import FlexibleInput from '../../../elements/FlexibleInput';
 
 export class TagList extends Component {
   constructor(props) {
@@ -57,7 +57,7 @@ export class TagList extends Component {
         })}
 
         <li className="tag-list--input">
-          <TextInput
+          <FlexibleInput
             id="tag"
             label="New tag"
             value={tagInput}

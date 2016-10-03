@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 import { checkAuth } from '../../api/security';
 
-import TextInput from '../../elements/TextInput';
+import FlexibleInput from '../../elements/FlexibleInput';
 
 class Login extends Component {
   constructor(props) {
@@ -39,7 +39,7 @@ class Login extends Component {
     const { userId, userKey } = this.state;
     return (
       <form onSubmit={this.authenticateLoginAttempt}>
-        <TextInput
+        <FlexibleInput
           id="userId"
           label="Username"
           value={userId}
