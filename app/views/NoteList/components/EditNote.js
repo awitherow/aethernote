@@ -22,6 +22,8 @@ export default class EditNote extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.closeEditor = this.closeEditor.bind(this);
+    this.deleteNote = this.deleteNote.bind(this);
+    this.toggleWizard = this.toggleWizard.bind(this);
   }
 
   onSubmit(e) {
@@ -50,6 +52,16 @@ export default class EditNote extends Component {
 
     if (!this.state.formUpdated) stateUpdate.formUpdated = true;
     this.setState(stateUpdate);
+  }
+
+  deleteNote() {
+    this.props.onRemove(this.props.note.id);
+    this.toggleWizard();
+    this.closeEditor();
+  }
+
+  toggleWizard() {
+    this.setState({ deleteWizardOpen: !this.state.deleteWizardOpen });
   }
 
   render() {
@@ -119,16 +131,29 @@ export default class EditNote extends Component {
             />
 
         </form>
+
         <div className="deleteNote">
-          <button className={deleteNoteRequestClasses}>Delete Note</button>
+          <button className={deleteNoteRequestClasses}
+            onClick={this.toggleWizard}>
+            Delete Note
+          </button>
+
           <div className={deleteNotePanelClasses}>
             <span className="deleteNote__panel-ask">
               Are you sure you want to delete this?
             </span>
-            <button className="deleteNote__panel-yes">Yes</button>
-            <button className="deleteNote__panel-no">No</button>
+
+            <button className="deleteNote__panel-yes"
+              onClick={this.deleteNote}>
+              Yes
+            </button>
+            <button className="deleteNote__panel-no"
+              onClick={this.toggleWizard}>
+              No
+            </button>
           </div>
         </div>
+
       </div>
     );
   }
