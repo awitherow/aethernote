@@ -1,9 +1,9 @@
 export const config = {
   statusTypes : [
     'inbox',
-    'backlog'
+    'backlog',
     'soon',
     'now',
     'recent',
-  ];
-}
+  ],
+};
