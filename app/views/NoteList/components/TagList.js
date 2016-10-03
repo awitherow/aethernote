@@ -24,7 +24,7 @@ export class TagList extends Component {
     tagList.push(tagInput);
     this.props.handleChange('tag', tagInput);
     this.setState({
-      tagInput: '',
+      tagInput: '...',
       tags: tagList,
     });
   }
@@ -38,6 +38,7 @@ export class TagList extends Component {
 
   render() {
     const tagList = this.state.tags;
+    const { tagInput } = this.state;
     return (
       <ul className="tag-list">
 
@@ -58,7 +59,7 @@ export class TagList extends Component {
           <TextInput
             id="tag"
             label="New tag"
-            defaultValue="..."
+            defaultValue={tagInput}
             onChange={(e) => this.captureTag('tagInput', e.target.value)}
             />
           <button onClick={this.addTag}>Add Tag</button>
