@@ -46,15 +46,13 @@ class Login extends Component {
           value={userId}
           onChange={(e) => this.setState({ userId: e.target.value })}
           />
-        <fieldset>
-          <label htmlFor="userKey">Password</label>
-          <input
-            id="userKey"
-            type="password"
-            value={userKey}
-            onChange={(e) => this.setState({ userKey: e.target.value })}
-            />
-        </fieldset>
+        <FlexibleInput
+          id="userKey"
+          label="Password"
+          type="password"
+          value={userKey}
+          onChange={(e) => this.setState({ userKey: e.target.value })}
+          />
         <button>Submit</button>
       </form>
     );
