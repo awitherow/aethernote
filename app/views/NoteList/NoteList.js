@@ -92,7 +92,7 @@ export default class NoteList extends Component {
   }
 
   render() {
-    const { editor, notes } = this.state;
+    const { editor, notes, notesWithStatusType } = this.state;
 
     return (
       <div className="note-list">
@@ -106,17 +106,16 @@ export default class NoteList extends Component {
         />
 
         <h2 className="note-list__page-title">
-          Notes <span>({notes.length})</span>
+          Notes <span>({notesWithStatusType})</span>
+        </h2>
+
+        <div className="note-list__sort">
           <Dropdown
             id="status-types"
             label="Status"
             options={statusTypes}
             handleChange={e => this.setState({ status: e.target.value })}
             />
-        </h2>
-
-        <div className="note-list__sort">
-          {/* TODO: add sorting */}
         </div>
 
         <ul className="note-list__list">
