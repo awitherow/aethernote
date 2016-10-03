@@ -115,8 +115,8 @@ export default class EditNote extends Component {
             <span className="deleteNote__panel--ask">
               Are you sure you want to delete this?
             </span>
-            <button className="deleteNote__panel--yes">Delete Note</button>
-            <button className="deleteNote__panel--no">Delete Note</button>
+            <button className="deleteNote__panel--yes">Yes</button>
+            <button className="deleteNote__panel--no">No</button>
           </div>
         </div>
       </div>
