@@ -82,6 +82,10 @@ export default class NoteList extends Component {
     });
   }
 
+  filter(notes) {
+    return notes.filter(note => note.status === this.state.status);
+  }
+
   render() {
     const { editor, notes } = this.state;
 
@@ -111,7 +115,7 @@ export default class NoteList extends Component {
         </div>
 
         <ul className="note-list__list">
-          {notes.map(note =>
+          {this.filter(notes).map(note =>
             <NoteItem
               key={note.id}
               note={note}
