@@ -1,9 +1,20 @@
 .note-list {
   padding: 15px;
 
-  &__page-title {
-    padding-bottom: 5px;
-    font-size: 20px;
+  .sub-header {
+    margin: 20px 0;
+    display: flex;
+
+    h2 {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    .refresh-notes {
+      margin-left: auto;
+      border: none;
+      background: none;
+    }
   }
 
   &__sort {

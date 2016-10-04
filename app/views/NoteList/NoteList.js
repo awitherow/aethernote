@@ -106,9 +106,14 @@ export default class NoteList extends Component {
         onRemove={this.removeNote.bind(this)}
         />
 
-        <h2 className="note-list__page-title">
-          Notes <span>({notesWithStatusType})</span>
-        </h2>
+        <div className="sub-header">
+          <h2 className="note-list__page-title">
+            Notes <span>({notesWithStatusType})</span>
+          </h2>
+          <button
+            className="refresh-notes"
+            onClick={this.getNotes.bind(this)}>REFRESH</button>
+        </div>
 
         <div className="note-list__sort">
           <Dropdown
