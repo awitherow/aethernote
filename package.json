@@ -41,6 +41,7 @@
     "pg-promise": "^5.2.8",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
+    "react-icons": "^2.2.1",
     "react-intl": "^2.1.4",
     "remarkable": "^1.7.0",
     "sass-loader": "^4.0.2",
