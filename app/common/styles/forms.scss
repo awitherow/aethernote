@@ -17,3 +17,9 @@ input[type="password"]  {
   border: none;
   border-bottom: 1px solid gold;
 }
+
+button {
+  &:focus {
+    outline: 0;
+  }
+}

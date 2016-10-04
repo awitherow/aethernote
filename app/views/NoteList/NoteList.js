@@ -1,6 +1,5 @@
 import './styles/note-list.scss';
 import React, { Component, PropTypes } from 'react';
-import MdAutorenew from 'react-icons/lib/md/autorenew';
 
 import * as noteService from '../../api/notes';
 import { statusTypes } from './config';
@@ -115,7 +114,7 @@ export default class NoteList extends Component {
           <button
             className="refresh-notes"
             onClick={this.getNotes.bind(this)}>
-            <MdAutorenew />
+            &#8635;
           </button>
         </div>
 
@@ -155,7 +154,7 @@ export default class NoteList extends Component {
               this.setState({ priority: e.target.checked });
             }}
             />
-          <input type="submit" />
+          <button>&#43;</button>
         </form>
 
       </div>

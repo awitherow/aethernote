@@ -4,11 +4,12 @@ const NoteItem = ({
   note, editNote,
 }) => {
   const { id, title, prio } = note;
+  let prioElement = <span className="priority">&#9888;</span>;
   return (
       <li>
-        <span className="priority">{ prio ? '!' : null}</span>
+        { prio ?  prioElement : null }
         <span className="title">{title}</span>
-        <button onClick={() => editNote(id)}>EDIT</button>
+        <button onClick={() => editNote(id)}>&#9998;</button>
       </li>
 
   );

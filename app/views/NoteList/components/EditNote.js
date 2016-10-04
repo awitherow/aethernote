@@ -2,8 +2,6 @@ import '../styles/edit.scss';
 import React, { Component, PropTypes } from 'react';
 import { FormattedDate } from 'react-intl';
 import classnames from 'classnames';
-import MdClose from 'react-icons/lib/md/close';
-import MdSave from 'react-icons/lib/md/save';
 
 import { convertToMarkdown } from '../../../common/helpers';
 import { statusTypes } from '../config';
@@ -89,7 +87,7 @@ export default class EditNote extends Component {
             Date Created: <FormattedDate value={created} />
           </span>
           <button className="close" onClick={this.closeEditor}>
-            <MdClose />
+            &times;
           </button>
         </header>
 
@@ -127,7 +125,7 @@ export default class EditNote extends Component {
               />
 
             <button disabled={!formUpdated}>
-              <MdSave />
+              SAVE
             </button>
           </div>
 
@@ -152,22 +150,20 @@ export default class EditNote extends Component {
         <div className="deleteNote">
           <button className={deleteNoteRequestClasses}
             onClick={this.toggleWizard}>
-            Delete Note
+            &#9842;
           </button>
 
           <div className={deleteNotePanelClasses}>
-            <span className="deleteNote__panel-ask">
-              Are you sure you want to delete this?
-            </span>
 
             <button className="deleteNote__panel-yes"
               onClick={this.deleteNote}>
-              Yes
+              &#9786;
             </button>
             <button className="deleteNote__panel-no"
               onClick={this.toggleWizard}>
-              No
+              &#9785;
             </button>
+          
           </div>
         </div>
 
