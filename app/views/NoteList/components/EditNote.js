@@ -2,6 +2,8 @@ import '../styles/edit.scss';
 import React, { Component, PropTypes } from 'react';
 import { FormattedDate } from 'react-intl';
 import classnames from 'classnames';
+import MdClose from 'react-icons/lib/md/close';
+import MdSave from 'react-icons/lib/md/save';
 
 import { convertToMarkdown } from '../../../common/helpers';
 import { statusTypes } from '../config';
@@ -86,7 +88,9 @@ export default class EditNote extends Component {
           <span>
             Date Created: <FormattedDate value={created} />
           </span>
-          <button className="close" onClick={this.closeEditor}>X</button>
+          <button className="close" onClick={this.closeEditor}>
+            <MdClose />
+          </button>
         </header>
 
         <form onSubmit={this.onSubmit}>
@@ -122,7 +126,9 @@ export default class EditNote extends Component {
               handleChange={e => this.handleChange('status', e.target.value)}
               />
 
-            <button disabled={!formUpdated}>Save Changes</button>
+            <button disabled={!formUpdated}>
+              <MdSave />
+            </button>
           </div>
 
           <TagList
