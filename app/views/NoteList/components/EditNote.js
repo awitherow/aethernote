@@ -31,7 +31,6 @@ export default class EditNote extends Component {
   onSubmit(e) {
     e.preventDefault();
     this.props.onSubmit(this.state);
-    this.closeEditor();
   }
 
   closeEditor() {
@@ -163,7 +162,7 @@ export default class EditNote extends Component {
               onClick={this.toggleWizard}>
               &#9785;
             </button>
-          
+
           </div>
         </div>
 
