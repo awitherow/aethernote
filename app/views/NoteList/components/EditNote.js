@@ -2,6 +2,7 @@ import '../styles/edit.scss';
 import React, { Component, PropTypes } from 'react';
 import { FormattedDate } from 'react-intl';
 import classnames from 'classnames';
+import { Editor, EditorState } from 'draft-js';
 import MdClose from 'react-icons/lib/md/close';
 import MdSave from 'react-icons/lib/md/save';
 
@@ -15,12 +16,13 @@ import Dropdown from '../../../elements/Dropdown';
 
 import TagList from './TagList';
 
-export default class EditNote extends Component {
+class EditNote extends Component {
   constructor(props) {
     super(props);
     this.state = {
       formUpdated: false,
       deleteWizardOpen: false,
+      editorState: EditorState.createEmpty(),
     };
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -70,7 +72,7 @@ export default class EditNote extends Component {
 
   render() {
     if (this.props.hidden) return null;
-    const { formUpdated, deleteWizardOpen } = this.state;
+    const { formUpdated, deleteWizardOpen, editorState } = this.state;
     const { id, title, content, details, created, prio, archived, status } = this.props.note;
 
     const deleteNoteRequestClasses = classnames('deleteNote__request', {
@@ -136,6 +138,11 @@ export default class EditNote extends Component {
             tags={details.tags}
             />
 
+          <Editor
+            editorState={editorState}
+            onChange={(editorState) => this.handleChange('editorState', editorState)}
+            />
+
           <div // eslint-disable-next-line
             dangerouslySetInnerHTML={convertToMarkdown(content)}
             className="content-view"/>
@@ -183,3 +190,5 @@ EditNote.propTypes = {
   onClose: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
 };
+
+export default EditNote;
