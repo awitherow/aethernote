@@ -130,24 +130,6 @@ class NoteList extends Component {
               options={statusTypes}
               handleChange={e => this.setState({ status: e.target.value })}
               />
-        <form className="note-list__add-note" onSubmit={this.addNote.bind(this)}>
-          <FlexibleInput
-            id="note"
-            label="Awaiting changes..."
-            type="text"
-            defaultValue=""
-            onChange={(e) => this.setState({ noteInput: e.target.value })}
-            />
-          <CheckboxInput
-            id="priority"
-            label="Important task?"
-            defaultChecked={false}
-            onClick={(e) => {
-              this.setState({ priority: e.target.checked });
-            }}
-            />
-          <button>&#43;</button>
-        </form>
           </div>
 
           <ul className="note-list__list">
@@ -161,10 +143,33 @@ class NoteList extends Component {
             )}
           </ul>
 
+          <form className="note-list__add-note" onSubmit={this.addNote.bind(this)}>
+            <FlexibleInput
+              id="note"
+              label="Awaiting changes..."
+              type="text"
+              defaultValue=""
+              onChange={(e) => this.setState({ noteInput: e.target.value })}
+              />
+            <CheckboxInput
+              id="priority"
+              label="Important task?"
+              defaultChecked={false}
+              onClick={(e) => {
+                this.setState({ priority: e.target.checked });
+              }}
+              />
+            <button>&#43;</button>
+          </form>
+
         </div>
       </div>
     );
   }
 }
+
+NoteList.contextTypes = {
+  update: PropTypes.func.isRequired,
+};
 
 export default NoteList;
