@@ -36,6 +36,7 @@
     "classnames": "^2.2.5",
     "css-loader": "^0.24.0",
     "dotenv": "^2.0.0",
+    "draft-js": "^0.9.1",
     "express": "^4.14.0",
     "node-sass": "^3.10.0",
     "pg-promise": "^5.2.8",
