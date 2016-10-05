@@ -1,5 +1,6 @@
 import './styles/note-list.scss';
 import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
 
 import * as noteService from '../../api/notes';
 import { statusTypes } from './config';
@@ -11,7 +12,7 @@ import Dropdown from '../../elements/Dropdown';
 import NoteItem from './components/NoteItem';
 import EditNote from './components/EditNote';
 
-export default class NoteList extends Component {
+class NoteList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -95,49 +96,40 @@ export default class NoteList extends Component {
 
   render() {
     const { editor, notes, notesWithStatusType } = this.state;
+    const noteListClasses = classnames('note-list', {
+      'hidden': !editor.hidden,
+    });
 
     return (
-      <div className="note-list">
+      <div className="note-page">
 
-      <EditNote
-        hidden={editor.hidden}
-        note={editor.note}
-        onSubmit={this.submitEdit.bind(this)}
-        onClose={this.closeEditor.bind(this)}
-        onRemove={this.removeNote.bind(this)}
-        />
+        <EditNote
+          hidden={editor.hidden}
+          note={editor.note}
+          onSubmit={this.submitEdit.bind(this)}
+          onClose={this.closeEditor.bind(this)}
+          onRemove={this.removeNote.bind(this)}
+          />
 
-        <div className="sub-header">
-          <h2 className="note-list__page-title">
-            Notes <span>({notesWithStatusType})</span>
-          </h2>
-          <button
-            className="refresh-notes"
-            onClick={this.getNotes.bind(this)}>
-            &#8635;
-          </button>
-        </div>
+        <div className={noteListClasses}>
+          <div className="sub-header">
+            <h2 className="note-list__page-title">
+              Notes <span>({notesWithStatusType})</span>
+            </h2>
+            <button
+              className="refresh-notes"
+              onClick={this.getNotes.bind(this)}>
+              &#8635;
+            </button>
+          </div>
 
-        <div className="note-list__sort">
-          <Dropdown
-            id="status-types"
-            label="Status"
-            options={statusTypes}
-            handleChange={e => this.setState({ status: e.target.value })}
-            />
-        </div>
-
-        <ul className="note-list__list">
-          {this.filter(notes).map(note =>
-            <NoteItem
-              key={note.id}
-              note={note}
-              removeNote={this.removeNote.bind(this)}
-              editNote={this.editNote.bind(this)}
+          <div className="note-list__sort">
+            <Dropdown
+              id="status-types"
+              label="Status"
+              options={statusTypes}
+              handleChange={e => this.setState({ status: e.target.value })}
               />
-          )}
-        </ul>
-
         <form className="note-list__add-note" onSubmit={this.addNote.bind(this)}>
           <FlexibleInput
             id="note"
@@ -156,12 +148,23 @@ export default class NoteList extends Component {
             />
           <button>&#43;</button>
         </form>
+          </div>
 
+          <ul className="note-list__list">
+            {this.filter(notes).map(note =>
+              <NoteItem
+                key={note.id}
+                note={note}
+                removeNote={this.removeNote.bind(this)}
+                editNote={this.editNote.bind(this)}
+                />
+            )}
+          </ul>
+
+        </div>
       </div>
     );
   }
 }
 
-NoteList.contextTypes = {
-  update: PropTypes.func.isRequired,
-};
+export default NoteList;
