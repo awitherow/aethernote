@@ -2,7 +2,7 @@ import '../styles/edit.scss';
 import React, { Component, PropTypes } from 'react';
 import { FormattedDate } from 'react-intl';
 import classnames from 'classnames';
-import { Editor, EditorState } from 'draft-js';
+import { Editor, EditorState, RichUtils } from 'draft-js';
 import MdClose from 'react-icons/lib/md/close';
 import MdSave from 'react-icons/lib/md/save';
 
@@ -27,6 +27,7 @@ class EditNote extends Component {
 
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleKeyCommand = this.handleKeyCommand.bind(this);
     this.closeEditor = this.closeEditor.bind(this);
     this.deleteNote = this.deleteNote.bind(this);
     this.toggleWizard = this.toggleWizard.bind(this);
@@ -58,6 +59,15 @@ class EditNote extends Component {
 
     if (!this.state.formUpdated) stateUpdate.formUpdated = true;
     this.setState(stateUpdate);
+  }
+
+  handleKeyCommand(command) {
+    const newState = RichUtils.handleKeyCommand(this.state.editorState, command);
+    if (newState) {
+      this.handleChange('editorState', newState);
+      return 'handled';
+    }
+    return 'not-handled';
   }
 
   deleteNote() {
@@ -140,6 +150,7 @@ class EditNote extends Component {
 
           <Editor
             editorState={editorState}
+            handleKeyCommand={this.handleKeyCommand}
             onChange={(editorState) => this.handleChange('editorState', editorState)}
             />
 
