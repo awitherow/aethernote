@@ -1,2 +1,2 @@
-import CheckboxInput from './checkbox-input';
-export default CheckboxInput;
+import CheckboxInput from './checkbox-input'
+export default CheckboxInput

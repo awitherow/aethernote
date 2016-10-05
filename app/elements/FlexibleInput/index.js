@@ -1,2 +1,2 @@
-import TextInput from './flex-input';
-export default TextInput;
+import TextInput from './flex-input'
+export default TextInput

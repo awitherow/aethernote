@@ -6,8 +6,8 @@ const statusTypes = [
   'now',
   'done',
   'reference',
-];
+]
 
 export {
   statusTypes,
-};
+}

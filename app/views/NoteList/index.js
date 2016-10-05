@@ -1,2 +1,2 @@
-import NoteList from './NoteList';
-export default NoteList;
+import NoteList from './NoteList'
+export default NoteList

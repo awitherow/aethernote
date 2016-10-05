@@ -1,6 +1,6 @@
-var webpack = require('webpack');
+var webpack = require('webpack')
 
-var nodeEnv = process.env.NODE_ENV;
+var nodeEnv = process.env.NODE_ENV
 
 var config = {
   devtool: nodeEnv === 'production' ? 'cheap-module-source-map' : 'source-map',
@@ -26,7 +26,7 @@ var config = {
   resolve: {
     extensions: ['', '.js', '.css'],
   },
-};
+}
 
 if (nodeEnv === 'production') {
   config.plugins = [].concat([
@@ -40,7 +40,7 @@ if (nodeEnv === 'production') {
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify("production") },
     }),
-  ]);
+  ])
 }
 
-module.exports = config;
+module.exports = config

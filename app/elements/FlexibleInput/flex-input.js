@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'
 
 export default function FlexibleInput({
   id,
@@ -7,7 +7,7 @@ export default function FlexibleInput({
   type,
   onChange,
 }){
-  let fieldClass = `${id}-field`;
+  let fieldClass = `${id}-field`
   return (
     <fieldset className={fieldClass}>
       <label htmlFor={id}>{label}</label>
@@ -18,7 +18,7 @@ export default function FlexibleInput({
         onChange={onChange}
         />
     </fieldset>
-  );
+  )
 }
 
 FlexibleInput.propTypes = {
@@ -27,4 +27,4 @@ FlexibleInput.propTypes = {
   defaultValue: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-};
+}

@@ -1,2 +1,2 @@
-import TextAreaInput from './text-area';
-export default TextAreaInput;
+import TextAreaInput from './text-area'
+export default TextAreaInput

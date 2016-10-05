@@ -2,17 +2,17 @@ function get(cb) {
   fetch('/api/notes')
     .then(r => r.json())
     .then(res => {
-      cb(res.data);
+      cb(res.data)
     })
-    .catch(e => console.log(e));
+    .catch(e => console.log(e))
 }
 
 function add(entry, cb) {
-  const length = entry.content.length;
+  const length = entry.content.length
   if (length > 32) {
-    entry.title = `${entry.content.substring(0, 32)}...`;
+    entry.title = `${entry.content.substring(0, 32)}...`
   } else {
-    entry.title = `${entry.content.substring(0, length)}`;
+    entry.title = `${entry.content.substring(0, length)}`
   }
 
   fetch('/api/notes', {
@@ -22,17 +22,17 @@ function add(entry, cb) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(entry),
-  }).then(cb);
+  }).then(cb)
 }
 
 function remove(id, cb) {
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
-  }).then(cb);
+  }).then(cb)
 }
 
 function update(orig, diff, cb) {
-  const update = Object.assign(orig, diff);
+  const update = Object.assign(orig, diff)
   fetch(`/api/notes/${orig.id}`, {
     method: 'PUT',
     headers: {
@@ -42,7 +42,7 @@ function update(orig, diff, cb) {
     body: JSON.stringify({
       update,
     }),
-  }).then(cb);
+  }).then(cb)
 }
 
 export {
@@ -50,4 +50,4 @@ export {
   add,
   remove,
   update,
-};
+}

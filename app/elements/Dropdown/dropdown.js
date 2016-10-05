@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'
 
 const Dropdown = ({
   id,
@@ -7,7 +7,7 @@ const Dropdown = ({
   handleChange,
   defaultValue,
 }) => {
-  const fieldsetClasses = `${id}-field`;
+  const fieldsetClasses = `${id}-field`
   return (
     <fieldset className={fieldsetClasses}>
       <label htmlFor={id}>{label}</label>
@@ -17,13 +17,13 @@ const Dropdown = ({
         onChange={handleChange}
         defaultValue={defaultValue || ""}>
         {options.map(option => {
-          let key = options.indexOf(option);
-          return <option key={key} value={option}>{option}</option>;
+          let key = options.indexOf(option)
+          return <option key={key} value={option}>{option}</option>
         })}
       </select>
     </fieldset>
-  );
-};
+  )
+}
 
 Dropdown.propTypes = {
   id: PropTypes.string.isRequired,
@@ -31,6 +31,6 @@ Dropdown.propTypes = {
   options: PropTypes.array.isRequired,
   handleChange: PropTypes.func.isRequired,
   defaultValue: PropTypes.string,
-};
+}
 
-export default Dropdown;
+export default Dropdown

@@ -3,7 +3,7 @@
     "comma-dangle": ["warn", "always-multiline"],
     "indent": ["error", 2, {"SwitchCase": 1}],
     "no-console": "warn",
-    "semi": ["error", "always"]
+    "semi": ["error", "never"]
   },
   "env": {
     "node": true,

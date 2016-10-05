@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'
 
 export default function CheckboxInput({
   id,
@@ -16,7 +16,7 @@ export default function CheckboxInput({
         onClick={onClick}
         />
     </fieldset>
-  );
+  )
 }
 
 CheckboxInput.propTypes = {
@@ -24,4 +24,4 @@ CheckboxInput.propTypes = {
   label: PropTypes.string.isRequired,
   defaultChecked: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
-};
+}

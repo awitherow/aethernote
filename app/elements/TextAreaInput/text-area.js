@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'
 
 export default function TextAreaInput({
   id,
@@ -6,7 +6,7 @@ export default function TextAreaInput({
   value,
   onChange,
 }){
-  const fieldsetClasses = `${id}-field`;
+  const fieldsetClasses = `${id}-field`
   return (
     <fieldset className={fieldsetClasses}>
       <label htmlFor={id}>{label}</label>
@@ -17,7 +17,7 @@ export default function TextAreaInput({
         defaultValue={value}
         />
     </fieldset>
-  );
+  )
 }
 
 TextAreaInput.propTypes = {
@@ -25,4 +25,4 @@ TextAreaInput.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-};
+}

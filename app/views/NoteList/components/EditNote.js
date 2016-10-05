@@ -1,82 +1,82 @@
-import '../styles/edit.scss';
-import React, { Component, PropTypes } from 'react';
-import { FormattedDate } from 'react-intl';
-import classnames from 'classnames';
+import '../styles/edit.scss'
+import React, { Component, PropTypes } from 'react'
+import { FormattedDate } from 'react-intl'
+import classnames from 'classnames'
 
-import { convertToMarkdown } from '../../../common/helpers';
-import { statusTypes } from '../config';
+import { convertToMarkdown } from '../../../common/helpers'
+import { statusTypes } from '../config'
 
-import CheckboxInput from '../../../elements/CheckboxInput';
-import FlexibleInput from '../../../elements/FlexibleInput';
-import TextAreaInput from '../../../elements/TextAreaInput';
-import Dropdown from '../../../elements/Dropdown';
+import CheckboxInput from '../../../elements/CheckboxInput'
+import FlexibleInput from '../../../elements/FlexibleInput'
+import TextAreaInput from '../../../elements/TextAreaInput'
+import Dropdown from '../../../elements/Dropdown'
 
-import TagList from './TagList';
+import TagList from './TagList'
 
 export default class EditNote extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       formUpdated: false,
       deleteWizardOpen: false,
-    };
+    }
 
-    this.onSubmit = this.onSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.closeEditor = this.closeEditor.bind(this);
-    this.deleteNote = this.deleteNote.bind(this);
-    this.toggleWizard = this.toggleWizard.bind(this);
+    this.onSubmit = this.onSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.closeEditor = this.closeEditor.bind(this)
+    this.deleteNote = this.deleteNote.bind(this)
+    this.toggleWizard = this.toggleWizard.bind(this)
   }
 
   onSubmit(e) {
-    e.preventDefault();
-    this.props.onSubmit(this.state);
+    e.preventDefault()
+    this.props.onSubmit(this.state)
   }
 
   closeEditor() {
-    this.setState({ formUpdated: false });
-    this.props.onClose();
+    this.setState({ formUpdated: false })
+    this.props.onClose()
   }
 
   handleChange(whatToChange, change) {
-    let stateUpdate = { details: { tags: [] } };
+    let stateUpdate = { details: { tags: [] } }
 
     switch(whatToChange) {
-      case 'addTag': stateUpdate.details.tags.push(change); break;
+      case 'addTag': stateUpdate.details.tags.push(change); break
       case 'removeTag': {
-        let tagList = stateUpdate.details.tags;
-        tagList.splice(tagList.indexOf(change), 1);
-        break;
+        let tagList = stateUpdate.details.tags
+        tagList.splice(tagList.indexOf(change), 1)
+        break
       }
-      default: stateUpdate[whatToChange] = change; break;
+      default: stateUpdate[whatToChange] = change; break
     }
 
-    if (!this.state.formUpdated) stateUpdate.formUpdated = true;
-    this.setState(stateUpdate);
+    if (!this.state.formUpdated) stateUpdate.formUpdated = true
+    this.setState(stateUpdate)
   }
 
   deleteNote() {
-    this.props.onRemove(this.props.note.id);
-    this.toggleWizard();
-    this.closeEditor();
+    this.props.onRemove(this.props.note.id)
+    this.toggleWizard()
+    this.closeEditor()
   }
 
   toggleWizard() {
-    this.setState({ deleteWizardOpen: !this.state.deleteWizardOpen });
+    this.setState({ deleteWizardOpen: !this.state.deleteWizardOpen })
   }
 
   render() {
-    if (this.props.hidden) return null;
-    const { formUpdated, deleteWizardOpen } = this.state;
-    const { id, title, content, details, created, prio, archived, status } = this.props.note;
+    if (this.props.hidden) return null
+    const { formUpdated, deleteWizardOpen } = this.state
+    const { id, title, content, details, created, prio, archived, status } = this.props.note
 
     const deleteNoteRequestClasses = classnames('deleteNote__request', {
       'hidden': deleteWizardOpen,
-    });
+    })
 
     const deleteNotePanelClasses = classnames('deleteNote__panel', {
       'hidden': !deleteWizardOpen,
-    });
+    })
 
     return (
       <div className="editor">
@@ -167,7 +167,7 @@ export default class EditNote extends Component {
         </div>
 
       </div>
-    );
+    )
   }
 }
 
@@ -177,4 +177,4 @@ EditNote.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
-};
+}

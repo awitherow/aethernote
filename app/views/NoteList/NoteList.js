@@ -1,20 +1,20 @@
-import './styles/note-list.scss';
-import React, { Component, PropTypes } from 'react';
-import classnames from 'classnames';
+import './styles/note-list.scss'
+import React, { Component, PropTypes } from 'react'
+import classnames from 'classnames'
 
-import * as noteService from '../../api/notes';
-import { statusTypes } from './config';
+import * as noteService from '../../api/notes'
+import { statusTypes } from './config'
 
-import FlexibleInput from '../../elements/FlexibleInput';
-import CheckboxInput from '../../elements/CheckboxInput';
-import Dropdown from '../../elements/Dropdown';
+import FlexibleInput from '../../elements/FlexibleInput'
+import CheckboxInput from '../../elements/CheckboxInput'
+import Dropdown from '../../elements/Dropdown'
 
-import NoteItem from './components/NoteItem';
-import EditNote from './components/EditNote';
+import NoteItem from './components/NoteItem'
+import EditNote from './components/EditNote'
 
 class NoteList extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       noteInput: "",
       priority: false,
@@ -25,56 +25,56 @@ class NoteList extends Component {
       },
       status: 'inbox',
       notesWithStatusType: 0,
-    };
+    }
   }
 
   componentDidMount() {
-    this.getNotes();
+    this.getNotes()
   }
 
   getNotes() {
-    this.context.update('loading', true);
+    this.context.update('loading', true)
     noteService.get(notes => {
-      this.setState({ notes });
-      this.context.update('loading', false);
-    });
+      this.setState({ notes })
+      this.context.update('loading', false)
+    })
   }
 
   removeNote(id) {
-    this.context.update('loading', true);
-    noteService.remove(id, () => this.getNotes());
+    this.context.update('loading', true)
+    noteService.remove(id, () => this.getNotes())
   }
 
   addNote(e) {
-    e.preventDefault();
-    const { noteInput, priority, status } = this.state;
+    e.preventDefault()
+    const { noteInput, priority, status } = this.state
     noteService.add({
       content: noteInput,
       prio: priority,
       status,
     }, () => {
-      this.setState({ noteInput: "", priority: false });
-      this.getNotes();
-    });
+      this.setState({ noteInput: "", priority: false })
+      this.getNotes()
+    })
   }
 
   editNote(id) {
-    const { notes } = this.state;
-    let note = notes.filter(note => note.id === id)[0];
-    if (!note) return;
+    const { notes } = this.state
+    let note = notes.filter(note => note.id === id)[0]
+    if (!note) return
     this.setState({
       editor: {
         hidden: false,
         note,
       },
-    });
+    })
   }
 
   submitEdit(edits) {
     noteService.update(this.state.editor.note, edits, () => {
-      this.closeEditor();
-      this.getNotes();
-    });
+      this.closeEditor()
+      this.getNotes()
+    })
   }
 
   closeEditor(){
@@ -83,22 +83,22 @@ class NoteList extends Component {
         hidden: true,
         note: {},
       },
-    });
+    })
   }
 
   filter(notes) {
-    let filteredNotes = notes.filter(note => note.status === this.state.status);
+    let filteredNotes = notes.filter(note => note.status === this.state.status)
     if (this.state.notesWithStatusType !== filteredNotes.length) {
-      this.setState({ notesWithStatusType: filteredNotes.length });
+      this.setState({ notesWithStatusType: filteredNotes.length })
     }
-    return filteredNotes;
+    return filteredNotes
   }
 
   render() {
-    const { editor, notes, notesWithStatusType } = this.state;
+    const { editor, notes, notesWithStatusType } = this.state
     const noteListClasses = classnames('note-list', {
       'hidden': !editor.hidden,
-    });
+    })
 
     return (
       <div className="note-page">
@@ -156,7 +156,7 @@ class NoteList extends Component {
               label="Important task?"
               defaultChecked={false}
               onClick={(e) => {
-                this.setState({ priority: e.target.checked });
+                this.setState({ priority: e.target.checked })
               }}
               />
             <button>&#43;</button>
@@ -164,12 +164,12 @@ class NoteList extends Component {
 
         </div>
       </div>
-    );
+    )
   }
 }
 
 NoteList.contextTypes = {
   update: PropTypes.func.isRequired,
-};
+}
 
-export default NoteList;
+export default NoteList
