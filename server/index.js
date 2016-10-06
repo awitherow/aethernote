@@ -4,7 +4,7 @@ import favicon from 'serve-favicon'
 import * as api from './queries'
 import * as auth from './auth'
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === 'development') {
   require('dotenv').config()
 }
 
