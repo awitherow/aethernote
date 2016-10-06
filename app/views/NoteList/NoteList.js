@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
 import * as noteService from '../../api/notes'
-import { statusTypes } from './config'
+import { statusTypes, contextTypes } from './config'
 
 import FlexibleInput from '../../elements/FlexibleInput'
 import CheckboxInput from '../../elements/CheckboxInput'
@@ -23,12 +23,12 @@ class NoteList extends Component {
         hidden: true,
         note: {},
       },
-      filters: {
-        context: 'personal',
-        status: 'inbox',
-      },
+      context: 'personal',
+      status: 'inbox',
       activeNotes: 0,
     }
+
+    this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
@@ -90,16 +90,24 @@ class NoteList extends Component {
   }
 
   filter(notes) {
-    let filteredNotes = notes.filter(note => note.context === this.state.filters.context)
-    filteredNotes = notes.filter(note => note.status === this.state.filters.status)
+    let filteredNotes = notes.filter(note => note.context === this.state.context)
+    filteredNotes = filteredNotes.filter(note => note.status === this.state.status)
     if (this.state.activeNotes !== filteredNotes.length) {
       this.setState({ activeNotes: filteredNotes.length })
     }
     return filteredNotes
   }
 
+  handleChange(whatToChange, change) {
+    switch (whatToChange) {
+      case 'status': this.setState({ status: change }); break
+      case 'context': this.setState({ context: change }); break
+      default: return
+    }
+  }
+
   render() {
-    const { editor, notes, notesWithStatusType } = this.state
+    const { editor, notes, activeNotes } = this.state
     const noteListClasses = classnames('note-list', {
       'hidden': !editor.hidden,
     })
@@ -118,7 +126,7 @@ class NoteList extends Component {
         <div className={noteListClasses}>
           <div className="sub-header">
             <h2 className="note-list__page-title">
-              Notes <span>({notesWithStatusType})</span>
+              Notes <span>({activeNotes})</span>
             </h2>
             <button
               className="refresh-notes"
@@ -129,10 +137,16 @@ class NoteList extends Component {
 
           <div className="note-list__sort">
             <Dropdown
+              id="context-types"
+              label="Context"
+              options={contextTypes}
+              handleChange={e => this.handleChange('context', e.target.value)}
+              />
+            <Dropdown
               id="status-types"
               label="Status"
               options={statusTypes}
-              handleChange={e => this.setState({ status: e.target.value })}
+              handleChange={e => this.handleChange('status', e.target.value)}
               />
           </div>
 

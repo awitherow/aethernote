@@ -8,6 +8,13 @@ const statusTypes = [
   'reference',
 ]
 
+const contextTypes = [
+  'personal',
+  'entrepreneur',
+  'costa-digital',
+]
+
 export {
   statusTypes,
+  contextTypes,
 }
