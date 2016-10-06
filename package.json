@@ -19,7 +19,9 @@
     "lint": "eslint . --ext .js --ext .jsx --fix",
     "dev": "npm run express-dev & npm run webpack-dev",
     "webpack-dev": "NODE_ENV='development' webpack -d --watch --colors",
-    "express-dev": "NODE_ENV='development' DATABASE_URL=$(heroku config:get DATABASE_URL -a aethernote) nodemon start.js"
+    "express-dev": "NODE_ENV='development' DATABASE_URL=$(heroku config:get DATABASE_URL -a aethernote) nodemon start.js",
+    "docs": "cd docs && gitbook serve",
+    "deploy-docs": "bash ./deploy-docs.sh",
   },
   "dependencies": {
     "babel": "^6.5.2",
