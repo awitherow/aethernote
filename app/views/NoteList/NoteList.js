@@ -23,8 +23,11 @@ class NoteList extends Component {
         hidden: true,
         note: {},
       },
-      status: 'inbox',
-      notesWithStatusType: 0,
+      filters: {
+        context: 'personal',
+        status: 'inbox',
+      },
+      activeNotes: 0,
     }
   }
 
@@ -87,9 +90,10 @@ class NoteList extends Component {
   }
 
   filter(notes) {
-    let filteredNotes = notes.filter(note => note.status === this.state.status)
-    if (this.state.notesWithStatusType !== filteredNotes.length) {
-      this.setState({ notesWithStatusType: filteredNotes.length })
+    let filteredNotes = notes.filter(note => note.context === this.state.filters.context)
+    filteredNotes = notes.filter(note => note.status === this.state.filters.status)
+    if (this.state.activeNotes !== filteredNotes.length) {
+      this.setState({ activeNotes: filteredNotes.length })
     }
     return filteredNotes
   }
