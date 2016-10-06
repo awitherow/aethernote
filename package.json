@@ -23,7 +23,7 @@
     "docs": "cd docs && gitbook serve",
     "deploy-docs": "bash ./deploy-docs.sh",
     "unit": "karma start test/unit/karma.conf.js --single-run",
-    "e2e": "node test/e2e/runner.js",
+    "e2e": "node test/e2e/runner.js"
   },
   "dependencies": {
     "bluebird": "^3.4.1",
