@@ -24,7 +24,7 @@ class NoteList extends Component {
         note: {},
       },
       context: 'personal',
-      status: 'inbox',
+      status: 'now',
       activeNotes: 0,
     }
 
@@ -141,12 +141,14 @@ class NoteList extends Component {
               id="context-types"
               label="Context"
               options={contextTypes}
+              defaultValue={this.state.status}
               handleChange={e => this.handleChange('context', e.target.value)}
               />
             <Dropdown
               id="status-types"
               label="Status"
               options={statusTypes}
+              defaultValue={this.state.status}
               handleChange={e => this.handleChange('status', e.target.value)}
               />
           </div>
