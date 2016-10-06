@@ -11,16 +11,10 @@
     "node": "6.3.0"
   },
   "scripts": {
-    "start": "npm run webpack & npm run express",
-    "webpack": "NODE_ENV='production' webpack",
-    "express": "NODE_ENV='production' node build/build.js",
+    "start": "node build/build.js",
+    "dev": "node build/dev-server.js",
     "test": "npm run unit && npm run e2e && npm run lint",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "dev": "npm run express-dev",
-    "webpack-dev": "NODE_ENV='development' webpack -d --watch --colors",
-    "express-dev": "node build/dev-server.js",
-    "docs": "cd docs && gitbook serve",
-    "deploy-docs": "bash ./deploy-docs.sh",
     "unit": "karma start test/unit/karma.conf.js --single-run",
     "e2e": "node test/e2e/runner.js"
   },
