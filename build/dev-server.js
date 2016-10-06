@@ -1,5 +1,6 @@
 var path = require('path')
 var express = require('express')
+var favicon = 'require'
 var webpack = require('webpack')
 var config = require('../config')
 var proxyMiddleware = require('http-proxy-middleware')
@@ -55,6 +56,7 @@ app.use(hotMiddleware)
 // serve pure static assets
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
+app.use(favicon('static/favicon.ico'))
 
 module.exports = app.listen(port, function (err) {
   if (err) {
