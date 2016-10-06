@@ -50,11 +50,12 @@ class NoteList extends Component {
 
   addNote(e) {
     e.preventDefault()
-    const { noteInput, priority, status } = this.state
+    const { noteInput, priority, context } = this.state
     noteService.add({
       content: noteInput,
       prio: priority,
-      status,
+      status: 'inbox',
+      context,
     }, () => {
       this.setState({ noteInput: "", priority: false })
       this.getNotes()

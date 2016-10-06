@@ -10,7 +10,7 @@ function get(cb) {
 function add(entry, cb) {
   const length = entry.content.length
   if (length > 32) {
-    entry.title = `${entry.content.substring(0, 32)}...`
+    entry.title = `${entry.content.substring(0, 32)}`
   } else {
     entry.title = `${entry.content.substring(0, length)}`
   }
