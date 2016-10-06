@@ -1,16 +1,22 @@
-{
-  "rules": {
-    "comma-dangle": ["warn", "always-multiline"],
-    "indent": ["error", 2, {"SwitchCase": 1}],
-    "no-console": "warn",
-    "semi": ["error", "never"]
+module.exports = {
+  root: true,
+  parser: 'babel-eslint',
+  parserOptions: {
+    sourceType: 'module'
   },
-  "env": {
-    "node": true,
-    "mocha": true,
-    "browser": true
-  },
-  parser: "babel-eslint",
-  "plugins": ["react"],
-  "extends": ["eslint:recommended", "plugin:react/recommended"]
+  // https://github.com/feross/standard/blob/master/RULES.md#javascript-standard-style
+  extends: 'standard',
+  // required to lint *.vue files
+  plugins: [
+    'html'
+  ],
+  // add your custom rules here
+  'rules': {
+    // allow paren-less arrow functions
+    'arrow-parens': 0,
+    // allow async-await
+    'generator-star-spacing': 0,
+    // allow debugger during development
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+  }
 }
