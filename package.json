@@ -14,7 +14,6 @@
     "start": "npm run webpack & npm run express",
     "webpack": "NODE_ENV='production' webpack",
     "express": "NODE_ENV='production' node build/build.js",
-    "prepush": "npm run test",
     "test": "npm run unit && npm run e2e && npm run lint",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
     "dev": "npm run express-dev & npm run webpack-dev",
