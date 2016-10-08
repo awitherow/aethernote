@@ -1,6 +1,7 @@
+require('babel-register')
 var path = require('path')
 var express = require('express')
-var favicon = 'require'
+var favicon = require('serve-favicon')
 var webpack = require('webpack')
 var config = require('../config')
 var proxyMiddleware = require('http-proxy-middleware')
