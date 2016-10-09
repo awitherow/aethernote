@@ -3,6 +3,9 @@
     #loading(v-show="loading")
       span.loading.dots2
     AppHeader
+    #note-list
+      ul(v-show="!loading")
+        li(v-for="note in notes") {{ note.title }}
 </template>
 
 <script>
@@ -27,7 +30,7 @@ export default {
     fetchNotes () {
       this.loading = true
       get((notes) => {
-        this.notes = notes
+        this.notes = notes.data
         this.loading = false
       })
     }
