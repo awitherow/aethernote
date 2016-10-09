@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import AppHeader from './components/molecules/Header'
+import AppHeader from './components/micro/Header'
 
 import { get } from './api/notes'
 
