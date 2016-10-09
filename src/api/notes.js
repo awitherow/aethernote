@@ -1,4 +1,4 @@
-function get(cb) {
+function get (cb) {
   fetch('/api/notes')
     .then(r => r.json())
     .then(res => {
@@ -7,7 +7,7 @@ function get(cb) {
     .catch(e => console.log(e))
 }
 
-function add(entry, cb) {
+function add (entry, cb) {
   const length = entry.content.length
   if (length > 32) {
     entry.title = `${entry.content.substring(0, 32)}`
@@ -19,29 +19,29 @@ function add(entry, cb) {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify(entry),
+    body: JSON.stringify(entry)
   }).then(cb)
 }
 
-function remove(id, cb) {
+function remove (id, cb) {
   fetch(`/api/notes/${id}`, {
-    method: 'DELETE',
+    method: 'DELETE'
   }).then(cb)
 }
 
-function update(orig, diff, cb) {
+function update (orig, diff, cb) {
   const update = Object.assign(orig, diff)
   fetch(`/api/notes/${orig.id}`, {
     method: 'PUT',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      update,
-    }),
+      update
+    })
   }).then(cb)
 }
 
@@ -49,5 +49,5 @@ export {
   get,
   add,
   remove,
-  update,
+  update
 }
