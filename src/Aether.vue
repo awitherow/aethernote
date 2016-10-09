@@ -3,20 +3,23 @@
     #loading(v-show="loading")
       span.loading.dots2
     AppHeader
-    #note-list
-      ul(v-show="!loading")
-        li(v-for="note in notes") {{ note.title }}
+    NoteList(
+      :title="title"
+      :loading="loading"
+    )
 </template>
 
 <script>
 import AppHeader from './components/micro/Header'
+import NoteList from './components/macro/Notelist'
 
 import { get } from './api/notes'
 
 export default {
   name: 'Aether',
   components: {
-    AppHeader
+    AppHeader,
+    Notelist
   },
   data: () => ({
     loading: false,
