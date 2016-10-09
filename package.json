@@ -19,12 +19,12 @@
     "e2e": "node test/e2e/runner.js"
   },
   "dependencies": {
+    "axios": "^0.14.0",
     "bluebird": "^3.4.1",
     "body-parser": "^1.15.2",
     "dotenv": "^2.0.0",
     "pg-promise": "^5.2.8",
     "serve-favicon": "^2.3.0",
-    "whatwg-fetch": "^1.0.0",
     "vue": "^2.0.1"
   },
   "devDependencies": {
