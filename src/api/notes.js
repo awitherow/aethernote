@@ -1,6 +1,7 @@
+import axios from 'axios'
+
 function get (cb) {
-  fetch('/api/notes')
-    .then(r => r.json())
+  axios.get('/api/notes')
     .then(res => {
       cb(res.data)
     })
@@ -15,33 +16,19 @@ function add (entry, cb) {
     entry.title = `${entry.content.substring(0, length)}`
   }
 
-  fetch('/api/notes', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(entry)
+  axios.post('/api/notes', {
+    entry
   }).then(cb)
 }
 
 function remove (id, cb) {
-  fetch(`/api/notes/${id}`, {
-    method: 'DELETE'
-  }).then(cb)
+  axios.delete(`/api/notes/${id}`).then(cb)
 }
 
 function update (orig, diff, cb) {
   const update = Object.assign(orig, diff)
-  fetch(`/api/notes/${orig.id}`, {
-    method: 'PUT',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      update
-    })
+  axios.put(`/api/notes/${orig.id}`, {
+    update
   }).then(cb)
 }
 
