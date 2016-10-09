@@ -8,6 +8,8 @@
 <script>
 import AppHeader from './components/molecules/Header'
 
+import { get } from './api/notes'
+
 export default {
   name: 'Aether',
   components: {
@@ -15,8 +17,21 @@ export default {
   },
   data: () => ({
     loading: false,
-    authenticated: false
-  })
+    authenticated: false,
+    notes: []
+  }),
+  created () {
+    this.fetchNotes()
+  },
+  methods: {
+    fetchNotes () {
+      this.loading = true
+      get((notes) => {
+        this.notes = notes
+        this.loading = false
+      })
+    }
+  }
 }
 </script>
 
@@ -32,7 +47,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
