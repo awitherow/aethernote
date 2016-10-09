@@ -3,15 +3,15 @@
     #loading(v-show="loading")
       span.loading.dots2
     AppHeader
-    NoteList(
-      :title="title"
-      :loading="loading"
+    Notelist(
+      v-bind:notes="notes"
+      v-bind:loading="loading"
     )
 </template>
 
 <script>
 import AppHeader from './components/micro/Header'
-import NoteList from './components/macro/Notelist'
+import Notelist from './components/macro/Notelist'
 
 import { get } from './api/notes'
 
