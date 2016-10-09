@@ -1,8 +1,8 @@
 import Vue from 'vue'
-import App from './App'
+import Aether from './Aether'
 
 /* eslint-disable no-new */
 new Vue({
-  el: '#aether',
-  render: h => h(App)
+  el: '#app',
+  render: h => h(Aether)
 })
