@@ -3,6 +3,10 @@
     #loading(v-show="loading")
       span.loading.dots2
     AppHeader
+    Profile(
+      v-bind:profileOpen="profileOpen"
+      v-bind:profile="profile"
+    )
     Notelist(
       v-bind:notes="notes"
       v-bind:loading="loading"
@@ -10,8 +14,10 @@
 </template>
 
 <script>
-import AppHeader from './components/micro/Header'
-import Notelist from './components/macro/Notelist'
+import Notelist from './components/views/Notelist'
+import Profile from './components/views/Profile'
+
+import AppHeader from './components/elements/Header'
 
 import * as notes from './api/notes'
 import * as profile from './api/profile'
@@ -20,13 +26,15 @@ export default {
   name: 'Aether',
   components: {
     AppHeader,
-    Notelist
+    Notelist,
+    Profile
   },
   data: () => ({
     loading: false,
     authenticated: false,
     notes: [],
-    profile: {}
+    profile: {},
+    profileOpen: false
   }),
   created () {
     this.loading = true
