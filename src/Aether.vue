@@ -13,7 +13,8 @@
 import AppHeader from './components/micro/Header'
 import Notelist from './components/macro/Notelist'
 
-import { get } from './api/notes'
+import * as notes from './api/notes'
+import * as profile from './api/profile'
 
 export default {
   name: 'Aether',
@@ -24,17 +25,25 @@ export default {
   data: () => ({
     loading: false,
     authenticated: false,
-    notes: []
+    notes: [],
+    profile: {}
   }),
   created () {
-    this.fetchNotes()
+    this.loading = true
+    this.fetchProfile() // TODO: async await
+    this.fetchNotes() // TODO: async await
+    this.loading = false
   },
   methods: {
     fetchNotes () {
-      this.loading = true
-      get((notes) => {
+      notes.get((notes) => {
         this.notes = notes.data
-        this.loading = false
+      })
+    },
+    fetchProfile () {
+      profile.get(profile => {
+        console.log(profile)
+        this.profile = profile.data
       })
     }
   }

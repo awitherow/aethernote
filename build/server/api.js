@@ -11,4 +11,7 @@ module.exports = function connectApi (app) {
 
   // security
   app.use('/api/auth', auth.checkAuth)
+
+  // profile
+  app.get('/api/profile', api.getProfile)
 }

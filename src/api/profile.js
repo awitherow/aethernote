@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 function get (cb) {
-  axios.get('/api/profile/', cb)
+  axios.get('/api/profile', cb)
     .then(res => {
       cb(res.data)
     })
