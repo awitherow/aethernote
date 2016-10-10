@@ -8,6 +8,12 @@ const pgp = pg({
 pgp.pg.defaults.ssl = true
 const db = pgp(process.env.DATABASE_URL)
 
+// toc
+// 1. notes
+// 2. profile
+
+// 1. notes
+
 export const getNotes = (req, res, next) => {
   db.any('select * from entries')
   .then(data => {
@@ -75,6 +81,17 @@ export const removeNote = (req, res, next) => {
     })
   }).catch(err => next(err))
 }
+
+// 2. profile
+
+export const getProfile = (req, res, next) => {
+  db.one(`select * from profile`)
+  .then(data => {
+    res.status(200)
+    .json({
+      status: 'success',
+      data,
+      message: 'Retrieved entry'
     })
   }).catch(err => next(err))
 }
