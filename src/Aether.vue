@@ -50,7 +50,6 @@ export default {
     },
     fetchProfile () {
       profile.get(profile => {
-        console.log(profile)
         this.profile = profile.data
       })
     }
