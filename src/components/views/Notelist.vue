@@ -14,11 +14,14 @@
           type="checkbox"
           v-model="newNote.prio"
         )
+      button(v-on:click.prevent="addNote") +
     ul
       li(v-for="note in notes") {{ note.title }}
 </template>
 
 <script>
+import * as notes from '../../api/notes'
+
 export default {
   name: 'Notelist',
   props: ['notes', 'loading'],
@@ -29,7 +32,15 @@ export default {
       status: 'inbox',
       context: 'personal'
     }
-  })
+  }),
+  methods: {
+    addNote () {
+      const { content, prio, status, context } = this.newNote
+      const entry = { content, prio, status, context }
+      this.notes.unshift(entry)
+      notes.add({ content, prio, status, context })
+    }
+  }
 }
 </script>
 
