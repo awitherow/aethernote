@@ -5,12 +5,12 @@
     </div>
     <AppHeader/>
     <Profile
-      v-bind:profileOpen="profileOpen"
-      v-bind:profile="profile"
+      :profileOpen="profileOpen"
+      :profile="profile"
       />
     <Notelist
-      v-bind:notes="notes"
-      v-bind:loading="loading"
+      :notes="notes"
+      :loading="loading"
       />
   </div>
 </template>
