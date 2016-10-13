@@ -1,7 +1,10 @@
 var api = require('./queries')
 var auth = require('./auth')
+var bodyParser = require('body-parser')
 
 module.exports = function connectApi (app) {
+  app.use(bodyParser.json())
+  app.use(bodyParser.urlencoded({ extended: true }))
   // db queries
   app.get('/api/notes', api.getNotes)
   app.get('/api/notes/:id', api.getNote)

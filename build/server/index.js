@@ -1,12 +1,8 @@
 import express from 'express'
-import bodyParser from 'body-parser'
 import favicon from 'serve-favicon'
 import connectApi from './api'
 
 const app = express()
-
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
 
 connectApi(app)
 
