@@ -1,16 +1,18 @@
-<template lang="pug">
-  #aether
-    #loading(v-show="loading")
-      span.loading.dots2
-    AppHeader
-    Profile(
+<template>
+  <div id="aether">
+    <div id="loading" v-show="loading">
+      <span class="loading dots2"/>
+    </div>
+    <AppHeader/>
+    <Profile
       v-bind:profileOpen="profileOpen"
       v-bind:profile="profile"
-    )
-    Notelist(
+      />
+    <Notelist
       v-bind:notes="notes"
       v-bind:loading="loading"
-    )
+      />
+  </div>
 </template>
 
 <script>
@@ -61,6 +63,7 @@ export default {
 body {
   margin: 0;
 }
+
 #loading {
   position: fixed;
   background: white;

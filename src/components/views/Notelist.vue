@@ -1,22 +1,29 @@
-<template lang=pug>
-  #note-list(v-show="!loading")
-    #add-note
-      fieldset
-        label(for="content")
-        input(
-          name="prio"
+<template>
+  <div id="note-list" v-show="!loading">
+    <form id="add-note">
+      <fieldset>
+        <label for="content"></label>
+        <input
+          name="content"
           v-model="newNote.content"
-        )
-      fieldset
-        label(for="prio")
-        input(
+          />
+      </fieldset>
+      <fieldset>
+        <label for="prio"></label>
+        <input
           name="prio"
           type="checkbox"
           v-model="newNote.prio"
-        )
-      button(v-on:click.prevent="addNote") +
-    ul
-      li(v-for="note in notes") {{ note.title }}
+          />
+      </fieldset>
+      <button v-on:click.prevent="addNote">+</button>
+    </form>
+    <ul>
+      <li v-for="note in notes">
+        {{ note.title }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
