@@ -15,10 +15,7 @@ function add (entry, cb) {
   } else {
     entry.title = `${entry.content.substring(0, length)}`
   }
-
-  axios.post('/api/notes', {
-    entry
-  }).then(cb)
+  axios.post('/api/notes', entry).then(cb)
 }
 
 function remove (id, cb) {
