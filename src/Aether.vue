@@ -1,8 +1,8 @@
 <template>
   <div id="aether">
-    <div id="loading" v-show="loading">
-      <span class="loading dots2"/>
-    </div>
+    <Loading
+      v-bind:loading="loading"
+      />
     <AppHeader/>
     <Profile
       :profileOpen="profileOpen"
@@ -20,6 +20,7 @@ import Notelist from './components/views/Notelist'
 import Profile from './components/views/Profile'
 
 import AppHeader from './components/elements/Header'
+import Loading from './components/elements/Loading'
 
 import * as notes from './api/notes'
 import * as profile from './api/profile'
@@ -29,7 +30,8 @@ export default {
   components: {
     AppHeader,
     Notelist,
-    Profile
+    Profile,
+    Loading
   },
   data: () => ({
     loading: false,
@@ -40,14 +42,14 @@ export default {
   }),
   created () {
     this.loading = true
-    this.fetchProfile() // TODO: async await
-    this.fetchNotes() // TODO: async await
-    this.loading = false
+    this.fetchProfile()
+    this.fetchNotes()
   },
   methods: {
     fetchNotes () {
       notes.get((notes) => {
         this.notes = notes.data
+        this.loading = false
       })
     },
     fetchProfile () {
