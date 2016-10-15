@@ -4,7 +4,7 @@ import { FormattedDate } from 'react-intl'
 import classnames from 'classnames'
 
 import { convertToMarkdown } from '../../../common/helpers'
-import { statusTypes, contextTypes } from '../config'
+import { statusTypes } from '../config'
 
 import CheckboxInput from '../../../elements/CheckboxInput'
 import FlexibleInput from '../../../elements/FlexibleInput'
@@ -69,7 +69,7 @@ export default class EditNote extends Component {
     if (this.props.hidden) return null
     const { formUpdated, deleteWizardOpen } = this.state
     const { id, title, content, details, created,
-      prio, archived, status, context } = this.props.note
+      prio, archived, status } = this.props.note
 
     const deleteNoteRequestClasses = classnames('deleteNote__request', {
       'hidden': deleteWizardOpen,
@@ -114,14 +114,6 @@ export default class EditNote extends Component {
               label="Archived"
               defaultChecked={archived}
               onClick={(e) => this.handleChange('archived', e.target.checked)}
-              />
-
-            <Dropdown
-              id="context-types"
-              label="Context"
-              options={contextTypes}
-              defaultValue={context}
-              handleChange={e => this.handleChange('context', e.target.value)}
               />
 
             <Dropdown

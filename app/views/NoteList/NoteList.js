@@ -23,7 +23,6 @@ class NoteList extends Component {
         hidden: true,
         note: {},
       },
-      context: 'personal',
       status: 'now',
       activeNotes: 0,
     }
@@ -50,12 +49,11 @@ class NoteList extends Component {
 
   addNote(e) {
     e.preventDefault()
-    const { noteInput, priority, context } = this.state
+    const { noteInput, priority } = this.state
     noteService.add({
       content: noteInput,
       prio: priority,
       status: 'inbox',
-      context,
     }, () => {
       this.setState({ noteInput: "", priority: false })
       this.getNotes()
@@ -91,8 +89,7 @@ class NoteList extends Component {
   }
 
   filter(notes) {
-    let filteredNotes = notes.filter(note => note.context === this.state.context)
-    filteredNotes = filteredNotes.filter(note => note.status === this.state.status)
+    let filteredNotes = notes.filter(note => note.status === this.state.status)
     if (this.state.activeNotes !== filteredNotes.length) {
       this.setState({ activeNotes: filteredNotes.length })
     }
@@ -137,13 +134,6 @@ class NoteList extends Component {
           </div>
 
           <div className="note-list__sort">
-            <Dropdown
-              id="context-types"
-              label="Context"
-              options={contextTypes}
-              defaultValue={this.state.status}
-              handleChange={e => this.handleChange('context', e.target.value)}
-              />
             <Dropdown
               id="status-types"
               label="Status"
