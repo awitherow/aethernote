@@ -1,5 +1,5 @@
 <template>
-  <div id="note-list" v-show="!loading">
+  <div id="note-list">
     <form id="add-note">
       <fieldset class="add-input">
         <label for="content">Add new note:</label>
@@ -31,19 +31,29 @@ import * as notes from '../../api/notes'
 
 export default {
   name: 'Notelist',
-  props: ['notes', 'loading'],
   data: () => ({
     newNote: {
       content: '',
       prio: false,
       status: 'inbox',
       context: 'personal'
-    }
+    },
+    notes: {}
   }),
+  created () {
+    this.fetchNotes()
+  },
   methods: {
+    fetchNotes () {
+      notes.get((notes) => {
+        this.notes = notes.data
+      })
+    },
     addNote () {
       const { content, prio, status, context } = this.newNote
-      notes.add({ content, prio, status, context })
+      notes.add({ content, prio, status, context }, () => {
+        this.fetchNotes()
+      })
     }
   }
 }

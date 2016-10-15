@@ -1,5 +1,5 @@
 <template>
-  <div id="profile" v-if="profileOpen">
+  <div id="profile">
     <h1>Hello</h1>
     <span v-if="profile">
       {{ profile.name ? profile.name : '...' }}
@@ -13,12 +13,23 @@
 </template>
 
 <script>
+import * as profile from '../../api/profile'
+
 export default {
   name: 'Profile',
-  props: ['profileOpen', 'profile'],
   data: () => ({
-    text: 'Profile page!'
-  })
+    profile: {}
+  }),
+  created () {
+    this.fetchProfile()
+  },
+  methods: {
+    fetchProfile () {
+      profile.get(profile => {
+        this.profile = profile.data
+      })
+    }
+  }
 }
 </script>
 

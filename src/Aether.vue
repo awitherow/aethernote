@@ -3,61 +3,25 @@
     <Loading
       v-bind:loading="loading"
       />
-    <AppHeader/>
-    <Profile
-      :profileOpen="profileOpen"
-      :profile="profile"
-      />
-    <Notelist
-      :notes="notes"
-      :loading="loading"
-      />
+    <AppHeader />
+    <router-view />
   </div>
 </template>
 
 <script>
-import Notelist from './components/views/Notelist'
-import Profile from './components/views/Profile'
-
 import AppHeader from './components/elements/Header'
 import Loading from './components/elements/Loading'
-
-import * as notes from './api/notes'
-import * as profile from './api/profile'
 
 export default {
   name: 'Aether',
   components: {
     AppHeader,
-    Notelist,
-    Profile,
     Loading
   },
   data: () => ({
     loading: false,
-    authenticated: false,
-    notes: [],
-    profile: {},
-    profileOpen: false
-  }),
-  created () {
-    this.loading = true
-    this.fetchProfile()
-    this.fetchNotes()
-  },
-  methods: {
-    fetchNotes () {
-      notes.get((notes) => {
-        this.notes = notes.data
-        this.loading = false
-      })
-    },
-    fetchProfile () {
-      profile.get(profile => {
-        this.profile = profile.data
-      })
-    }
-  }
+    authenticated: false
+  })
 }
 </script>
 

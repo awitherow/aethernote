@@ -25,7 +25,8 @@
     "dotenv": "^2.0.0",
     "pg-promise": "^5.2.8",
     "serve-favicon": "^2.3.0",
-    "vue": "^2.0.1"
+    "vue": "^2.0.1",
+    "vue-router": "^2.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
