@@ -40,6 +40,7 @@ export default class EditNote extends Component {
   }
 
   closeEditor() {
+    this.resetState()
     this.props.onClose()
   }
 
