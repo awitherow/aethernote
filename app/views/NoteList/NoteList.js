@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
 import * as noteService from '../../api/notes'
-import { statusTypes, contextTypes } from './config'
+import { statusTypes } from './config'
 
 import FlexibleInput from '../../elements/FlexibleInput'
 import CheckboxInput from '../../elements/CheckboxInput'
