@@ -74,7 +74,6 @@ class NoteList extends Component {
 
   submitEdit(edits) {
     noteService.update(this.state.editor.note, edits, () => {
-      this.closeEditor()
       this.getNotes()
     })
   }

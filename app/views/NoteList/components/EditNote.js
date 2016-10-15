@@ -36,7 +36,6 @@ export default class EditNote extends Component {
     delete update.formUpdated
     delete update.deleteWizardOpen
     this.props.onSubmit(update)
-    this.resetState()
   }
 
   closeEditor() {
