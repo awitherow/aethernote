@@ -49,7 +49,6 @@ export default class EditNote extends Component {
         delete this.state[thing]
       }
     }
-    console.log('reset', this.state)
     this.setState(...this.state, initialState)
   }
 
@@ -81,7 +80,6 @@ export default class EditNote extends Component {
   }
 
   render() {
-    console.log('render', this.state)
     if (this.props.hidden) return null
     const { formUpdated, deleteWizardOpen } = this.state
     const { id, title, content, details, created,
