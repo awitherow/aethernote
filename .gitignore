@@ -3,10 +3,9 @@ node_modules
 Dockerfile
 docker-compose.yml
 npm-debug.log
-public/index.js
-public/index.js.map
-public/index.css.map
-public/index.css
-public/bundle.js
-public/bundle.js.map
 *.orig
+.DS_Store
+dist/
+test/unit/coverage
+test/e2e/reports
+selenium-debug.log
