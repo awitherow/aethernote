@@ -49,7 +49,7 @@ export default class EditNote extends Component {
         delete this.state[thing]
       }
     }
-    console.log('reset', this.state);
+    console.log('reset', this.state)
     this.setState(...this.state, initialState)
   }
 
