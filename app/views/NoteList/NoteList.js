@@ -111,7 +111,7 @@ class NoteList extends Component {
     })
 
     return (
-      <div className="note-page">
+      <div className="note-page" key="note-page">
 
         <EditNote
           hidden={editor.hidden}

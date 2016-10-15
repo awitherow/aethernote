@@ -13,13 +13,15 @@ import Dropdown from '../../../elements/Dropdown'
 
 import TagList from './TagList'
 
+const initialState = {
+  formUpdated: false,
+  deleteWizardOpen: false,
+}
+
 export default class EditNote extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      formUpdated: false,
-      deleteWizardOpen: false,
-    }
+    this.state = initialState
 
     this.onSubmit = this.onSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -30,12 +32,25 @@ export default class EditNote extends Component {
 
   onSubmit(e) {
     e.preventDefault()
-    this.props.onSubmit(this.state)
+    let update = this.state
+    delete update.formUpdated
+    delete update.deleteWizardOpen
+    this.props.onSubmit(update)
+    this.resetState()
   }
 
   closeEditor() {
-    this.setState({ formUpdated: false })
     this.props.onClose()
+  }
+
+  resetState() {
+    for (let thing in this.state) {
+      if (thing) {
+        delete this.state[thing]
+      }
+    }
+    console.log('reset', this.state);
+    this.setState(...this.state, initialState)
   }
 
   handleChange(whatToChange, change) {
@@ -66,6 +81,7 @@ export default class EditNote extends Component {
   }
 
   render() {
+    console.log('render', this.state)
     if (this.props.hidden) return null
     const { formUpdated, deleteWizardOpen } = this.state
     const { id, title, content, details, created,

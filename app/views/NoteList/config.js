@@ -1,9 +1,8 @@
 const statusTypes = [
   'inbox',
   'one day',
-  'backlog',
-  'soon',
-  'now',
+  'todo',
+  'doing',
   'done',
   'reference',
 ]
