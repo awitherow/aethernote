@@ -1,15 +1,15 @@
 <template>
   <div id="note-list" v-show="!loading">
     <form id="add-note">
-      <fieldset>
-        <label for="content"></label>
+      <fieldset class="add-input">
+        <label for="content">Add new note:</label>
         <input
           name="content"
           v-model="newNote.content"
           />
       </fieldset>
       <fieldset>
-        <label for="prio"></label>
+        <label for="prio">Has priority?</label>
         <input
           name="prio"
           type="checkbox"
@@ -43,13 +43,48 @@ export default {
   methods: {
     addNote () {
       const { content, prio, status, context } = this.newNote
-      const entry = { content, prio, status, context }
-      this.notes.unshift(entry)
       notes.add({ content, prio, status, context })
     }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  #add-note {
+    display: flex;
+    padding: 10px 25px 0 25px;
+
+    fieldset,
+    input,
+    button {
+      border: none;
+    }
+
+    .add-input {
+      flex: auto;
+    }
+
+    fieldset {
+      position: relative;
+      padding: 0 10px;
+      min-width: 15px;
+
+      label {
+        display: none;
+      }
+
+      input {
+        border-bottom: 1px solid black;
+        padding: 5px;
+        width: 100%
+      }
+    }
+
+    button {
+      font-size: 18px;
+      font-weight: 300;
+      padding: 0 5px;
+      background: none;
+    }
+  }
 </style>
