@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import * as notes from '../api/notes'
+import * as notes from './api/notes'
 
 Vue.use(Vuex)
 
