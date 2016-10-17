@@ -15,7 +15,7 @@ const db = pgp(process.env.DATABASE_URL)
 // 1. notes
 
 export const getNotes = (req, res, next) => {
-  db.any('select * from entries')
+  db.any('select * from entries order by created desc')
   .then(data => {
     res.status(200)
     .json({
