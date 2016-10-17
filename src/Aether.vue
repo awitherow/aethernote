@@ -1,10 +1,15 @@
 <template>
   <div id="aether">
+
     <Loading
       v-bind:loading="loading"
       />
+
+    <NavOverlay />
     <AppHeader />
+
     <router-view />
+
   </div>
 </template>
 
@@ -12,12 +17,14 @@
 import { mapState } from 'vuex'
 import AppHeader from './components/elements/Header'
 import Loading from './components/elements/Loading'
+import NavOverlay from './components/elements/NavOverlay'
 
 export default {
   name: 'Aether',
   components: {
     AppHeader,
-    Loading
+    Loading,
+    NavOverlay
   },
   computed: mapState({
     loading: state => state.loading

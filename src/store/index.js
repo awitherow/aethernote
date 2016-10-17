@@ -8,11 +8,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     loading: false,
+    navLinks: false,
     notes: []
   },
   mutations: {
     isLoading (state, payload) {
       state.loading = payload.data
+    },
+    navLinksShown (state, data) {
+      state.navLinks = data
     },
     updateNotes (state, payload) {
       state.notes = payload.notes
