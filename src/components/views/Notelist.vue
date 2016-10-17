@@ -1,5 +1,5 @@
 <template>
-  <div id="note-list">
+  <div id="note-list" v-show="!loading">
     <form id="add-note">
       <fieldset class="add-input">
         <label for="content">Add new note:</label>
@@ -16,7 +16,7 @@
           v-model="newNote.prio"
           />
       </fieldset>
-      <button v-on:click.prevent="addNote">+</button>
+      <button v-on:click.prevent="add">+</button>
     </form>
     <ul>
       <li v-for="note in notes">
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import * as notes from '../../api/notes'
+import { mapState, mapMutations, mapActions } from 'vuex'
 
 export default {
   name: 'Notelist',
@@ -38,22 +38,21 @@ export default {
       status: 'inbox',
       context: 'personal'
     },
-    notes: {}
+    notes: []
   }),
   created () {
-    this.fetchNotes()
+    this.loadNotes()
   },
+  computed: mapState({
+    loading: state => state.loading,
+    notes: state => state.notes
+  }),
   methods: {
-    fetchNotes () {
-      notes.get((notes) => {
-        this.notes = notes.data
-      })
-    },
-    addNote () {
+    ...mapMutations([ 'isLoading' ]),
+    ...mapActions([ 'loadNotes', 'addNote' ]),
+    add () {
       const { content, prio, status, context } = this.newNote
-      notes.add({ content, prio, status, context }, () => {
-        this.fetchNotes()
-      })
+      this.addNote({ newNote: { content, prio, status, context } })
     }
   }
 }

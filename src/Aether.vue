@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import AppHeader from './components/elements/Header'
 import Loading from './components/elements/Loading'
 
@@ -18,9 +19,8 @@ export default {
     AppHeader,
     Loading
   },
-  data: () => ({
-    loading: false,
-    authenticated: false
+  computed: mapState({
+    loading: state => state.loading
   })
 }
 </script>
