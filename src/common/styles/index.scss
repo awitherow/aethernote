@@ -1,0 +1,60 @@
+@import url(
+  'https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed'
+);
+
+// colors
+$gold: #B6A05D;
+$grey: #F7F7F7;
+
+// reset
+
+body {
+  font-family: 'Roboto Condensed', sans-serif;
+  color: $gold;
+  margin: 0;
+}
+
+// forms
+
+button {
+  font-family: 'Roboto Condensed', sans-serif;
+  border: 1px solid $gold;
+  background: none;
+  color: $gold;
+  text-transform: uppercase;
+  padding: 15px 20px;
+  letter-spacing: 1px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &--filled {
+    color: white;
+    background: $gold;
+  }
+}
+
+// reused
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: black;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// animations
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
