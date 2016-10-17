@@ -1,20 +1,13 @@
 import Vue from 'vue'
 import Aether from './Aether'
-import VueRouter from 'vue-router'
 
 import store from './store'
-
-Vue.use(VueRouter)
+import router from './router'
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   store,
-  router: new VueRouter({
-    routes: [
-      { path: '/', component: require('./components/views/Notelist') },
-      { path: '/profile', component: require('./components/views/Profile') }
-    ]
-  }),
+  router,
   render: h => h(Aether)
 })
