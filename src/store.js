@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import * as notes from './api/notes'
+import * as profile from './api/profile'
 
 Vue.use(Vuex)
 
@@ -20,6 +21,9 @@ export default new Vuex.Store({
     },
     updateNotes (state, payload) {
       state.notes = payload.notes
+    },
+    updateProfile (state, payload) {
+      state.profile = payload.profile
     }
   },
   actions: {
@@ -27,6 +31,13 @@ export default new Vuex.Store({
       commit('isLoading', { data: 1 })
       notes.get(res => {
         commit('updateNotes', { notes: res.data })
+        commit('isLoading', { data: 0 })
+      })
+    },
+    loadProfile ({ commit, state }) {
+      commit('isLoading', { data: 1 })
+      profile.get(res => {
+        commit('updateProfile', { profile: res.data })
         commit('isLoading', { data: 0 })
       })
     },

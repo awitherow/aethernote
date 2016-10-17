@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'Notelist',
@@ -48,7 +48,6 @@ export default {
     notes: state => state.notes
   }),
   methods: {
-    ...mapMutations([ 'isLoading' ]),
     ...mapActions([ 'loadNotes', 'addNote' ]),
     add () {
       const { content, prio, status, context } = this.newNote

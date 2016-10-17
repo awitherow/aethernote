@@ -1,8 +1,8 @@
 <template>
-  <div id="profile">
+  <div id="profile" v-if="!loading">
     <h1>Hello</h1>
-    <span v-if="profile">
-      {{ profile.name ? profile.name : '...' }}
+    <span>
+      {{ profile.name }}
     </span>
     <div v-if="profile">
       <h2>Stats</h2>
@@ -13,22 +13,18 @@
 </template>
 
 <script>
-import * as profile from '../../api/profile'
-
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'Profile',
-  data: () => ({
-    profile: {}
-  }),
   created () {
-    this.fetchProfile()
+    this.loadProfile()
   },
+  computed: mapState({
+    loading: state => state.loading,
+    profile: state => state.profile
+  }),
   methods: {
-    fetchProfile () {
-      profile.get(profile => {
-        this.profile = profile.data
-      })
-    }
+    ...mapActions([ 'loadProfile' ])
   }
 }
 </script>
