@@ -33,15 +33,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+@import '../../common/styles/index.scss';
+
 #profile {
-  background: black;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  color: white;
+  height: 100%;
+  color: $gold;
   padding: 15px 30px;
 }
 

@@ -6,11 +6,10 @@
       v-show="navLinks">
 
       <ul>
-        <li
-          v-for="link in linkList"
-          @click="routeTo(link.href)"
-          >
-          {{ link.text }}
+        <li v-for="link in linkList">
+          <button
+            @click="routeTo(link.href)"
+            >{{ link.text }}</button>
         </li>
       </ul>
 
@@ -31,6 +30,10 @@ export default {
   name: 'NavOverlay',
   data: () => ({
     linkList: [
+      {
+        text: 'NoteList',
+        href: '/'
+      },
       {
         text: 'Profile',
         href: '/profile'
@@ -67,10 +70,9 @@ export default {
       font-size: 18px;
       padding-bottom: 5px;
 
-      a {
-        color: $gold;
-        text-decoration: none;
-
+      button {
+        font-size: 16px;
+        padding: 5px;
         &:hover {
           color: white;
         }
