@@ -6,10 +6,11 @@
       v-show="navLinks">
 
       <ul>
-        <li v-for="link in linkList">
-          <a v-bind:href="link.href">
-            {{ link.text }}
-          </a>
+        <li
+          v-for="link in linkList"
+          @click="routeTo(link.href)"
+          >
+          {{ link.text }}
         </li>
       </ul>
 
@@ -31,8 +32,8 @@ export default {
   data: () => ({
     linkList: [
       {
-        text: 'Journal',
-        href: '/journal'
+        text: 'Profile',
+        href: '/profile'
       }
     ]
   }),
@@ -42,6 +43,10 @@ export default {
   methods: {
     closeNavlinks () {
       this.$store.commit('navLinksShown', false)
+    },
+    routeTo (route) {
+      this.$router.push(route)
+      this.closeNavlinks()
     }
   }
 }
