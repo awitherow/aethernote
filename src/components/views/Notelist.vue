@@ -50,8 +50,12 @@ export default {
   methods: {
     ...mapActions([ 'loadNotes', 'addNote' ]),
     add () {
-      const { content, prio, status, context } = this.newNote
-      this.addNote({ newNote: { content, prio, status, context } })
+      const { content, prio, status } = this.newNote
+      this.addNote({ newNote: { content, prio, status } })
+      this.newNote = {
+        content: '',
+        prio: false
+      }
     }
   }
 }
@@ -62,10 +66,9 @@ export default {
     display: flex;
     padding: 10px 25px 0 25px;
 
-    fieldset,
-    input,
-    button {
-      border: none;
+    .submit {
+      font: 14px Roboto Condensed;
+      padding: 5px 10px;
     }
 
     .add-input {
@@ -86,7 +89,6 @@ export default {
         padding: 5px;
         width: 100%
       }
-    }
 
     button {
       font-size: 18px;
