@@ -16,10 +16,16 @@ body {
 
 // forms
 
+fieldset,
+input,
 button {
+  border: none;
+}
+
+button {
+  background: none;
   font-family: 'Roboto Condensed', sans-serif;
   border: 1px solid $gold;
-  background: none;
   color: $gold;
   text-transform: uppercase;
   padding: 15px 20px;

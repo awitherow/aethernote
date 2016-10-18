@@ -11,6 +11,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+@import '../../common/styles/index.scss';
+#loading {
+  font-size: 42px;
+  color: $gold;
+}
 </style>

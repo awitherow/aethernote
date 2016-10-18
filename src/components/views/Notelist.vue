@@ -80,21 +80,20 @@ export default {
       padding: 0 10px;
       min-width: 15px;
 
-      label {
-        display: none;
-      }
-
       input {
         border-bottom: 1px solid black;
-        padding: 5px;
+        padding: 7.5px;
         width: 100%
       }
 
-    button {
-      font-size: 18px;
-      font-weight: 300;
-      padding: 0 5px;
-      background: none;
+      input[type="checkbox"] {
+        font-size: 24px;
+        margin: 5px;
+      }
+
+      label {
+        display: none;
+      }
     }
   }
 </style>
