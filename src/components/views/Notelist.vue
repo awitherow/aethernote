@@ -16,7 +16,7 @@
           v-model="newNote.prio"
           />
       </fieldset>
-      <button v-on:click.prevent="add">+</button>
+      <button class="submit" v-on:click.prevent="add">Add</button>
     </form>
     <ul>
       <li v-for="note in notes">
@@ -27,26 +27,31 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
+
+const local = {
+  newNote: {
+    content: '',
+    prio: false,
+    status: 'inbox'
+  },
+  notes: []
+}
 
 export default {
   name: 'Notelist',
-  data: () => ({
-    newNote: {
-      content: '',
-      prio: false,
-      status: 'inbox',
-      context: 'personal'
-    },
-    notes: []
-  }),
+  data: () => (local),
   created () {
     this.loadNotes()
   },
-  computed: mapState({
-    loading: state => state.loading,
-    notes: state => state.notes
-  }),
+  computed: {
+    ...mapState({
+      loading: state => state.loading
+    }),
+    ...mapGetters({
+      notes: 'entriesTypeNote'
+    })
+  },
   methods: {
     ...mapActions([ 'loadNotes', 'addNote' ]),
     add () {

@@ -12,6 +12,11 @@ export default new Vuex.Store({
     navLinks: false,
     notes: []
   },
+  getters: {
+    entriesTypeNote: state => {
+      return state.notes.filter(todo => todo.type === 'note')
+    }
+  },
   mutations: {
     isLoading (state, payload) {
       state.loading = payload.data
