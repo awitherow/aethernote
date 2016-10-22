@@ -1,7 +1,7 @@
 <template>
   <div id="header">
     <h1> {{ text }} </h1>
-    <button v-on:click="showNavLinks"> Menu </button>
+    <button @click="showNavLinks"> Menu </button>
   </div>
 </template>
 

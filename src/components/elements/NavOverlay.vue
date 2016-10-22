@@ -14,7 +14,7 @@
       </ul>
 
       <button
-        v-on:click="closeNavlinks"
+        @click="closeNavlinks"
         v-show="navLinks"
         class="close"
         />

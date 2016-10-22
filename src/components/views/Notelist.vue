@@ -16,7 +16,7 @@
           v-model="newNote.prio"
           />
       </fieldset>
-      <button class="submit" v-on:click.prevent="add">Add</button>
+      <button class="submit" @click.prevent="add">Add</button>
     </form>
     <ul>
       <li v-for="note in notes">
