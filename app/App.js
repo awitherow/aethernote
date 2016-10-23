@@ -34,11 +34,7 @@ export default class App extends Component {
   render() {
     const { loading, authenticated } = this.state
 
-    if (!authenticated) {
-      return <Login />
-    }
-
-    return (
+    return !authenticated ? <Login /> : (
       <div className="aether">
 
         { loading ? <Overlay type="loading" /> : null }
