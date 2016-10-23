@@ -32,25 +32,25 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    loadNotes ({ commit, state }) {
-      commit('isLoading', { data: 1 })
+    loadNotes ({ commit }) {
+      commit('isLoading', { data: true })
       notes.get(res => {
         commit('updateNotes', { notes: res.data })
-        commit('isLoading', { data: 0 })
+        commit('isLoading', { data: false })
       })
     },
-    loadProfile ({ commit, state }) {
-      commit('isLoading', { data: 1 })
+    loadProfile ({ commit }) {
+      commit('isLoading', { data: true })
       profile.get(res => {
         commit('updateProfile', { profile: res.data })
-        commit('isLoading', { data: 0 })
+        commit('isLoading', { data: false })
       })
     },
-    addNote ({ commit, state, dispatch }, payload) {
-      commit('isLoading', { data: 1 })
+    addNote ({ commit, dispatch }, payload) {
+      commit('isLoading', { data: true })
       notes.add(payload.newNote, () => {
         dispatch('loadNotes')
-        commit('isLoading', { data: 0 })
+        commit('isLoading', { data: false })
       })
     }
   }
