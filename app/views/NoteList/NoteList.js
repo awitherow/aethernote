@@ -98,7 +98,6 @@ class NoteList extends Component {
   handleChange(whatToChange, change) {
     switch (whatToChange) {
       case 'status': this.setState({ status: change }); break
-      case 'context': this.setState({ context: change }); break
       default: return
     }
   }
