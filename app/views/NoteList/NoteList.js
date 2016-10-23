@@ -23,7 +23,7 @@ class NoteList extends Component {
         hidden: true,
         note: {},
       },
-      status: 'now',
+      status: 'inbox',
       activeNotes: 0,
     }
 
