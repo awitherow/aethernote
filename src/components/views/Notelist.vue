@@ -34,8 +34,7 @@ const local = {
     content: '',
     prio: false,
     status: 'inbox'
-  },
-  notes: []
+  }
 }
 
 export default {
