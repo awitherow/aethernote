@@ -1,5 +1,6 @@
 <template>
   <div id="note-list" v-show="!loading">
+
     <form id="add-note">
       <fieldset class="add-input">
         <label for="content">Add new note:</label>
@@ -23,6 +24,7 @@
         {{ note.title }}
       </li>
     </ul>
+
   </div>
 </template>
 
