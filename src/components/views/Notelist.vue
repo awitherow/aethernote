@@ -38,6 +38,8 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
+import statusTypes from '../../common/config/status-types'
+
 import Dropdown from '../elements/Dropdown'
 
 const local = {
@@ -45,7 +47,8 @@ const local = {
     content: '',
     prio: false,
     status: 'inbox'
-  }
+  },
+  statusTypes
 }
 
 export default {
