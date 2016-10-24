@@ -36,18 +36,18 @@ export default {
   height: 100%;
   color: $gold;
   padding: 15px 30px;
-}
 
-h1 {
-  font-size: 24px;
-  margin: 0;
-}
+  h1 {
+    font-size: 24px;
+    margin: 0;
+  }
 
-h2 {
-  font-size: 20px;
-}
+  h2 {
+    font-size: 20px;
+  }
 
-span {
-  padding-left: 7px;
+  span {
+    padding-left: 7px;
+  }
 }
 </style>
