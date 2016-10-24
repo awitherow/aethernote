@@ -10,11 +10,14 @@ export default new Vuex.Store({
   state: {
     loading: false,
     navLinks: false,
-    notes: []
+    notes: [],
+    status: 'inbox'
   },
   getters: {
     entriesTypeNote: state => {
-      return state.notes.filter(todo => todo.type === 'note')
+      return state.notes.filter(todo =>
+        todo.type === 'note' && todo.status === state.status
+      )
     }
   },
   mutations: {
@@ -29,6 +32,9 @@ export default new Vuex.Store({
     },
     updateProfile (state, payload) {
       state.profile = payload.profile
+    },
+    updateStatus (state, payload) {
+      state.status = payload
     }
   },
   actions: {
@@ -52,6 +58,9 @@ export default new Vuex.Store({
         dispatch('loadNotes')
         commit('isLoading', { data: false })
       })
+    },
+    switchStatus ({ commit }, payload) {
+      commit('updateStatus', payload)
     }
   }
 })
