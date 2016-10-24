@@ -19,6 +19,14 @@
       </fieldset>
       <button class="submit" @click.prevent="add">Add</button>
     </form>
+
+    <Dropdown
+      id="status-select"
+      label="Status"
+      :onChange="changeHandler"
+      :selected="status"
+      :options="statusTypes"/>
+
     <ul>
       <li v-for="note in notes">
         {{ note.title }}
@@ -30,6 +38,7 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
+import Dropdown from '../elements/Dropdown'
 
 const local = {
   newNote: {
@@ -41,6 +50,9 @@ const local = {
 
 export default {
   name: 'Notelist',
+  components: {
+    Dropdown
+  },
   data: () => (local),
   created () {
     this.loadNotes()
