@@ -62,20 +62,27 @@ export default {
   },
   computed: {
     ...mapState({
-      loading: state => state.loading
+      loading: state => state.loading,
+      status: state => state.status
     }),
     ...mapGetters({
       notes: 'entriesTypeNote'
     })
   },
   methods: {
-    ...mapActions([ 'loadNotes', 'addNote' ]),
+    ...mapActions([ 'loadNotes', 'addNote', 'switchStatus' ]),
     add () {
       const { content, prio, status } = this.newNote
       this.addNote({ newNote: { content, prio, status } })
       this.newNote = {
         content: '',
         prio: false
+      }
+    },
+    changeHandler (id, value) {
+      switch (id) {
+        case 'status-select':
+          this.switchStatus(value)
       }
     }
   }
