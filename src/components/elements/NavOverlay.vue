@@ -37,6 +37,10 @@ export default {
       {
         text: 'Profile',
         href: '/profile'
+      },
+      {
+        text: 'Journal',
+        href: '/journal'
       }
     ]
   }),
