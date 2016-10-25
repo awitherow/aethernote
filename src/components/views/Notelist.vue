@@ -29,7 +29,10 @@
 
     <ul>
       <li v-for="note in notes">
-        {{ note.title }}
+        <router-link :to="{
+          name: 'note',
+          params: { id: note.id }
+          }">{{ note.title }}</router-link>
       </li>
     </ul>
 
