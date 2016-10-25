@@ -5,8 +5,21 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
   routes: [
-    { path: '/', component: require('./components/views/Notelist') },
-    { path: '/profile', component: require('./components/views/Profile') }
+    {
+      name: 'home',
+      path: '/',
+      component: require('./components/views/Notelist')
+    },
+    {
+      name: 'profile',
+      path: '/profile',
+      component: require('./components/views/Profile')
+    },
+    {
+      name: 'note',
+      path: '/note/:id',
+      component: require('./components/views/Note')
+    }
   ]
 })
 
