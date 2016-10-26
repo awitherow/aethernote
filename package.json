@@ -23,6 +23,8 @@
     "bluebird": "^3.4.1",
     "body-parser": "^1.15.2",
     "dotenv": "^2.0.0",
+    "lodash": "^4.16.4",
+    "marked": "^0.3.6",
     "pg-promise": "^5.2.8",
     "serve-favicon": "^2.3.0",
     "vue": "^2.0.1",

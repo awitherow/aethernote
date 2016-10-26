@@ -59,6 +59,14 @@ export default new Vuex.Store({
         commit('isLoading', { data: false })
       })
     },
+    editNote ({ commit, dispatch }, payload) {
+      commit('isLoading', { data: true })
+      const { orig, diff } = payload
+      notes.update(orig, diff, () => {
+        dispatch('loadNotes')
+        commit('isLoading', { data: false })
+      })
+    },
     switchStatus ({ commit }, payload) {
       commit('updateStatus', payload)
     }
