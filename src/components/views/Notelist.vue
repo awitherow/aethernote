@@ -1,7 +1,7 @@
 <template>
   <div id="note-list" v-show="!loading">
 
-    <form id="add-note">
+    <form id="note-list__add-note">
       <fieldset class="add-input">
         <label for="content">Add new note:</label>
         <input
@@ -27,7 +27,7 @@
       :selected="status"
       :options="statusTypes"/>
 
-    <ul>
+    <ul id="note-list__list">
       <li v-for="note in notes">
         <router-link :to="{
           name: 'note',
@@ -93,9 +93,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  #add-note {
+#note-list {
+  padding: 0 25px;
+
+  &__add-note {
     display: flex;
-    padding: 10px 25px 0 25px;
+    margin-top: 10px;
 
     .submit {
       font: 14px Roboto Condensed;
@@ -127,4 +130,23 @@ export default {
       }
     }
   }
+
+  &__list {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+
+    li {
+      margin: 5px 0;
+    }
+  }
+
+  #status-select-fieldset {
+    margin: 15px 0 10px 0;
+    padding: 0;
+
+
+  }
+}
+
 </style>
