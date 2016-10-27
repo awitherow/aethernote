@@ -1,5 +1,11 @@
 <template>
-  <div v-if="activeNote">
+  <div class="note" v-if="activeNote">
+
+    <div class="note-controls">
+      <button @click="postDeletion">
+        <div class="trash icon"></div>
+      </button>
+    </div>
 
     <form @submit.prevent="postUpdates">
 
@@ -74,7 +80,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['loadNotes', 'editNote']),
+    ...mapActions(['loadNotes', 'editNote', 'deleteNote']),
     update: _.debounce(function (e) {
       if (e.target.type === 'checkbox') {
         this.edits[e.target.id] = e.target.checked
@@ -90,10 +96,26 @@ export default {
           note.id === parseInt(this.$store.state.route.params.id))[0],
         diff: this.edits
       })
+    },
+    postDeletion () {
+      this.deleteNote({id: this.activeNote.id})
+      this.$router.push('/')
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+  .note {
+    position: relative;
+    &-controls {
+      position: absolute;
+      top: 0;
+      right: 30px;
+      button {
+        border: none;
+        padding: 0;
+      }
+    }
+  }
 </style>

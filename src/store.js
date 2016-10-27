@@ -62,10 +62,16 @@ export default new Vuex.Store({
     editNote ({ commit, dispatch }, payload) {
       commit('isLoading', { data: true })
       const { orig, diff } = payload
-      console.log(orig, diff)
       notes.update(orig, diff, () => {
         dispatch('loadNotes')
         commit('isLoading', { data: false })
+      })
+    },
+    deleteNote ({ commit, dispatch }, payload) {
+      commit('isLoading', { data: true })
+      const { id } = payload
+      notes.remove(id, () => {
+        dispatch('loadNotes')
       })
     },
     switchStatus ({ commit }, payload) {
