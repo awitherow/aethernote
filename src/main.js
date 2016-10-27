@@ -1,8 +1,9 @@
 import Vue from 'vue'
-import Aether from './Aether'
-import { sync } from 'vuex-router-sync'
 import store from './store'
 import router from './router'
+import { sync } from 'vuex-router-sync'
+
+import Aether from './Aether'
 
 sync(store, router)
 
