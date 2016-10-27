@@ -1,5 +1,5 @@
 <template>
-  <fieldset>
+  <fieldset :id="id + '-fieldset'">
     <label :for="id">{{label}}</label>
     <select
       :id="id"
