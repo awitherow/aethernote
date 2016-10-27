@@ -4,12 +4,11 @@
     <input
       :id="id"
       type="checkbox"
-      :checked="value"
+      :checked="checked"
       @change="onChange"
       />
   </fieldset>
 </template>
-
 
 <script>
 export default {

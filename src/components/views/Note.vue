@@ -17,10 +17,17 @@
         :onChange="update"
         />
 
-      <textarea id="content" :value="activeNote.content" @input="update" />
-    </form>
+      <CheckboxInput
+        id="archived"
+        label="Archived"
+        :checked="activeNote.archived"
+        :onChange="update"
+        />
 
-    <div v-html="compiledMarkdown" />
+      <div v-html="compiledMarkdown" />
+      <textarea id="content" :value="activeNote.content" @input="update" />
+      <input type="submit" />
+    </form>
 
   </div>
 </template>
@@ -44,15 +51,14 @@ export default {
     CheckboxInput
   },
   data: () => (local),
-  created () {
-    if (!this.notes.length) {
+  mounted () {
+    if (!this.$store.state.notes.length) {
       this.loadNotes()
     }
   },
   computed: {
     ...mapState({
       loading: state => state.loading,
-      notes: state => state.notes,
       activeNote: state => state.notes.filter(note =>
         note.id === parseInt(state.route.params.id))[0]
     }),
@@ -62,7 +68,7 @@ export default {
   },
   methods: {
     ...mapActions(['loadNotes', 'editNote']),
-    update: _debounce(function(e) {
+    update: _.debounce(function (e) {
       if (e.target.type === 'checkbox') {
         this.edits[e.target.id] = e.target.checked
         this.activeNote[e.target.id] = e.target.checked
@@ -72,8 +78,11 @@ export default {
       }
     }, 300),
     postUpdates () {
-      this.editNote(this.activeNote, this.edits)
-      this.edits = {}
+      this.editNote({
+        orig: this.$store.state.notes.filter(note =>
+          note.id === parseInt(this.$store.state.route.params.id))[0],
+        diff: this.edits
+      })
     }
   }
 }
