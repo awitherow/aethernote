@@ -57,7 +57,7 @@ export const updateNote = (req, res, next) => {
     archived, details, status} = req.body.update
   db.none(
     'update entries ' +
-    'set title=$1, content=$2, prio=$3, archived=$4, details=$5, status=$6,' +
+    'set title=$1, content=$2, prio=$3, archived=$4, details=$5, status=$6 ' +
     'where id=$7',
     [title, content, prio, archived, details, status, id]
   ).then(() => {
