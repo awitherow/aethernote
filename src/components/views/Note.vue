@@ -25,8 +25,13 @@
         />
 
       <div v-html="compiledMarkdown" />
-      <textarea id="content" :value="activeNote.content" @input="update" />
+      <TextAreaInput
+        id="content"
+        label="Content"
+        :value="activeNote.content"
+        :onInput="update" />
       <input type="submit" />
+
     </form>
 
   </div>
@@ -39,6 +44,7 @@ import _ from 'lodash'
 
 import TextInput from '../elements/TextInput'
 import CheckboxInput from '../elements/CheckboxInput'
+import TextAreaInput from '../elements/TextAreaInput'
 
 let local = {
   edits: {}
@@ -48,7 +54,8 @@ export default {
   name: 'Note',
   components: {
     TextInput,
-    CheckboxInput
+    CheckboxInput,
+    TextAreaInput,
   },
   data: () => (local),
   mounted () {
