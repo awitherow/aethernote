@@ -109,6 +109,7 @@ export default {
           note.id === parseInt(this.$store.state.route.params.id))[0],
         diff: this.edits
       })
+      this.edits = {}
     },
     postDeletion () {
       this.deleteNote({id: this.activeNote.id})
