@@ -56,7 +56,7 @@ import { mapState, mapActions } from 'vuex'
 import marked from 'marked'
 import _ from 'lodash'
 
-// import statusTypes from '../../common/config/status-types'
+import statusTypes from '../../common/config/status-types'
 
 import TextInput from '../elements/TextInput'
 import CheckboxInput from '../elements/CheckboxInput'
@@ -64,7 +64,8 @@ import TextAreaInput from '../elements/TextAreaInput'
 import Dropdown from '../elements/Dropdown'
 
 let local = {
-  edits: {}
+  edits: {},
+  statusTypes
 }
 
 export default {
