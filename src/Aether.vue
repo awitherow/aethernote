@@ -13,8 +13,8 @@
 <script>
 import { mapState } from 'vuex'
 import AppHeader from './components/elements/Header'
-import Loading from './components/elements/Loading'
-import NavOverlay from './components/elements/NavOverlay'
+import Loading from './components/views/Loading'
+import NavOverlay from './components/views/NavOverlay'
 
 export default {
   name: 'Aether',
