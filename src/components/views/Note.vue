@@ -30,6 +30,14 @@
         :onChange="update"
         />
 
+      <Dropdown
+        id="status"
+        label="Status"
+        :onChange="update"
+        :selected="activeNote.status"
+        :options="statusTypes"
+        />
+
       <div v-html="compiledMarkdown" />
       <TextAreaInput
         id="content"
@@ -48,9 +56,12 @@ import { mapState, mapActions } from 'vuex'
 import marked from 'marked'
 import _ from 'lodash'
 
+// import statusTypes from '../../common/config/status-types'
+
 import TextInput from '../elements/TextInput'
 import CheckboxInput from '../elements/CheckboxInput'
 import TextAreaInput from '../elements/TextAreaInput'
+import Dropdown from '../elements/Dropdown'
 
 let local = {
   edits: {}
@@ -62,6 +73,7 @@ export default {
     TextInput,
     CheckboxInput,
     TextAreaInput,
+    Dropdown
   },
   data: () => (local),
   mounted () {
