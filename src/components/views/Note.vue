@@ -1,21 +1,23 @@
 <template>
   <div v-if="activeNote">
 
-    <form @submit.prevent="updateNote">
-      <fieldset>
-        <label for="title">title</label>
-        <input id="title" :value="activeNote.title" @change="update" />
-      </fieldset>
-      <fieldset>
-        <label for="prio">prio</label>
-        <input
-          id="prio"
-          type="checkbox"
-          :value="activeNote.prio"
-          @change="update" />
-      </fieldset>
+    <form @submit.prevent="postUpdates">
 
-      <textarea :value="activeNote.content" @input="update" />
+      <TextInput
+        id="title"
+        label="title"
+        :value="activeNote.title"
+        :onInput="update"
+        />
+
+      <CheckboxInput
+        id="prio"
+        label="Prio"
+        :checked="activeNote.prio"
+        :onChange="update"
+        />
+
+      <textarea id="content" :value="activeNote.content" @input="update" />
     </form>
 
     <div v-html="compiledMarkdown" />
@@ -28,12 +30,19 @@ import { mapState, mapActions } from 'vuex'
 import marked from 'marked'
 import _ from 'lodash'
 
+import TextInput from '../elements/TextInput'
+import CheckboxInput from '../elements/CheckboxInput'
+
 let local = {
   edits: {}
 }
 
 export default {
   name: 'Note',
+  components: {
+    TextInput,
+    CheckboxInput
+  },
   data: () => (local),
   created () {
     if (!this.notes.length) {
@@ -53,11 +62,16 @@ export default {
   },
   methods: {
     ...mapActions(['loadNotes', 'editNote']),
-    update: _.debounce(function (e) {
-      this.edits[e.target.id] = e.target.value
-      this.activeNote[e.target.id] = e.target.value
+    update: _debounce(function(e) {
+      if (e.target.type === 'checkbox') {
+        this.edits[e.target.id] = e.target.checked
+        this.activeNote[e.target.id] = e.target.checked
+      } else {
+        this.edits[e.target.id] = e.target.value
+        this.activeNote[e.target.id] = e.target.value
+      }
     }, 300),
-    updateNote () {
+    postUpdates () {
       this.editNote(this.activeNote, this.edits)
       this.edits = {}
     }
