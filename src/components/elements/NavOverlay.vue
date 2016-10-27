@@ -77,6 +77,8 @@ export default {
       button {
         font-size: 16px;
         padding: 5px;
+        color: $grey;
+
         &:hover {
           color: white;
         }
@@ -102,7 +104,7 @@ export default {
         content: ' ';
         height: 33px;
         width: 2px;
-        background-color: $gold;
+        background-color: $grey;
       }
 
       &:before {

@@ -27,6 +27,6 @@ export default {
   justify-content: center;
   
   font-size: 42px;
-  color: $gold;
+  color: $black;
 }
 </style>

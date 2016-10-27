@@ -5,7 +5,6 @@
   </fieldset>
 </template>
 
-
 <script>
 export default {
   name: 'TextInput',

@@ -1,16 +1,18 @@
 @import url(
-  'https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed'
+  'https://fonts.googleapis.com/css?family=Noto+Serif'
 );
 
 // colors
-$gold: #B6A05D;
+$black: black;
 $grey: #F7F7F7;
+
+$font-family: 'Noto Serif', serif;
 
 // reset
 
 body {
-  font-family: 'Roboto Condensed', sans-serif;
-  color: $gold;
+  font-family: $font-family;
+  color: $black;
   margin: 0;
 }
 
@@ -20,14 +22,16 @@ fieldset,
 input,
 button,
 textarea {
+  padding: 0;
+  margin: 0;
   border: none;
+  font-family:: $font-family;
 }
 
 button {
   background: none;
-  font-family: 'Roboto Condensed', sans-serif;
-  border: 1px solid $gold;
-  color: $gold;
+  border: 1px solid $black;
+  color: $black;
   text-transform: uppercase;
   padding: 15px 20px;
   letter-spacing: 1px;
@@ -38,7 +42,7 @@ button {
 
   &--filled {
     color: white;
-    background: $gold;
+    background: $black;
   }
 }
 

@@ -34,7 +34,7 @@ export default {
 
 #profile {
   height: 100%;
-  color: $gold;
+  color: $black;
   padding: 15px 30px;
 
   h1 {

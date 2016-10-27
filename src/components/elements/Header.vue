@@ -29,7 +29,7 @@ export default {
   h1 {
     font-size: 24px;
     margin: 0;
-    color: $gold;
+    color: $grey;
     padding: 15px 30px;
   }
 
@@ -37,6 +37,7 @@ export default {
     margin-left: auto;
     margin-right: 15px;
     border: none;
+    color: $grey;
   }
 }
 </style>
