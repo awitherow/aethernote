@@ -1,5 +1,6 @@
 <template>
   <div v-if="activeNote">
+
     <form @submit.prevent="updateNote">
       <fieldset>
         <label for="title">title</label>
@@ -11,11 +12,14 @@
           id="prio"
           type="checkbox"
           :value="activeNote.prio"
-          @input="update" />
+          @change="update" />
       </fieldset>
+
+      <textarea :value="activeNote.content" @input="update" />
     </form>
-    <textarea :value="activeNote.content" @input="update" />
+
     <div v-html="compiledMarkdown" />
+
   </div>
 </template>
 
