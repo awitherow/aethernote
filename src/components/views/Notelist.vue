@@ -21,7 +21,7 @@
     </form>
 
     <Dropdown
-      id="status-select"
+      id="status"
       label="Status"
       :onChange="changeHandler"
       :selected="status"
@@ -82,10 +82,10 @@ export default {
         prio: false
       }
     },
-    changeHandler (id, value) {
-      switch (id) {
-        case 'status-select':
-          this.switchStatus(value)
+    changeHandler (e) {
+      switch (e.target.id) {
+        case 'status':
+          this.switchStatus(e.target.value)
       }
     }
   }
@@ -141,7 +141,7 @@ export default {
     }
   }
 
-  #status-select-fieldset {
+  #status-fieldset {
     margin: 15px 0 10px 0;
     padding: 0;
 

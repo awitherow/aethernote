@@ -4,7 +4,7 @@
     <select
       :id="id"
       name="select"
-      @change="handleChange"
+      @change="onChange"
       v-model="currentOption">
         <option v-for="option in options">{{option}}</option>
     </select>
@@ -18,11 +18,6 @@ export default {
   computed: {
     currentOption () {
       return this.selected
-    }
-  },
-  methods: {
-    handleChange (e) {
-      this.onChange(this.id, e.target.value)
     }
   }
 }
