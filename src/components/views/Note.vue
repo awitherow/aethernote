@@ -3,7 +3,7 @@
 
     <div class="note-controls">
       <button @click="postDeletion">
-        <div class="trash icon"></div>
+        TRASH!
       </button>
     </div>
 
