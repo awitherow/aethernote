@@ -113,7 +113,6 @@ export default {
     },
     postDeletion () {
       this.deleteNote({id: this.activeNote.id})
-      this.$router.push('/')
     }
   }
 }
