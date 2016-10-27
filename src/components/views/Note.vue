@@ -110,9 +110,14 @@ export default {
         diff: this.edits
       })
       this.edits = {}
+      this.routeBack()
     },
     postDeletion () {
       this.deleteNote({id: this.activeNote.id})
+      this.routeBack()
+    },
+    routeBack() {
+      this.$router.push('/') // TODO: how to go back?
     }
   }
 }
