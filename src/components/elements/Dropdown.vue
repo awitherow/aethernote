@@ -27,7 +27,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '../../common/styles/index.scss';
-</style>
