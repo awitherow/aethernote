@@ -119,16 +119,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .note {
-    position: relative;
-    &-controls {
-      position: absolute;
-      top: 0;
-      right: 30px;
-      button {
-        border: none;
-        padding: 0;
-      }
-    }
-  }
+@import '../../common/styles/index.scss';
 </style>

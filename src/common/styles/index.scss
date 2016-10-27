@@ -14,8 +14,6 @@ $font-family: 'Noto Serif', serif;
 
 body {
   font-family: $font-family;
-  color: $black;
-  margin: 0;
 }
 
 // forms
@@ -31,20 +29,8 @@ textarea {
 }
 
 button {
-  background: none;
-  border: 1px solid $black;
-  color: $black;
-  text-transform: uppercase;
-  padding: 15px 20px;
-  letter-spacing: 1px;
-
   &:hover {
     cursor: pointer;
-  }
-
-  &--filled {
-    color: white;
-    background: $black;
   }
 }
 
@@ -57,7 +43,6 @@ button {
   left: 0;
   bottom: 0;
   right: 0;
-  background: black;
 
   display: flex;
   align-items: center;

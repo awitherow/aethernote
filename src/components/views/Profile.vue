@@ -31,23 +31,4 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../common/styles/index.scss';
-
-#profile {
-  height: 100%;
-  color: $black;
-  padding: 15px 30px;
-
-  h1 {
-    font-size: 24px;
-    margin: 0;
-  }
-
-  h2 {
-    font-size: 20px;
-  }
-
-  span {
-    padding-left: 7px;
-  }
-}
 </style>

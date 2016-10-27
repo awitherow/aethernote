@@ -63,29 +63,6 @@ export default {
 @import '../../common/styles/index.scss';
 
 #nav-overlay {
-  ul {
-    padding: 0;
-    margin: 0;
-    text-transform: uppercase;
-    text-align: center;
-
-    li {
-      list-style: none;
-      font-size: 18px;
-      padding-bottom: 5px;
-
-      button {
-        font-size: 16px;
-        padding: 5px;
-        color: $grey;
-
-        &:hover {
-          color: white;
-        }
-      }
-    }
-  }
-
   button {
     border: none;
 

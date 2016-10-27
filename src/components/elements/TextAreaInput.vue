@@ -12,9 +12,5 @@ export default {
 }
 </script>
 
-<style>
-textarea {
-  width: 100%;
-  min-height: 30vh;
-}
+<style lang="scss">
 </style>
