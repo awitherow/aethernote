@@ -1,7 +1,7 @@
 <template>
   <div id="header">
+    <button @click="showNavLinks"> &#9776; </button>
     <h1> {{ text }} </h1>
-    <button @click="showNavLinks"> Menu </button>
   </div>
 </template>
 
@@ -21,4 +21,19 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../common/styles/index.scss';
+#header {
+  display: flex;
+  button,
+  h1 {
+    font-size: 20px;
+  }
+
+  button {
+    margin: 0 10px;
+  }
+
+  h1 {
+    font-weight: 300;
+  }
+}
 </style>
