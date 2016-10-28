@@ -116,7 +116,7 @@ export default {
       this.deleteNote({id: this.activeNote.id})
       this.routeBack()
     },
-    routeBack() {
+    routeBack () {
       this.$router.push('/') // TODO: how to go back?
     }
   }
