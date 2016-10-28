@@ -47,13 +47,12 @@ export const createNote = (req, res, next) => {
 }
 
 export const updateNote = (req, res, next) => {
-  const { id, title, content, prio,
-    archived, details, status} = req.body.update
+  const { id, title, content, prio, details, status} = req.body.update
   db.none(
     'update entries ' +
-    'set title=$1, content=$2, prio=$3, archived=$4, details=$5, status=$6' +
-    'where id=$7',
-    [title, content, prio, archived, details, status, id]
+    'set title=$1, content=$2, prio=$3, details=$4, status=$5 ' +
+    'where id=$6',
+    [title, content, prio, details, status, id]
   ).then(() => {
     res.status(200)
     .json({
