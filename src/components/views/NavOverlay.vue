@@ -16,7 +16,8 @@
       <button
         @click="closeNavlinks"
         v-show="navLinks"
-        > CLOSE </button>
+        class="close"
+        > &#9587; </button>
 
     </div>
   </transition>
@@ -58,6 +59,23 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../../common/styles/index.scss';
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+
+  button {
+    font-size: 18px;
+  }
+}
 </style>
