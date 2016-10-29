@@ -103,8 +103,15 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../common/styles/index.scss';
+
+#note-list {
+
+  &__add-note {
+    display: flex;
+    padding: 0 8px;
+
     #content-fieldset {
       flex: auto;
       padding: 8px 0 0 0;
