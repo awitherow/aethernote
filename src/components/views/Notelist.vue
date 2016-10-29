@@ -44,6 +44,8 @@ import { mapState, mapGetters, mapActions } from 'vuex'
 import statusTypes from '../../common/config/status-types'
 
 import Dropdown from '../elements/Dropdown'
+import CheckboxInput from '../elements/CheckboxInput'
+import TextInput from '../elements/TextInput'
 
 const local = {
   newNote: {
@@ -58,6 +60,9 @@ export default {
   name: 'Notelist',
   components: {
     Dropdown
+    Dropdown,
+    CheckboxInput,
+    TextInput
   },
   data: () => (local),
   created () {
