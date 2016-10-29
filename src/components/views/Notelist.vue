@@ -2,13 +2,6 @@
   <div id="note-list" v-show="!loading">
 
     <form id="note-list__add-note">
-      <fieldset class="add-input">
-        <label for="content">Add new note:</label>
-        <input
-          name="content"
-          v-model="newNote.content"
-          />
-      </fieldset>
       <fieldset>
         <label for="prio">Has priority?</label>
         <input
@@ -18,6 +11,12 @@
           />
       </fieldset>
       <button class="submit" @click.prevent="add">Add</button>
+      <TextInput
+        id="content"
+        label="Add new note:"
+        :value="newNote.content"
+        :onInput="changeHandler"
+        />
     </form>
 
     <Dropdown
@@ -99,4 +98,19 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../common/styles/index.scss';
+    #content-fieldset {
+      flex: auto;
+      padding: 8px 0 0 0;
+
+      label {
+        display: none;
+      }
+
+      input {
+        border-bottom: 1px solid black;
+        font-size: 14px;
+        padding: 5px 0;
+        width: 100%;
+      }
+    }
 </style>
