@@ -2,21 +2,22 @@
   <div id="note-list" v-show="!loading">
 
     <form id="note-list__add-note">
-      <fieldset>
-        <label for="prio">Has priority?</label>
-        <input
-          name="prio"
-          type="checkbox"
-          v-model="newNote.prio"
-          />
-      </fieldset>
-      <button class="submit" @click.prevent="add">Add</button>
+
       <TextInput
         id="content"
         label="Add new note:"
         :value="newNote.content"
         :onInput="changeHandler"
         />
+
+      <CheckboxInput
+        id="prio"
+        label="Has priority?"
+        :checked="newNote.prio"
+        :onChange="changeHandler"
+        />
+
+      <button class="submit" @click.prevent="add"> &#43; </button>
     </form>
 
     <Dropdown
@@ -113,4 +114,12 @@ export default {
         width: 100%;
       }
     }
+
+    button {
+      font-size: 16px;
+      border: 1px solid black;
+      padding: 0 16px;
+    }
+  }
+}
 </style>
