@@ -59,7 +59,6 @@ const local = {
 export default {
   name: 'Notelist',
   components: {
-    Dropdown
     Dropdown,
     CheckboxInput,
     TextInput
@@ -91,6 +90,13 @@ export default {
       switch (e.target.id) {
         case 'status':
           this.switchStatus(e.target.value)
+          break
+        case 'prio':
+          this.newNote.prio = e.target.checked
+          break
+        case 'content':
+          this.newNote.content = e.target.value
+          break
       }
     }
   }
