@@ -12,7 +12,7 @@
 
       <CheckboxInput
         id="prio"
-        label="Has priority?"
+        label="Prio?"
         :checked="newNote.prio"
         :onChange="changeHandler"
         />
@@ -107,10 +107,13 @@ export default {
 @import '../../common/styles/index.scss';
 
 #note-list {
+  margin: 8px;
+  background: rgba(255,255,255,0.9);
+  height: 100%;
 
   &__add-note {
     display: flex;
-    padding: 0 8px;
+    padding: 8px;
 
     #content-fieldset {
       flex: auto;
@@ -121,7 +124,7 @@ export default {
       }
 
       input {
-        border-bottom: 1px solid rgba(0,0,0,0.2);
+        border-bottom: 1px solid black;
         font-size: 14px;
         padding: 8px;
         width: 94%;
@@ -146,7 +149,7 @@ export default {
       }
 
       label {
-        border: 1px solid rgba(0,0,0,0.2);
+        border: 1px solid black;
         color: #444;
         cursor: pointer;
         font-size: 11px;

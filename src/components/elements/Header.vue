@@ -23,6 +23,8 @@ export default {
 @import '../../common/styles/index.scss';
 #header {
   display: flex;
+  background: rgba(255,255,255,0.95);
+
   button,
   h1 {
     font-size: 20px;

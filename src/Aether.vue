@@ -31,9 +31,10 @@ export default {
 
 <style lang="scss" scoped>
 #aether {
+  position: relative;
   height: 100vh;
   width: 100vw;
-  background: url('/static/img/wall/universe.jpg') no-repeat center center fixed; 
+  background: url('/static/img/wall/strand.jpg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
