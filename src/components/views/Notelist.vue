@@ -109,11 +109,11 @@ export default {
 #note-list {
   margin: 8px;
   background: rgba(255,255,255,0.9);
-  height: 100%;
+  padding: 8px;
 
   &__add-note {
     display: flex;
-    padding: 8px;
+    margin-bottom: 8px;
 
     #content-fieldset {
       flex: auto;
