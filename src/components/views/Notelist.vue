@@ -114,17 +114,46 @@ export default {
 
     #content-fieldset {
       flex: auto;
-      padding: 8px 0 0 0;
+      padding: 0;
 
       label {
         display: none;
       }
 
       input {
-        border-bottom: 1px solid black;
+        border-bottom: 1px solid rgba(0,0,0,0.2);
         font-size: 14px;
-        padding: 5px 0;
-        width: 100%;
+        padding: 8px;
+        width: 94%;
+      }
+    }
+
+    #prio-fieldset {
+      padding: 0;
+      margin: 0 8px;
+
+      input[type="checkbox"] {
+        display: none;
+        
+        &:checked {
+          + label {
+            background: #1874b5;
+            border-color: #1874b5;
+            color: #fff;
+            transition: all 125ms ease-out;
+          }
+        }
+      }
+
+      label {
+        border: 1px solid rgba(0,0,0,0.2);
+        color: #444;
+        cursor: pointer;
+        font-size: 11px;
+        display: inline-block;
+        padding: 10px;
+        text-transform: uppercase;
+        transition: none;
       }
     }
 
