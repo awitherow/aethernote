@@ -12,7 +12,8 @@
 
       <CheckboxInput
         id="prio"
-        label="Prio?"
+        label=""
+        icon="heart"
         :checked="newNote.prio"
         :onChange="changeHandler"
         />
@@ -20,12 +21,15 @@
       <button class="submit" @click.prevent="add"> &#43; </button>
     </form>
 
-    <Dropdown
-      id="status"
-      label="Status"
-      :onChange="changeHandler"
-      :selected="status"
-      :options="statusTypes"/>
+    <div class="refinery">
+      <Dropdown
+        id="status"
+        label="Status"
+        :onChange="changeHandler"
+        :selected="status"
+        :options="statusTypes"
+        />
+    </div>
 
     <ul id="note-list__list">
       <li v-for="note in notes">
@@ -108,7 +112,7 @@ export default {
 
 #note-list {
   margin: 8px;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255,255,255,0.95);
   padding: 8px;
 
   &__add-note {
@@ -164,6 +168,22 @@ export default {
       font-size: 16px;
       border: 1px solid black;
       padding: 0 16px;
+    }
+  }
+
+  .refinery {
+
+    #status-fieldset {
+      padding: 0;
+
+      label {
+        display: none;
+      }
+
+      #status {
+        font-size: 14px;
+        text-transform: uppercase;
+      }
     }
   }
 }
