@@ -1,6 +1,7 @@
 <template>
   <fieldset :id="id + '-fieldset'">
-    <label :for="id">{{ iconLabel ? iconLabel : label}}</label>
+    <label :for="id" v-if="this.icon">{{ iconLabel }}</label>
+    <label :for="id" v-else>{{ label }}</label>
     <input
       :id="id"
       type="checkbox"
