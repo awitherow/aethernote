@@ -1,5 +1,5 @@
 <template>
-  <div id="note-list" v-show="!loading">
+  <div id="note-list" class="panel" v-show="!loading">
 
     <form id="note-list__add-note">
 
@@ -12,7 +12,6 @@
 
       <CheckboxInput
         id="prio"
-        label=""
         icon="heart"
         :checked="newNote.prio"
         :onChange="changeHandler"
@@ -111,9 +110,6 @@ export default {
 @import '../../common/styles/index.scss';
 
 #note-list {
-  margin: 8px;
-  background: rgba(255,255,255,0.95);
-  padding: 8px;
 
   &__add-note {
     display: flex;

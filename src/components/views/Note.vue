@@ -1,5 +1,5 @@
 <template>
-  <div class="note" v-if="activeNote">
+  <div class="note panel" v-if="activeNote">
 
     <div class="note-controls">
       <button @click="postDeletion">

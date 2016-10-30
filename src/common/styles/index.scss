@@ -41,6 +41,12 @@ button {
   justify-content: center;
 }
 
+.panel {
+  margin: 8px;
+  background: rgba(255,255,255,0.95);
+  padding: 8px;
+}
+
 // animations
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s
