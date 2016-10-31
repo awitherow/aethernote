@@ -11,6 +11,11 @@ const router = new VueRouter({
       component: require('./components/views/Notelist')
     },
     {
+      name: 'login',
+      path: '/login',
+      component: require('./components/views/Login')
+    },
+    {
       name: 'profile',
       path: '/profile',
       component: require('./components/views/Profile')

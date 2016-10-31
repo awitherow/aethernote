@@ -1,6 +1,6 @@
-export function checkAuth(id, key, cb) {
-  fetch(`/api/auth?id=${id}&key=${key}`)
-    .then(r => r.json())
+import axios from 'axios'
+export function checkAuth (id, key, cb) {
+  axios.get(`/api/auth?id=${id}&key=${key}`)
     .then(res => {
       cb(res.data)
     })

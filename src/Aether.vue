@@ -8,6 +8,7 @@
     <router-view />
 
   </div>
+
 </template>
 
 <script>
@@ -24,8 +25,14 @@ export default {
     NavOverlay
   },
   computed: mapState({
-    loading: state => state.loading
-  })
+    loading: state => state.loading,
+    authenticated: state => state.authenticated
+  }),
+  created () {
+    if (!this.authenticated) {
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 
@@ -36,7 +43,7 @@ export default {
   min-width: 100vw;
   width: 100%;
   height: 100%;
-  background: url('/static/img/wall/strand.jpg') no-repeat center center fixed; 
+  background: url('/static/img/wall/strand.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

@@ -9,7 +9,7 @@ export function checkAuth (req, res) {
 
   res.status(200)
   .json({
-    status: 'success',
+    status: 'succes',
     data,
     message: data ? 'Authenticated' : 'Authentication failed',
   })

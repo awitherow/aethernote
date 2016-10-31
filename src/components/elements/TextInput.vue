@@ -10,7 +10,9 @@ export default {
   name: 'TextInput',
   props: ['id', 'value', 'type', 'label', 'onInput'],
   computed: {
-    computedType: () => this.type ? this.type : 'text'
+    computedType: function () {
+      return this.type ? this.type : 'text'
+    }
   }
 }
 </script>

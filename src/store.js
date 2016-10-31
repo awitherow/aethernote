@@ -3,12 +3,14 @@ import Vuex from 'vuex'
 
 import * as notes from './api/notes'
 import * as profile from './api/profile'
+import * as security from './api/security'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     loading: false,
+    authenticated: false,
     navLinks: false,
     notes: [],
     status: 'inbox'
@@ -35,6 +37,9 @@ export default new Vuex.Store({
     },
     updateStatus (state, payload) {
       state.status = payload
+    },
+    authenticate (state, payload) {
+      state.authenticated = payload.data
     }
   },
   actions: {
@@ -76,6 +81,16 @@ export default new Vuex.Store({
     },
     switchStatus ({ commit }, payload) {
       commit('updateStatus', payload)
+    },
+    authenticate ({ commit }, payload) {
+      commit('isLoading', { data: true })
+      const { username, password } = payload
+      security.checkAuth(username, password, (e) => {
+        console.log(e.data)
+        const authenticated = e.data
+        commit('authenticate', { data: authenticated })
+        commit('isLoading', { data: false })
+      })
     }
   }
 })

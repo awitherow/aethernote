@@ -73,7 +73,8 @@ export default {
   computed: {
     ...mapState({
       loading: state => state.loading,
-      status: state => state.status
+      status: state => state.status,
+      authenticated: state => state.authenticated
     }),
     ...mapGetters({
       notes: 'entriesTypeNote'
@@ -137,7 +138,7 @@ export default {
 
       input[type="checkbox"] {
         display: none;
-        
+
         &:checked {
           + label {
             background: #1874b5;
