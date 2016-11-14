@@ -4,7 +4,7 @@ var nodeEnv = process.env.NODE_ENV
 
 var config = {
   devtool: nodeEnv === 'production' ? 'cheap-module-source-map' : 'source-map',
-  entry: './app/index.js',
+  entry: ['promise-polyfill', 'whatwg-fetch', './app/index.js'],
   output: {
     path: 'public',
     filename: 'index.js',
