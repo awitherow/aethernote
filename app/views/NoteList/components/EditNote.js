@@ -1,6 +1,5 @@
 import '../styles/edit.scss'
 import React, { Component, PropTypes } from 'react'
-import { FormattedDate } from 'react-intl'
 import classnames from 'classnames'
 
 import { convertToMarkdown } from '../../../common/helpers'
@@ -98,7 +97,7 @@ export default class EditNote extends Component {
         <header>
           <h1>{title} | #{id}</h1>
           <span>
-            Date Created: <FormattedDate value={created} />
+            {created}
           </span>
           <button className="close" onClick={this.closeEditor}>
             &times;
