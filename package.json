@@ -34,7 +34,7 @@
     "bluebird": "^3.4.1",
     "body-parser": "^1.15.2",
     "classnames": "^2.2.5",
-    "css-loader": "^0.24.0",
+    "css-loader": "^0.26.0",
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "intl": "^1.2.5",
@@ -43,22 +43,21 @@
     "promise-polyfill": "^6.0.2",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
-    "react-icons": "^2.2.1",
-    "react-intl": "^2.1.4",
     "remarkable": "^1.7.0",
     "sass-loader": "^4.0.2",
     "serve-favicon": "^2.3.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
-    "whatwg-fetch": "^1.0.0"
+    "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
-    "babel-eslint": "^6.1.2",
+    "babel-eslint": "^7.1.1",
     "eslint": "^3.3.0",
     "eslint-config-es2015": "^1.1.0",
     "eslint-plugin-react": "^6.1.0",
     "husky": "^0.11.6",
-    "nodemon": "^1.10.0"
+    "nodemon": "^1.10.0",
+    "react-hot-loader": "^3.0.0-beta.6"
   },
   "license": "ISC",
   "bugs": {
