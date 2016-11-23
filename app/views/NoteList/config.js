@@ -1,6 +1,6 @@
 const statusTypes = [
   'inbox',
-  'one day',
+  'backlog',
   'todo',
   'doing',
   'done',
