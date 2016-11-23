@@ -5,19 +5,16 @@ import classnames from 'classnames'
 import * as noteService from '../../api/notes'
 import { statusTypes } from './config'
 
-import FlexibleInput from '../../elements/FlexibleInput'
-import CheckboxInput from '../../elements/CheckboxInput'
 import Dropdown from '../../elements/Dropdown'
 
 import NoteItem from './components/NoteItem'
 import EditNote from './components/EditNote'
+import AddNote from './components/AddNote'
 
 class NoteList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      noteInput: "",
-      priority: false,
       notes: [],
       editor: {
         hidden: true,
@@ -43,19 +40,6 @@ class NoteList extends Component {
   removeNote = (id) => {
     this.context.update('loading', true)
     noteService.remove(id, () => this.getNotes())
-  }
-
-  addNote = (e) => {
-    e.preventDefault()
-    const { noteInput, priority } = this.state
-    noteService.add({
-      content: noteInput,
-      prio: priority,
-      status: 'inbox',
-    }, () => {
-      this.setState({ noteInput: "", priority: false })
-      this.getNotes()
-    })
   }
 
   editNote = (id) => {
@@ -150,24 +134,9 @@ class NoteList extends Component {
             )}
           </ul>
 
-          <form className="note-list__add-note" onSubmit={this.addNote}>
-            <FlexibleInput
-              id="note"
-              label="Awaiting changes..."
-              type="text"
-              defaultValue=""
-              onChange={(e) => this.setState({ noteInput: e.target.value })}
-              />
-            <CheckboxInput
-              id="priority"
-              label="Important task?"
-              defaultChecked={false}
-              onClick={(e) => {
-                this.setState({ priority: e.target.checked })
-              }}
-              />
-            <button>&#43;</button>
-          </form>
+          <AddNote
+            getNotes={this.getNotes}
+            />
 
         </div>
       </div>
