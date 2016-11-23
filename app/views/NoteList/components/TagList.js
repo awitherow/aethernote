@@ -9,15 +9,13 @@ export class TagList extends Component {
       tagInput: '...',
       tags: this.props.tags.slice(),
     }
-
-    this.addTag = this.addTag.bind(this)
   }
 
   captureTag(tagInput, change) {
     this.setState({ tagInput: change })
   }
 
-  addTag(e) {
+  addTag = (e) => {
     e.preventDefault()
     const { tags, tagInput } = this.state
     let tagList = tags

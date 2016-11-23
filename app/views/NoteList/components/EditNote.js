@@ -21,15 +21,10 @@ export default class EditNote extends Component {
   constructor(props) {
     super(props)
     this.state = initialState
-
-    this.onSubmit = this.onSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.closeEditor = this.closeEditor.bind(this)
-    this.deleteNote = this.deleteNote.bind(this)
-    this.toggleWizard = this.toggleWizard.bind(this)
+    
   }
 
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault()
     let update = this.state
     delete update.formUpdated
@@ -37,12 +32,12 @@ export default class EditNote extends Component {
     this.props.onSubmit(update)
   }
 
-  closeEditor() {
+  closeEditor = () => {
     this.resetState()
     this.props.onClose()
   }
 
-  resetState() {
+  resetState = () => {
     for (let thing in this.state) {
       if (thing) {
         delete this.state[thing]
@@ -51,7 +46,7 @@ export default class EditNote extends Component {
     this.setState(...this.state, initialState)
   }
 
-  handleChange(whatToChange, change) {
+  handleChange = (whatToChange, change) => {
     let stateUpdate = { details: { tags: [] } }
 
     switch(whatToChange) {
@@ -68,13 +63,13 @@ export default class EditNote extends Component {
     this.setState(stateUpdate)
   }
 
-  deleteNote() {
+  deleteNote = () => {
     this.props.onRemove(this.props.note.id)
     this.toggleWizard()
     this.closeEditor()
   }
 
-  toggleWizard() {
+  toggleWizard = () => {
     this.setState({ deleteWizardOpen: !this.state.deleteWizardOpen })
   }
 
@@ -91,6 +86,8 @@ export default class EditNote extends Component {
     const deleteNotePanelClasses = classnames('deleteNote__panel', {
       'hidden': !deleteWizardOpen,
     })
+
+    console.log(content);
 
     return (
       <div className="editor">
