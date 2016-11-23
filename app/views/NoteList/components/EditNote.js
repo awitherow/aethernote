@@ -31,10 +31,12 @@ export default class EditNote extends Component {
 
   onSubmit = (e) => {
     e.preventDefault()
+    this.context.update('loading', true)
     let update = this.state
     delete update.formUpdated
     delete update.deleteWizardOpen
     this.props.onSubmit(update)
+    this.closeEditor()
   }
 
   closeEditor = () => {
@@ -191,4 +193,8 @@ EditNote.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
+}
+
+EditNote.contextTypes = {
+  update: PropTypes.func.isRequired,
 }
