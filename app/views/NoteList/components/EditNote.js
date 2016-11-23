@@ -20,8 +20,13 @@ const initialState = {
 export default class EditNote extends Component {
   constructor(props) {
     super(props)
-    this.state = initialState
-    
+    this.state = { ...initialState }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.note.content) {
+      this.setState({ content: nextProps.note.content })
+    }
   }
 
   onSubmit = (e) => {
@@ -75,8 +80,8 @@ export default class EditNote extends Component {
 
   render() {
     if (this.props.hidden) return null
-    const { formUpdated, deleteWizardOpen } = this.state
-    const { id, title, content, details, created,
+    const { formUpdated, deleteWizardOpen, content } = this.state
+    const { id, title, details, created,
       prio, archived, status } = this.props.note
 
     const deleteNoteRequestClasses = classnames('deleteNote__request', {
@@ -86,8 +91,6 @@ export default class EditNote extends Component {
     const deleteNotePanelClasses = classnames('deleteNote__panel', {
       'hidden': !deleteWizardOpen,
     })
-
-    console.log(content);
 
     return (
       <div className="editor">
