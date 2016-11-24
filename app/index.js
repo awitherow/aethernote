@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 
 import './common/styles.scss'
+import * as noteService from './api/notes'
 
 import Overlay from './elements/Overlay'
 import Header from './elements/Header'
@@ -13,21 +14,34 @@ import Login from './views/Login'
 class App extends Component {
   static childContextTypes = {
     update: PropTypes.func,
+    getNotes: PropTypes.func,
   }
 
   state = {
     loading: false,
     authenticated: true,
     currentRoute: 'note-list',
+    notes: [],
   }
 
-  getChildContext() {
-    return {
-      update: this.update.bind(this),
-    }
+  componentDidMount() {
+    this.getNotes()
   }
 
-  update= (action, data) => {
+  getNotes = () => {
+    this.update('loading', true)
+    noteService.get(notes => {
+      this.setState({ notes })
+      this.update('loading', false)
+    })
+  }
+
+  getChildContext = () => ({
+    update: this.update,
+    getNotes: this.getNotes,
+  })
+
+  update = (action, data) => {
     let payload
     switch(action) {
       case 'loading': payload = { loading: data }; break
@@ -39,8 +53,16 @@ class App extends Component {
 
   route = () => {
     switch(this.state.currentRoute) {
-      case 'note-list': return <NoteList />
-      case 'journal': return <Journal />
+      case 'note-list': return (
+        <NoteList
+          notes={this.state.notes.filter(n => n.type === 'note')}
+          />
+      )
+      case 'journal': return (
+        <Journal
+          notes={this.state.notes.filter(n => n.type === 'journal')}
+          />
+      )
     }
   }
 

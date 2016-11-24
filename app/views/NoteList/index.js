@@ -12,34 +12,27 @@ import EditNote from './components/EditNote'
 import AddNote from './components/AddNote'
 
 class NoteList extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      notes: [],
-      editor: {
-        hidden: true,
-        note: {},
-      },
-      status: 'inbox',
-      activeNotes: 0,
-    }
+  static propTypes = {
+    notes: PropTypes.array.isRequired,
   }
 
-  componentDidMount() {
-    this.getNotes()
+  static contextTypes = {
+    update: PropTypes.func.isRequired,
+    getNotes: PropTypes.func.isRequired,
   }
 
-  getNotes = () => {
-    this.context.update('loading', true)
-    noteService.get(notes => {
-      this.setState({ notes })
-      this.context.update('loading', false)
-    })
+  state = {
+    editor: {
+      hidden: true,
+      note: {},
+    },
+    status: 'inbox',
+    activeNotes: 0,
   }
 
   removeNote = (id) => {
     this.context.update('loading', true)
-    noteService.remove(id, () => this.getNotes())
+    noteService.remove(id, () => this.context.getNotes())
   }
 
   editNote = (id) => {
@@ -56,7 +49,7 @@ class NoteList extends Component {
 
   submitEdit = (edits) => {
     noteService.update(this.state.editor.note, edits, () => {
-      this.getNotes()
+      this.context.getNotes()
     })
   }
 
@@ -85,7 +78,8 @@ class NoteList extends Component {
   }
 
   render() {
-    const { editor, notes, activeNotes } = this.state
+    const { editor, activeNotes } = this.state
+    const { notes } = this.props
     const noteListClasses = classnames('note-list', {
       'hidden': !editor.hidden,
     })
@@ -108,7 +102,7 @@ class NoteList extends Component {
             </h2>
             <button
               className="refresh-notes"
-              onClick={this.getNotes}>
+              onClick={this.context.getNotes}>
               &#8635;
             </button>
           </div>
@@ -135,17 +129,13 @@ class NoteList extends Component {
           </ul>
 
           <AddNote
-            getNotes={this.getNotes}
+            getNotes={this.context.getNotes}
             />
 
         </div>
       </div>
     )
   }
-}
-
-NoteList.contextTypes = {
-  update: PropTypes.func.isRequired,
 }
 
 export default NoteList
