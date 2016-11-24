@@ -1,10 +1,21 @@
 .main-header {
   background: black;
 
+  h1,
+  .routes-field {
+    display: inline-block;
+    color: white;
+  }
+
+  .routes-field {
+    #routes {
+      color: white;
+    }
+  }
+
   h1 {
     font-size: 24px;
     margin: 0;
-    color: white;
     padding: 15px 30px;
 
   }
