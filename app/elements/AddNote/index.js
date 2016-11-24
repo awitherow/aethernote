@@ -11,20 +11,23 @@ export default class AddNote extends Component {
     type: PropTypes.string.isRequired,
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      content: '',
-      prio: false,
+  resetState = () => {
+    for (let thing in this.state) {
+      if (thing) {
+        delete this.state[thing]
+      }
     }
+    this.setState(...this.state, initialState)
   }
 
   addNote = (e) => {
     e.preventDefault()
-    const { content, prio } = this.state
-    const { type } = this.props
-    noteService.add({ content, prio, type }, () => {
-      this.setState({ content: "", prio: false })
+
+    noteService.add({
+      ...this.state,
+      type: this.props.type,
+    }, () => {
+      this.resetState()
       this.props.getNotes()
     })
   }
@@ -39,14 +42,18 @@ export default class AddNote extends Component {
           defaultValue=""
           onChange={(e) => this.setState({ content: e.target.value })}
           />
-        <CheckboxInput
-          id="prio"
-          label="Important task?"
-          defaultChecked={false}
-          onClick={(e) => {
-            this.setState({ prio: e.target.checked })
-          }}
-          />
+
+          {this.props.type === 'note' ? (
+            <CheckboxInput
+              id="prio"
+              label="Important task?"
+              defaultChecked={false}
+              onClick={(e) => {
+                this.setState({ prio: e.target.checked })
+              }}
+              />
+          ) : null}
+
         <button>&#43;</button>
       </form>
     )
