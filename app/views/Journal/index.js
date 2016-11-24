@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import moment from 'moment'
 import AddNote from '../../elements/AddNote'
 
 export default class Journal extends Component {
@@ -23,6 +24,8 @@ export default class Journal extends Component {
   render () {
     return (
       <div>
+
+        {moment(this.state.selectedDay).format('MMM Do YY')}
         <ul>
           {this.props.notes
             .filter(e => this.getEntriesFromSelectedDay(e.created))
