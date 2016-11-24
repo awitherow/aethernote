@@ -128,10 +128,7 @@ class NoteList extends Component {
             )}
           </ul>
 
-          <AddNote
-            getNotes={this.context.getNotes}
-            type="note"
-            />
+          <AddNote type="note" />
 
         </div>
       </div>

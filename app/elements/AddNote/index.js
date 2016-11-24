@@ -7,8 +7,12 @@ import * as noteService from '../../api/notes'
 
 export default class AddNote extends Component {
   static propTypes = {
-    getNotes: PropTypes.func.isRequired,
     type: PropTypes.string.isRequired,
+  }
+
+  static contextTypes = {
+    update: PropTypes.func.isRequired,
+    getNotes: PropTypes.func.isRequired,
   }
 
   resetState = () => {
@@ -30,7 +34,7 @@ export default class AddNote extends Component {
       this.resetState()
       this.refs[`${this.props.type}-addNoteForm`]
         .childNodes[0].childNodes[1].value = ''
-      this.props.getNotes()
+      this.context.getNotes()
     })
   }
 

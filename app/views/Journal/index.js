@@ -35,10 +35,7 @@ export default class Journal extends Component {
             .map(e => <li key={e.created}>{e.content}</li>)}
         </ul>
 
-        <AddNote
-          getNotes={this.context.getNotes}
-          type="journal"
-          />
+        <AddNote type="journal" />
 
       </div>
     )
