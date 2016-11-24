@@ -9,7 +9,7 @@ import Dropdown from '../../elements/Dropdown'
 
 import NoteItem from './components/NoteItem'
 import EditNote from './components/EditNote'
-import AddNote from './components/AddNote'
+import AddNote from '../../elements/AddNote'
 
 class NoteList extends Component {
   static propTypes = {
@@ -36,7 +36,7 @@ class NoteList extends Component {
   }
 
   editNote = (id) => {
-    const { notes } = this.state
+    const { notes } = this.props
     let note = notes.filter(note => note.id === id)[0]
     if (!note) return
     this.setState({
@@ -130,6 +130,7 @@ class NoteList extends Component {
 
           <AddNote
             getNotes={this.context.getNotes}
+            type="note"
             />
 
         </div>

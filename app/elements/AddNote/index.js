@@ -1,14 +1,14 @@
-import '../styles/note-list.scss'
 import React, { Component, PropTypes } from 'react'
 
-import FlexibleInput from '../../../elements/FlexibleInput'
-import CheckboxInput from '../../../elements/CheckboxInput'
+import FlexibleInput from '../FlexibleInput'
+import CheckboxInput from '../CheckboxInput'
 
-import * as noteService from '../../../api/notes'
+import * as noteService from '../../api/notes'
 
 export default class AddNote extends Component {
   static propTypes = {
     getNotes: PropTypes.func.isRequired,
+    type: PropTypes.string.isRequired,
   }
 
   constructor(props) {
@@ -22,7 +22,8 @@ export default class AddNote extends Component {
   addNote = (e) => {
     e.preventDefault()
     const { content, prio } = this.state
-    noteService.add({ content, prio }, () => {
+    const { type } = this.props
+    noteService.add({ content, prio, type }, () => {
       this.setState({ content: "", prio: false })
       this.props.getNotes()
     })
