@@ -1,3 +1,4 @@
+import './styles/index.scss'
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
 import AddNote from '../../elements/AddNote'
@@ -23,9 +24,10 @@ export default class Journal extends Component {
 
   render () {
     return (
-      <div>
+      <div className="journal" key="journal-page">
 
-        {moment(this.state.selectedDay).format('MMM Do YY')}
+        <h2>{moment(this.state.selectedDay).format('MMM Do YY')}</h2>
+
         <ul>
           {this.props.notes
             .filter(e => this.getEntriesFromSelectedDay(e.created))
@@ -36,6 +38,7 @@ export default class Journal extends Component {
           getNotes={this.context.getNotes}
           type="journal"
           />
+
       </div>
     )
   }
