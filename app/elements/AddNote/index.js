@@ -17,24 +17,30 @@ export default class AddNote extends Component {
         delete this.state[thing]
       }
     }
-    this.setState(...this.state, initialState)
+    this.setState(...this.state, {})
   }
 
   addNote = (e) => {
     e.preventDefault()
-
+    this.context.update('loading', true)
     noteService.add({
       ...this.state,
       type: this.props.type,
     }, () => {
       this.resetState()
+      this.refs[`${this.props.type}-addNoteForm`]
+        .childNodes[0].childNodes[1].value = ''
       this.props.getNotes()
     })
   }
 
   render() {
     return (
-      <form className="note-list__add-note" onSubmit={this.addNote}>
+      <form
+        className="note-list__add-note"
+        onSubmit={this.addNote}
+        ref={`${this.props.type}-addNoteForm`}
+        >
         <FlexibleInput
           id="note"
           label="Awaiting changes..."

@@ -26,6 +26,6 @@ FlexibleInput.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   defaultValue: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired, // accepts "text", "password" atm.
   onChange: PropTypes.func.isRequired,
 }
