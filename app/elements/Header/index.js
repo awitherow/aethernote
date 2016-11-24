@@ -24,9 +24,6 @@ const Header = ({ currentRoute, update }) => {
 
 Header.propTypes = {
   currentRoute: PropTypes.string.isRequired,
-}
-
-Header.contextTypes = {
   update: PropTypes.func.isRequired,
 }
 
