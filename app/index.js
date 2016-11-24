@@ -10,12 +10,13 @@ import NoteList from './views/NoteList'
 import Login from './views/Login'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      loading: false,
-      authenticated: false,
-    }
+  static childContextTypes = {
+    update: PropTypes.func,
+  }
+
+  state = {
+    loading: false,
+    authenticated: false,
   }
 
   getChildContext() {
@@ -49,10 +50,5 @@ class App extends Component {
     )
   }
 }
-
-App.childContextTypes = {
-  update: PropTypes.func,
-}
-
 
 render(<App />, document.getElementById('app'))
