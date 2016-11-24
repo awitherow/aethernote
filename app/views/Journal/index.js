@@ -11,10 +11,13 @@ export default class Journal extends Component {
     getNotes: PropTypes.func.isRequired,
   }
 
+  state = {
+    selectedDay: new Date().setHours(0, 0, 0, 0),
+  }
+
   getEntriesFromSelectedDay = (dateCreated) => {
-    const today = new Date().setHours(0, 0, 0, 0)
     const entryDay = new Date(dateCreated).setHours(0, 0, 0, 0)
-    return today === entryDay
+    return this.state.selectedDay === entryDay
   }
 
   render () {
