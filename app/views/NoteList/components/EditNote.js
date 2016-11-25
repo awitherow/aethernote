@@ -10,8 +10,6 @@ import FlexibleInput from '../../../elements/FlexibleInput'
 import TextAreaInput from '../../../elements/TextAreaInput'
 import Dropdown from '../../../elements/Dropdown'
 
-import TagList from './TagList'
-
 const initialState = {
   formUpdated: false,
   deleteWizardOpen: false,
@@ -57,15 +55,9 @@ export default class EditNote extends Component {
   }
 
   handleChange = (whatToChange, change) => {
-    let stateUpdate = { details: { tags: [] } }
+    let stateUpdate = {}
 
     switch(whatToChange) {
-      case 'addTag': stateUpdate.details.tags.push(change); break
-      case 'removeTag': {
-        let tagList = stateUpdate.details.tags
-        tagList.splice(tagList.indexOf(change), 1)
-        break
-      }
       default: stateUpdate[whatToChange] = change; break
     }
 
@@ -86,8 +78,7 @@ export default class EditNote extends Component {
   render() {
     if (this.props.hidden) return null
     const { formUpdated, deleteWizardOpen, content } = this.state
-    const { id, title, details, created,
-      prio, archived, category } = this.props.note
+    const { id, title, created, prio, archived, category } = this.props.note
 
     const deleteNoteRequestClasses = classnames('deleteNote__request', {
       'hidden': deleteWizardOpen,
@@ -146,11 +137,6 @@ export default class EditNote extends Component {
               SAVE
             </button>
           </div>
-
-          <TagList
-            handleChange={this.handleChange}
-            tags={details.tags}
-            />
 
           <div // eslint-disable-next-line
             dangerouslySetInnerHTML={convertToMarkdown(content)}
