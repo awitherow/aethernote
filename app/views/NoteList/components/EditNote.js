@@ -77,8 +77,8 @@ export default class EditNote extends Component {
 
   render() {
     if (this.props.hidden) return null
-    const { formUpdated, deleteWizardOpen, content } = this.state
-    const { id, title, created, prio, archived, category } = this.props.note
+    const { formUpdated, deleteWizardOpen, content, title } = this.state
+    const { id, created, prio, archived, category } = this.props.note
 
     const deleteNoteRequestClasses = classnames('deleteNote__request', {
       'hidden': deleteWizardOpen,
