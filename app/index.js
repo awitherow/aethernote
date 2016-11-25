@@ -11,6 +11,15 @@ import NoteList from './views/NoteList'
 import Journal from './views/Journal'
 import Login from './views/Login'
 
+function checkAuthentication() {
+  if (process.env.NODE_ENV === 'development') {
+    return true
+  } else {
+    // TODO: check cookies
+    return false
+  }
+}
+
 class App extends Component {
   static childContextTypes = {
     update: PropTypes.func,
@@ -19,7 +28,7 @@ class App extends Component {
 
   state = {
     loading: false,
-    authenticated: false,
+    authenticated: checkAuthentication(),
     currentRoute: 'journal',
     notes: [],
   }

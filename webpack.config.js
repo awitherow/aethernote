@@ -29,19 +29,21 @@ var config = {
   resolve: {
     extensions: ['', '.js', '.css'],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': { NODE_ENV: JSON.stringify(nodeEnv) },
+    }),
+  ],
 }
 
 if (nodeEnv === 'production') {
-  config.plugins = [].concat([
+  config.plugins = config.plugins.concat([
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false },
       sourceMap: false,
       comments: false,
-    }),
-    new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: JSON.stringify("production") },
     }),
   ])
 }
