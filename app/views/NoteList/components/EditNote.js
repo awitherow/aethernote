@@ -25,7 +25,10 @@ export default class EditNote extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.note.content) {
-      this.setState({ content: nextProps.note.content })
+      this.setState({
+        content: nextProps.note.content,
+        title: nextProps.note.title,
+      })
     }
   }
 
@@ -112,7 +115,7 @@ export default class EditNote extends Component {
             id="title"
             label="Title"
             type="text"
-            defaultValue={title}
+            value={title}
             onChange={(e) => this.handleChange('title', e.target.value)}
             />
 

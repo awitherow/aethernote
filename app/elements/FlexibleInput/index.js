@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react'
 export default function FlexibleInput({
   id,
   label,
-  defaultValue,
+  value,
   type,
   onChange,
 }){
@@ -15,7 +15,7 @@ export default function FlexibleInput({
         key={id}
         id={id}
         type={type}
-        defaultValue={defaultValue}
+        value={value}
         onChange={onChange}
         />
     </fieldset>
@@ -25,7 +25,7 @@ export default function FlexibleInput({
 FlexibleInput.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  defaultValue: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired, // accepts "text", "password" atm.
   onChange: PropTypes.func.isRequired,
 }

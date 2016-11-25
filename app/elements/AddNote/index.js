@@ -6,6 +6,10 @@ import CheckboxInput from '../CheckboxInput'
 import * as noteService from '../../api/notes'
 
 export default class AddNote extends Component {
+  state = {
+    content: '',
+  }
+
   static propTypes = {
     type: PropTypes.string.isRequired,
   }
@@ -32,24 +36,18 @@ export default class AddNote extends Component {
       type: this.props.type,
     }, () => {
       this.resetState()
-      this.refs[`${this.props.type}-addNoteForm`]
-        .childNodes[0].childNodes[1].value = ''
       this.context.getNotes()
     })
   }
 
   render() {
     return (
-      <form
-        className="note-list__add-note"
-        onSubmit={this.addNote}
-        ref={`${this.props.type}-addNoteForm`}
-        >
+      <form className="note-list__add-note" onSubmit={this.addNote}>
         <FlexibleInput
           id="note"
           label="Awaiting changes..."
           type="text"
-          defaultValue=""
+          value={this.state.content}
           onChange={(e) => this.setState({ content: e.target.value })}
           />
 
