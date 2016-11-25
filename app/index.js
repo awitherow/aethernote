@@ -19,7 +19,7 @@ class App extends Component {
 
   state = {
     loading: false,
-    authenticated: true,
+    authenticated: false,
     currentRoute: 'journal',
     notes: [],
   }
