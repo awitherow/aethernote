@@ -31,7 +31,6 @@ export default class Journal extends Component {
         <ul>
           {this.props.notes
             .filter(e => this.getEntriesFromSelectedDay(e.created))
-            .reverse()
             .map(e => <li key={e.created}>{e.content}</li>)}
         </ul>
 
