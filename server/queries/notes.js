@@ -35,8 +35,8 @@ export const getNote = (req, res, next) => {
 
 export const createNote = (req, res, next) => {
   if (!req.body.type) { req.body.type = 'note' }
-  db.none('insert into entries(title, content, prio, status, type)' +
-      'values( ${title}, ${content}, ${prio}, ${status}, ${type})',
+  db.none('insert into entries(title, content, prio, category, type)' +
+      'values( ${title}, ${content}, ${prio}, ${category}, ${type})',
     req.body)
   .then(() => {
     res.status(200)
@@ -48,12 +48,12 @@ export const createNote = (req, res, next) => {
 }
 
 export const updateNote = (req, res, next) => {
-  const { id, title, content, prio, details, status} = req.body.update
+  const { id, title, content, prio, details, category} = req.body.update
   db.none(
     'update entries ' +
-    'set title=$1, content=$2, prio=$3, details=$4, status=$5 ' +
+    'set title=$1, content=$2, prio=$3, details=$4, category=$5 ' +
     'where id=$6',
-    [title, content, prio, details, status, id]
+    [title, content, prio, details, category, id]
   ).then(() => {
     res.status(200)
     .json({

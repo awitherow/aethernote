@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
 import { convertToMarkdown } from '../../../common/helpers'
-import { statusTypes } from '../config'
+import { categories } from '../config'
 
 import CheckboxInput from '../../../elements/CheckboxInput'
 import FlexibleInput from '../../../elements/FlexibleInput'
@@ -87,7 +87,7 @@ export default class EditNote extends Component {
     if (this.props.hidden) return null
     const { formUpdated, deleteWizardOpen, content } = this.state
     const { id, title, details, created,
-      prio, archived, status } = this.props.note
+      prio, archived, category } = this.props.note
 
     const deleteNoteRequestClasses = classnames('deleteNote__request', {
       'hidden': deleteWizardOpen,
@@ -135,11 +135,11 @@ export default class EditNote extends Component {
               />
 
             <Dropdown
-              id="status-types"
-              label="Status"
-              options={statusTypes}
-              defaultValue={status}
-              handleChange={e => this.handleChange('status', e.target.value)}
+              id="category-types"
+              label="Category"
+              options={categories}
+              defaultValue={category}
+              handleChange={e => this.handleChange('category', e.target.value)}
               />
 
             <button disabled={!formUpdated}>

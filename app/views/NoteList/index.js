@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
 import * as noteService from '../../api/notes'
-import { statusTypes } from './config'
+import { categories } from './config'
 
 import Dropdown from '../../elements/Dropdown'
 
@@ -26,7 +26,7 @@ class NoteList extends Component {
       hidden: true,
       note: {},
     },
-    status: 'inbox',
+    category: 'inbox',
     activeNotes: 0,
   }
 
@@ -64,13 +64,14 @@ class NoteList extends Component {
 
   handleChange = (whatToChange, change) => {
     switch (whatToChange) {
-      case 'status': this.setState({ status: change }); break
+      case 'category': this.setState({ category: change }); break
       default: return
     }
   }
 
   filter(notes) {
-    let filteredNotes = notes.filter(note => note.status === this.state.status)
+    let filteredNotes =
+      notes.filter(note => note.category === this.state.category)
     if (this.state.activeNotes !== filteredNotes.length) {
       this.setState({ activeNotes: filteredNotes.length })
     }
@@ -109,11 +110,11 @@ class NoteList extends Component {
 
           <div className="note-list__sort">
             <Dropdown
-              id="status-types"
-              label="Status"
-              options={statusTypes}
-              defaultValue={this.state.status}
-              handleChange={e => this.handleChange('status', e.target.value)}
+              id="category-types"
+              label="Category"
+              options={categories}
+              defaultValue={this.state.category}
+              handleChange={e => this.handleChange('category', e.target.value)}
               />
           </div>
 

@@ -8,7 +8,12 @@ function get(cb) {
 }
 
 function add(entry, cb) {
-  entry.status = 'inbox'
+  if (!entry.category) {
+    switch(entry.type) {
+      case 'note': entry.category = 'inbox'; break
+      case 'journal': entry.category = 'progress'; break
+    }
+  }
 
   const length = entry.content.length
   if (length > 32) {

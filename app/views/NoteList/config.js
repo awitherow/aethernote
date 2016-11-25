@@ -1,4 +1,4 @@
-const statusTypes = [
+const categories = [
   'inbox',
   'backlog',
   'todo',
@@ -8,5 +8,5 @@ const statusTypes = [
 ]
 
 export {
-  statusTypes,
+  categories,
 }
