@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react'
 import Dropdown from '../Dropdown'
 
 const routes = [
-  'note-list',
+  'note',
   'journal',
 ]
 

@@ -6,6 +6,7 @@ import * as noteService from './api/notes'
 
 import Overlay from './elements/Overlay'
 import Header from './elements/Header'
+import AddNote from './elements/AddNote'
 
 import NoteList from './views/NoteList'
 import Journal from './views/Journal'
@@ -29,7 +30,7 @@ class App extends Component {
   state = {
     loading: false,
     authenticated: checkAuthentication(),
-    currentRoute: 'note-list',
+    currentRoute: 'note',
     notes: [],
   }
 
@@ -62,7 +63,7 @@ class App extends Component {
 
   route = () => {
     switch(this.state.currentRoute) {
-      case 'note-list': return (
+      case 'note': return (
         <NoteList
           notes={this.state.notes.filter(n => n.type === 'note')}
           />
@@ -88,7 +89,10 @@ class App extends Component {
           update={this.update}
           />
 
-        {this.route()}
+        <div className="inner">
+          <AddNote type={currentRoute} />
+          {this.route()}
+        </div>
 
       </div>
     )

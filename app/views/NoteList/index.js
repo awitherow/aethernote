@@ -9,7 +9,6 @@ import Dropdown from '../../elements/Dropdown'
 
 import NoteItem from './components/NoteItem'
 import EditNote from './components/EditNote'
-import AddNote from '../../elements/AddNote'
 
 class NoteList extends Component {
   static propTypes = {
@@ -128,8 +127,6 @@ class NoteList extends Component {
                 />
             )}
           </ul>
-
-          <AddNote type="note" />
 
         </div>
       </div>

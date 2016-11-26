@@ -1,7 +1,6 @@
 import './styles/index.scss'
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
-import AddNote from '../../elements/AddNote'
 
 export default class Journal extends Component {
   static propTypes = {
@@ -33,8 +32,6 @@ export default class Journal extends Component {
             .filter(e => this.getEntriesFromSelectedDay(e.created))
             .map(e => <li key={e.created}>{e.content}</li>)}
         </ul>
-
-        <AddNote type="journal" />
 
       </div>
     )
