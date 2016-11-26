@@ -38,19 +38,34 @@ header {
     }
   }
 
-  .content {
-    &-view,
-    &-field {
-      padding-left: 5px;
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    @media(min-width: 768px) {
+      flex-direction: row;
     }
 
-    &-view {
-      border-left: 5px solid gold;
+    .content {
+        &-view,
+        &-field {
+          padding-left: 5px;
+          width: 100%;
+        }
+
+        &-view {
+          border-left: 5px solid gold;
+        }
+
+        &-field {
+          border-left: 5px solid grey;
+        }
     }
 
-    &-field {
-      border-left: 5px solid grey;
+    #content {
+      font-family: Hack;
+      font-size: 16px;
     }
-
   }
 }

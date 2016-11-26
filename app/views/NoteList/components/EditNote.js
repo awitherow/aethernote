@@ -138,16 +138,18 @@ export default class EditNote extends Component {
             </button>
           </div>
 
-          <div // eslint-disable-next-line
-            dangerouslySetInnerHTML={convertToMarkdown(content)}
-            className="content-view"/>
+          <div className="content-container">
+            <div // eslint-disable-next-line
+              dangerouslySetInnerHTML={convertToMarkdown(content)}
+              className="content-view"/>
 
-          <TextAreaInput
-            id="content"
-            label="Contents"
-            value={content}
-            onChange={(e) => this.handleChange('content', e.target.value)}
-            />
+            <TextAreaInput
+              id="content"
+              label="Contents"
+              value={content}
+              onChange={(e) => this.handleChange('content', e.target.value)}
+              />
+          </div>
 
         </form>
 
