@@ -29,7 +29,7 @@ class App extends Component {
   state = {
     loading: false,
     authenticated: checkAuthentication(),
-    currentRoute: 'journal',
+    currentRoute: 'note-list',
     notes: [],
   }
 
