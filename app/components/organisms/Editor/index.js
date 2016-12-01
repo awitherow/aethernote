@@ -77,7 +77,7 @@ export default class Editor extends Component {
   render() {
     if (this.props.hidden) return null
     const { formUpdated, deleteWizardOpen, content, title } = this.state
-    const { id, created, prio, archived, category } = this.props.note
+    const { id, created, prio, category } = this.props.note
 
     const deleteNoteRequestClasses = classnames('deleteNote__request', {
       'hidden': deleteWizardOpen,
