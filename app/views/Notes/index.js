@@ -1,10 +1,10 @@
-import './styles/note-list.scss'
+import './index.scss'
 import React, { Component, PropTypes } from 'react'
 
 import Dropdown from '../../components/atoms/Dropdown'
 import ThingsList from '../../components/molecules/ThingsList'
 
-class NoteList extends Component {
+class Notes extends Component {
   static propTypes = {
     things: PropTypes.array.isRequired,
     type: PropTypes.string.isRequired,
@@ -53,13 +53,11 @@ class NoteList extends Component {
     const { things } = this.props
 
     return (
-      <div className="note-page" key="note-page">
+      <div className="note-view" key="note-page">
 
-        <div className="note-list">
+        <div>
           <div className="sub-header">
-            <h2 className="note-list__page-title">
-              Notes <span>({activeNotes})</span>
-            </h2>
+            <h2> Notes <span>({activeNotes})</span> </h2>
             <button
               className="refresh-notes"
               onClick={this.context.getThings}>
@@ -67,7 +65,7 @@ class NoteList extends Component {
             </button>
           </div>
 
-          <div className="note-list__sort">
+          <div className="note-view__sort">
             <Dropdown
               id="category-types"
               label="Category"
@@ -98,4 +96,4 @@ class NoteList extends Component {
   }
 }
 
-export default NoteList
+export default Notes

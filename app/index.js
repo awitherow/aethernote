@@ -11,7 +11,7 @@ import AddThing from './components/molecules/AddThing'
 
 import Editor from './components/organisms/Editor'
 
-import NoteList from './views/NoteList'
+import Notes from './views/Notes'
 import Journal from './views/Journal'
 import Login from './views/Login'
 
@@ -94,7 +94,7 @@ class App extends Component {
     }
 
     switch(currentType) {
-      case 'note': return <NoteList {...sharedProps} />
+      case 'note': return <Notes {...sharedProps} />
       case 'journal': return <Journal {...sharedProps} />
     }
   }
