@@ -3,7 +3,7 @@ import { render } from 'react-dom'
 
 import './common/styles.scss'
 
-import * as noteService from './api/notes'
+import * as thingService from './api/notes'
 
 import Overlay from './components/molecules/Overlay'
 import Header from './components/molecules/Header'
@@ -48,7 +48,7 @@ class App extends Component {
 
   getThings = () => {
     !this.state.loading && this.update('loading', true)
-    noteService.get(notes => {
+    thingService.get(notes => {
       this.setState({ notes })
       this.update('loading', false)
     })
@@ -56,11 +56,11 @@ class App extends Component {
 
   removeItem = (id) => {
     this.update('loading', true)
-    noteService.remove(id, () => this.getThings())
+    thingService.remove(id, () => this.getThings())
   }
 
   submitEdit = (edits) => {
-    noteService.update(this.state.editor.note, edits, () => {
+    thingService.update(this.state.editor.note, edits, () => {
       this.getThings()
     })
   }
@@ -92,7 +92,7 @@ class App extends Component {
       removeItem: this.removeItem,
 
     }
-    
+
     switch(currentType) {
       case 'note': return <NoteList {...sharedProps} />
       case 'journal': return <Journal {...sharedProps} />

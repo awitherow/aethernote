@@ -4,7 +4,7 @@ import FlexibleInput from '../../atoms/FlexibleInput'
 import CheckboxInput from '../../atoms/CheckboxInput'
 import Dropdown from '../../atoms/Dropdown'
 
-import * as noteService from '../../../api/notes'
+import * as thingService from '../../../api/notes'
 
 const journalCategories = [
   'progress',
@@ -41,7 +41,7 @@ export default class AddThing extends Component {
   addNote = (e) => {
     e.preventDefault()
     this.context.update('loading', true)
-    noteService.add({
+    thingService.add({
       ...this.state,
       type: this.props.type,
     }, () => {
