@@ -7,17 +7,23 @@ import { categories } from './config'
 
 import Dropdown from '../../elements/Dropdown'
 
-import ListItem from './components/ListItem'
 import EditNote from './components/EditNote'
+
+import ThingsList from '../../components/molecules/ThingsList'
 
 class NoteList extends Component {
   static propTypes = {
     notes: PropTypes.array.isRequired,
+    type: PropTypes.string.isRequired,
   }
 
   static contextTypes = {
     update: PropTypes.func.isRequired,
     getNotes: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    type: 'note',
   }
 
   state = {
@@ -117,16 +123,13 @@ class NoteList extends Component {
               />
           </div>
 
-          <ul className="note-list__list">
-            {this.filter(notes).map(note =>
-              <ListItem
-                key={note.id}
-                note={note}
-                removeNote={this.removeNote}
-                editItem={this.editItem}
-                />
-            )}
-          </ul>
+          <ThingsList
+            type={this.props.type}
+            things={this.filter(notes)}
+            classModifier="note-list__list"
+            edit={this.editItem}
+            remove={this.removeItem}
+            />
 
         </div>
       </div>
