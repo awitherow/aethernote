@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 
 import './common/styles.scss'
+
 import * as noteService from './api/notes'
 
 import Overlay from './elements/Overlay'

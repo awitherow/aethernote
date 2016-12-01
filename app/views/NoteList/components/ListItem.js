@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 
-const NoteItem = ({
-  note, editNote,
+const ListItem = ({
+  note, editItem,
 }) => {
   const { id, title, prio } = note
   let prioElement = <span className="priority">&#9888;</span>
@@ -9,15 +9,15 @@ const NoteItem = ({
       <li>
         { prio ?  prioElement : null }
         <span className="title">{title}</span>
-        <button onClick={() => editNote(id)}>&#9998;</button>
+        <button onClick={() => editItem(id)}>&#9998;</button>
       </li>
 
   )
 }
 
-NoteItem.propTypes = {
+ListItem.propTypes = {
   note: PropTypes.object.isRequired,
-  editNote: PropTypes.func.isRequired,
+  editItem: PropTypes.func.isRequired,
 }
 
-export default NoteItem
+export default ListItem

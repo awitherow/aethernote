@@ -7,7 +7,7 @@ import { categories } from './config'
 
 import Dropdown from '../../elements/Dropdown'
 
-import NoteItem from './components/NoteItem'
+import ListItem from './components/ListItem'
 import EditNote from './components/EditNote'
 
 class NoteList extends Component {
@@ -29,12 +29,12 @@ class NoteList extends Component {
     activeNotes: 0,
   }
 
-  removeNote = (id) => {
+  removeItem = (id) => {
     this.context.update('loading', true)
     noteService.remove(id, () => this.context.getNotes())
   }
 
-  editNote = (id) => {
+  editItem = (id) => {
     const { notes } = this.props
     let note = notes.filter(note => note.id === id)[0]
     if (!note) return
@@ -92,7 +92,7 @@ class NoteList extends Component {
           note={editor.note}
           onSubmit={this.submitEdit}
           onClose={this.closeEditor}
-          onRemove={this.removeNote}
+          onRemove={this.removeItem}
           />
 
         <div className={noteListClasses}>
@@ -119,11 +119,11 @@ class NoteList extends Component {
 
           <ul className="note-list__list">
             {this.filter(notes).map(note =>
-              <NoteItem
+              <ListItem
                 key={note.id}
                 note={note}
                 removeNote={this.removeNote}
-                editNote={this.editNote}
+                editItem={this.editItem}
                 />
             )}
           </ul>
