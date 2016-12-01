@@ -6,7 +6,7 @@ import Dropdown from '../../atoms/Dropdown'
 
 import * as noteService from '../../../api/notes'
 
-const categories = [
+const journalCategories = [
   'progress',
   'dream',
   'gratitude',
@@ -76,8 +76,8 @@ export default class AddThing extends Component {
             <Dropdown
               id="journal-type"
               label="Journal Entry Type"
-              options={categories}
-              defaultValue={categories[0]}
+              options={journalCategories}
+              defaultValue={journalCategories[0]}
               handleChange={(e) =>
                 this.handleChange('category', e.target.value)
               }
