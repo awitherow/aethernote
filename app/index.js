@@ -7,7 +7,9 @@ import * as noteService from './api/notes'
 
 import Overlay from './components/molecules/Overlay'
 import Header from './components/molecules/Header'
-import AddNote from './components/molecules/AddNote'
+import AddThing from './components/molecules/AddThing'
+
+import Editor from './components/organisms/Editor'
 
 import NoteList from './views/NoteList'
 import Journal from './views/Journal'
@@ -22,6 +24,11 @@ function checkAuthentication() {
   }
 }
 
+const initialEditorState = {
+  hidden: true,
+  note: {},
+}
+
 class App extends Component {
   static childContextTypes = {
     update: PropTypes.func,
@@ -33,17 +40,28 @@ class App extends Component {
     authenticated: checkAuthentication(),
     currentRoute: 'note',
     notes: [],
+    editor: initialEditorState,
   }
 
-  componentDidMount() {
+  componentDidMount = () =>
     this.getNotes()
-  }
 
   getNotes = () => {
-    this.update('loading', true)
+    !this.state.loading && this.update('loading', true)
     noteService.get(notes => {
       this.setState({ notes })
       this.update('loading', false)
+    })
+  }
+
+  removeItem = (id) => {
+    this.update('loading', true)
+    noteService.remove(id, () => this.getNotes())
+  }
+
+  submitEdit = (edits) => {
+    noteService.update(this.state.editor.note, edits, () => {
+      this.getNotes()
     })
   }
 
@@ -58,6 +76,10 @@ class App extends Component {
       case 'loading': payload = { loading: data }; break
       case 'auth': payload = { authenticated: data }; break
       case 'newRoute': payload = { currentRoute: data }; break
+      case 'closeEditor':
+        payload = { editor: { hidden: true, note: {} }}; break
+      case 'openEditor':
+        payload = { editor: { hidden: false, note: data }}; break
     }
     this.setState(payload)
   }
@@ -66,11 +88,14 @@ class App extends Component {
     switch(this.state.currentRoute) {
       case 'note': return (
         <NoteList
+          type="note"
+          removeItem={this.removeItem}
           notes={this.state.notes.filter(n => n.type === 'note')}
           />
       )
       case 'journal': return (
         <Journal
+          type="journal"
           notes={this.state.notes.filter(n => n.type === 'journal')}
           />
       )
@@ -78,7 +103,7 @@ class App extends Component {
   }
 
   render() {
-    const { loading, authenticated, currentRoute } = this.state
+    const { loading, authenticated, currentRoute, editor } = this.state
 
     return !authenticated ? <Login /> : (
       <div className="aether">
@@ -91,8 +116,19 @@ class App extends Component {
           />
 
         <div className="inner">
-          <AddNote type={currentRoute} />
+
+          <AddThing type={currentRoute} />
+
           {this.route()}
+
+          <Editor
+            hidden={editor.hidden}
+            note={editor.note}
+            onSubmit={this.submitEdit}
+            onClose={() => this.update('closeEditor')}
+            onRemove={this.removeItem}
+            />
+
         </div>
 
       </div>

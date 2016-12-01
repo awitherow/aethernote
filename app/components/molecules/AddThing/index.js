@@ -17,7 +17,7 @@ const initialState = {
   content: '',
 }
 
-export default class AddNote extends Component {
+export default class AddThing extends Component {
   state = { ...initialState }
 
   static propTypes = {

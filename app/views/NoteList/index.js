@@ -1,20 +1,14 @@
 import './styles/note-list.scss'
 import React, { Component, PropTypes } from 'react'
-import classnames from 'classnames'
-
-import * as noteService from '../../api/notes'
-import { categories } from './config'
 
 import Dropdown from '../../components/atoms/Dropdown'
 import ThingsList from '../../components/molecules/ThingsList'
-
-import EditNote from './components/EditNote'
-
 
 class NoteList extends Component {
   static propTypes = {
     notes: PropTypes.array.isRequired,
     type: PropTypes.string.isRequired,
+    removeItem: PropTypes.func.isRequired,
   }
 
   static contextTypes = {
@@ -27,44 +21,15 @@ class NoteList extends Component {
   }
 
   state = {
-    editor: {
-      hidden: true,
-      note: {},
-    },
     category: 'inbox',
     activeNotes: 0,
-  }
-
-  removeItem = (id) => {
-    this.context.update('loading', true)
-    noteService.remove(id, () => this.context.getNotes())
   }
 
   editItem = (id) => {
     const { notes } = this.props
     let note = notes.filter(note => note.id === id)[0]
     if (!note) return
-    this.setState({
-      editor: {
-        hidden: false,
-        note,
-      },
-    })
-  }
-
-  submitEdit = (edits) => {
-    noteService.update(this.state.editor.note, edits, () => {
-      this.context.getNotes()
-    })
-  }
-
-  closeEditor = () => {
-    this.setState({
-      editor: {
-        hidden: true,
-        note: {},
-      },
-    })
+    this.context.update('openEditor', note)
   }
 
   handleChange = (whatToChange, change) => {
@@ -84,24 +49,13 @@ class NoteList extends Component {
   }
 
   render() {
-    const { editor, activeNotes } = this.state
+    const { activeNotes } = this.state
     const { notes } = this.props
-    const noteListClasses = classnames('note-list', {
-      'hidden': !editor.hidden,
-    })
 
     return (
       <div className="note-page" key="note-page">
 
-        <EditNote
-          hidden={editor.hidden}
-          note={editor.note}
-          onSubmit={this.submitEdit}
-          onClose={this.closeEditor}
-          onRemove={this.removeItem}
-          />
-
-        <div className={noteListClasses}>
+        <div className="note-list">
           <div className="sub-header">
             <h2 className="note-list__page-title">
               Notes <span>({activeNotes})</span>
@@ -117,7 +71,14 @@ class NoteList extends Component {
             <Dropdown
               id="category-types"
               label="Category"
-              options={categories}
+              options={[
+                'inbox',
+                'backlog',
+                'todo',
+                'doing',
+                'done',
+                'reference',
+              ]}
               defaultValue={this.state.category}
               handleChange={e => this.handleChange('category', e.target.value)}
               />
@@ -128,7 +89,7 @@ class NoteList extends Component {
             things={this.filter(notes)}
             classModifier="note-list__list"
             edit={this.editItem}
-            remove={this.removeItem}
+            remove={this.props.removeItem}
             />
 
         </div>

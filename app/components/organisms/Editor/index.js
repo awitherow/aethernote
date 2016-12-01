@@ -1,9 +1,8 @@
-import '../styles/edit.scss'
+import './index.scss'
 import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
 import { convertToMarkdown } from '../../../common/helpers'
-import { categories } from '../config'
 
 import TextAreaInput from '../../../components/atoms/TextAreaInput'
 import FlexibleInput from '../../../components/atoms/FlexibleInput'
@@ -15,7 +14,7 @@ const initialState = {
   deleteWizardOpen: false,
 }
 
-export default class EditNote extends Component {
+export default class Editor extends Component {
   constructor(props) {
     super(props)
     this.state = { ...initialState }
@@ -118,17 +117,17 @@ export default class EditNote extends Component {
               onClick={(e) => this.handleChange('prio', e.target.checked)}
               />
 
-            <CheckboxInput
-              id="archived"
-              label="Archived"
-              defaultChecked={archived}
-              onClick={(e) => this.handleChange('archived', e.target.checked)}
-              />
-
             <Dropdown
               id="category-types"
               label="Category"
-              options={categories}
+              options={[
+                'inbox',
+                'backlog',
+                'todo',
+                'doing',
+                'done',
+                'reference',
+              ]}
               defaultValue={category}
               handleChange={e => this.handleChange('category', e.target.value)}
               />
@@ -178,7 +177,7 @@ export default class EditNote extends Component {
   }
 }
 
-EditNote.propTypes = {
+Editor.propTypes = {
   note: PropTypes.object.isRequired,
   hidden: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
@@ -186,6 +185,6 @@ EditNote.propTypes = {
   onRemove: PropTypes.func.isRequired,
 }
 
-EditNote.contextTypes = {
+Editor.contextTypes = {
   update: PropTypes.func.isRequired,
 }
