@@ -32,7 +32,7 @@ const initialEditorState = {
 class App extends Component {
   static childContextTypes = {
     update: PropTypes.func,
-    getNotes: PropTypes.func,
+    getThings: PropTypes.func,
   }
 
   state = {
@@ -44,9 +44,9 @@ class App extends Component {
   }
 
   componentDidMount = () =>
-    this.getNotes()
+    this.getThings()
 
-  getNotes = () => {
+  getThings = () => {
     !this.state.loading && this.update('loading', true)
     noteService.get(notes => {
       this.setState({ notes })
@@ -56,18 +56,18 @@ class App extends Component {
 
   removeItem = (id) => {
     this.update('loading', true)
-    noteService.remove(id, () => this.getNotes())
+    noteService.remove(id, () => this.getThings())
   }
 
   submitEdit = (edits) => {
     noteService.update(this.state.editor.note, edits, () => {
-      this.getNotes()
+      this.getThings()
     })
   }
 
   getChildContext = () => ({
     update: this.update,
-    getNotes: this.getNotes,
+    getThings: this.getThings,
   })
 
   update = (action, data) => {

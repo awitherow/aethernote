@@ -13,7 +13,7 @@ class NoteList extends Component {
 
   static contextTypes = {
     update: PropTypes.func.isRequired,
-    getNotes: PropTypes.func.isRequired,
+    getThings: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -62,7 +62,7 @@ class NoteList extends Component {
             </h2>
             <button
               className="refresh-notes"
-              onClick={this.context.getNotes}>
+              onClick={this.context.getThings}>
               &#8635;
             </button>
           </div>
