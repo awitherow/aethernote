@@ -5,10 +5,10 @@ import classnames from 'classnames'
 import { convertToMarkdown } from '../../../common/helpers'
 import { categories } from '../config'
 
-import CheckboxInput from '../../../elements/CheckboxInput'
-import FlexibleInput from '../../../elements/FlexibleInput'
-import TextAreaInput from '../../../elements/TextAreaInput'
-import Dropdown from '../../../elements/Dropdown'
+import TextAreaInput from '../../../components/atoms/TextAreaInput'
+import FlexibleInput from '../../../components/atoms/FlexibleInput'
+import Dropdown from '../../../components/atoms/Dropdown'
+import CheckboxInput from '../../../components/atoms/CheckboxInput'
 
 const initialState = {
   formUpdated: false,

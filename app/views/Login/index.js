@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 import { checkAuth } from '../../api/security'
 
-import FlexibleInput from '../../elements/FlexibleInput'
+import FlexibleInput from '../../components/atoms/FlexibleInput'
 
 class Login extends Component {
   constructor(props) {

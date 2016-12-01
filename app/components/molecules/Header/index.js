@@ -1,6 +1,6 @@
 import './styles/header.scss'
 import React, { PropTypes } from 'react'
-import Dropdown from '../Dropdown'
+import Dropdown from '../../atoms/Dropdown'
 
 const routes = [
   'note',

@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 
-import FlexibleInput from '../FlexibleInput'
-import CheckboxInput from '../CheckboxInput'
-import Dropdown from '../Dropdown'
+import FlexibleInput from '../../atoms/FlexibleInput'
+import CheckboxInput from '../../atoms/CheckboxInput'
+import Dropdown from '../../atoms/Dropdown'
 
-import * as noteService from '../../api/notes'
+import * as noteService from '../../../api/notes'
 
 const categories = [
   'progress',

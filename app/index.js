@@ -5,9 +5,9 @@ import './common/styles.scss'
 
 import * as noteService from './api/notes'
 
-import Overlay from './elements/Overlay'
-import Header from './elements/Header'
-import AddNote from './elements/AddNote'
+import Overlay from './components/molecules/Overlay'
+import Header from './components/molecules/Header'
+import AddNote from './components/molecules/AddNote'
 
 import NoteList from './views/NoteList'
 import Journal from './views/Journal'

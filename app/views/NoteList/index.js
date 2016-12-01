@@ -5,11 +5,11 @@ import classnames from 'classnames'
 import * as noteService from '../../api/notes'
 import { categories } from './config'
 
-import Dropdown from '../../elements/Dropdown'
+import Dropdown from '../../components/atoms/Dropdown'
+import ThingsList from '../../components/molecules/ThingsList'
 
 import EditNote from './components/EditNote'
 
-import ThingsList from '../../components/molecules/ThingsList'
 
 class NoteList extends Component {
   static propTypes = {
