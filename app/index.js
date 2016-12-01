@@ -38,7 +38,7 @@ class App extends Component {
   state = {
     loading: false,
     authenticated: checkAuthentication(),
-    currentRoute: 'note',
+    currentType: 'note',
     notes: [],
     editor: initialEditorState,
   }
@@ -75,7 +75,7 @@ class App extends Component {
     switch(action) {
       case 'loading': payload = { loading: data }; break
       case 'auth': payload = { authenticated: data }; break
-      case 'newRoute': payload = { currentRoute: data }; break
+      case 'newRoute': payload = { currentType: data }; break
       case 'closeEditor':
         payload = { editor: { hidden: true, note: {} }}; break
       case 'openEditor':
@@ -85,25 +85,22 @@ class App extends Component {
   }
 
   route = () => {
-    switch(this.state.currentRoute) {
-      case 'note': return (
-        <NoteList
-          type="note"
-          removeItem={this.removeItem}
-          notes={this.state.notes.filter(n => n.type === 'note')}
-          />
-      )
-      case 'journal': return (
-        <Journal
-          type="journal"
-          notes={this.state.notes.filter(n => n.type === 'journal')}
-          />
-      )
+    const { currentType, notes } = this.state
+    const sharedProps = {
+      type: currentType,
+      things: notes.filter(n => n.type === currentType),
+      removeItem: this.removeItem,
+
+    }
+    
+    switch(currentType) {
+      case 'note': return <NoteList {...sharedProps} />
+      case 'journal': return <Journal {...sharedProps} />
     }
   }
 
   render() {
-    const { loading, authenticated, currentRoute, editor } = this.state
+    const { loading, authenticated, currentType, editor } = this.state
 
     return !authenticated ? <Login /> : (
       <div className="aether">
@@ -111,13 +108,13 @@ class App extends Component {
         { loading ? <Overlay type="loading" /> : null }
 
         <Header
-          currentRoute={currentRoute}
+          currentType={currentType}
           update={this.update}
           />
 
         <div className="inner">
 
-          <AddThing type={currentRoute} />
+          <AddThing type={currentType} />
 
           {this.route()}
 

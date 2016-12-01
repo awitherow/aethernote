@@ -2,9 +2,13 @@ import './styles/index.scss'
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
 
+import ThingsList from '../../components/molecules/ThingsList'
+
 export default class Journal extends Component {
   static propTypes = {
-    notes: PropTypes.array.isRequired,
+    type: PropTypes.string.isRequired,
+    things: PropTypes.array.isRequired,
+    removeItem: PropTypes.func.isRequired,
   }
 
   static contextTypes = {
@@ -21,17 +25,28 @@ export default class Journal extends Component {
     return this.state.selectedDay === entryDay
   }
 
+  editItem = (id) => {
+    const { things } = this.props
+    let note = things.filter(note => note.id === id)[0]
+    if (!note) return
+    this.context.update('openEditor', note)
+  }
+
   render () {
     return (
       <div className="journal" key="journal-page">
 
         <h2>{moment(this.state.selectedDay).format('MMM Do YY')}</h2>
 
-        <ul>
-          {this.props.notes
+        <ThingsList
+          type="journal"
+          things={this.props.things
             .filter(e => this.getEntriesFromSelectedDay(e.created))
-            .map(e => <li key={e.created}>{e.content}</li>)}
-        </ul>
+          }
+          classModifier="journal"
+          edit={this.editItem}
+          remove={this.props.removeItem}
+          />
 
       </div>
     )

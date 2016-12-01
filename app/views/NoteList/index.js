@@ -6,7 +6,7 @@ import ThingsList from '../../components/molecules/ThingsList'
 
 class NoteList extends Component {
   static propTypes = {
-    notes: PropTypes.array.isRequired,
+    things: PropTypes.array.isRequired,
     type: PropTypes.string.isRequired,
     removeItem: PropTypes.func.isRequired,
   }
@@ -26,8 +26,8 @@ class NoteList extends Component {
   }
 
   editItem = (id) => {
-    const { notes } = this.props
-    let note = notes.filter(note => note.id === id)[0]
+    const { things } = this.props
+    let note = things.filter(note => note.id === id)[0]
     if (!note) return
     this.context.update('openEditor', note)
   }
@@ -50,7 +50,7 @@ class NoteList extends Component {
 
   render() {
     const { activeNotes } = this.state
-    const { notes } = this.props
+    const { things } = this.props
 
     return (
       <div className="note-page" key="note-page">
@@ -86,7 +86,7 @@ class NoteList extends Component {
 
           <ThingsList
             type={this.props.type}
-            things={this.filter(notes)}
+            things={this.filter(things)}
             classModifier="note-list__list"
             edit={this.editItem}
             remove={this.props.removeItem}

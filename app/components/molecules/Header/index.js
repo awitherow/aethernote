@@ -7,7 +7,7 @@ const routes = [
   'journal',
 ]
 
-const Header = ({ currentRoute, update }) => {
+const Header = ({ currentType, update }) => {
   return (
     <header className="main-header">
       <h1>Aether</h1>
@@ -15,7 +15,7 @@ const Header = ({ currentRoute, update }) => {
         id="routes"
         label="Routes"
         options={routes}
-        defaultValue={currentRoute}
+        defaultValue={currentType}
         handleChange={e => update('newRoute', e.target.value)}
         />
     </header>
@@ -23,7 +23,7 @@ const Header = ({ currentRoute, update }) => {
 }
 
 Header.propTypes = {
-  currentRoute: PropTypes.string.isRequired,
+  currentType: PropTypes.string.isRequired,
   update: PropTypes.func.isRequired,
 }
 
