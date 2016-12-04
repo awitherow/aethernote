@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
 
-import './common/styles.scss'
+import './lib/styles.scss'
 
 import * as thingService from './api/notes'
 

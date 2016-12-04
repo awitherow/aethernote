@@ -2,7 +2,7 @@ import './index.scss'
 import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
-import { convertToMarkdown } from '../../../common/helpers'
+import { convertToMarkdown } from '../../../lib/helpers'
 
 import TextAreaInput from '../../../components/atoms/TextAreaInput'
 import FlexibleInput from '../../../components/atoms/FlexibleInput'
