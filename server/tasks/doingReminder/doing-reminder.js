@@ -15,8 +15,9 @@ function sendMail() {
     .then(tasks => tasks.map(task => titles.push(task.title)))
     .then(() => {
       let nodemailer = require('nodemailer')
-      let transporter =
-        nodemailer.createTransport(`smtps://${GMAIL_USER}%40gmail.com:${GMAIL_PASS}@smtp.gmail.com`)
+      let transporter = nodemailer.createTransport(
+        `smtps://${GMAIL_USER}%40gmail.com:${GMAIL_PASS}@smtp.gmail.com`
+      )
 
       transporter.sendMail({
         from: GMAIL_USER,
