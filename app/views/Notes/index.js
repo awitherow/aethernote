@@ -4,6 +4,8 @@ import React, { Component, PropTypes } from 'react'
 import Dropdown from '../../components/atoms/Dropdown'
 import ThingsList from '../../components/molecules/ThingsList'
 
+import categories from '../../lib/schema/categories'
+
 class Notes extends Component {
   static propTypes = {
     things: PropTypes.array.isRequired,
@@ -69,14 +71,7 @@ class Notes extends Component {
             <Dropdown
               id="category-types"
               label="Category"
-              options={[
-                'inbox',
-                'backlog',
-                'todo',
-                'doing',
-                'done',
-                'reference',
-              ]}
+              options={categories.note}
               defaultValue={this.state.category}
               handleChange={e => this.handleChange('category', e.target.value)}
               />

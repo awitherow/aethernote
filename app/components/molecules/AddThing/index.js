@@ -5,14 +5,7 @@ import CheckboxInput from '../../atoms/CheckboxInput'
 import Dropdown from '../../atoms/Dropdown'
 
 import * as thingService from '../../../api/notes'
-
-const journalCategories = [
-  'recap',
-  'dream',
-  'gratitude',
-  'goals tomorrow',
-  'other',
-]
+import categories from '../../../lib/schema/categories'
 
 const initialState = {
   content: '',
@@ -77,8 +70,8 @@ export default class AddThing extends Component {
             <Dropdown
               id="journal-type"
               label="Journal Entry Type"
-              options={journalCategories}
-              defaultValue={journalCategories[0]}
+              options={categories.journal}
+              defaultValue={categories.journal[0]}
               handleChange={(e) =>
                 this.handleChange('category', e.target.value)
               }

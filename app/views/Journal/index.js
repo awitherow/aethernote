@@ -5,14 +5,7 @@ import moment from 'moment'
 import ListGroup from '../../components/molecules/ListGroup'
 
 import { getToday, getYestereday } from '../../lib/helpers'
-
-const journalCategories = [
-  'goals',
-  'recap',
-  'dream',
-  'gratitude',
-  'other',
-]
+import categories from '../../lib/schema/categories'
 
 export default class Journal extends Component {
   static propTypes = {
@@ -51,7 +44,7 @@ export default class Journal extends Component {
 
         <h2>{moment(this.state.day).format('MMM Do YY')}</h2>
 
-        {journalCategories.map(category => {
+        {categories.journal.map(category => {
           return (
             <ListGroup
               key={category}
