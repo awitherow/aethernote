@@ -1,4 +1,4 @@
-import './styles/index.scss'
+import './journal.scss'
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
 

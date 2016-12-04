@@ -1,4 +1,4 @@
-import './styles/header.scss'
+import './header.scss'
 import React, { PropTypes } from 'react'
 import Dropdown from '../../atoms/Dropdown'
 

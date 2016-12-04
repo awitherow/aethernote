@@ -1,3 +1,4 @@
+import './login.scss'
 import React, { Component, PropTypes } from 'react'
 
 import { checkAuth } from '../../api/security'
