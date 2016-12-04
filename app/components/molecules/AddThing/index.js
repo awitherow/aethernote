@@ -7,9 +7,10 @@ import Dropdown from '../../atoms/Dropdown'
 import * as thingService from '../../../api/notes'
 
 const journalCategories = [
-  'progress',
+  'recap',
   'dream',
   'gratitude',
+  'goals tomorrow',
   'other',
 ]
 
