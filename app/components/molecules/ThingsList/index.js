@@ -1,6 +1,12 @@
 import React, { PropTypes } from 'react'
 import ListItem from '../../atoms/ListItem'
 
+function selectContentType(note) {
+  switch (note.type) {
+    case 'journal': return note.content
+    case 'note': return note.title
+  }
+}
 
 export default function ThingsList({
   classModifier,
@@ -14,7 +20,9 @@ export default function ThingsList({
       {things.map(note =>
         <ListItem
           key={note.id}
-          note={note}
+          id={note.id}
+          content={selectContentType(note)}
+          prio={note.type && note.prio}
           edit={edit}
           remove={remove}
           />

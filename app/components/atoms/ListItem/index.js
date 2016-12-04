@@ -1,14 +1,13 @@
 import React, { PropTypes } from 'react'
 
 const ListItem = ({
-  note, edit,
+  id, content, prio, edit,
 }) => {
-  const { id, title, prio } = note
   let prioElement = <span className="priority">&#9888;</span>
   return (
       <li>
         { prio ?  prioElement : null }
-        <span className="title">{title}</span>
+        <span className="title">{content}</span>
         <button onClick={() => edit(id)}>&#9998;</button>
       </li>
 
@@ -16,7 +15,9 @@ const ListItem = ({
 }
 
 ListItem.propTypes = {
-  note: PropTypes.object.isRequired,
+  id: PropTypes.number.isRequired,
+  content: PropTypes.string.isRequired,
+  prio: PropTypes.bool.isRequired,
   edit: PropTypes.func.isRequired,
 }
 
