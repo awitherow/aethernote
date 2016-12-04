@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 import { checkAuth } from '../../api/security'
 
+import { Button } from 'antd'
 import FlexibleInput from '../../components/atoms/FlexibleInput'
 
 class Login extends Component {
@@ -37,7 +38,7 @@ class Login extends Component {
   render() {
     const { userId, userKey } = this.state
     return (
-      <form onSubmit={this.authenticateLoginAttempt}>
+      <form>
         <FlexibleInput
           id="userId"
           label="Username"
@@ -52,7 +53,7 @@ class Login extends Component {
           value={userKey}
           onChange={(e) => this.setState({ userKey: e.target.value })}
           />
-        <button>Submit</button>
+        <Button onClick={this.authenticateLoginAttempt}>Submit</Button>
       </form>
     )
   }

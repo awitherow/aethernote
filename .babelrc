@@ -1,6 +1,7 @@
 {
   "presets": ["latest", "react"],
   "plugins": [
+    ["import", { "libraryName": "antd", "style": "css" }],
     "transform-class-properties",
     "transform-object-rest-spread"
   ]

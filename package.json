@@ -24,6 +24,7 @@
     "dev-doing-reminder": "NODE_ENV='development' DATABASE_URL=$(heroku config:get DATABASE_URL -a aethernote) nodemon server/tasks/doingReminder"
   },
   "dependencies": {
+    "antd": "^2.5.0",
     "babel": "^6.5.2",
     "babel-loader": "^6.2.8",
     "babel-polyfill": "^6.16.0",
@@ -52,6 +53,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
+    "babel-plugin-import": "^1.1.0",
     "babel-plugin-transform-class-properties": "^6.19.0",
     "babel-plugin-transform-object-rest-spread": "^6.19.0",
     "babel-preset-latest": "^6.16.0",
