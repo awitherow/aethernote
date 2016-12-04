@@ -2,10 +2,10 @@ import './journal.scss'
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
 
-import ListGroup from '../../components/molecules/ListGroup'
-
 import { getToday, getYestereday } from '../../lib/helpers'
 import categories from '../../lib/schema/categories'
+
+import ListGroup from '../../components/molecules/ListGroup'
 
 export default class Journal extends Component {
   static propTypes = {
