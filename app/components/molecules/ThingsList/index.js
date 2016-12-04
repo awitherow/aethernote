@@ -9,14 +9,12 @@ function selectContentType(note) {
 }
 
 export default function ThingsList({
-  classModifier,
   things,
   edit,
   remove,
 }) {
-  const ThingsListClass = `thingslist ${classModifier}`
   return (
-    <ul className={ThingsListClass}>
+    <ul className="list">
       {things.map(note =>
         <ListItem
           key={note.id}
@@ -35,5 +33,4 @@ ThingsList.propTypes = {
   things: PropTypes.array.isRequired,
   edit: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired,
-  classModifier: PropTypes.string.isRequired,
 }

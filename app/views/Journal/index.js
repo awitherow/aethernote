@@ -2,7 +2,17 @@ import './styles/index.scss'
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
 
-import ThingsList from '../../components/molecules/ThingsList'
+import ListGroup from '../../components/molecules/ListGroup'
+
+import { getToday, getYestereday } from '../../lib/helpers'
+
+const journalCategories = [
+  'goals',
+  'recap',
+  'dream',
+  'gratitude',
+  'other',
+]
 
 export default class Journal extends Component {
   static propTypes = {
@@ -17,12 +27,15 @@ export default class Journal extends Component {
   }
 
   state = {
-    selectedDay: new Date().setHours(0, 0, 0, 0),
+    day: getToday(),
   }
 
-  getEntriesFromSelectedDay = (dateCreated) => {
-    const entryDay = new Date(dateCreated).setHours(0, 0, 0, 0)
-    return this.state.selectedDay === entryDay
+  filterEntries = (category) => {
+    const date = category === 'goals' ? getYestereday() : this.state.day
+    return this.props.things.filter(thing =>
+      (new Date(thing.created).setHours(0, 0, 0, 0) === date) &&
+      (thing.category === category)
+    )
   }
 
   editItem = (id) => {
@@ -36,17 +49,19 @@ export default class Journal extends Component {
     return (
       <div className="journal" key="journal-page">
 
-        <h2>{moment(this.state.selectedDay).format('MMM Do YY')}</h2>
+        <h2>{moment(this.state.day).format('MMM Do YY')}</h2>
 
-        <ThingsList
-          type="journal"
-          things={this.props.things
-            .filter(e => this.getEntriesFromSelectedDay(e.created))
-          }
-          classModifier="journal"
-          edit={this.editItem}
-          remove={this.props.removeItem}
-          />
+        {journalCategories.map(category => {
+          return (
+            <ListGroup
+              key={category}
+              category={category}
+              things={this.filterEntries(category)}
+              editItem={this.editItem}
+              removeItem={this.props.removeItem}
+              />
+          )
+        })}
 
       </div>
     )
