@@ -1,3 +1,5 @@
+import categories from '../lib/schema/categories'
+
 function get(cb) {
   fetch('/api/notes')
     .then(r => r.json())
@@ -10,8 +12,8 @@ function get(cb) {
 function add(entry, cb) {
   if (!entry.category) {
     switch(entry.type) {
-      case 'note': entry.category = 'inbox'; break
-      case 'journal': entry.category = 'progress'; break
+      case 'note': entry.category = categories.note[0]; break
+      case 'journal': entry.category = categories.journal[0]; break
     }
   }
 

@@ -23,10 +23,18 @@ export default class AddThing extends Component {
     getThings: PropTypes.func.isRequired,
   }
 
-  resetState = () => {
+  componentWillReceiveProps(nextProps) {
+    this.resetState(nextProps.type)
+  }
+
+  resetState = (type) => {
     for (let thing in this.state) {
       if (thing) {
-        delete this.state[thing]
+        if (thing === 'category' && type === 'journal') {
+          return
+        } else {
+          delete this.state[thing]
+        }
       }
     }
     this.setState(...this.state, initialState)
@@ -39,7 +47,7 @@ export default class AddThing extends Component {
       ...this.state,
       type: this.props.type,
     }, () => {
-      this.resetState()
+      this.resetState(this.props.type)
       this.context.getThings()
     })
   }

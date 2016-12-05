@@ -8,8 +8,8 @@ const categories  = {
     'reference',
   ],
   journal : [
-    'goals',
     'recap',
+    'goals',
     'dream',
     'gratitude',
     'other',
