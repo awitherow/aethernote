@@ -12,7 +12,7 @@ const categories  = {
     'goals',
     'dream',
     'gratitude',
-    'other',
+    'magick',
   ],
 }
 
