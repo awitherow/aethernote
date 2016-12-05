@@ -9,6 +9,7 @@ const db = pgp(process.env.DATABASE_URL)
 function sendMail() {
   let GMAIL_USER = process.env.GMAIL_USER
   let GMAIL_PASS = process.env.GMAIL_PASS
+  let PRIVATE_EMAIL = process.env.PRIVATE_EMAIL
 
   let titles = []
   getTasks('doing')
@@ -21,7 +22,7 @@ function sendMail() {
 
       transporter.sendMail({
         from: GMAIL_USER,
-        to: process.env.PRIVATE_EMAIL,
+        to: PRIVATE_EMAIL,
         subject: 'Daily Reminder',
         text: `${titles.join('\n')}`,
       }, (error, info) => {
