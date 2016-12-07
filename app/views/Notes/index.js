@@ -11,10 +11,11 @@ class Notes extends Component {
     things: PropTypes.array.isRequired,
     type: PropTypes.string.isRequired,
     removeItem: PropTypes.func.isRequired,
+    // redux functions
+    openEditor: PropTypes.func.isRequired,
   }
 
   static contextTypes = {
-    update: PropTypes.func.isRequired,
     getThings: PropTypes.func.isRequired,
   }
 
@@ -31,7 +32,7 @@ class Notes extends Component {
     const { things } = this.props
     let note = things.filter(note => note.id === id)[0]
     if (!note) return
-    this.context.update('openEditor', note)
+    this.props.openEditor()
   }
 
   handleChange = (whatToChange, change) => {

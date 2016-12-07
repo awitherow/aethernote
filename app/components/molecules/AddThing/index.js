@@ -21,7 +21,6 @@ export default class AddThing extends Component {
   }
 
   static contextTypes = {
-    update: PropTypes.func.isRequired,
     getThings: PropTypes.func.isRequired,
   }
 
