@@ -1,8 +1,16 @@
+import './lib/styles.scss'
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
-import { createStore } from 'redux'
 
-import './lib/styles.scss'
+import { Provider, connect } from 'react-redux'
+import store from './redux/store'
+import {
+  toggleLoading,
+  grantAuthority,
+  routeTo,
+  openEditor,
+  closeEditor,
+} from './redux/actions'
 
 import * as thingService from './api/notes'
 
@@ -16,56 +24,21 @@ import Notes from './views/Notes'
 import Journal from './views/Journal'
 import Login from './views/Login'
 
-function checkAuthentication() {
-  return process.env.NODE_ENV === 'development' ? true : false
-}
-
-function Aether(state = {
-  loading: false,
-  authenticated: checkAuthentication(),
-  currentType: 'note',
-  notes: [],
-  editor: {
-    hidden: true,
-    note: {},
-  },
-}, action) {
-  switch(action.type) {
-    case 'LOADING': return {
-      ...state,
-      loading: action.data,
-    }
-    case 'CHECK_AUTH': return {
-      ...state,
-      authenticated: action.data,
-    }
-    case 'HANDLE_ROUTE': return {
-      ...state,
-      currentType: action.data,
-    }
-    case 'OPEN_EDITOR': return {
-      ...state,
-      editor: {
-        hidden: false,
-        note: action.data,
-      },
-    }
-    case 'CLOSE_EDITOR': return {
-      ...state,
-      editor: {
-        hidden: true,
-        note: action.data,
-      },
-    }
-  }
-}
-
-let store = createStore(Aether)
-
 class App extends Component {
   static childContextTypes = {
     update: PropTypes.func,
     getThings: PropTypes.func,
+  }
+
+  static propTypes = {
+    // redux dispatchers
+    grantAuthority: PropTypes.func.isRequired,
+    toggleLoading: PropTypes.func.isRequired,
+    closeEditor: PropTypes.func.isRequired,
+    routeTo: PropTypes.func.isRequired,
+    openEditor: PropTypes.func.isRequired,
+    // redux state
+    currentType: PropTypes.string.isRequired,
   }
 
   state = {
@@ -169,4 +142,22 @@ class App extends Component {
   }
 }
 
-render(<App />, document.getElementById('app'))
+const mapDispatchToProps = dispatch => ({
+  toggleLoading: (v) => dispatch(toggleLoading(v)),
+  grantAuthority: (v) => dispatch(grantAuthority(v)),
+  routeTo: (v) => dispatch(routeTo(v)),
+  openEditor: (v) => dispatch(openEditor(v)),
+  closeEditor: (v) => dispatch(closeEditor(v)),
+})
+
+const mapStateToProps = state => ({ state })
+
+const Aether = connect(
+  mapDispatchToProps,
+  mapStateToProps
+)(<App />)
+
+render(
+  <Provider store={store}>
+    <Aether />
+  </Provider>, document.getElementById('app'))
