@@ -3,10 +3,10 @@ import {
 } from './constants'
 
 // app
-export const toggleLoading = (bool) => ({ type: LOADING, bool })
-export const grantAuthority = (authd) => ({ type: GRANT_AUTHORITY, authd })
-export const routeTo = (route) => ({ type: HANDLE_ROUTE, route })
+export const toggleLoading = (data) => ({ type: LOADING, data })
+export const grantAuthority = (data) => ({ type: GRANT_AUTHORITY, data })
+export const routeTo = (data) => ({ type: HANDLE_ROUTE, data })
 
 // editor
-export const openEditor = (note) => ({ type: OPEN_EDITOR, note })
+export const openEditor = (data) => ({ type: OPEN_EDITOR, data })
 export const closeEditor = () => ({ type: CLOSE_EDITOR })

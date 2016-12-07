@@ -1,4 +1,3 @@
-import { createStore } from 'redux'
 import {
   LOADING, GRANT_AUTHORITY, HANDLE_ROUTE, OPEN_EDITOR, CLOSE_EDITOR,
 } from './constants'
@@ -17,7 +16,8 @@ const initialState = {
   },
 }
 
-export default createStore((intialState, action) => {
+const Store = (intialState, action) => {
+  console.log(action)
   switch(action.type) {
     case LOADING: return {
       ...initialState,
@@ -41,5 +41,8 @@ export default createStore((intialState, action) => {
     case CLOSE_EDITOR: return {
       ...initialState,
     }
+    default: return initialState
   }
-})
+}
+
+export default Store

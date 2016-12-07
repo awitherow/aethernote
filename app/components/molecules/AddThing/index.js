@@ -16,6 +16,8 @@ export default class AddThing extends Component {
 
   static propTypes = {
     type: PropTypes.string.isRequired,
+    // redux functions
+    toggleLoading: PropTypes.func.isRequired,
   }
 
   static contextTypes = {
@@ -42,7 +44,7 @@ export default class AddThing extends Component {
 
   addNote = (e) => {
     e.preventDefault()
-    this.context.update('loading', true)
+    this.props.toggleLoading(true)
     thingService.add({
       ...this.state,
       type: this.props.type,

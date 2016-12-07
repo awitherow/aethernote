@@ -5,14 +5,15 @@ import { checkAuth } from '../../api/security'
 
 import FlexibleInput from '../../components/atoms/FlexibleInput'
 
-class Login extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      failureAttempts: 0,
-      userId: '',
-      userKey: '',
-    }
+export default class Login extends Component {
+  static propTypes = {
+    grantAuthority: PropTypes.func.isRequired,
+  }
+
+  state = {
+    failureAttempts: 0,
+    userId: '',
+    userKey: '',
   }
 
   authenticateLoginAttempt = (e) => {
@@ -30,7 +31,7 @@ class Login extends Component {
           })
         }
       } else {
-        this.context.update('auth', true)
+        this.props.grantAuthority(true)
       }
     })
   }
@@ -58,9 +59,3 @@ class Login extends Component {
     )
   }
 }
-
-Login.contextTypes = {
-  update: PropTypes.func.isRequired,
-}
-
-export default Login
