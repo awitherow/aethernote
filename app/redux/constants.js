@@ -1,0 +1,5 @@
+export const LOADING = 'LOADING'
+export const GRANT_AUTHORITY = 'GRANT_AUTHORITY'
+export const HANDLE_ROUTE = 'HANDLE_ROUTE'
+export const OPEN_EDITOR = 'OPEN_EDITOR'
+export const CLOSE_EDITOR = 'CLOSE_EDITOR'
