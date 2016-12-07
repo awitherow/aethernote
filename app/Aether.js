@@ -35,6 +35,10 @@ class Aether extends Component {
     // redux state
     currentType: PropTypes.string.isRequired,
     authenticated: PropTypes.bool.isRequired,
+    editor: PropTypes.shape({
+      hidden: PropTypes.bool.isRequired,
+      note: PropTypes.object.isRequired,
+    }).isRequired,
   }
 
   state = {
@@ -84,8 +88,8 @@ class Aether extends Component {
   }
 
   render() {
-    const { loading, editor } = this.state
-    const { authenticated, currentType } = this.props
+    const { loading } = this.state
+    const { editor, authenticated, currentType } = this.props
 
     return !authenticated ? (
       <Login
@@ -133,9 +137,10 @@ const mapDispatchToProps = dispatch => ({
   closeEditor: (v) => dispatch(closeEditor(v)),
 })
 
-const mapStateToProps = ({ currentType, authenticated }) => ({
+const mapStateToProps = ({ currentType, authenticated, editor }) => ({
   currentType,
   authenticated,
+  editor,
 })
 
 const ConnectedAether = connect(

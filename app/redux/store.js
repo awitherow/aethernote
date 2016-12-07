@@ -17,7 +17,6 @@ const initialState = {
 }
 
 const Store = (intialState, action) => {
-  console.log(action)
   switch(action.type) {
     case LOADING: return {
       ...initialState,
