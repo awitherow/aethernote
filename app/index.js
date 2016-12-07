@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { render } from 'react-dom'
+import { createStore } from 'redux'
 
 import './lib/styles.scss'
 
@@ -19,10 +20,47 @@ function checkAuthentication() {
   return process.env.NODE_ENV === 'development' ? true : false
 }
 
-const initialEditorState = {
-  hidden: true,
-  note: {},
+function Aether(state = {
+  loading: false,
+  authenticated: checkAuthentication(),
+  currentType: 'note',
+  notes: [],
+  editor: {
+    hidden: true,
+    note: {},
+  },
+}, action) {
+  switch(action.type) {
+    case 'LOADING': return {
+      ...state,
+      loading: action.data,
+    }
+    case 'CHECK_AUTH': return {
+      ...state,
+      authenticated: action.data,
+    }
+    case 'HANDLE_ROUTE': return {
+      ...state,
+      currentType: action.data,
+    }
+    case 'OPEN_EDITOR': return {
+      ...state,
+      editor: {
+        hidden: false,
+        note: action.data,
+      },
+    }
+    case 'CLOSE_EDITOR': return {
+      ...state,
+      editor: {
+        hidden: true,
+        note: action.data,
+      },
+    }
+  }
 }
+
+let store = createStore(Aether)
 
 class App extends Component {
   static childContextTypes = {
@@ -35,7 +73,10 @@ class App extends Component {
     authenticated: checkAuthentication(),
     currentType: 'note',
     notes: [],
-    editor: initialEditorState,
+    editor: {
+      hidden: true,
+      note: {},
+    },
   }
 
   componentDidMount = () =>
