@@ -12,10 +12,11 @@ export default class Journal extends Component {
     type: PropTypes.string.isRequired,
     things: PropTypes.array.isRequired,
     removeItem: PropTypes.func.isRequired,
+    // redux
+    openEditor: PropTypes.func.isRequired,
   }
 
   static contextTypes = {
-    update: PropTypes.func.isRequired,
     getThings: PropTypes.func.isRequired,
   }
 
@@ -35,7 +36,7 @@ export default class Journal extends Component {
     const { things } = this.props
     let note = things.filter(note => note.id === id)[0]
     if (!note) return
-    this.context.update('openEditor', note)
+    this.props.openEditor(note)
   }
 
   render () {

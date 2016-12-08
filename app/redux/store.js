@@ -35,6 +35,10 @@ const Store = (state, action) => {
     }
     case CLOSE_EDITOR: return {
       ...state,
+      editor: {
+        hidden: true,
+        note: {},
+      },
     }
     default: return initialState
   }

@@ -39,6 +39,7 @@ class Aether extends Component {
       hidden: PropTypes.bool.isRequired,
       note: PropTypes.object.isRequired,
     }).isRequired,
+    loading: PropTypes.bool.isRequired,
   }
 
   state = {
@@ -62,7 +63,7 @@ class Aether extends Component {
   }
 
   submitEdit = (edits) => {
-    thingService.update(this.state.editor.note, edits, () => {
+    thingService.update(this.props.editor.note, edits, () => {
       this.getThings()
     })
   }
@@ -88,8 +89,7 @@ class Aether extends Component {
   }
 
   render() {
-    const { loading } = this.state
-    const { editor, authenticated, currentType } = this.props
+    const { loading, editor, authenticated, currentType } = this.props
 
     return !authenticated ? (
       <Login
@@ -120,6 +120,7 @@ class Aether extends Component {
             onSubmit={this.submitEdit}
             onClose={this.props.closeEditor}
             onRemove={this.removeItem}
+            toggleLoading={this.props.toggleLoading}
             />
 
         </div>
@@ -137,10 +138,13 @@ const mapDispatchToProps = dispatch => ({
   closeEditor: (v) => dispatch(closeEditor(v)),
 })
 
-const mapStateToProps = ({ currentType, authenticated, editor }) => ({
+const mapStateToProps = ({
+  currentType, authenticated, editor, loading,
+}) => ({
   currentType,
   authenticated,
   editor,
+  loading,
 })
 
 const ConnectedAether = connect(
