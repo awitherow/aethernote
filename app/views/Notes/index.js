@@ -32,7 +32,7 @@ class Notes extends Component {
     const { things } = this.props
     let note = things.filter(note => note.id === id)[0]
     if (!note) return
-    this.props.openEditor()
+    this.props.openEditor(note)
   }
 
   handleChange = (whatToChange, change) => {

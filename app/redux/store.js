@@ -2,13 +2,9 @@ import {
   LOADING, GRANT_AUTHORITY, HANDLE_ROUTE, OPEN_EDITOR, CLOSE_EDITOR,
 } from './constants'
 
-function checkAuthentication() {
-  return process.env.NODE_ENV === 'development' ? true : false
-}
-
 const initialState = {
   loading: false,
-  authenticated: checkAuthentication(),
+  authenticated: false,
   currentType: 'note',
   editor: {
     hidden: true,
@@ -16,29 +12,29 @@ const initialState = {
   },
 }
 
-const Store = (intialState, action) => {
+const Store = (state, action) => {
   switch(action.type) {
     case LOADING: return {
-      ...initialState,
+      ...state,
       loading: action.data,
     }
     case GRANT_AUTHORITY: return {
-      ...initialState,
+      ...state,
       authenticated: action.data,
     }
     case HANDLE_ROUTE: return {
-      ...initialState,
+      ...state,
       currentType: action.data,
     }
     case OPEN_EDITOR: return {
-      ...initialState,
+      ...state,
       editor: {
         hidden: false,
         note: action.data,
       },
     }
     case CLOSE_EDITOR: return {
-      ...initialState,
+      ...state,
     }
     default: return initialState
   }

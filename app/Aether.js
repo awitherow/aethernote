@@ -78,7 +78,7 @@ class Aether extends Component {
       type: currentType,
       things: notes.filter(n => n.type === currentType),
       removeItem: this.removeItem,
-      openEditor: this.props.closeEditor,
+      openEditor: this.props.openEditor,
     }
 
     switch(currentType) {
