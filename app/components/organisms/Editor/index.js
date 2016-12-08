@@ -15,9 +15,12 @@ const initialState = {
 }
 
 export default class Editor extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { ...initialState }
+  static propTypes = {
+    toggleLoading: PropTypes.func.isRequired,
+  }
+
+  state = {
+    ...initialState,
   }
 
   componentWillReceiveProps(nextProps) {
@@ -31,7 +34,7 @@ export default class Editor extends Component {
 
   onSubmit = (e) => {
     e.preventDefault()
-    this.context.update('loading', true)
+    this.props.toggleLoading(true)
     let update = this.state
     delete update.formUpdated
     delete update.deleteWizardOpen
@@ -183,8 +186,4 @@ Editor.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
-}
-
-Editor.contextTypes = {
-  update: PropTypes.func.isRequired,
 }
