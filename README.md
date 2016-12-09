@@ -15,8 +15,8 @@ coming soon
 ## development
 
 ```sh
-$ npm install
-$ npm run dev
+$ yarn install
+$ yarn dev
 ```
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
