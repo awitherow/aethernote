@@ -2,9 +2,18 @@ import {
   LOADING, GRANT_AUTHORITY, HANDLE_ROUTE, OPEN_EDITOR, CLOSE_EDITOR,
 } from './constants'
 
+function checkAuthentication() {
+  if (process.env.NODE_ENV === 'development') {
+    return true
+  } else {
+    // check cookies?
+    return false
+  }
+}
+
 const initialState = {
   loading: false,
-  authenticated: false,
+  authenticated: checkAuthentication(),
   currentType: 'note',
   editor: {
     hidden: true,
