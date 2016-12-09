@@ -10,15 +10,18 @@
   "engines": {
     "node": "6.3.0"
   },
+  "env": {
+    "browser": true
+  },
   "scripts": {
-    "start": "npm run webpack & npm run express",
+    "start": "yarn webpack & yarn express",
     "webpack": "webpack",
     "express": "node start.js",
     "doing-reminder": "node server/tasks/doingReminder",
     "prepush": "npm run test",
     "test": "npm run lint",
     "lint": "eslint . --ext .js --ext .jsx --fix",
-    "dev": "npm run express-dev & npm run webpack-dev",
+    "dev": "yarn express-dev & yarn webpack-dev",
     "webpack-dev": "NODE_ENV='development' webpack -d --watch --colors",
     "express-dev": "NODE_ENV='development' DATABASE_URL=$(heroku config:get DATABASE_URL -a aethernote) nodemon start.js",
     "dev-doing-reminder": "NODE_ENV='development' DATABASE_URL=$(heroku config:get DATABASE_URL -a aethernote) nodemon server/tasks/doingReminder"
@@ -67,7 +70,8 @@
     "husky": "^0.11.9",
     "nodemon": "^1.11.0",
     "react-hot-loader": "^3.0.0-beta.6",
-    "redux-devtools": "^3.3.1"
+    "redux-devtools": "^3.3.1",
+    "yarn": "^0.17.10"
   },
   "license": "ISC",
   "bugs": {
