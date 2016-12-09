@@ -10,6 +10,9 @@
   "engines": {
     "node": "6.3.0"
   },
+  "env": {
+    "browser": true
+  },
   "scripts": {
     "start": "yarn webpack & yarn express",
     "webpack": "webpack",
