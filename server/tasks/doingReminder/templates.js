@@ -9,11 +9,11 @@ export const doingReminder = (tasks, goals) => renderEmail(
       <Span fontSize={16}>
         <h1>Last night, your goals were...</h1>
         <ol>
-          {goals.map(goal =>
+          {goals ? goals.map(goal =>
             <li key={goal.title}>
               <Span {...taskStyles({ prio: true })}>{goal.title}</Span>
             </li>
-          )}
+          ) : 'no goals!'}
         </ol>
       </Span>
     </Item>
@@ -21,11 +21,11 @@ export const doingReminder = (tasks, goals) => renderEmail(
       <Span fontSize={16}>
         <h1>Currently in 'doing!' | {tasks.length} tasks</h1>
         <ol>
-          {tasks.map(task =>
+          {tasks ? tasks.map(task =>
             <li key={task.title}>
               <Span {...taskStyles(task)}>{task.title}</Span>
             </li>
-          )}
+          ): 'move tasks into doing!'}
         </ol>
       </Span>
     </Item>
