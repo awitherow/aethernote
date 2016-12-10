@@ -6,10 +6,7 @@ export function convertToMarkdown(text) {
 }
 
 export function getYestereday() {
-  let date = new Date()
-  date.setDate(date.getDate -1)
-  date.setHours(0, 0, 0, 0)
-  return date
+  return new Date(new Date() - (1000*60*60*24)).setHours(0, 0, 0, 0)
 }
 
 export function getToday() {
