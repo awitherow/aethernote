@@ -1,5 +1,6 @@
 import promiseLib from 'bluebird'
 import pg from 'pg-promise'
+import axios from 'axios'
 
 import { doingReminder } from './templates'
 
@@ -17,6 +18,7 @@ async function sendMail() {
   let GMAIL_PASS = process.env.GMAIL_PASS
   let PRIVATE_EMAIL = process.env.PRIVATE_EMAIL
 
+  const quote = await getQuotes()
   const tasks = await getThingsByCategory('doing')
   const goals = await getThingsByCategory('goals').filter(goal =>
     new Date(goal.created).setHours(0, 0, 0, 0) ===
@@ -32,7 +34,7 @@ async function sendMail() {
     from: GMAIL_USER,
     to: PRIVATE_EMAIL,
     subject: 'Daily Reminder',
-    html: doingReminder(tasks, goals),
+    html: doingReminder(quote.data, tasks, goals),
   }, (error, info) => {
     if (error) return console.log(error)
     console.log('Message sent: ' + info.response)
@@ -42,7 +44,20 @@ async function sendMail() {
 function getThingsByCategory(category) {
   return db.any('select * from entries WHERE category=${category}', {
     category,
-  }).then(data => data).catch(err => console.log(err))
+  }).catch(err => console.log(err))
+}
+
+function getQuotes() {
+  return axios({
+    method: 'get',
+    url: 'http://api.forismatic.com/api/1.0/',
+    params: {
+      method: 'getQuote',
+      format: 'json',
+      lang: 'en',
+    },
+    transformResponse: data => JSON.stringify(data),
+  })
 }
 
 sendMail()

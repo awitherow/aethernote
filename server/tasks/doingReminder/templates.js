@@ -3,8 +3,16 @@ import ReactHTMLEmail, { Email, Item, Span, renderEmail } from 'react-html-email
 
 ReactHTMLEmail.injectReactEmailAttributes()
 
-export const doingReminder = (tasks, goals) => renderEmail(
+export const doingReminder = (quote, tasks, goals) => renderEmail(
   <Email title="Doing Reminder">
+    <Item align="center">
+      <Span fontSize={16}>
+        <blockquote>
+          <p>{quote.quoteText}</p>
+          <footer>{quote.quoteAuthor}</footer>
+        </blockquote>
+      </Span>
+    </Item>
     <Item>
       <Span fontSize={16}>
         <h1>Last night, your goals were...</h1>
