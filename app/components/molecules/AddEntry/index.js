@@ -28,7 +28,7 @@ export default class AddThing extends Component {
     this.resetState(nextProps.type)
   }
 
-  resetState = (type) => {
+  resetState = () => {
     for (let thing in this.state) {
       if (thing) {
         delete this.state[thing]
@@ -44,7 +44,7 @@ export default class AddThing extends Component {
       ...this.state,
       type: this.props.type,
     }, () => {
-      this.resetState(this.props.type)
+      this.resetState()
       this.context.getEntries()
     })
   }
