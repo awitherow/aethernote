@@ -43,7 +43,7 @@ class Aether extends Component {
   }
 
   state = {
-    notes: [],
+    entires: [],
   }
 
   componentDidMount = () =>
@@ -51,8 +51,8 @@ class Aether extends Component {
 
   getEntries = () => {
     !this.state.loading && this.props.toggleLoading(true)
-    entryService.get(notes => {
-      this.setState({ notes })
+    entryService.get(entires => {
+      this.setState({ entires })
       this.props.toggleLoading(false)
     })
   }
@@ -73,11 +73,11 @@ class Aether extends Component {
   })
 
   route = () => {
-    const { notes } = this.state
+    const { entires } = this.state
     const { currentType } = this.props
     const sharedProps = {
       type: currentType,
-      things: notes.filter(n => n.type === currentType),
+      entries: entires.filter(entry => entry.type === currentType),
       removeItem: this.removeItem,
       openEditor: this.props.openEditor,
     }

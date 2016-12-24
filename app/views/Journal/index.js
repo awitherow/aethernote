@@ -10,7 +10,7 @@ import ListGroup from '../../components/molecules/ListGroup'
 export default class Journal extends Component {
   static propTypes = {
     type: PropTypes.string.isRequired,
-    things: PropTypes.array.isRequired,
+    entries: PropTypes.array.isRequired,
     removeItem: PropTypes.func.isRequired,
     // redux
     openEditor: PropTypes.func.isRequired,
@@ -26,15 +26,15 @@ export default class Journal extends Component {
 
   filterEntries = (category) => {
     const date = category === 'goals' ? getYestereday() : this.state.day
-    return this.props.things.filter(thing =>
+    return this.props.entries.filter(thing =>
       (new Date(thing.created).setHours(0, 0, 0, 0) === date) &&
       (thing.category === category)
     )
   }
 
   editItem = (id) => {
-    const { things } = this.props
-    let note = things.filter(note => note.id === id)[0]
+    const { entries } = this.props
+    let note = entries.filter(note => note.id === id)[0]
     if (!note) return
     this.props.openEditor(note)
   }
@@ -50,7 +50,7 @@ export default class Journal extends Component {
             <ListGroup
               key={category}
               category={category}
-              things={this.filterEntries(category)}
+              entries={this.filterEntries(category)}
               editItem={this.editItem}
               removeItem={this.props.removeItem}
               />

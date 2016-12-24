@@ -2,13 +2,13 @@ import './index.scss'
 import React, { Component, PropTypes } from 'react'
 
 import Dropdown from '../../components/atoms/Dropdown'
-import ThingsList from '../../components/molecules/ThingsList'
+import List from '../../components/molecules/List'
 
 import categories from '../../lib/schema/categories'
 
 class Notes extends Component {
   static propTypes = {
-    things: PropTypes.array.isRequired,
+    entries: PropTypes.array.isRequired,
     type: PropTypes.string.isRequired,
     removeItem: PropTypes.func.isRequired,
     // redux functions
@@ -29,8 +29,8 @@ class Notes extends Component {
   }
 
   editItem = (id) => {
-    const { things } = this.props
-    let note = things.filter(note => note.id === id)[0]
+    const { entries } = this.props
+    let note = entries.filter(note => note.id === id)[0]
     if (!note) return
     this.props.openEditor(note)
   }
@@ -53,7 +53,7 @@ class Notes extends Component {
 
   render() {
     const { activeNotes } = this.state
-    const { things } = this.props
+    const { entries } = this.props
 
     return (
       <div className="note-view" key="note-page">
@@ -78,9 +78,9 @@ class Notes extends Component {
               />
           </div>
 
-          <ThingsList
+          <List
             type={this.props.type}
-            things={this.filter(things)}
+            entries={this.filter(entries)}
             classModifier="note-list__list"
             edit={this.editItem}
             remove={this.props.removeItem}

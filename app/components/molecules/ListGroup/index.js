@@ -1,6 +1,6 @@
 import React, { PropTypes} from 'react'
 
-import ThingsList from '../ThingsList'
+import List from '../List'
 
 export default function ListGroup({
   category,
@@ -11,7 +11,7 @@ export default function ListGroup({
   return (
     <div>
       <div>{category}</div>
-      <ThingsList
+      <List
         things={things}
         edit={editItem}
         remove={removeItem}

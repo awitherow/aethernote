@@ -8,14 +8,14 @@ function selectContentType(note) {
   }
 }
 
-export default function ThingsList({
-  things,
+export default function List({
+  entries,
   edit,
   remove,
 }) {
   return (
-    <ul className="list">
-      {things.map(note =>
+    <ul className="List">
+      {entries.map(note =>
         <ListItem
           key={note.id}
           id={note.id}
@@ -29,8 +29,8 @@ export default function ThingsList({
   )
 }
 
-ThingsList.propTypes = {
-  things: PropTypes.array.isRequired,
+List.propTypes = {
+  entries: PropTypes.array.isRequired,
   edit: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired,
 }
