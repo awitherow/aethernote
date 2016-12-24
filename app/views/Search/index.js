@@ -17,7 +17,21 @@ class Search extends Component {
   state = {
     entry: '',
     results: [],
+    options: {
+      shouldSort: true,
+      threshold: 0.25,
+      location: 0,
+      distance: 10000,
+      maxPatternLength: 32,
+      minMatchCharLength: 1,
+      keys: [
+        "title",
+        "content",
+      ],
+    },
   }
+
+  fuse = new Fuse(this.props.entries, this.state.options)
 
   editItem = (id) => {
     const { entries } = this.props
@@ -28,20 +42,6 @@ class Search extends Component {
   }
 
   render() {
-    const options = {
-      shouldSort: true,
-      threshold: 0.5,
-      location: 0,
-      distance: 10000,
-      maxPatternLength: 32,
-      minMatchCharLength: 1,
-      keys: [
-        "title",
-        "content",
-      ],
-    }
-    const fuse = new Fuse(this.props.entries, options)
-
     return (
       <div className="overlay search">
         <FlexibleInput
@@ -55,7 +55,7 @@ class Search extends Component {
 
         <List
           type={null}
-          entries={fuse.search(this.state.entry)}
+          entries={this.fuse.search(this.state.entry)}
           classModifier="search__list"
           edit={this.editItem}
           remove={this.props.removeItem}
