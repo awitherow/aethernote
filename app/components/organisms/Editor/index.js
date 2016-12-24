@@ -3,6 +3,8 @@ import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
 import { convertToMarkdown } from '../../../lib/helpers'
+import categories from '../../../lib/schema/categories'
+
 
 import TextAreaInput from '../../../components/atoms/TextAreaInput'
 import FlexibleInput from '../../../components/atoms/FlexibleInput'
@@ -80,7 +82,7 @@ export default class Editor extends Component {
   render() {
     if (this.props.hidden) return null
     const { formUpdated, deleteWizardOpen, content, title } = this.state
-    const { id, created, prio, category } = this.props.note
+    const { id, created, prio, category, type } = this.props.note
 
     const deleteNoteRequestClasses = classnames('deleteNote__request', {
       'hidden': deleteWizardOpen,
@@ -123,14 +125,7 @@ export default class Editor extends Component {
             <Dropdown
               id="category-types"
               label="Category"
-              options={[
-                'inbox',
-                'backlog',
-                'todo',
-                'doing',
-                'done',
-                'reference',
-              ]}
+              options={categories[type]}
               defaultValue={category}
               handleChange={e => this.handleChange('category', e.target.value)}
               />
