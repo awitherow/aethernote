@@ -4,7 +4,7 @@ import classnames from 'classnames'
 
 import { convertToMarkdown } from '../../../lib/helpers'
 import categories from '../../../lib/schema/categories'
-
+import contexts from '../../../lib/schema/contexts'
 
 import TextAreaInput from '../../../components/atoms/TextAreaInput'
 import FlexibleInput from '../../../components/atoms/FlexibleInput'
@@ -82,7 +82,7 @@ export default class Editor extends Component {
   render() {
     if (this.props.hidden) return null
     const { formUpdated, deleteWizardOpen, content, title } = this.state
-    const { id, created, prio, category, type } = this.props.note
+    const { id, created, prio, category, type, context } = this.props.note
 
     const deleteNoteRequestClasses = classnames('deleteNote__request', {
       'hidden': deleteWizardOpen,
@@ -128,6 +128,14 @@ export default class Editor extends Component {
               options={categories[type]}
               defaultValue={category}
               handleChange={e => this.handleChange('category', e.target.value)}
+              />
+
+            <Dropdown
+              id="context-types"
+              label="Context"
+              options={contexts}
+              defaultValue={context}
+              handleChange={e => this.handleChange('context', e.target.value)}
               />
 
             <button disabled={!formUpdated}>
