@@ -4,7 +4,7 @@ import List from '../List'
 
 export default function ListGroup({
   category,
-  things,
+  entries,
   editItem,
   removeItem,
 }) {
@@ -12,7 +12,7 @@ export default function ListGroup({
     <div>
       <div>{category}</div>
       <List
-        things={things}
+        entries={entries}
         edit={editItem}
         remove={removeItem}
         />
@@ -22,7 +22,7 @@ export default function ListGroup({
 
 ListGroup.propTypes = {
   category: PropTypes.string.isRequired,
-  things: PropTypes.array.isRequired,
+  entries: PropTypes.array.isRequired,
   editItem: PropTypes.func.isRequired,
   removeItem: PropTypes.func.isRequired,
 }

@@ -31,11 +31,7 @@ export default class AddThing extends Component {
   resetState = (type) => {
     for (let thing in this.state) {
       if (thing) {
-        if (thing === 'category' && type === 'journal') {
-          return
-        } else {
-          delete this.state[thing]
-        }
+        delete this.state[thing]
       }
     }
     this.setState(...this.state, initialState)
