@@ -1,5 +1,5 @@
 import {
-  LOADING, GRANT_AUTHORITY, HANDLE_ROUTE, OPEN_EDITOR, CLOSE_EDITOR,
+  LOADING, GRANT_AUTHORITY, HANDLE_ROUTE, OPEN_EDITOR, CLOSE_EDITOR, TOGGLE_SEARCH,
 } from './constants'
 
 function checkAuthentication() {
@@ -19,9 +19,10 @@ const initialState = {
     hidden: true,
     note: {},
   },
+  searching: false,
 }
 
-const Store = (state, action) => {
+const Store = (state = initialState, action) => {
   switch(action.type) {
     case LOADING: return {
       ...state,
@@ -49,7 +50,11 @@ const Store = (state, action) => {
         note: {},
       },
     }
-    default: return initialState
+    case TOGGLE_SEARCH: return {
+      ...state,
+      searching: action.data,
+    }
+    default: return state
   }
 }
 

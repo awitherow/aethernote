@@ -5,6 +5,7 @@ function selectContentType(note) {
   switch (note.type) {
     case 'journal': return note.content
     case 'note': return note.title
+    default: return note.title
   }
 }
 

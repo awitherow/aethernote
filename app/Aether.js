@@ -11,6 +11,7 @@ import Editor from './components/organisms/Editor'
 import Notes from './views/Notes'
 import Journal from './views/Journal'
 import Login from './views/Login'
+import Search from './views/Search'
 
 import {
   toggleLoading,
@@ -18,6 +19,7 @@ import {
   routeTo,
   openEditor,
   closeEditor,
+  toggleSearch,
 } from './redux/actions'
 
 class Aether extends Component {
@@ -29,6 +31,7 @@ class Aether extends Component {
     // redux dispatchers
     grantAuthority: PropTypes.func.isRequired,
     toggleLoading: PropTypes.func.isRequired,
+    toggleSearch: PropTypes.func.isRequired,
     closeEditor: PropTypes.func.isRequired,
     routeTo: PropTypes.func.isRequired,
     openEditor: PropTypes.func.isRequired,
@@ -40,10 +43,11 @@ class Aether extends Component {
       note: PropTypes.object.isRequired,
     }).isRequired,
     loading: PropTypes.bool.isRequired,
+    searching: PropTypes.bool.isRequired,
   }
 
   state = {
-    entires: [],
+    entries: [],
   }
 
   componentDidMount = () =>
@@ -51,8 +55,8 @@ class Aether extends Component {
 
   getEntries = () => {
     !this.state.loading && this.props.toggleLoading(true)
-    entryService.get(entires => {
-      this.setState({ entires })
+    entryService.get(entries => {
+      this.setState({ entries })
       this.props.toggleLoading(false)
     })
   }
@@ -73,11 +77,11 @@ class Aether extends Component {
   })
 
   route = () => {
-    const { entires } = this.state
+    const { entries } = this.state
     const { currentType } = this.props
     const sharedProps = {
       type: currentType,
-      entries: entires.filter(entry => entry.type === currentType),
+      entries: entries.filter(entry => entry.type === currentType),
       removeItem: this.removeItem,
       openEditor: this.props.openEditor,
     }
@@ -89,7 +93,7 @@ class Aether extends Component {
   }
 
   render() {
-    const { loading, editor, authenticated, currentType } = this.props
+    const { loading, editor, authenticated, currentType, searching } = this.props
 
     return !authenticated ? (
       <Login grantAuthority={this.props.grantAuthority} />
@@ -97,10 +101,19 @@ class Aether extends Component {
       <div className="aether">
 
         { loading ? <Overlay type="loading" /> : null }
+        { searching ? (
+          <Search
+            entries={this.state.entries}
+            removeItem={this.removeItem}
+            openEditor={this.props.openEditor}
+            toggleSearch={this.props.toggleSearch}
+          />
+        ) : null }
 
         <Header
           currentType={currentType}
           routeTo={this.props.routeTo}
+          toggleSearch={this.props.toggleSearch}
           />
 
         <div className="inner">
@@ -130,6 +143,7 @@ class Aether extends Component {
 
 const mapDispatchToProps = dispatch => ({
   toggleLoading: (v) => dispatch(toggleLoading(v)),
+  toggleSearch: (v) => dispatch(toggleSearch(v)),
   grantAuthority: (v) => dispatch(grantAuthority(v)),
   routeTo: (v) => dispatch(routeTo(v)),
   openEditor: (v) => dispatch(openEditor(v)),
@@ -137,12 +151,13 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mapStateToProps = ({
-  currentType, authenticated, editor, loading,
+  currentType, authenticated, editor, loading, searching,
 }) => ({
   currentType,
   authenticated,
   editor,
   loading,
+  searching,
 })
 
 const ConnectedAether = connect(

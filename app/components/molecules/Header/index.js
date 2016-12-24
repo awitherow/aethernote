@@ -7,7 +7,7 @@ const routes = [
   'journal',
 ]
 
-const Header = ({ currentType, routeTo }) => {
+const Header = ({ currentType, routeTo, toggleSearch }) => {
   return (
     <header className="main-header">
       <h1>Aether</h1>
@@ -18,6 +18,7 @@ const Header = ({ currentType, routeTo }) => {
         defaultValue={currentType}
         handleChange={e => routeTo(e.target.value)}
         />
+      <button onClick={() => toggleSearch(true)}>SEARCH</button>
     </header>
   )
 }
@@ -25,6 +26,7 @@ const Header = ({ currentType, routeTo }) => {
 Header.propTypes = {
   currentType: PropTypes.string.isRequired,
   routeTo: PropTypes.func.isRequired,
+  toggleSearch: PropTypes.func.isRequired,
 }
 
 export default Header
