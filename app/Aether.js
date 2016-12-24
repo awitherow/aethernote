@@ -18,6 +18,7 @@ import {
   routeTo,
   openEditor,
   closeEditor,
+  toggleSearch,
 } from './redux/actions'
 
 class Aether extends Component {
@@ -29,6 +30,7 @@ class Aether extends Component {
     // redux dispatchers
     grantAuthority: PropTypes.func.isRequired,
     toggleLoading: PropTypes.func.isRequired,
+    toggleSearch: PropTypes.func.isRequired,
     closeEditor: PropTypes.func.isRequired,
     routeTo: PropTypes.func.isRequired,
     openEditor: PropTypes.func.isRequired,
@@ -40,6 +42,7 @@ class Aether extends Component {
       note: PropTypes.object.isRequired,
     }).isRequired,
     loading: PropTypes.bool.isRequired,
+    searching: PropTypes.bool.isRequired,
   }
 
   state = {
@@ -89,7 +92,7 @@ class Aether extends Component {
   }
 
   render() {
-    const { loading, editor, authenticated, currentType } = this.props
+    const { loading, editor, authenticated, currentType, searching } = this.props
 
     return !authenticated ? (
       <Login grantAuthority={this.props.grantAuthority} />
@@ -97,10 +100,13 @@ class Aether extends Component {
       <div className="aether">
 
         { loading ? <Overlay type="loading" /> : null }
+        { searching ? (
+        ) : null }
 
         <Header
           currentType={currentType}
           routeTo={this.props.routeTo}
+          toggleSearch={this.props.toggleSearch}
           />
 
         <div className="inner">
@@ -130,6 +136,7 @@ class Aether extends Component {
 
 const mapDispatchToProps = dispatch => ({
   toggleLoading: (v) => dispatch(toggleLoading(v)),
+  toggleSearch: (v) => dispatch(toggleSearch(v)),
   grantAuthority: (v) => dispatch(grantAuthority(v)),
   routeTo: (v) => dispatch(routeTo(v)),
   openEditor: (v) => dispatch(openEditor(v)),
@@ -137,12 +144,13 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mapStateToProps = ({
-  currentType, authenticated, editor, loading,
+  currentType, authenticated, editor, loading, searching,
 }) => ({
   currentType,
   authenticated,
   editor,
   loading,
+  searching,
 })
 
 const ConnectedAether = connect(
