@@ -4,13 +4,17 @@ where thoughts come from
 
 ## introduction
 
-Screw Evernotes new policy concerning access limitation and their annoying new paywalls.
+an attempt to learn more about myself through gathering entries of many types.
 
-This will be a set of API calls that can chat with a database (postgres) and be able to execute the following calls:
+currently defined schemas for entries
 
-```
-coming soon
-```
+- notes
+- journals
+
+### to come
+
+- todo (split notes)
+- habits
 
 ## development
 
@@ -19,8 +23,4 @@ $ yarn install
 $ yarn dev
 ```
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
-
-## notes
-
-http://kaffeine.herokuapp.com/#!
+Your app should now be running on [localhost:3333](http://localhost:3333/).
