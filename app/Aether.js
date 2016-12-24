@@ -4,7 +4,7 @@ import * as thingService from './api/entries'
 
 import Overlay from './components/molecules/Overlay'
 import Header from './components/molecules/Header'
-import AddThing from './components/molecules/AddThing'
+import AddEntry from './components/molecules/AddEntry'
 
 import Editor from './components/organisms/Editor'
 
@@ -107,7 +107,7 @@ class Aether extends Component {
 
         <div className="inner">
 
-          <AddThing
+          <AddEntry
             type={currentType}
             toggleLoading={this.props.toggleLoading}
             />
