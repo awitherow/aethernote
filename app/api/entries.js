@@ -1,4 +1,4 @@
-import categories from '../lib/schema/categories'
+import { categories } from '../lib/schema'
 
 function get(cb) {
   fetch('/api/notes')

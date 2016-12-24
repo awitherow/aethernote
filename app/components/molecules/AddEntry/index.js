@@ -5,7 +5,7 @@ import CheckboxInput from '../../atoms/CheckboxInput'
 import Dropdown from '../../atoms/Dropdown'
 
 import * as entryService from '../../../api/entries'
-import categories from '../../../lib/schema/categories'
+import { categories } from '../../../lib/schema'
 
 const initialState = {
   content: '',

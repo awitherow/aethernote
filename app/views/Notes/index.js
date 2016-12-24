@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from 'react'
 import Dropdown from '../../components/atoms/Dropdown'
 import List from '../../components/molecules/List'
 
-import categories from '../../lib/schema/categories'
+import { categories } from '../../lib/schema'
 
 class Notes extends Component {
   static propTypes = {

@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
 
 import { getToday, getYestereday } from '../../lib/helpers'
-import categories from '../../lib/schema/categories'
+import { categories } from '../../lib/schema'
 
 import ListGroup from '../../components/molecules/ListGroup'
 

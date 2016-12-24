@@ -1,4 +1,4 @@
-const categories  = {
+export const categories  = {
   note: [
     'inbox',
     'backlog',
@@ -16,4 +16,16 @@ const categories  = {
   ],
 }
 
-export default categories
+export const contexts = [
+  'self-image',
+  'career',
+  'wealth',
+  'health',
+  'social',
+  'family',
+  'love',
+  'fun',
+  'spiritual',
+  'mental',
+  'emotional',
+]
