@@ -9,7 +9,7 @@ const categories  = {
   ],
   journal : [
     'recap',
-    'goals',
+    'aspirations',
     'dream',
     'gratitude',
     'magick',

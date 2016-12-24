@@ -25,7 +25,7 @@ export default class Journal extends Component {
   }
 
   filterEntries = (category) => {
-    const date = category === 'goals' ? getYestereday() : this.state.day
+    const date = category === 'aspirations' ? getYestereday() : this.state.day
     return this.props.entries.filter(thing =>
       (new Date(thing.created).setHours(0, 0, 0, 0) === date) &&
       (thing.category === category)
