@@ -11,3 +11,4 @@ public/index.css
 public/bundle.js
 public/bundle.js.map
 *.orig
+yarn.lock
