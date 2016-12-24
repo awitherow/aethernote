@@ -54,7 +54,7 @@ const Store = (state = initialState, action) => {
       ...state,
       searching: action.data,
     }
-    default: return state
+    default: return initialState
   }
 }
 
