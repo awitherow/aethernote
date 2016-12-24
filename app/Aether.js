@@ -92,10 +92,8 @@ class Aether extends Component {
     const { loading, editor, authenticated, currentType } = this.props
 
     return !authenticated ? (
-      <Login
-        grantAuthority={this.props.grantAuthority}
-        />
-    ) : (
+      <Login grantAuthority={this.props.grantAuthority} />
+      ) : (
       <div className="aether">
 
         { loading ? <Overlay type="loading" /> : null }
@@ -112,7 +110,7 @@ class Aether extends Component {
             toggleLoading={this.props.toggleLoading}
             />
 
-          {this.route()}
+          {editor.hidden ? this.route() : null}
 
           <Editor
             hidden={editor.hidden}
