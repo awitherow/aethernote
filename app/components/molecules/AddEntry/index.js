@@ -4,7 +4,7 @@ import FlexibleInput from '../../atoms/FlexibleInput'
 import CheckboxInput from '../../atoms/CheckboxInput'
 import Dropdown from '../../atoms/Dropdown'
 
-import * as thingService from '../../../api/entries'
+import * as entryService from '../../../api/entries'
 import categories from '../../../lib/schema/categories'
 
 const initialState = {
@@ -44,7 +44,7 @@ export default class AddThing extends Component {
   addNote = (e) => {
     e.preventDefault()
     this.props.toggleLoading(true)
-    thingService.add({
+    entryService.add({
       ...this.state,
       type: this.props.type,
     }, () => {

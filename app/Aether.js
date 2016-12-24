@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import * as thingService from './api/entries'
+import * as entryService from './api/entries'
 
 import Overlay from './components/molecules/Overlay'
 import Header from './components/molecules/Header'
@@ -51,7 +51,7 @@ class Aether extends Component {
 
   getThings = () => {
     !this.state.loading && this.props.toggleLoading(true)
-    thingService.get(notes => {
+    entryService.get(notes => {
       this.setState({ notes })
       this.props.toggleLoading(false)
     })
@@ -59,11 +59,11 @@ class Aether extends Component {
 
   removeItem = (id) => {
     this.props.toggleLoading(true)
-    thingService.remove(id, () => this.getThings())
+    entryService.remove(id, () => this.getThings())
   }
 
   submitEdit = (edits) => {
-    thingService.update(this.props.editor.note, edits, () => {
+    entryService.update(this.props.editor.note, edits, () => {
       this.getThings()
     })
   }
