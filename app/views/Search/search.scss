@@ -1,0 +1,10 @@
+.search {
+    color: black;
+    flex-direction: column;
+
+    .List {
+      position: relative;
+      max-height: 85vh;
+      overflow-y: scroll;
+    }
+}

@@ -1,26 +1,28 @@
-header {
-  position: relative;
+.editor {
+  z-index: 9;
+  padding: 15px;
 
-  h1 {
-    font-size: 24px;
-  }
+  header {
+    position: relative;
 
-  .close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: none;
-    border: none;
-    font-size: 24px;
+    h1 {
+      font-size: 24px;
+    }
 
-    &:hover {
-      color: red;
+    .close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: none;
+      border: none;
+      font-size: 24px;
+
+      &:hover {
+        color: red;
+      }
     }
   }
-}
 
-.editor {
-  padding: 15px;
   .note-options {
     position: relative;
 

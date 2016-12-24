@@ -11,6 +11,7 @@ import Editor from './components/organisms/Editor'
 import Notes from './views/Notes'
 import Journal from './views/Journal'
 import Login from './views/Login'
+import Search from './views/Search'
 
 import {
   toggleLoading,
@@ -46,7 +47,7 @@ class Aether extends Component {
   }
 
   state = {
-    entires: [],
+    entries: [],
   }
 
   componentDidMount = () =>
@@ -54,8 +55,8 @@ class Aether extends Component {
 
   getEntries = () => {
     !this.state.loading && this.props.toggleLoading(true)
-    entryService.get(entires => {
-      this.setState({ entires })
+    entryService.get(entries => {
+      this.setState({ entries })
       this.props.toggleLoading(false)
     })
   }
@@ -76,11 +77,11 @@ class Aether extends Component {
   })
 
   route = () => {
-    const { entires } = this.state
+    const { entries } = this.state
     const { currentType } = this.props
     const sharedProps = {
       type: currentType,
-      entries: entires.filter(entry => entry.type === currentType),
+      entries: entries.filter(entry => entry.type === currentType),
       removeItem: this.removeItem,
       openEditor: this.props.openEditor,
     }
@@ -101,6 +102,12 @@ class Aether extends Component {
 
         { loading ? <Overlay type="loading" /> : null }
         { searching ? (
+          <Search
+            entries={this.state.entries}
+            removeItem={this.removeItem}
+            openEditor={this.props.openEditor}
+            toggleSearch={this.props.toggleSearch}
+          />
         ) : null }
 
         <Header

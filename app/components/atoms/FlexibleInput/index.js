@@ -6,6 +6,7 @@ export default function FlexibleInput({
   value,
   type,
   onChange,
+  autofocus,
 }){
   let fieldClass = `${id}-field`
   return (
@@ -17,6 +18,7 @@ export default function FlexibleInput({
         type={type}
         value={value}
         onChange={onChange}
+        autoFocus={autofocus}
         />
     </fieldset>
   )
@@ -28,4 +30,5 @@ FlexibleInput.propTypes = {
   value: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired, // accepts "text", "password" atm.
   onChange: PropTypes.func.isRequired,
+  autofocus: PropTypes.bool,
 }
