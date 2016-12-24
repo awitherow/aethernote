@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
 import { convertToMarkdown } from '../../../lib/helpers'
-import { categories } from '../../../lib/schema'
+import { categories, contexts } from '../../../lib/schema'
 
 import TextAreaInput from '../../../components/atoms/TextAreaInput'
 import FlexibleInput from '../../../components/atoms/FlexibleInput'
