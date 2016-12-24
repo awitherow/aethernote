@@ -24,3 +24,7 @@ $ yarn dev
 ```
 
 Your app should now be running on [localhost:3333](http://localhost:3333/).
+
+## third party use
+
+- [fuse.js](https://github.com/krisk/fuse#options)
