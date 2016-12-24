@@ -122,6 +122,14 @@ export default class Editor extends Component {
               />
 
             <Dropdown
+              id="type"
+              label="Type"
+              options={Object.keys(categories)}
+              defaultValue={type}
+              handleChange={e => this.handleChange('type', e.target.value)}
+              />
+
+            <Dropdown
               id="category-types"
               label="Category"
               options={categories[type]}
