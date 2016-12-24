@@ -4,7 +4,7 @@ import FlexibleInput from '../../atoms/FlexibleInput'
 import CheckboxInput from '../../atoms/CheckboxInput'
 import Dropdown from '../../atoms/Dropdown'
 
-import * as thingService from '../../../api/notes'
+import * as thingService from '../../../api/entries'
 import categories from '../../../lib/schema/categories'
 
 const initialState = {

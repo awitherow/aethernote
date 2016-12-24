@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import * as thingService from './api/notes'
+import * as thingService from './api/entries'
 
 import Overlay from './components/molecules/Overlay'
 import Header from './components/molecules/Header'
