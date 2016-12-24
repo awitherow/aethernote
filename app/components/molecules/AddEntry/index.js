@@ -21,7 +21,7 @@ export default class AddThing extends Component {
   }
 
   static contextTypes = {
-    getThings: PropTypes.func.isRequired,
+    getEntries: PropTypes.func.isRequired,
   }
 
   componentWillReceiveProps(nextProps) {
@@ -49,7 +49,7 @@ export default class AddThing extends Component {
       type: this.props.type,
     }, () => {
       this.resetState(this.props.type)
-      this.context.getThings()
+      this.context.getEntries()
     })
   }
 

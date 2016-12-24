@@ -22,7 +22,7 @@ import {
 
 class Aether extends Component {
   static childContextTypes = {
-    getThings: PropTypes.func,
+    getEntries: PropTypes.func,
   }
 
   static propTypes = {
@@ -47,9 +47,9 @@ class Aether extends Component {
   }
 
   componentDidMount = () =>
-    this.getThings()
+    this.getEntries()
 
-  getThings = () => {
+  getEntries = () => {
     !this.state.loading && this.props.toggleLoading(true)
     entryService.get(notes => {
       this.setState({ notes })
@@ -59,17 +59,17 @@ class Aether extends Component {
 
   removeItem = (id) => {
     this.props.toggleLoading(true)
-    entryService.remove(id, () => this.getThings())
+    entryService.remove(id, () => this.getEntries())
   }
 
   submitEdit = (edits) => {
     entryService.update(this.props.editor.note, edits, () => {
-      this.getThings()
+      this.getEntries()
     })
   }
 
   getChildContext = () => ({
-    getThings: this.getThings,
+    getEntries: this.getEntries,
   })
 
   route = () => {

@@ -16,7 +16,7 @@ class Notes extends Component {
   }
 
   static contextTypes = {
-    getThings: PropTypes.func.isRequired,
+    getEntries: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -63,7 +63,7 @@ class Notes extends Component {
             <h2> Notes <span>({activeNotes})</span> </h2>
             <button
               className="refresh-notes"
-              onClick={this.context.getThings}>
+              onClick={this.context.getEntries}>
               &#8635;
             </button>
           </div>

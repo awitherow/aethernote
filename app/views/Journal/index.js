@@ -17,7 +17,7 @@ export default class Journal extends Component {
   }
 
   static contextTypes = {
-    getThings: PropTypes.func.isRequired,
+    getEntries: PropTypes.func.isRequired,
   }
 
   state = {
