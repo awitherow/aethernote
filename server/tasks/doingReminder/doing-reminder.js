@@ -20,6 +20,7 @@ async function sendMail() {
 
   const quote = await getQuotes()
   const tasks = await getThingsByCategory('doing')
+  const affirmations = await getThingsByCategory('affirmation')
   const goals = await getThingsByCategory('aspirations').filter(goal =>
     new Date(goal.created).setHours(0, 0, 0, 0) ===
     new Date(new Date() - (1000*60*60*24)).setHours(0, 0, 0, 0)
@@ -34,7 +35,7 @@ async function sendMail() {
     from: GMAIL_USER,
     to: PRIVATE_EMAIL,
     subject: 'Daily Reminder',
-    html: doingReminder(quote.data, tasks, goals),
+    html: doingReminder(quote.data, tasks, goals, affirmations),
   }, (error, info) => {
     if (error) return console.log(error)
     console.log('Message sent: ' + info.response)
@@ -56,7 +57,6 @@ function getQuotes() {
       format: 'json',
       lang: 'en',
     },
-    transformResponse: data => JSON.stringify(data),
   })
 }
 
