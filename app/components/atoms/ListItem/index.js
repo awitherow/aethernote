@@ -1,13 +1,18 @@
 import React, { PropTypes } from 'react'
+import './list-item.scss'
+import classnames from 'classnames'
 
 const ListItem = ({
   id, content, prio, edit,
 }) =>
   <li>
-    <span className="priority">
-      {prio}
+    <span className={classnames('title', {
+      high: prio === 3,
+      med: prio === 2,
+      low: prio === 1,
+    })}>
+      {content}
     </span>
-    <span className="title">{content}</span>
     <button onClick={() => edit(id)}>&#9998;</button>
   </li>
 
