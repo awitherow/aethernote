@@ -1,11 +1,13 @@
 export const categories  = {
   note: [
     'inbox',
+    'icebox',
     'backlog',
     'todo',
     'doing',
     'done',
     'reference',
+    'affirmation',
   ],
   journal : [
     'recap',
@@ -13,6 +15,7 @@ export const categories  = {
     'dream',
     'gratitude',
     'magick',
+    'reflection',
   ],
 }
 
@@ -21,11 +24,14 @@ export const contexts = [
   'career',
   'wealth',
   'health',
-  'social',
-  'family',
-  'love',
-  'fun',
+  'people',
   'spiritual',
   'mental',
   'emotional',
+  'aether',
+  'hamburg',
+  'psychonaut',
+  'quantified self',
+  'reading',
+  'food',
 ]
