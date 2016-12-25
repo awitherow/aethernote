@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
 import FlexibleInput from '../../atoms/FlexibleInput'
-import CheckboxInput from '../../atoms/CheckboxInput'
 import Dropdown from '../../atoms/Dropdown'
 
 import * as entryService from '../../../api/entries'
@@ -63,11 +62,14 @@ export default class AddThing extends Component {
           />
 
           {this.props.type === 'note' ? (
-            <CheckboxInput
+            <Dropdown
               id="prio"
-              label="Important task?"
-              defaultChecked={false}
-              onClick={(e) => this.handleChange('prio', e.target.checked)}
+              label="How important is this?"
+              options={[1, 2, 3]}
+              defaultValue={1}
+              handleChange={(e) =>
+                this.handleChange('prio', e.target.value)
+              }
               />
           ) : null}
 

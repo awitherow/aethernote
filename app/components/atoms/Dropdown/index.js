@@ -30,7 +30,10 @@ Dropdown.propTypes = {
   label: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
   handleChange: PropTypes.func.isRequired,
-  defaultValue: PropTypes.string,
+  defaultValue: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 }
 
 export default Dropdown

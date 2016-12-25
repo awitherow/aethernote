@@ -8,7 +8,6 @@ import { categories, contexts } from '../../../lib/schema'
 import TextAreaInput from '../../../components/atoms/TextAreaInput'
 import FlexibleInput from '../../../components/atoms/FlexibleInput'
 import Dropdown from '../../../components/atoms/Dropdown'
-import CheckboxInput from '../../../components/atoms/CheckboxInput'
 
 const initialState = {
   formUpdated: false,
@@ -114,11 +113,14 @@ export default class Editor extends Component {
             />
 
           <div className="row note-options">
-            <CheckboxInput
+            <Dropdown
               id="prio"
-              label="Prio"
-              defaultChecked={prio}
-              onClick={(e) => this.handleChange('prio', e.target.checked)}
+              label="How important is this?"
+              options={[1, 2, 3]}
+              defaultValue={prio}
+              handleChange={(e) =>
+                this.handleChange('prio', e.target.value)
+              }
               />
 
             <Dropdown

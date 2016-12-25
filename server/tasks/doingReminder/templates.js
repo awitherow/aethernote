@@ -26,7 +26,7 @@ export const doingReminder = (
             <ol>
               {affirmations.map(affirmation =>
                 <li key={affirmation.content}>
-                  <Span {...taskStyles({ prio: true })}>{affirmation.content}</Span>
+                  <Span {...taskStyles({ prio: 3 })}>{affirmation.content}</Span>
                 </li>
               )}
             </ol>
@@ -40,7 +40,7 @@ export const doingReminder = (
               <ol>
                 {goals.map(goal =>
                   <li key={goal.title}>
-                    <Span {...taskStyles({ prio: true })}>{goal.title}</Span>
+                    <Span {...taskStyles({ prio: 3 })}>{goal.title}</Span>
                   </li>
                 )}
               </ol>
@@ -66,7 +66,10 @@ export const doingReminder = (
 }
 
 const taskStyles = (task) => ({
-  ...task.prio && {
+  ...task.prio > 1 && {
+    fontWeight: 'bold',
+  },
+  ...task.prio > 2 && {
     fontWeight: 'bold',
     color: 'red',
   },

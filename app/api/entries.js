@@ -24,7 +24,7 @@ function add(entry, cb) {
     entry.title = `${entry.content.substring(0, length)}`
   }
 
-  if (!entry.prio) entry.prio = false
+  if (!entry.prio) entry.prio = 1
 
   fetch('/api/notes', {
     method: 'POST',
