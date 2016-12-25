@@ -5,18 +5,18 @@ import { getNotes, getNote, createNote, updateNote, removeNote } from './queries
 import * as auth from './queries/auth'
 import compression from 'compression'
 
-if (process.env.NODE_ENV === "development") {
-  require('dotenv').config()
-}
-
 const app = express()
 app.use(compression())
 
-app.get('*.js', function (req, res, next) {
-  req.url = req.url + '.gz'
-  res.set('Content-Encoding', 'gzip')
-  next()
-})
+if (process.env.NODE_ENV === "development") {
+  require('dotenv').config()
+} else {
+  app.get('*.js', function (req, res, next) {
+    req.url = req.url + '.gz'
+    res.set('Content-Encoding', 'gzip')
+    next()
+  })
+}
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
