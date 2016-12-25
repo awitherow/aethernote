@@ -18,6 +18,10 @@ export const categories  = {
     'magick',
     'reflection',
   ],
+  habits: [
+    'positive',
+    'negative',
+  ],
 }
 
 export const contexts = [
