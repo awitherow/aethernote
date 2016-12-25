@@ -115,7 +115,7 @@ export default class Editor extends Component {
           <div className="row note-options">
             <Dropdown
               id="prio"
-              label="How important is this?"
+              label="Importance?"
               options={[1, 2, 3]}
               defaultValue={prio}
               handleChange={(e) =>

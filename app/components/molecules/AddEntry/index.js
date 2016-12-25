@@ -64,7 +64,7 @@ export default class AddThing extends Component {
           {this.props.type === 'note' ? (
             <Dropdown
               id="prio"
-              label="How important is this?"
+              label="Importance?"
               options={[1, 2, 3]}
               defaultValue={1}
               handleChange={(e) =>
