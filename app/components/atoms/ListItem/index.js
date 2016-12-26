@@ -7,9 +7,9 @@ const ListItem = ({
 }) =>
   <li>
     <span className={classnames('title', {
-      high: prio === 3,
-      med: prio === 2,
-      low: prio === 1,
+      'high-prio': prio === 3,
+      'med-prio': prio === 2,
+      'low-prio': prio === 1,
     })}>
       {content}
     </span>
