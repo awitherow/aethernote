@@ -10,7 +10,6 @@ class Notes extends Component {
   static propTypes = {
     entries: PropTypes.array.isRequired,
     type: PropTypes.string.isRequired,
-    removeItem: PropTypes.func.isRequired,
     // redux functions
     openEditor: PropTypes.func.isRequired,
   }
@@ -83,7 +82,6 @@ class Notes extends Component {
             entries={this.filter(entries)}
             classModifier="note-list__list"
             edit={this.editItem}
-            remove={this.props.removeItem}
             />
 
         </div>

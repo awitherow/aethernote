@@ -8,7 +8,6 @@ import List from '../../components/molecules/List'
 class Search extends Component {
   static propTypes = {
     entries: PropTypes.array.isRequired,
-    removeItem: PropTypes.func.isRequired,
     // redux functions
     openEditor: PropTypes.func.isRequired,
     toggleSearch: PropTypes.func.isRequired,
@@ -58,7 +57,6 @@ class Search extends Component {
           entries={this.fuse.search(this.state.entry)}
           classModifier="search__list"
           edit={this.editItem}
-          remove={this.props.removeItem}
         />
       </div>
     )

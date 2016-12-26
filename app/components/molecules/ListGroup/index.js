@@ -6,7 +6,6 @@ export default function ListGroup({
   category,
   entries,
   editItem,
-  removeItem,
 }) {
   return (
     <div>
@@ -14,7 +13,6 @@ export default function ListGroup({
       <List
         entries={entries}
         edit={editItem}
-        remove={removeItem}
         />
     </div>
   )
@@ -24,5 +22,4 @@ ListGroup.propTypes = {
   category: PropTypes.string.isRequired,
   entries: PropTypes.array.isRequired,
   editItem: PropTypes.func.isRequired,
-  removeItem: PropTypes.func.isRequired,
 }

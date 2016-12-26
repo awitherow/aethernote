@@ -12,18 +12,16 @@ function selectContentType(note) {
 export default function List({
   entries,
   edit,
-  remove,
 }) {
   return (
     <ul className="List">
-      {entries.map(note =>
+      {entries.map(entry =>
         <ListItem
-          key={note.id}
-          id={note.id}
-          content={selectContentType(note)}
-          prio={note.type && note.prio}
+          key={entry.id}
+          id={entry.id}
+          content={selectContentType(entry)}
+          prio={entry.type && entry.prio}
           edit={edit}
-          remove={remove}
           />
       )}
     </ul>
@@ -33,5 +31,4 @@ export default function List({
 List.propTypes = {
   entries: PropTypes.array.isRequired,
   edit: PropTypes.func.isRequired,
-  remove: PropTypes.func.isRequired,
 }

@@ -11,7 +11,6 @@ export default class Journal extends Component {
   static propTypes = {
     type: PropTypes.string.isRequired,
     entries: PropTypes.array.isRequired,
-    removeItem: PropTypes.func.isRequired,
     // redux
     openEditor: PropTypes.func.isRequired,
   }
@@ -52,7 +51,6 @@ export default class Journal extends Component {
               category={category}
               entries={this.filterEntries(category)}
               editItem={this.editItem}
-              removeItem={this.props.removeItem}
               />
           )
         })}

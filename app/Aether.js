@@ -82,7 +82,6 @@ class Aether extends Component {
     const sharedProps = {
       type: currentType,
       entries: entries.filter(entry => entry.type === currentType),
-      removeItem: this.removeItem,
       openEditor: this.props.openEditor,
     }
 
@@ -104,7 +103,6 @@ class Aether extends Component {
         { searching ? (
           <Search
             entries={this.state.entries}
-            removeItem={this.removeItem}
             openEditor={this.props.openEditor}
             toggleSearch={this.props.toggleSearch}
           />
