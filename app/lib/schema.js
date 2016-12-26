@@ -18,7 +18,7 @@ export const categories  = {
     'magick',
     'reflection',
   ],
-  habits: [
+  habit: [
     'godmode',
     'really good',
     'good',
