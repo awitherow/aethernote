@@ -19,8 +19,12 @@ export const categories  = {
     'reflection',
   ],
   habits: [
-    'positive',
-    'negative',
+    'godmode',
+    'really good',
+    'good',
+    'bad',
+    'really bad',
+    'ultimate sin',
   ],
 }
 
