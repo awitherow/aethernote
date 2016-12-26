@@ -1,11 +1,7 @@
 import './header.scss'
 import React, { PropTypes } from 'react'
 import Dropdown from '../../atoms/Dropdown'
-
-const routes = [
-  'note',
-  'journal',
-]
+import { categories } from '../../../lib/schema'
 
 const Header = ({ currentType, routeTo, toggleSearch }) => {
   return (
@@ -14,7 +10,7 @@ const Header = ({ currentType, routeTo, toggleSearch }) => {
       <Dropdown
         id="routes"
         label="Routes"
-        options={routes}
+        options={Object.keys(categories)}
         defaultValue={currentType}
         handleChange={e => routeTo(e.target.value)}
         />
