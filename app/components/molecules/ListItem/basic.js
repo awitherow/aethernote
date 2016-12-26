@@ -17,7 +17,12 @@ const Basic = ({
   </li>
 
 Basic.propTypes = {
-  item: PropTypes.object.isRequired,
+  item: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    prio: PropTypes.number.isRequired,
+  }).isRequired,
   edit: PropTypes.func.isRequired,
 }
 
