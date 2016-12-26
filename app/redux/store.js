@@ -22,7 +22,7 @@ const initialState = {
   searching: false,
 }
 
-const Store = (state = initialState, action) => {
+const Store = (state, action) => {
   switch(action.type) {
     case LOADING: return {
       ...state,
