@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import ListItem from '../../atoms/ListItem'
+import ListItem from '../ListItem'
 
 function selectContentType(note) {
   switch (note.type) {
@@ -18,9 +18,12 @@ export default function List({
       {entries.map(entry =>
         <ListItem
           key={entry.id}
-          id={entry.id}
-          content={selectContentType(entry)}
-          prio={entry.type && entry.prio}
+          item={{
+            id: entry.id,
+            type: entry.type,
+            content: selectContentType(entry),
+            prio: entry.type && entry.prio,
+          }}
           edit={edit}
           />
       )}
