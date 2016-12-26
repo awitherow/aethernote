@@ -17,11 +17,16 @@ function add(entry, cb) {
     }
   }
 
-  const length = entry.content.length
-  if (length > 32) {
-    entry.title = `${entry.content.substring(0, 32)}`
+  if (entry.type !== 'habit') {
+    const length = entry.content.length
+    if (length > 32) {
+      entry.title = `${entry.content.substring(0, 32)}`
+    } else {
+      entry.title = `${entry.content.substring(0, length)}`
+    }
   } else {
-    entry.title = `${entry.content.substring(0, length)}`
+    entry.title = entry.content
+    entry.content = 0
   }
 
   if (!entry.prio) entry.prio = 1
