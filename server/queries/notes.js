@@ -42,7 +42,7 @@ export const createNote = (req, res, next) => {
 
 export const updateNote = (req, res, next) => {
   const { id, title, content, prio, category, context, type } = req.body.update
-  if (type === 'habit') {
+  if (type === 'habit' && req.body.update.length < 2) {
     addHabit({
       name: title,
       value: 1,
