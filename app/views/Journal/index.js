@@ -12,7 +12,7 @@ export default class Journal extends Component {
     type: PropTypes.string.isRequired,
     entries: PropTypes.array.isRequired,
     // redux
-    openEditor: PropTypes.func.isRequired,
+    editItem: PropTypes.func.isRequired,
   }
 
   static contextTypes = {
@@ -31,13 +31,6 @@ export default class Journal extends Component {
     )
   }
 
-  editItem = (id) => {
-    const { entries } = this.props
-    let note = entries.filter(note => note.id === id)[0]
-    if (!note) return
-    this.props.openEditor(note)
-  }
-
   render () {
     return (
       <div className="journal" key="journal-page">
@@ -50,7 +43,7 @@ export default class Journal extends Component {
               key={category}
               category={category}
               entries={this.filterEntries(category)}
-              editItem={this.editItem}
+              editItem={this.props.editItem}
               />
           )
         })}

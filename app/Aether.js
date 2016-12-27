@@ -67,6 +67,13 @@ class Aether extends Component {
     entryService.remove(id, () => this.getEntries())
   }
 
+  editItem = (id) => {
+    const { entries } = this.state
+    let note = entries.filter(note => note.id === id)[0]
+    if (!note) return
+    this.props.openEditor(note)
+  }
+
   submitEdit = (edits) => {
     entryService.update(this.props.editor.note, edits, () => {
       this.getEntries()
@@ -83,13 +90,15 @@ class Aether extends Component {
     const sharedProps = {
       type: currentType,
       entries: entries.filter(entry => entry.type === currentType),
-      openEditor: this.props.openEditor,
+      editItem: this.editItem,
     }
 
     switch(currentType) {
       case 'note': return <Notes {...sharedProps} />
       case 'journal': return <Journal {...sharedProps} />
-      case 'habit': return <Habit {...sharedProps} />
+      case 'habit': return (
+        <Habit {...sharedProps} submitEdit={this.submitEdit} />
+      )
     }
   }
 

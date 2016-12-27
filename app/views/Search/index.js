@@ -9,7 +9,7 @@ class Search extends Component {
   static propTypes = {
     entries: PropTypes.array.isRequired,
     // redux functions
-    openEditor: PropTypes.func.isRequired,
+    editItem: PropTypes.func.isRequired,
     toggleSearch: PropTypes.func.isRequired,
   }
 
@@ -32,14 +32,6 @@ class Search extends Component {
 
   fuse = new Fuse(this.props.entries, this.state.options)
 
-  editItem = (id) => {
-    const { entries } = this.props
-    let result = entries.filter(result => result.id === id)[0]
-    if (!result) return
-    this.props.toggleSearch(false)
-    this.props.openEditor(result)
-  }
-
   render() {
     return (
       <div className="overlay search">
@@ -56,7 +48,7 @@ class Search extends Component {
           type={null}
           entries={this.fuse.search(this.state.entry)}
           classModifier="search__list"
-          edit={this.editItem}
+          edit={this.props.editItem}
         />
       </div>
     )

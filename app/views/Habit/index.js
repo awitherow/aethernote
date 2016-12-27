@@ -5,15 +5,9 @@ export default class Habit extends Component {
   static propTypes = {
     type: PropTypes.string.isRequired,
     entries: PropTypes.array.isRequired,
+    submitEdit: PropTypes.func.isRequired,
     // redux functions
-    openEditor: PropTypes.func.isRequired,
-  }
-
-  editItem = (id) => {
-    const { entries } = this.props
-    let note = entries.filter(note => note.id === id)[0]
-    if (!note) return
-    this.props.openEditor(note)
+    editItem: PropTypes.func.isRequired,
   }
 
   render() {
@@ -22,7 +16,8 @@ export default class Habit extends Component {
         type={this.props.type}
         entries={this.props.entries}
         classModifier="habit__list"
-        edit={this.editItem}
+        edit={this.props.editItem}
+        submitEdit={this.props.submitEdit}
         />
     )
   }
