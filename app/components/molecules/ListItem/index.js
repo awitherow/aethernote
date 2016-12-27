@@ -15,7 +15,7 @@ function selectContentType(note) {
 const ListItemHandler = ({
   item, edit, submitEdit,
 }) => {
-  const defaultProps = {
+  const basicProps = {
     item: {
       id: item.id,
       type: item.type,
@@ -26,11 +26,11 @@ const ListItemHandler = ({
   }
 
   switch(item.type) {
-    case 'journal': return <Basic {...defaultProps}/>
-    case 'note': return <Basic {...defaultProps}/>
+    case 'journal': return <Basic {...basicProps}/>
+    case 'note': return <Basic {...basicProps}/>
     case 'habit':
       return <Habit item={item} edit={edit} submitEdit={submitEdit} />
-    default: return <Basic {...defaultProps}/>
+    default: return <Basic {...basicProps}/>
   }
 }
 
