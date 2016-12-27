@@ -14,7 +14,7 @@ const mapCategoryToStyle = (cat) => {
   }
 }
 
-class Habit extends Component {
+export default class Habit extends Component {
   static propTypes = {
     item: PropTypes.object.isRequired,
     edit: PropTypes.func.isRequired,
@@ -35,7 +35,7 @@ class Habit extends Component {
         <Label bsStyle={mapCategoryToStyle(this.props.item.category)}>
           {this.props.item.category}
         </Label>
-        <Button bsSize="xsmall" onClick={() => this.recordHabit()}>
+        <Button bsSize="xsmall" onClick={this.recordHabit}>
           <Glyphicon glyph="plus"/>
         </Button>
         <Button
@@ -48,5 +48,3 @@ class Habit extends Component {
     )
   }
 }
-
-export default Habit
