@@ -13,7 +13,7 @@ function selectContentType(note) {
 }
 
 const ListItemHandler = ({
-  item, edit,
+  item, edit, submitEdit,
 }) => {
   const defaultProps = {
     item: {
@@ -29,11 +29,7 @@ const ListItemHandler = ({
     case 'journal': return <Basic {...defaultProps}/>
     case 'note': return <Basic {...defaultProps}/>
     case 'habit':
-      defaultProps.item.category = item.category
-      delete defaultProps.item.prio
-      return (
-          <Habit {...defaultProps}/>
-      )
+      return <Habit item={item} edit={edit} submitEdit={submitEdit} />
     default: return <Basic {...defaultProps}/>
   }
 }
@@ -41,6 +37,7 @@ const ListItemHandler = ({
 ListItemHandler.propTypes = {
   item: PropTypes.object.isRequired,
   edit: PropTypes.func.isRequired,
+  submitEdit: PropTypes.func,
 }
 
 export default ListItemHandler

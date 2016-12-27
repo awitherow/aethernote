@@ -1,29 +1,57 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes, Component } from 'react'
 import './list-item.scss'
-import classnames from 'classnames'
 
-const Habit = ({
-  item, edit,
-}) =>
-  <li>
-    <span className={classnames('title', {
-      'high-prio': item.prio === 3,
-      'med-prio': item.prio === 2,
-      'low-prio': item.prio === 1,
-    })}>
-      {item.content}
-    </span>
-    <button onClick={() => edit(item.id)}>&#9998;</button>
-  </li>
+import { Label, Button, Glyphicon } from 'react-bootstrap'
 
-Habit.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    prio: PropTypes.number.isRequired,
-  }).isRequired,
-  edit: PropTypes.func.isRequired,
+const mapCategoryToStyle = (cat) => {
+  switch (cat) {
+    case 'godmode': return 'primary'
+    case 'really good': return 'success'
+    case 'good': return 'default'
+    case 'bad': return 'info'
+    case 'really bad': return 'warning'
+    case 'ultimate sin': return 'danger'
+  }
+}
+
+class Habit extends Component {
+  static propTypes = {
+    item: PropTypes.object.isRequired,
+    edit: PropTypes.func.isRequired,
+    submitEdit: PropTypes.func.isRequired,
+  }
+
+  recordHabit = (mod) => {
+    const intVal = parseInt(this.props.item.content)
+    const newValue = mod === 'plus' ? (intVal + 1) : (intVal - 1)
+    this.props.submitEdit({ content: newValue.toString() }, this.props.item)
+  }
+
+  render() {
+    return (
+      <li>
+        <span>
+          {this.props.item.title}
+        </span>
+        <Label bsStyle={mapCategoryToStyle(this.props.item.category)}>
+          {this.props.item.category}
+        </Label>
+        <Button bsSize="xsmall" onClick={() => this.recordHabit('plus')}>
+          <Glyphicon glyph="plus"/>
+        </Button>
+        <Button bsSize="xsmall" onClick={() => this.recordHabit('minus')}>
+          <Glyphicon glyph="minus"/>
+        </Button>
+
+        <Button
+          bsSize="xsmall"
+          onClick={() => this.props.edit(this.props.item.id)}
+        >
+          <Glyphicon glyph="edit" />
+        </Button>
+      </li>
+    )
+  }
 }
 
 export default Habit

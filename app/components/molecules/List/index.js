@@ -4,6 +4,7 @@ import ListItem from '../ListItem'
 export default function List({
   entries,
   edit,
+  submitEdit,
 }) {
   return (
     <ul className="List">
@@ -12,6 +13,7 @@ export default function List({
           key={entry.id}
           item={entry}
           edit={edit}
+          submitEdit={submitEdit}
           />
       )}
     </ul>
@@ -21,4 +23,5 @@ export default function List({
 List.propTypes = {
   entries: PropTypes.array.isRequired,
   edit: PropTypes.func.isRequired,
+  submitEdit: PropTypes.func,
 }

@@ -74,8 +74,9 @@ class Aether extends Component {
     this.props.openEditor(note)
   }
 
-  submitEdit = (edits) => {
-    entryService.update(this.props.editor.note, edits, () => {
+  submitEdit = (edits, orig) => {
+    const original = orig ? orig : this.props.editor.note
+    entryService.update(original, edits, () => {
       this.getEntries()
     })
   }
