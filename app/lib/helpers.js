@@ -12,3 +12,8 @@ export function getYestereday() {
 export function getToday() {
   return new Date().setHours(0, 0, 0, 0)
 }
+
+export const toTitleCase = (str) =>
+  str.replace(/\w\S*/g, txt =>
+    txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+  ) 
