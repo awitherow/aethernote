@@ -8,10 +8,10 @@ import List from '../../components/molecules/List'
 class Search extends Component {
   static propTypes = {
     entries: PropTypes.array.isRequired,
-    removeItem: PropTypes.func.isRequired,
     // redux functions
-    openEditor: PropTypes.func.isRequired,
+    editItem: PropTypes.func.isRequired,
     toggleSearch: PropTypes.func.isRequired,
+    submitEdit: PropTypes.func.isRequired,
   }
 
   state = {
@@ -33,14 +33,6 @@ class Search extends Component {
 
   fuse = new Fuse(this.props.entries, this.state.options)
 
-  editItem = (id) => {
-    const { entries } = this.props
-    let result = entries.filter(result => result.id === id)[0]
-    if (!result) return
-    this.props.toggleSearch(false)
-    this.props.openEditor(result)
-  }
-
   render() {
     return (
       <div className="overlay search">
@@ -57,8 +49,8 @@ class Search extends Component {
           type={null}
           entries={this.fuse.search(this.state.entry)}
           classModifier="search__list"
-          edit={this.editItem}
-          remove={this.props.removeItem}
+          edit={this.props.editItem}
+          submitEdit={this.props.submitEdit}
         />
       </div>
     )

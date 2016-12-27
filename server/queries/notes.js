@@ -1,13 +1,6 @@
-import promiseLib from 'bluebird'
-import pg from 'pg-promise'
+import db from '../db'
 
-const pgp = pg({
-  promiseLib,
-})
-
-pgp.pg.defaults.ssl = true
-const db = pgp(process.env.DATABASE_URL)
-
+import { trackHabit } from './habits'
 export const getNotes = (req, res, next) => {
   db.any('select * from entries')
   .then(data => {
@@ -48,12 +41,19 @@ export const createNote = (req, res, next) => {
 }
 
 export const updateNote = (req, res, next) => {
-  const { id, title, content, prio, category, context } = req.body.update
+  const { id, title, content, prio, category, context, type } = req.body.update
+  const mostLikelyOnlyHabitTracked = req.body.update.length < 2
+  if (type === 'habit' && mostLikelyOnlyHabitTracked) {
+    trackHabit({
+      name: title,
+      value: 1,
+    })
+  }
   db.none(
     'update entries ' +
-    'set title=$1, content=$2, prio=$3, category=$4, context=$5' +
-    'where id=$6',
-    [title, content, prio, category, context, id]
+    'set title=$1, content=$2, prio=$3, category=$4, context=$5, type=$6' +
+    'where id=$7',
+    [title, content, prio, category, context, type, id]
   ).then(() => {
     res.status(200)
     .json({

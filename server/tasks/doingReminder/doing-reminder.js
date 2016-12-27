@@ -1,17 +1,10 @@
-import promiseLib from 'bluebird'
-import pg from 'pg-promise'
 import axios from 'axios'
-
+import db from '../db'
 import { doingReminder } from './templates'
 
 if (process.env.NODE_ENV === 'development') {
   require('dotenv').config()
 }
-
-const pgp = pg({ promiseLib })
-
-pgp.pg.defaults.ssl = true
-const db = pgp(process.env.DATABASE_URL)
 
 async function sendMail() {
   let GMAIL_USER = process.env.GMAIL_USER

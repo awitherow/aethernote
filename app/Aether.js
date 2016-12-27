@@ -12,6 +12,7 @@ import Notes from './views/Notes'
 import Journal from './views/Journal'
 import Login from './views/Login'
 import Search from './views/Search'
+import Habit from './views/Habit'
 
 import {
   toggleLoading,
@@ -66,8 +67,15 @@ class Aether extends Component {
     entryService.remove(id, () => this.getEntries())
   }
 
-  submitEdit = (edits) => {
-    entryService.update(this.props.editor.note, edits, () => {
+  editItem = (id) => {
+    const { entries } = this.state
+    let note = entries.filter(note => note.id === id)[0]
+    if (!note) return
+    this.props.openEditor(note)
+  }
+
+  submitEdit = (edits, orig = this.props.editor.note) => {
+    entryService.update(orig, edits, () => {
       this.getEntries()
     })
   }
@@ -82,13 +90,15 @@ class Aether extends Component {
     const sharedProps = {
       type: currentType,
       entries: entries.filter(entry => entry.type === currentType),
-      removeItem: this.removeItem,
-      openEditor: this.props.openEditor,
+      editItem: this.editItem,
     }
 
     switch(currentType) {
       case 'note': return <Notes {...sharedProps} />
       case 'journal': return <Journal {...sharedProps} />
+      case 'habit': return (
+        <Habit {...sharedProps} submitEdit={this.submitEdit} />
+      )
     }
   }
 
@@ -104,9 +114,9 @@ class Aether extends Component {
         { searching ? (
           <Search
             entries={this.state.entries}
-            removeItem={this.removeItem}
-            openEditor={this.props.openEditor}
+            editItem={this.editItem}
             toggleSearch={this.props.toggleSearch}
+            submitEdit={this.submitEdit}
           />
         ) : null }
 
