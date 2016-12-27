@@ -21,10 +21,9 @@ class Habit extends Component {
     submitEdit: PropTypes.func.isRequired,
   }
 
-  recordHabit = (mod) => {
+  recordHabit = () => {
     const intVal = parseInt(this.props.item.content)
-    const newValue = mod === 'plus' ? (intVal + 1) : (intVal - 1)
-    this.props.submitEdit({ content: newValue.toString() }, this.props.item)
+    this.props.submitEdit({ content: (intVal + 1).toString() }, this.props.item)
   }
 
   render() {
@@ -36,13 +35,9 @@ class Habit extends Component {
         <Label bsStyle={mapCategoryToStyle(this.props.item.category)}>
           {this.props.item.category}
         </Label>
-        <Button bsSize="xsmall" onClick={() => this.recordHabit('plus')}>
+        <Button bsSize="xsmall" onClick={() => this.recordHabit()}>
           <Glyphicon glyph="plus"/>
         </Button>
-        <Button bsSize="xsmall" onClick={() => this.recordHabit('minus')}>
-          <Glyphicon glyph="minus"/>
-        </Button>
-
         <Button
           bsSize="xsmall"
           onClick={() => this.props.edit(this.props.item.id)}

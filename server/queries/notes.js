@@ -1,4 +1,6 @@
 import db from '../db'
+
+import { addHabit } from './habits'
 export const getNotes = (req, res, next) => {
   db.any('select * from entries')
   .then(data => {
@@ -40,6 +42,12 @@ export const createNote = (req, res, next) => {
 
 export const updateNote = (req, res, next) => {
   const { id, title, content, prio, category, context, type } = req.body.update
+  if (type === 'habit') {
+    addHabit({
+      name: title,
+      value: 1,
+    })
+  }
   db.none(
     'update entries ' +
     'set title=$1, content=$2, prio=$3, category=$4, context=$5, type=$6' +
