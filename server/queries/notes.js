@@ -1,13 +1,4 @@
-import promiseLib from 'bluebird'
-import pg from 'pg-promise'
-
-const pgp = pg({
-  promiseLib,
-})
-
-pgp.pg.defaults.ssl = true
-const db = pgp(process.env.DATABASE_URL)
-
+import db from '../db'
 export const getNotes = (req, res, next) => {
   db.any('select * from entries')
   .then(data => {
