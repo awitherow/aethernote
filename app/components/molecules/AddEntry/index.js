@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 
-import FlexibleInput from '../../atoms/FlexibleInput'
-import Dropdown from '../../atoms/Dropdown'
+import {
+  Button, Glyphicon, Form, FormControl, FormGroup, InputGroup, DropdownButton,
+  MenuItem,
+} from 'react-bootstrap'
 
 import * as entryService from '../../../api/entries'
 import { categories } from '../../../lib/schema'
@@ -51,42 +53,40 @@ export default class AddThing extends Component {
   handleChange = (type, val) => this.setState({ [type]: val })
 
   render() {
+    const { type } = this.props
+    const { category, content } = this.state
     return (
-      <form className="note-list__add-note" onSubmit={this.addNote}>
-        <FlexibleInput
-          id="note"
-          label="Awaiting changes..."
-          type="text"
-          value={this.state.content}
-          onChange={(e) => this.handleChange('content', e.target.value)}
-          />
+      <Form inline>
 
-          {this.props.type === 'note' ? (
-            <Dropdown
-              id="prio"
-              label="Importance?"
-              options={[1, 2, 3]}
-              defaultValue={1}
-              handleChange={(e) =>
-                this.handleChange('prio', e.target.value)
-              }
-              />
-          ) : null}
+        <FormGroup controlId="newEntryInput">
+          {' '}
+          <InputGroup>
+            <DropdownButton
+              componentClass={InputGroup.Button}
+              id={`${type}-selector`}
+              title={category ? category : categories[type][0]}
+            >
+              {categories[type].map((cat, i) =>
+                <MenuItem
+                  key={i}
+                  onSelect={() => this.handleChange('category', cat)}>
+                  {cat}
+                </MenuItem>
+              )}
+            </DropdownButton>
+            <FormControl
+              type="text"
+              value={content}
+              onChange={(e) => this.handleChange('content', e.target.value)}
+            />
+          </InputGroup>
+        </FormGroup>
+        {' '}
+        <Button bsStyle="primary" onClick={this.addNote}>
+          <Glyphicon glyph="plus" />
+        </Button>
 
-          {this.props.type === 'journal' ? (
-            <Dropdown
-              id="journal-type"
-              label="Journal Entry Type"
-              options={categories.journal}
-              defaultValue={categories.journal[0]}
-              handleChange={(e) =>
-                this.handleChange('category', e.target.value)
-              }
-              />
-          ) : null}
-
-        <button>&#43;</button>
-      </form>
+      </Form>
     )
   }
 }

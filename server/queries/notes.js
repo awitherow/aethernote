@@ -28,8 +28,8 @@ export const getNote = (req, res, next) => {
 
 export const createNote = (req, res, next) => {
   if (!req.body.type) { req.body.type = 'note' }
-  db.none('insert into entries(title, content, prio, category, type)' +
-      'values( ${title}, ${content}, ${prio}, ${category}, ${type})',
+  db.none('insert into entries(title, content, category, type)' +
+      'values( ${title}, ${content}, ${category}, ${type})',
     req.body)
   .then(() => {
     res.status(200)

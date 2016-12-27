@@ -11,10 +11,7 @@ function get(cb) {
 
 function add(entry, cb) {
   if (!entry.category) {
-    switch(entry.type) {
-      case 'note': entry.category = categories.note[0]; break
-      case 'journal': entry.category = categories.journal[0]; break
-    }
+    entry.category = categories[entry.type][0]
   }
 
   if (entry.type !== 'habit') {
@@ -23,8 +20,6 @@ function add(entry, cb) {
     entry.title = entry.content
     entry.content = 0
   }
-
-  if (!entry.prio) entry.prio = 1
 
   fetch('/api/notes', {
     method: 'POST',
