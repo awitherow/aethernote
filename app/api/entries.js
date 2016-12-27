@@ -14,6 +14,10 @@ function add(entry, cb) {
     entry.category = categories[entry.type][0]
   }
 
+  if (!entry.prio) {
+    entry.prio = 1
+  }
+
   if (entry.type !== 'habit') {
     entry.title = `${entry.content.substring(0, 32)}`
   } else {

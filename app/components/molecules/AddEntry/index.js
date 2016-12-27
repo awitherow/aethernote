@@ -54,26 +54,42 @@ export default class AddThing extends Component {
 
   render() {
     const { type } = this.props
-    const { category, content } = this.state
+    const { category, content, prio } = this.state
     return (
       <Form inline>
 
         <FormGroup controlId="newEntryInput">
           {' '}
           <InputGroup>
-            <DropdownButton
-              componentClass={InputGroup.Button}
-              id={`${type}-selector`}
-              title={category ? category : categories[type][0]}
-            >
-              {categories[type].map((cat, i) =>
-                <MenuItem
-                  key={i}
-                  onSelect={() => this.handleChange('category', cat)}>
-                  {cat}
-                </MenuItem>
-              )}
-            </DropdownButton>
+            {type !== 'note' ? (
+              <DropdownButton
+                componentClass={InputGroup.Button}
+                id={`${type}-selector`}
+                title={category ? category : categories[type][0]}
+              >
+                {categories[type].map((cat, i) =>
+                  <MenuItem
+                    key={i}
+                    onSelect={() => this.handleChange('category', cat)}>
+                    {cat}
+                  </MenuItem>
+                )}
+              </DropdownButton>
+            ) : (
+              <DropdownButton
+                componentClass={InputGroup.Button}
+                id={`${type}-selector`}
+                title={prio ? prio : 'Priority'}
+              >
+                {[1, 2, 3].map((cat, i) =>
+                  <MenuItem
+                    key={i}
+                    onSelect={() => this.handleChange('prio', cat)}>
+                    {cat}
+                  </MenuItem>
+                )}
+              </DropdownButton>
+            )}
             <FormControl
               type="text"
               value={content}
