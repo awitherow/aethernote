@@ -38,6 +38,7 @@ const Store = (state, action) => {
     }
     case OPEN_EDITOR: return {
       ...state,
+      searching: false,
       editor: {
         hidden: false,
         note: action.data,

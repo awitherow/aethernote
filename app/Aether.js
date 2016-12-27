@@ -74,9 +74,8 @@ class Aether extends Component {
     this.props.openEditor(note)
   }
 
-  submitEdit = (edits, orig) => {
-    const original = orig ? orig : this.props.editor.note
-    entryService.update(original, edits, () => {
+  submitEdit = (edits, orig = this.props.editor.note) => {
+    entryService.update(orig, edits, () => {
       this.getEntries()
     })
   }
@@ -115,8 +114,9 @@ class Aether extends Component {
         { searching ? (
           <Search
             entries={this.state.entries}
-            openEditor={this.props.openEditor}
+            editItem={this.editItem}
             toggleSearch={this.props.toggleSearch}
+            submitEdit={this.submitEdit}
           />
         ) : null }
 

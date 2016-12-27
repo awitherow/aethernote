@@ -11,6 +11,7 @@ class Search extends Component {
     // redux functions
     editItem: PropTypes.func.isRequired,
     toggleSearch: PropTypes.func.isRequired,
+    submitEdit: PropTypes.func.isRequired,
   }
 
   state = {
@@ -49,6 +50,7 @@ class Search extends Component {
           entries={this.fuse.search(this.state.entry)}
           classModifier="search__list"
           edit={this.props.editItem}
+          submitEdit={this.props.submitEdit}
         />
       </div>
     )
