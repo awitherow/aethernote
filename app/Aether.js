@@ -12,6 +12,7 @@ import Notes from './views/Notes'
 import Journal from './views/Journal'
 import Login from './views/Login'
 import Search from './views/Search'
+import Habit from './views/Habit'
 
 import {
   toggleLoading,
@@ -88,6 +89,7 @@ class Aether extends Component {
     switch(currentType) {
       case 'note': return <Notes {...sharedProps} />
       case 'journal': return <Journal {...sharedProps} />
+      case 'habit': return <Habit {...sharedProps} />
     }
   }
 
