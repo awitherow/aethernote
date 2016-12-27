@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import * as entryService from './api/entries'
 
+import { toTitleCase } from './lib/helpers'
+
 import Overlay from './components/molecules/Overlay'
 import Header from './components/molecules/Header'
 import AddEntry from './components/molecules/AddEntry'
@@ -13,6 +15,8 @@ import Journal from './views/Journal'
 import Login from './views/Login'
 import Search from './views/Search'
 import Habit from './views/Habit'
+
+import { Panel, Glyphicon, Button } from 'react-bootstrap'
 
 import {
   toggleLoading,
@@ -111,6 +115,7 @@ class Aether extends Component {
       <div className="aether">
 
         { loading ? <Overlay type="loading" /> : null }
+
         { searching ? (
           <Search
             entries={this.state.entries}
@@ -128,13 +133,6 @@ class Aether extends Component {
 
         <div className="inner">
 
-          <AddEntry
-            type={currentType}
-            toggleLoading={this.props.toggleLoading}
-            />
-
-          {editor.hidden ? this.route() : null}
-
           <Editor
             hidden={editor.hidden}
             note={editor.note}
@@ -143,6 +141,44 @@ class Aether extends Component {
             onRemove={this.removeItem}
             toggleLoading={this.props.toggleLoading}
             />
+
+          <div>
+            <style type="text/css">{`
+              #quick-input {
+                margin-bottom: 25px;
+              }
+            `}</style>
+            <div id="quick-input">
+              <AddEntry
+                type={currentType}
+                toggleLoading={this.props.toggleLoading}
+                />
+            </div>
+          </div>
+
+          <Panel header={
+            <div>
+              <style type="text/css">{`
+                .spread-icon-right {
+                    display: flex;
+                }
+                .header-title {
+                  margin-right: auto;
+                }
+              `}</style>
+              <div className="spread-icon-right">
+                <span className="header-title">{toTitleCase(currentType)} Entries</span>
+                <Button
+                  bsSize="xsmall"
+                  onClick={this.getEntries}
+                >
+                  <Glyphicon glyph="refresh" />
+                </Button>
+              </div>
+            </div>
+            }>
+            {editor.hidden ? this.route() : null}
+          </Panel>
 
         </div>
 
