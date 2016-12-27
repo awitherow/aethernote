@@ -1,6 +1,6 @@
 import db from '../db'
 
-import { addHabit } from './habits'
+import { trackHabit } from './habits'
 export const getNotes = (req, res, next) => {
   db.any('select * from entries')
   .then(data => {
@@ -42,8 +42,9 @@ export const createNote = (req, res, next) => {
 
 export const updateNote = (req, res, next) => {
   const { id, title, content, prio, category, context, type } = req.body.update
-  if (type === 'habit' && req.body.update.length < 2) {
-    addHabit({
+  const mostLikelyOnlyHabitTracked = req.body.update.length < 2
+  if (type === 'habit' && mostLikelyOnlyHabitTracked) {
+    trackHabit({
       name: title,
       value: 1,
     })
