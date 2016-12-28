@@ -5,6 +5,7 @@ import {
 } from 'react-bootstrap'
 
 import { categories } from '../../lib/schema'
+import { isMobile } from '../../lib/helpers'
 
 class Notes extends Component {
   static propTypes = {
@@ -52,7 +53,7 @@ class Notes extends Component {
             </DropdownButton>
           </div>
 
-          <Table striped hover condensed>
+          <Table striped hover>
             <thead>
               <tr>
                 <td>#</td>
@@ -68,7 +69,9 @@ class Notes extends Component {
                   <td>{entry.id}</td>
                   <td>{entry.title}</td>
                   <td>
-                    <Button bsSize="small" onClick={() => editItem(entry.id)}>
+                    <Button
+                      block={isMobile}
+                      bsSize="small" onClick={() => editItem(entry.id)}>
                       <Glyphicon glyph="edit" />
                     </Button>
                   </td>

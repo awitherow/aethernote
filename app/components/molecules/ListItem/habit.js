@@ -3,6 +3,8 @@ import './list-item.scss'
 
 import { Label, Button, Glyphicon } from 'react-bootstrap'
 
+import { isMobile } from '../../../lib/helpers'
+
 const mapCategoryToStyle = (cat) => {
   switch (cat) {
     case 'godmode': return 'primary'
@@ -38,10 +40,13 @@ export default class Habit extends Component {
         <Label bsStyle={mapCategoryToStyle(this.props.item.category)}>
           {this.props.item.category}
         </Label>
-        <Button bsSize="xsmall" onClick={this.recordHabit}>
+        <Button
+          block={isMobile}
+          bsSize="xsmall" onClick={this.recordHabit}>
           <Glyphicon glyph="plus"/>
         </Button>
         <Button
+          block={isMobile}
           bsSize="xsmall"
           onClick={() => this.props.edit(this.props.item.id)}
         >

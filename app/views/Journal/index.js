@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
 
-import { getToday, getYestereday, toTitleCase } from '../../lib/helpers'
+import {
+  getToday, getYestereday, toTitleCase, isMobile,
+} from '../../lib/helpers'
 import { categories } from '../../lib/schema'
 
 import {
@@ -55,7 +57,9 @@ export default class Journal extends Component {
                       <td>{entry.id}</td>
                       <td>{entry.content}</td>
                       <td>
-                        <Button bsSize="small" onClick={() => this.props.editItem(entry.id)}>
+                        <Button
+                          block={isMobile}
+                          bsSize="small" onClick={() => this.props.editItem(entry.id)}>
                           <Glyphicon glyph="edit" />
                         </Button>
                       </td>

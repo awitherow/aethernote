@@ -1,17 +1,23 @@
-import './index.scss'
 import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
+import moment from 'moment'
 
-import { convertToMarkdown } from '../../../lib/helpers'
+import {
+  Panel, Form, FormControl, Button, Glyphicon, DropdownButton, MenuItem,
+  ButtonGroup,
+} from 'react-bootstrap'
+
+import { convertToMarkdown, isMobile } from '../../../lib/helpers'
 import { categories, contexts } from '../../../lib/schema'
-
-import TextAreaInput from '../../../components/atoms/TextAreaInput'
-import FlexibleInput from '../../../components/atoms/FlexibleInput'
-import Dropdown from '../../../components/atoms/Dropdown'
 
 const initialState = {
   formUpdated: false,
   deleteWizardOpen: false,
+}
+
+const responsiveButtonGroup = {
+  block: isMobile,
+  vertical: isMobile,
 }
 
 export default class Editor extends Component {
@@ -80,114 +86,170 @@ export default class Editor extends Component {
   render() {
     if (this.props.hidden) return null
     const { formUpdated, deleteWizardOpen, content, title } = this.state
-    const { id, created, prio, category, type, context } = this.props.note
+    const {
+      id, created, prio, category, type, context, modified,
+    } = this.props.note
 
     const deleteNoteRequestClasses = classnames('deleteNote__request', {
       'hidden': deleteWizardOpen,
     })
 
-    const deleteNotePanelClasses = classnames('deleteNote__panel', {
-      'hidden': !deleteWizardOpen,
-    })
+    const confirmDeleteClasses = !deleteWizardOpen && 'hidden'
 
     return (
-      <div className="editor">
-        <header>
-          <h1>{title} | #{id}</h1>
-          <span>
-            {created}
-          </span>
-          <button className="close" onClick={this.closeEditor}>
-            &times;
-          </button>
-        </header>
+      <Panel header={
+        <div>
+          <style type="text/css">{`
+            .spread-icon-right {
+              display: flex;
+            }
+            .float-btn {
+              margin-left: auto;
+            }
+          `}</style>
+          <div className="spread-icon-right">
+            <span>Edit #{id} | {title}</span>
+            <Button className="float-btn" bsSize="small" onClick={this.closeEditor}>
+              <Glyphicon glyph="remove" />
+            </Button>
+          </div>
+        </div>
+      }>
+        <style type="text/css">{`
+          .editor-title-bar {
+            position: relative;
+          }
+          .content-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+          }
+          .content-view,
+          .content-field {
+            padding-left: 5px;
+            width: 100%;
+          }
+          @media(min-width: 768px) {
+            .content-container {
+              flex-direction: row;
+            }
+          }
+          .extra-margin {
+            margin: 10px auto;
+          }
+        `}</style>
 
-        <form onSubmit={this.onSubmit}>
+        <div className="editor-subheader">
+           <ul>
+             <li>created {moment(created).fromNow()}</li>
+             <li>last modified {moment(modified).fromNow()}</li>
+           </ul>
+        </div>
 
-          <FlexibleInput
-            id="title"
-            label="Title"
+        <Form>
+
+          <FormControl
             type="text"
             value={title}
             onChange={(e) => this.handleChange('title', e.target.value)}
-            />
+          />
 
-          <div className="row note-options">
-            <Dropdown
-              id="prio"
-              label="Importance?"
-              options={[1, 2, 3]}
-              defaultValue={prio}
-              handleChange={(e) =>
-                this.handleChange('prio', e.target.value)
-              }
-              />
+          <div className="extra-margin">
+            <ButtonGroup {...responsiveButtonGroup}>
+              <DropdownButton
+                id={`prio-selector`}
+                title={this.state.prio ? this.state.prio : prio}
+              >
+                {[1, 2, 3].map(prio =>
+                  <MenuItem
+                    key={prio}
+                    onSelect={() => this.handleChange('prio', prio)}>
+                    {prio}
+                  </MenuItem>
+                )}
+              </DropdownButton>
 
-            <Dropdown
-              id="type"
-              label="Type"
-              options={Object.keys(categories)}
-              defaultValue={type}
-              handleChange={e => this.handleChange('type', e.target.value)}
-              />
+              <DropdownButton
+                id={`type-selector`}
+                title={this.state.type ? this.state.type : type}
+              >
+                {Object.keys(categories).map((type, i) =>
+                  <MenuItem
+                    key={i}
+                    onSelect={() => this.handleChange('type', type)}>
+                    {type}
+                  </MenuItem>
+                )}
+              </DropdownButton>
 
-            <Dropdown
-              id="category-types"
-              label="Category"
-              options={categories[this.state.type ? this.state.type : type]}
-              defaultValue={category}
-              handleChange={e => this.handleChange('category', e.target.value)}
-              />
+              <DropdownButton
+                id={`category-selector`}
+                title={this.state.category ? this.state.category : category}
+              >
+                {categories[this.state.type ? this.state.type : type].map((cat, i) =>
+                  <MenuItem
+                    key={i}
+                    onSelect={() => this.handleChange('category', cat)}>
+                    {cat}
+                  </MenuItem>
+                )}
+              </DropdownButton>
 
-            <Dropdown
-              id="context-types"
-              label="Context"
-              options={contexts}
-              defaultValue={context}
-              handleChange={e => this.handleChange('context', e.target.value)}
-              />
+              <DropdownButton
+                id={`context-selector`}
+                title={this.state.context ? this.state.context : context}
+              >
+                {contexts.map((con, i) =>
+                  <MenuItem
+                    key={i}
+                    onSelect={() => this.handleChange('context', con)}>
+                    {con}
+                  </MenuItem>
+                )}
+              </DropdownButton>
 
-            <button disabled={!formUpdated}>
-              SAVE
-            </button>
+              <Button bsStyle="success" onClick={this.onSubmit} disabled={!formUpdated}>
+                <Glyphicon glyph="cloud-upload" />
+              </Button>
+
+              <Button
+                className={deleteNoteRequestClasses}
+                onClick={this.toggleWizard}>
+                <Glyphicon glyph="trash" />
+              </Button>
+
+              <Button
+                className={confirmDeleteClasses}
+                bsStyle="danger"
+                onClick={this.deleteNote}>
+                <Glyphicon glyph="ok" />
+              </Button>
+
+              <Button
+                className={confirmDeleteClasses}
+                onClick={this.toggleWizard}>
+                <Glyphicon glyph="remove" />
+              </Button>
+            </ButtonGroup>
           </div>
 
-          <div className="content-container">
+          <div className="content-container extra-margin">
             <div // eslint-disable-next-line
               dangerouslySetInnerHTML={convertToMarkdown(content)}
               className="content-view"/>
 
-            <TextAreaInput
-              id="content"
-              label="Contents"
+            <FormControl
+              componentClass="textarea"
+              type="text"
               value={content}
               onChange={(e) => this.handleChange('content', e.target.value)}
-              />
-          </div>
-
-        </form>
-
-        <div className="deleteNote">
-          <button className={deleteNoteRequestClasses}
-            onClick={this.toggleWizard}>
-            &#9842;
-          </button>
-
-          <div className={deleteNotePanelClasses}>
-
-            <button className="deleteNote__panel-yes"
-              onClick={this.deleteNote}>
-              &#9786;
-            </button>
-            <button className="deleteNote__panel-no"
-              onClick={this.toggleWizard}>
-              &#9785;
-            </button>
+            />
 
           </div>
-        </div>
 
-      </div>
+        </Form>
+
+      </Panel>
     )
   }
 }

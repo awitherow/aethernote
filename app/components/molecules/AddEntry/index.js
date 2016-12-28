@@ -7,12 +7,13 @@ import {
 
 import * as entryService from '../../../api/entries'
 import { categories } from '../../../lib/schema'
+import { isMobile } from '../../../lib/helpers'
 
 const initialState = {
   content: '',
 }
 
-export default class AddThing extends Component {
+export default class addEntry extends Component {
   state = { ...initialState }
 
   static propTypes = {
@@ -98,7 +99,9 @@ export default class AddThing extends Component {
           </InputGroup>
         </FormGroup>
         {' '}
-        <Button bsStyle="primary" onClick={this.addNote}>
+        <Button
+          block={isMobile}
+          bsStyle="primary" onClick={this.addNote}>
           <Glyphicon glyph="plus" />
         </Button>
 
