@@ -1,5 +1,5 @@
 import axios from 'axios'
-import db from '../db'
+import db from '../../db'
 import { doingReminder } from './templates'
 
 if (process.env.NODE_ENV === 'development') {
