@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import * as entryService from './api/entries'
 
 import { toTitleCase } from './lib/helpers'
+import { categories } from './lib/schema'
 
 import Overlay from './components/molecules/Overlay'
 import Header from './components/molecules/Header'
@@ -16,7 +17,7 @@ import Login from './views/Login'
 import Search from './views/Search'
 import Habit from './views/Habit'
 
-import { Panel, Glyphicon, Button } from 'react-bootstrap'
+import { Panel, Glyphicon, Button, DropdownButton, MenuItem } from 'react-bootstrap'
 
 import {
   toggleLoading,
@@ -167,7 +168,20 @@ class Aether extends Component {
                 }
               `}</style>
               <div className="spread-icon-right">
-                <span className="header-title">{toTitleCase(currentType)} Entries</span>
+                <DropdownButton
+                  title={toTitleCase(currentType)}
+                  id="change-view"
+                >
+                  {Object.keys(categories).map((type, i) =>
+                    <MenuItem
+                      key={i}
+                      active={currentType === type}
+                      onSelect={() => this.props.routeTo(type)}
+                    >
+                      {toTitleCase(type)}
+                    </MenuItem>
+                  )}
+                </DropdownButton>
                 <Button
                   bsSize="xsmall"
                   onClick={this.getEntries}

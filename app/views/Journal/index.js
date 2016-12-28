@@ -39,9 +39,9 @@ export default class Journal extends Component {
 
       <ListGroup>
         {categories.journal.map((category, i) =>
-          <ListGroupItem  header={toTitleCase(category)}>
+          <ListGroupItem key={i} header={toTitleCase(category)}>
             {this.filterEntries(category).length ? (
-              <Table key={i} responsive striped hover>
+              <Table key={i} striped hover>
                 <thead>
                   <tr>
                     <td>#</td>
