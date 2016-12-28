@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
 import {
-  Button, Glyphicon, Form, FormControl, FormGroup, InputGroup, DropdownButton,
+  Button, Glyphicon, Form, FormControl, FormGroup, DropdownButton,
   MenuItem,
 } from 'react-bootstrap'
 
@@ -14,16 +14,14 @@ const initialState = {
 }
 
 export default class addEntry extends Component {
-  state = { ...initialState }
-
   static propTypes = {
     type: PropTypes.string.isRequired,
     // redux functions
     toggleLoading: PropTypes.func.isRequired,
   }
 
-  static contextTypes = {
-    getEntries: PropTypes.func.isRequired,
+  state = {
+    ...initialState,
   }
 
   componentWillReceiveProps(nextProps) {
@@ -54,56 +52,61 @@ export default class addEntry extends Component {
   handleChange = (type, val) => this.setState({ [type]: val })
 
   render() {
-    const { type } = this.props
-    const { category, content, prio } = this.state
+    const { category, content, type } = this.state
     return (
       <Form inline>
-
-        <FormGroup controlId="newEntryInput">
-          {' '}
-          <InputGroup>
-            {type !== 'note' ? (
-              <DropdownButton
-                componentClass={InputGroup.Button}
-                id={`${type}-selector`}
-                title={category ? category : categories[type][0]}
-              >
-                {categories[type].map((cat, i) =>
-                  <MenuItem
-                    key={i}
-                    onSelect={() => this.handleChange('category', cat)}>
-                    {cat}
-                  </MenuItem>
-                )}
-              </DropdownButton>
-            ) : (
-              <DropdownButton
-                componentClass={InputGroup.Button}
-                id={`${type}-selector`}
-                title={prio ? prio : 'Priority'}
-              >
-                {[1, 2, 3].map((cat, i) =>
-                  <MenuItem
-                    key={i}
-                    onSelect={() => this.handleChange('prio', cat)}>
-                    {cat}
-                  </MenuItem>
-                )}
-              </DropdownButton>
+        <style type="text/css">{`
+          .flexi-form {
+            display: flex;
+            flex-direction: column;
+            width: 100;
+          }
+          @media(min-width: 500px) {
+            flex-direction: row;
+          }
+        `}</style>
+        <FormGroup id="new-entry-input-form" className="flexi-form">
+          <DropdownButton
+            style={{ width: isMobile && '100%' }}
+            id={`${type}-selector`}
+            title={type ? type : this.props.type}
+          >
+            {Object.keys(categories).map((type, i) =>
+              <MenuItem
+                key={i}
+                onSelect={() => this.handleChange('type', type)}>
+                {type}
+              </MenuItem>
             )}
-            <FormControl
-              type="text"
-              value={content}
-              onChange={(e) => this.handleChange('content', e.target.value)}
-            />
-          </InputGroup>
+          </DropdownButton>
+
+          <DropdownButton
+            style={{ width: isMobile && '100%' }}
+            id={`${type}-selector`}
+            title={
+              category ? category : categories[type ? type : this.props.type][0]
+            }
+          >
+            {categories[type ? type : this.props.type].map((cat, i) =>
+              <MenuItem
+                key={i}
+                onSelect={() => this.handleChange('category', cat)}>
+                {cat}
+              </MenuItem>
+            )}
+          </DropdownButton>
+
+          <FormControl
+            type="text"
+            value={content}
+            onChange={(e) => this.handleChange('content', e.target.value)}
+          />
+          <Button
+            block={isMobile}
+            bsStyle="primary" onClick={this.addNote}>
+            <Glyphicon glyph="plus" />
+          </Button>
         </FormGroup>
-        {' '}
-        <Button
-          block={isMobile}
-          bsStyle="primary" onClick={this.addNote}>
-          <Glyphicon glyph="plus" />
-        </Button>
 
       </Form>
     )
