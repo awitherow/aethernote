@@ -21,6 +21,7 @@ export const categories  = {
     'godmode',
     'really good',
     'good',
+    'neutral',
     'bad',
     'really bad',
     'ultimate sin',
