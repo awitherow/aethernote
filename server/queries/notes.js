@@ -42,12 +42,12 @@ export const createNote = (req, res, next) => {
 
 export const updateNote = (req, res, next) => {
   const {
-    id, title, content, prio, category, context, type, tally,
+    id, title, content, prio, category, context, type, tally, value,
   } = req.body.update
   if (type === 'habit' && tally) {
     trackHabit({
       name: title,
-      value: 1,
+      value,
     })
   }
   db.none(

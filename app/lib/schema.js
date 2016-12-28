@@ -42,4 +42,5 @@ export const contexts = [
   'quantified self',
   'reading',
   'food',
+  'travel',
 ]
