@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import classnames from 'classnames'
+
 import * as entryService from './api/entries'
 
 import { toTitleCase } from './lib/helpers'
@@ -134,15 +136,6 @@ class Aether extends Component {
 
         <div className="inner">
 
-          <Editor
-            hidden={editor.hidden}
-            note={editor.note}
-            onSubmit={this.submitEdit}
-            onClose={this.props.closeEditor}
-            onRemove={this.removeItem}
-            toggleLoading={this.props.toggleLoading}
-            />
-
           <div>
             <style type="text/css">{`
               #quick-input {
@@ -157,7 +150,16 @@ class Aether extends Component {
             </div>
           </div>
 
-          <Panel header={
+          <Editor
+            hidden={editor.hidden}
+            note={editor.note}
+            onSubmit={this.submitEdit}
+            onClose={this.props.closeEditor}
+            onRemove={this.removeItem}
+            toggleLoading={this.props.toggleLoading}
+            />
+
+          <Panel style={{display: !editor.hidden && 'none'}} header={
             <div>
               <style type="text/css">{`
                 .spread-icon-right {
