@@ -129,6 +129,9 @@ export default class Editor extends Component {
             padding-left: 5px;
             width: 100%;
           }
+          .content-field {
+            min-height: 50vh;
+          }
           @media(min-width: 768px) {
             .content-container {
               flex-direction: row;
@@ -240,6 +243,7 @@ export default class Editor extends Component {
 
             <FormControl
               componentClass="textarea"
+              className="content-field"
               type="text"
               value={content}
               onChange={(e) => this.handleChange('content', e.target.value)}
