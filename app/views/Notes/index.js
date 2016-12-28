@@ -24,7 +24,7 @@ class Notes extends Component {
   }
 
   state = {
-    category: 'inbox',
+    category: 'doing',
     activeNotes: 0,
   }
 

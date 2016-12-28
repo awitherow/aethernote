@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import { isMobile } from '../../lib/helpers'
 
 import {
-  Table, Label, Button, Glyphicon, InputGroup, FormControl,
+  Table, Label, Button, Glyphicon, FormControl,
 } from 'react-bootstrap'
 
 const mapCategoryToStyle = (cat) => {
@@ -17,11 +17,11 @@ const mapCategoryToStyle = (cat) => {
   }
 }
 
-const getInitialState = (entries) => {
-  const initialState = {}
-  entries.map(entry => initialState[entry.id] = 1)
-  return initialState
-}
+const getInitialState = entries =>
+  entries.reduce((initialState, entry) => ({
+    ...initialState,
+    [entry.id]: 1,
+  }), {})
 
 export default class Habit extends Component {
   static propTypes = {
@@ -34,13 +34,22 @@ export default class Habit extends Component {
 
   state = getInitialState(this.props.entries)
 
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps.entries.length > this.props.entries.length) {
+      this.updateState(nextProps.entries)
+    }
+  }
+
+  updateState = (entries = this.props.entries) =>
+    this.setState({ ...getInitialState(entries)})
+
   recordHabit = (entry) => {
     this.props.submitEdit({
       content: parseInt(entry.content) + parseInt(this.state[entry.id]),
       tally: true,
       value: this.state[entry.id],
     }, entry)
-    this.setState({ ...getInitialState(this.props.entries )})
+    this.updateState()
   }
 
   render() {
@@ -50,11 +59,16 @@ export default class Habit extends Component {
           .input-with-button {
             display: flex;
           }
+          .table>tbody>tr>td {
+            text-align: center;
+            vertical-align: middle;
+          }
         `}</style>
         <thead>
           <tr>
             <td>Title</td>
             <td>Category</td>
+            <td>Current</td>
             <td>Track</td>
             <td>Edit</td>
           </tr>
@@ -68,6 +82,7 @@ export default class Habit extends Component {
                   {entry.category}
                 </Label>
               </td>
+              <td>{entry.content}</td>
               <td className="input-with-button">
                 <FormControl
                   type="number"
