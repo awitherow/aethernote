@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 
+import {
+  Table, Button, Glyphicon, DropdownButton, MenuItem,
+} from 'react-bootstrap'
+
 import Dropdown from '../../components/atoms/Dropdown'
-import List from '../../components/molecules/List'
 
 import { categories } from '../../lib/schema'
 
@@ -26,38 +29,60 @@ class Notes extends Component {
     activeNotes: 0,
   }
 
-  handleChange = (whatToChange, change) => {
-    switch (whatToChange) {
-      case 'category': this.setState({ category: change }); break
-      default: return
-    }
-  }
+  handleChange = (whatToChange, change) =>
+    this.setState({ [whatToChange]: change })
 
-  render = () =>
-    <div className="note-view" key="note-page">
+  render = () => {
+    const { type, entries, editItem } = this.props
+    const { category } = this.state
+    return (
+      <div className="note-view" key="note-page">
 
-      <div>
-        <div className="note-view__sort">
-          <Dropdown
-            id="category-types"
-            label="Category"
-            options={categories.note}
-            defaultValue={this.state.category}
-            handleChange={e => this.handleChange('category', e.target.value)}
-            />
+        <div>
+          <div className="note-view__sort">
+            <DropdownButton
+              id={`${type}-selector`}
+              title={category ? category : categories[type][0]}
+            >
+              {categories[type].map((cat, i) =>
+                <MenuItem
+                  key={i}
+                  onSelect={() => this.handleChange('category', cat)}>
+                  {cat}
+                </MenuItem>
+              )}
+            </DropdownButton>
+          </div>
+
+          <Table responsive striped hover condensed>
+            <thead>
+              <tr>
+                <td>#</td>
+                <td>Title</td>
+                <td>Edit</td>
+              </tr>
+            </thead>
+            <tbody>
+              {entries.filter(note =>
+                note.category === this.state.category
+              ).map((entry, i) =>
+                <tr key={i}>
+                  <td>{entry.id}</td>
+                  <td>{entry.title}</td>
+                  <td>
+                    <Button bsSize="small" onClick={() => editItem(entry.id)}>
+                      <Glyphicon glyph="edit" />
+                    </Button>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </Table>
+
         </div>
-
-        <List
-          type={this.props.type}
-          entries={this.props.entries.filter(note =>
-            note.category === this.state.category
-          )}
-          classModifier="note-list__list"
-          edit={this.props.editItem}
-          />
-
       </div>
-    </div>
+    )
+  }
 }
 
 export default Notes
