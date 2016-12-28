@@ -52,7 +52,7 @@ class Notes extends Component {
             </DropdownButton>
           </div>
 
-          <Table responsive striped hover condensed>
+          <Table striped hover condensed>
             <thead>
               <tr>
                 <td>#</td>

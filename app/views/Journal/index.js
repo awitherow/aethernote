@@ -1,11 +1,12 @@
-import './journal.scss'
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
 
-import { getToday, getYestereday } from '../../lib/helpers'
+import { getToday, getYestereday, toTitleCase } from '../../lib/helpers'
 import { categories } from '../../lib/schema'
 
-import ListGroup from '../../components/molecules/ListGroup'
+import {
+  Table, ListGroup, ListGroupItem, Button, Glyphicon,
+} from 'react-bootstrap'
 
 export default class Journal extends Component {
   static propTypes = {
@@ -31,24 +32,42 @@ export default class Journal extends Component {
     )
   }
 
-  render () {
-    return (
-      <div className="journal" key="journal-page">
+  render = () =>
+    <div className="journal" key="journal-page">
 
-        <h2>{moment(this.state.day).format('MMM Do YY')}</h2>
+      <h2>{moment(this.state.day).format('MMM Do YY')}</h2>
 
-        {categories.journal.map(category => {
-          return (
-            <ListGroup
-              key={category}
-              category={category}
-              entries={this.filterEntries(category)}
-              editItem={this.props.editItem}
-              />
-          )
-        })}
+      <ListGroup>
+        {categories.journal.map((category, i) =>
+          <ListGroupItem  header={toTitleCase(category)}>
+            {this.filterEntries(category).length ? (
+              <Table key={i} responsive striped hover>
+                <thead>
+                  <tr>
+                    <td>#</td>
+                    <td>Entry</td>
+                    <td>Edit</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.filterEntries(category).map((entry, i) =>
+                    <tr key={i}>
+                      <td>{entry.id}</td>
+                      <td>{entry.content}</td>
+                      <td>
+                        <Button bsSize="small" onClick={() => this.props.editItem(entry.id)}>
+                          <Glyphicon glyph="edit" />
+                        </Button>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </Table>
+            ) : null
+          }
+        </ListGroupItem>
+      )}
+    </ListGroup>
 
-      </div>
-    )
-  }
+  </div>
 }
