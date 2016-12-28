@@ -4,8 +4,6 @@ import {
   Table, Button, Glyphicon, DropdownButton, MenuItem,
 } from 'react-bootstrap'
 
-import Dropdown from '../../components/atoms/Dropdown'
-
 import { categories } from '../../lib/schema'
 
 class Notes extends Component {

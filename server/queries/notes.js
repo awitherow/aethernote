@@ -41,9 +41,10 @@ export const createNote = (req, res, next) => {
 }
 
 export const updateNote = (req, res, next) => {
-  const { id, title, content, prio, category, context, type } = req.body.update
-  const mostLikelyOnlyHabitTracked = req.body.update.length < 2
-  if (type === 'habit' && mostLikelyOnlyHabitTracked) {
+  const {
+    id, title, content, prio, category, context, type, tally,
+  } = req.body.update
+  if (type === 'habit' && tally) {
     trackHabit({
       name: title,
       value: 1,

@@ -23,7 +23,10 @@ export default class Habit extends Component {
 
   recordHabit = () => {
     const intVal = parseInt(this.props.item.content)
-    this.props.submitEdit({ content: (intVal + 1).toString() }, this.props.item)
+    this.props.submitEdit({
+      content: (intVal + 1).toString(),
+      tally: true,
+    }, this.props.item)
   }
 
   render() {
