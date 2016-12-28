@@ -18,6 +18,7 @@ export default class addEntry extends Component {
     type: PropTypes.string.isRequired,
     // redux functions
     toggleLoading: PropTypes.func.isRequired,
+    getEntries: PropTypes.func.isRequired,
   }
 
   state = {
@@ -39,13 +40,12 @@ export default class addEntry extends Component {
 
   addNote = (e) => {
     e.preventDefault()
-    this.props.toggleLoading(true)
     entryService.add({
       ...this.state,
       type: this.props.type,
     }, () => {
       this.resetState()
-      this.context.getEntries()
+      this.props.getEntries()
     })
   }
 

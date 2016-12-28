@@ -33,6 +33,7 @@ export const contexts = [
   'career',
   'wealth',
   'health',
+  'fitness',
   'people',
   'spiritual',
   'mental',

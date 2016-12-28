@@ -61,15 +61,13 @@ class Aether extends Component {
     this.getEntries()
 
   getEntries = () => {
-    !this.state.loading && this.props.toggleLoading(true)
     entryService.get(entries => {
       this.setState({ entries })
-      this.props.toggleLoading(false)
+      this.props.loading && this.props.toggleLoading(false)
     })
   }
 
   removeItem = (id) => {
-    this.props.toggleLoading(true)
     entryService.remove(id, () => this.getEntries())
   }
 
@@ -85,10 +83,6 @@ class Aether extends Component {
       this.getEntries()
     })
   }
-
-  getChildContext = () => ({
-    getEntries: this.getEntries,
-  })
 
   route = () => {
     const { entries } = this.state
@@ -145,6 +139,7 @@ class Aether extends Component {
               <AddEntry
                 type={currentType}
                 toggleLoading={this.props.toggleLoading}
+                getEntries={this.getEntries}
                 />
             </div>
           </div>

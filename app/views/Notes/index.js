@@ -1,11 +1,19 @@
 import React, { Component, PropTypes } from 'react'
 
 import {
-  Table, Button, Glyphicon, DropdownButton, MenuItem,
+  Table, Button, Glyphicon, DropdownButton, MenuItem, Label,
 } from 'react-bootstrap'
 
 import { categories } from '../../lib/schema'
 import { isMobile } from '../../lib/helpers'
+
+const mapPrioStyle = (prio) => {
+  switch (prio) {
+    case 3: return 'danger'
+    case 2: return 'warning'
+    default: return 'default'
+  }
+}
 
 class Notes extends Component {
   static propTypes = {
@@ -13,10 +21,6 @@ class Notes extends Component {
     type: PropTypes.string.isRequired,
     // redux functions
     editItem: PropTypes.func.isRequired,
-  }
-
-  static contextTypes = {
-    getEntries: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -58,6 +62,7 @@ class Notes extends Component {
               <tr>
                 <td>#</td>
                 <td>Title</td>
+                <td>Prio</td>
                 <td>Edit</td>
               </tr>
             </thead>
@@ -68,6 +73,11 @@ class Notes extends Component {
                 <tr key={i}>
                   <td>{entry.id}</td>
                   <td>{entry.title}</td>
+                  <td>
+                    <Label bsStyle={mapPrioStyle(entry.prio)}>
+                      {entry.prio}
+                    </Label>
+                  </td>
                   <td>
                     <Button
                       block={isMobile}
