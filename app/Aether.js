@@ -161,10 +161,10 @@ class Aether extends Component {
             <div>
               <style type="text/css">{`
                 .spread-icon-right {
-                    display: flex;
+                  display: flex;
                 }
-                .header-title {
-                  margin-right: auto;
+                .float-btn {
+                  margin-left: auto;
                 }
               `}</style>
               <div className="spread-icon-right">
@@ -183,6 +183,7 @@ class Aether extends Component {
                   )}
                 </DropdownButton>
                 <Button
+                  className="float-btn"
                   bsSize="xsmall"
                   onClick={this.getEntries}
                 >

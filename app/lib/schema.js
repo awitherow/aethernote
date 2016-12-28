@@ -11,12 +11,11 @@ export const categories  = {
     'strategic planning',
   ],
   journal : [
+    'dream',
+    'reflection',
     'recap',
     'aspirations',
-    'dream',
     'gratitude',
-    'magick',
-    'reflection',
   ],
   habit: [
     'godmode',
