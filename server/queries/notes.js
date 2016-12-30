@@ -2,7 +2,7 @@ import db from '../db'
 
 import { trackHabit } from './habits'
 export const getNotes = (req, res, next) => {
-  db.any('select * from entries')
+  db.any('select * from entries ORDER BY modified desc')
   .then(data => {
     res.status(200)
     .json({
