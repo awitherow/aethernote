@@ -153,7 +153,7 @@ class Aether extends Component {
             toggleLoading={this.props.toggleLoading}
             />
 
-          <Panel style={{display: !editor.hidden && 'none', 'overflowY': 'scroll'}} header={
+          <Panel style={{display: !editor.hidden && 'none'}} header={
             <div>
               <style type="text/css">{`
                 .spread-icon-right {

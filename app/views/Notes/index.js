@@ -55,7 +55,7 @@ class Notes extends Component {
             )}
           </DropdownButton>
 
-          <Table striped hover>
+          <Table striped hover responsive={isMobile} condensed={isMobile}>
             <thead>
               <tr>
                 <td>#</td>

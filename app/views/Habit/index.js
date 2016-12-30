@@ -84,6 +84,9 @@ export default class Habit extends Component {
             text-align: center;
             vertical-align: middle;
           }
+          .minput {
+            min-width: 100px;
+          }
         `}</style>
         <div className="note-list-modifer">
           <DropdownButton
@@ -112,13 +115,13 @@ export default class Habit extends Component {
             <Glyphicon glyph="remove" />
           </Button>
         </div>
-        <Table striped hover>
+        <Table striped hover responsive={isMobile} condensed={isMobile}>
           <thead>
             <tr>
               <td>Title</td>
               <td>Category</td>
               <td>Current</td>
-              <td className="track-column">Track</td>
+              <td>Track</td>
               <td>Edit</td>
             </tr>
           </thead>
@@ -132,8 +135,9 @@ export default class Habit extends Component {
                   </Label>
                 </td>
                 <td>{entry.content}</td>
-                <td className="input-with-button track-column">
+                <td className="input-with-button">
                   <FormControl
+                    className="minput"
                     type="number"
                     value={this.state[entry.id]}
                     onChange={(e) => this.setState({ [entry.id] : e.target.value})}
