@@ -42,20 +42,18 @@ class Notes extends Component {
       <div className="note-view" key="note-page">
 
         <div>
-          <div className="note-view__sort">
-            <DropdownButton
-              id={`${type}-selector`}
-              title={category ? category : categories[type][0]}
-            >
-              {categories[type].map((cat, i) =>
-                <MenuItem
-                  key={i}
-                  onSelect={() => this.handleChange('category', cat)}>
-                  {cat}
-                </MenuItem>
-              )}
-            </DropdownButton>
-          </div>
+          <DropdownButton
+            id={`${type}-selector`}
+            title={category ? category : categories[type][0]}
+          >
+            {categories[type].map((cat, i) =>
+              <MenuItem
+                key={i}
+                onSelect={() => this.handleChange('category', cat)}>
+                {cat}
+              </MenuItem>
+            )}
+          </DropdownButton>
 
           <Table striped hover>
             <thead>

@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 
 import { isMobile } from '../../lib/helpers'
+import { categories } from '../../lib/schema'
 
 import {
-  Table, Label, Button, Glyphicon, FormControl,
+  Table, Label, Button, Glyphicon, FormControl, DropdownButton, MenuItem,
 } from 'react-bootstrap'
 
 const mapCategoryToStyle = (cat) => {
@@ -32,15 +33,19 @@ export default class Habit extends Component {
     editItem: PropTypes.func.isRequired,
   }
 
-  state = getInitialState(this.props.entries)
+  state = {
+    ...getInitialState(this.props.entries),
+    category: null,
+    filter: false,
+  }
 
   componentWillReceiveProps = (nextProps) => {
     if (nextProps.entries.length > this.props.entries.length) {
-      this.updateState(nextProps.entries)
+      this.updateEntryIdMap(nextProps.entries)
     }
   }
 
-  updateState = (entries = this.props.entries) =>
+  updateEntryIdMap = (entries = this.props.entries) =>
     this.setState({ ...getInitialState(entries)})
 
   recordHabit = (entry) => {
@@ -49,13 +54,29 @@ export default class Habit extends Component {
       tally: true,
       value: this.state[entry.id],
     }, entry)
-    this.updateState()
+    this.updateEntryIdMap()
   }
 
+  handleChange = (whatToChange, change) =>
+    this.setState({ [whatToChange]: change })
+
   render() {
+    const { category, filter } = this.state
+    const { entries, type, editItem } = this.props
+    let sortedEntries = entries.sort(function(a, b){
+      if (a.category < b.category) return 1
+      if (a.category > b.category) return -1
+      return 0
+    })
+    const filteredEntries = filter ? sortedEntries.filter(entry =>
+      entry.category === category
+    ) : sortedEntries
     return (
-      <Table striped hover>
+      <div>
         <style type="text/css">{`
+          .note-list-modifer {
+            margin-bottom: 10px;
+          }
           .input-with-button {
             display: flex;
           }
@@ -64,48 +85,77 @@ export default class Habit extends Component {
             vertical-align: middle;
           }
         `}</style>
-        <thead>
-          <tr>
-            <td>Title</td>
-            <td>Category</td>
-            <td>Current</td>
-            <td>Track</td>
-            <td>Edit</td>
-          </tr>
-        </thead>
-        <tbody>
-          {this.props.entries.map((entry, i) =>
-            <tr key={i}>
-              <td>{entry.title}</td>
-              <td>
-                <Label bsStyle={mapCategoryToStyle(entry.category)}>
-                  {entry.category}
-                </Label>
-              </td>
-              <td>{entry.content}</td>
-              <td className="input-with-button">
-                <FormControl
-                  type="number"
-                  value={this.state[entry.id]}
-                  onChange={(e) => this.setState({ [entry.id] : e.target.value})}
-                />
-                <Button
-                  block={isMobile}
-                  bsSize="xsmall" onClick={() => this.recordHabit(entry)}>
-                  <Glyphicon glyph="plus"/>
-                </Button>
-              </td>
-              <td>
-                <Button
-                  block={isMobile}
-                  onClick={() => this.props.editItem(entry.id)}>
-                  <Glyphicon glyph="edit" />
-                </Button>
-              </td>
+        <div className="note-list-modifer">
+          <DropdownButton
+            id={`${type}-selector`}
+            title={
+              this.state.category ? this.state.category
+                : 'Impact'
+            }
+          >
+            {categories[type].map((category, i) =>
+              <MenuItem
+                key={i}
+                onSelect={() => {
+                  const state = { category }
+                  if (!filter) state.filter = true
+                  this.setState(state)
+                }}>
+                {category}
+              </MenuItem>
+            )}
+          </DropdownButton>
+          <Button
+            disabled={!filter}
+            bsStyle="primary"
+            onClick={() => this.setState({ filter: !filter, category: null })}>
+            <Glyphicon glyph="remove" />
+          </Button>
+        </div>
+        <Table striped hover>
+          <thead>
+            <tr>
+              <td>Title</td>
+              <td>Category</td>
+              <td>Current</td>
+              <td className="track-column">Track</td>
+              <td>Edit</td>
             </tr>
-          )}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {filteredEntries.map((entry, i) =>
+              <tr key={i}>
+                <td>{entry.title}</td>
+                <td>
+                  <Label bsStyle={mapCategoryToStyle(entry.category)}>
+                    {entry.category}
+                  </Label>
+                </td>
+                <td>{entry.content}</td>
+                <td className="input-with-button track-column">
+                  <FormControl
+                    type="number"
+                    value={this.state[entry.id]}
+                    onChange={(e) => this.setState({ [entry.id] : e.target.value})}
+                  />
+                  <Button
+                    block={isMobile}
+                    bsSize="xsmall" onClick={() => this.recordHabit(entry)}>
+                    <Glyphicon glyph="plus"/>
+                  </Button>
+                </td>
+                <td>
+                  <Button
+                    block={isMobile}
+                    onClick={() => editItem(entry.id)}>
+                    <Glyphicon glyph="edit" />
+                  </Button>
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </Table>
+      </div>
     )
   }
 }
