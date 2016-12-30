@@ -8,6 +8,7 @@ export const categories  = {
     'done',
     'reference',
     'affirmation',
+    'vision',
     'strategic planning',
   ],
   journal : [
