@@ -35,23 +35,36 @@ class Search extends Component {
 
   render() {
     return (
-      <div className="overlay search">
-        <FlexibleInput
-          id="search"
-          label="What you lookin' fo?"
-          type="text"
-          value={this.state.entry}
-          onChange={(e) => this.setState({entry: e.target.value})}
-          autofocus
-          />
+      <div>
+        <style type="text/css">{`
+          .search-results-list {
+            position: relative;
+            max-height: 85vh;
+            overflow-y: scroll;
+          }
+          .search-view {
+            color: black;
+            flex-direction: column;
+          }
+        `}</style>
+        <div className="overlay search-view">
+          <FlexibleInput
+            id="search"
+            label="What you lookin' fo?"
+            type="text"
+            value={this.state.entry}
+            onChange={(e) => this.setState({entry: e.target.value})}
+            autofocus
+            />
 
-        <List
-          type={null}
-          entries={this.fuse.search(this.state.entry)}
-          classModifier="search__list"
-          edit={this.props.editItem}
-          submitEdit={this.props.submitEdit}
-        />
+          <List
+            type={null}
+            entries={this.fuse.search(this.state.entry)}
+            classModifier="search-results-list"
+            edit={this.props.editItem}
+            submitEdit={this.props.submitEdit}
+          />
+        </div>
       </div>
     )
   }
