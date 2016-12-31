@@ -32,8 +32,18 @@ export const categories  = {
     'cardio',
     'weights',
     'sport',
-    'sex',
+    'activity',
   ],
+}
+
+export const measurements = {
+  exercise: {
+    bodyweight: 'difficulty',
+    cardio: 'distance',
+    weights: 'kilograms',
+    sport: 'minutes',
+    activity: 'minutes',
+  },
 }
 
 export const contexts = [
