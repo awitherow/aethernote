@@ -3,8 +3,8 @@ import moment from 'moment'
 
 import {
   getToday, getYestereday, toTitleCase, isMobile,
-} from '../../lib/helpers'
-import { categories } from '../../lib/schema'
+} from '../lib/helpers'
+import { categories } from '../lib/schema'
 
 import {
   Table, ListGroup, ListGroupItem, Button, Glyphicon,

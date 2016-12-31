@@ -1,9 +1,8 @@
-import './search.scss'
 import React, { PropTypes, Component } from 'react'
 import Fuse from 'fuse.js'
 
-import FlexibleInput from '../../components/atoms/FlexibleInput'
-import List from '../../components/molecules/List'
+import FlexibleInput from '../components/atoms/FlexibleInput'
+import List from '../components/molecules/List'
 
 class Search extends Component {
   static propTypes = {

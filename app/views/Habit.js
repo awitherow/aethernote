@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
-import { isMobile } from '../../lib/helpers'
-import { categories } from '../../lib/schema'
+import { isMobile } from '../lib/helpers'
+import { categories } from '../lib/schema'
 
 import {
   Table, Label, Button, Glyphicon, FormControl, DropdownButton, MenuItem,
