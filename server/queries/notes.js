@@ -1,6 +1,6 @@
 import db from '../db'
 
-import { trackHabit } from './habits'
+import { trackHabit, trackExercise } from './tracking'
 export const getNotes = (req, res, next) => {
   db.any('select * from entries ORDER BY modified desc')
   .then(data => {
@@ -45,11 +45,17 @@ export const updateNote = (req, res, next) => {
     id, title, content, prio, category, context, type, tally, value,
   } = req.body.update
   // TODO !! handle changed habit names/exercise names for linked db. use ID?
-  if (type === 'habit' && tally) {
-    trackHabit({
-      name: title,
-      value,
-    })
+  if (tally) {
+    switch(type) {
+      case 'habit': trackHabit({
+        name: title,
+        value,
+      }); break
+      case 'exercise': trackExercise({
+        exercise: id,
+        value,
+      })
+    }
   }
   db.none(
     'update entries ' +
