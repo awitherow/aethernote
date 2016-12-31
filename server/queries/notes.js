@@ -44,6 +44,7 @@ export const updateNote = (req, res, next) => {
   const {
     id, title, content, prio, category, context, type, tally, value,
   } = req.body.update
+  // TODO !! handle changed habit names/exercise names for linked db. use ID?
   if (type === 'habit' && tally) {
     trackHabit({
       name: title,
