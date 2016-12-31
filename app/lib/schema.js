@@ -27,6 +27,13 @@ export const categories  = {
     'really bad',
     'ultimate sin',
   ],
+  exercise: [
+    'bodyweight',
+    'cardio',
+    'weights',
+    'sport',
+    'sex',
+  ],
 }
 
 export const contexts = [
