@@ -38,11 +38,11 @@ export const categories  = {
 
 export const measurements = {
   exercise: {
-    bodyweight: 'difficulty',
-    cardio: 'distance',
-    weights: 'kilograms',
-    sport: 'minutes',
-    activity: 'minutes',
+    bodyweight: 'diff',
+    cardio: 'dist',
+    weights: 'kg',
+    sport: 'mins',
+    activity: 'mins',
   },
 }
 
