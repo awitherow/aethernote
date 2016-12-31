@@ -42,7 +42,7 @@ export default class addEntry extends Component {
     e.preventDefault()
     entryService.add({
       ...this.state,
-      type: this.state.type ? this.props.type : this.props.type,
+      type: this.state.type ? this.state.type : this.props.type,
     }, () => {
       this.resetState()
       this.props.getEntries()
