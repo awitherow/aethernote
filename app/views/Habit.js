@@ -80,6 +80,7 @@ export default class Habit extends Component {
           .input-with-button {
             display: flex;
           }
+          .table>thead>tr>td,
           .table>tbody>tr>td {
             text-align: center;
             vertical-align: middle;
