@@ -13,7 +13,7 @@ const initialState = {
   content: '',
 }
 
-export default class addEntry extends Component {
+export default class AddEntry extends Component {
   static propTypes = {
     type: PropTypes.string.isRequired,
     // redux functions
@@ -23,10 +23,7 @@ export default class addEntry extends Component {
 
   state = {
     ...initialState,
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.resetState(nextProps.type)
+    type: this.props.type,
   }
 
   resetState = () => {
@@ -52,7 +49,7 @@ export default class addEntry extends Component {
   handleChange = (type, val) => this.setState({ [type]: val })
 
   render() {
-    const { category, content, type } = this.state
+    const { category, content, type, prio } = this.state
     return (
       <Form inline>
         <style type="text/css">{`
@@ -80,21 +77,39 @@ export default class addEntry extends Component {
             )}
           </DropdownButton>
 
-          <DropdownButton
-            style={{ width: isMobile && '100%' }}
-            id={`${type}-selector`}
-            title={
-              category ? category : categories[type ? type : this.props.type][0]
-            }
-          >
-            {categories[type ? type : this.props.type].map((cat, i) =>
-              <MenuItem
-                key={i}
-                onSelect={() => this.handleChange('category', cat)}>
-                {cat}
-              </MenuItem>
-            )}
-          </DropdownButton>
+          {type === 'note' ? (
+            <DropdownButton
+              style={{ width: isMobile && '100%' }}
+              id="prio-selector"
+              title={
+                prio ? prio : 'Prio'
+              }
+            >
+              {[1, 2, 3].map(prio =>
+                <MenuItem
+                  key={prio}
+                  onSelect={() => this.handleChange('prio', prio)}>
+                  {prio}
+                </MenuItem>
+              )}
+            </DropdownButton>
+          ) : (
+            <DropdownButton
+              style={{ width: isMobile && '100%' }}
+              id={`${type}-selector`}
+              title={
+                category ? category : categories[type ? type : this.props.type][0]
+              }
+            >
+              {categories[type ? type : this.props.type].map((cat, i) =>
+                <MenuItem
+                  key={i}
+                  onSelect={() => this.handleChange('category', cat)}>
+                  {cat}
+                </MenuItem>
+              )}
+            </DropdownButton>
+          )}
 
           <FormControl
             type="text"
