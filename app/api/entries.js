@@ -1,4 +1,5 @@
 import { categories } from '../lib/schema'
+import moment from 'moment'
 
 function get(cb) {
   fetch('/api/notes')
@@ -20,6 +21,18 @@ function add(entry, cb) {
 
   if (entry.type !== 'habit') {
     entry.title = `${entry.content.substring(0, 32)}`
+
+    if (entry.type === 'exercise') {
+      entry.context = 'health'
+      delete entry.content
+      entry.content = {
+        total: 0,
+        best: {
+          date: moment(),
+          value: 0,
+        },
+      }
+    }
   } else {
     entry.title = entry.content
     entry.content = 0

@@ -58,6 +58,7 @@ export default class Habit extends Component {
   render() {
     const { filter } = this.state
     const { entries, type, editItem } = this.props
+
     return (
       <div>
         <style type="text/css">{`
@@ -80,7 +81,7 @@ export default class Habit extends Component {
             id={`${type}-selector`}
             title={
               this.state.category ? this.state.category
-                : 'Impact'
+                : 'Form'
             }
           >
             {categories[type].map((category, i) =>
@@ -107,7 +108,8 @@ export default class Habit extends Component {
             <tr>
               <td>Title</td>
               <td>Category</td>
-              <td>Current</td>
+              <td>Total</td>
+              <td>Best</td>
               <td>Track</td>
               <td>Edit</td>
             </tr>
@@ -121,7 +123,8 @@ export default class Habit extends Component {
                     {entry.category}
                   </Label>
                 </td>
-                <td>{entry.content}</td>
+                <td>{JSON.parse(entry.content)['total']}</td>
+                <td>{JSON.parse(entry.content)['best'].value}</td>
                 <td className="input-with-button">
                   <FormControl
                     className="minput"
