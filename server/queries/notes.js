@@ -82,3 +82,16 @@ export const removeNote = (req, res, next) => {
     })
   }).catch(err => next(err))
 }
+
+export const toggleCompletion = (req, res, next) => {
+  const { complete, id } = req.body
+  console.log(req.body)
+  db.none('update entries set complete=$1 where id=$2', [complete, id])
+    .then(() => {
+      res.status(200)
+      .json({
+        status: 'success',
+        message: 'Updated entry',
+      })
+    }).catch(err => next(err))
+}

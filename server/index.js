@@ -1,7 +1,9 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import favicon from 'serve-favicon'
-import { getNotes, getNote, createNote, updateNote, removeNote } from './queries/notes'
+import {
+  getNotes, getNote, createNote, updateNote, removeNote, toggleCompletion,
+} from './queries/notes'
 import * as auth from './queries/auth'
 import compression from 'compression'
 
@@ -26,6 +28,7 @@ app.get('/api/notes', getNotes)
 app.get('/api/notes/:id', getNote)
 app.post('/api/notes', createNote)
 app.put('/api/notes/:id', updateNote)
+app.put('/api/notes/complete/:id', toggleCompletion)
 app.delete('/api/notes/:id', removeNote)
 
 // security

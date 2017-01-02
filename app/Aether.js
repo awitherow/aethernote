@@ -91,6 +91,7 @@ class Aether extends Component {
       type: currentType,
       entries: entries.filter(entry => entry.type === currentType),
       editItem: this.editItem,
+      getEntries: this.getEntries,
     }
 
     switch(currentType) {
