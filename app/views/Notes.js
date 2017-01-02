@@ -40,20 +40,25 @@ class Notes extends Component {
     const { category } = this.state
     return (
       <div className="note-view" key="note-page">
-
-        <div>
-          <DropdownButton
-            id={`${type}-selector`}
-            title={category ? category : categories[type][0]}
-          >
-            {categories[type].map((cat, i) =>
-              <MenuItem
-                key={i}
-                onSelect={() => this.handleChange('category', cat)}>
-                {cat}
-              </MenuItem>
-            )}
-          </DropdownButton>
+        <style type="text/css">{`
+          .note-list-modifer {
+            margin-bottom: 10px;
+          }
+        `}</style>
+          <div className="note-list-modifer">
+            <DropdownButton
+              id={`${type}-selector`}
+              title={category ? category : categories[type][0]}
+            >
+              {categories[type].map((cat, i) =>
+                <MenuItem
+                  key={i}
+                  onSelect={() => this.handleChange('category', cat)}>
+                  {cat}
+                </MenuItem>
+              )}
+            </DropdownButton>
+          </div>
 
           <Table striped hover responsive={isMobile} condensed={isMobile}>
             <thead>
@@ -88,7 +93,6 @@ class Notes extends Component {
             </tbody>
           </Table>
 
-        </div>
       </div>
     )
   }
