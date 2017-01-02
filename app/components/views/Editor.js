@@ -7,8 +7,8 @@ import {
   ButtonGroup,
 } from 'react-bootstrap'
 
-import { convertToMarkdown, isMobile } from '../../../lib/helpers'
-import { categories, contexts } from '../../../lib/schema'
+import { convertToMarkdown, isMobile } from '../../lib/helpers'
+import { categories, contexts } from '../../lib/schema'
 
 const initialState = {
   formUpdated: false,

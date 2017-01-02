@@ -1,36 +1,42 @@
 import React, { Component, PropTypes } from 'react'
+import moment from 'moment'
 
-import { isMobile } from '../lib/helpers'
-import { categories } from '../lib/schema'
+import { isMobile } from '../../lib/helpers'
+import { categories, measurements } from '../../lib/schema'
 
 import {
   Table, Label, Button, Glyphicon, FormControl, DropdownButton, MenuItem,
+  InputGroup,
 } from 'react-bootstrap'
 
-const mapCategoryToStyle = (cat) => {
-  switch (cat) {
-    case 'godmode': return 'primary'
-    case 'really good': return 'success'
-    case 'good': return 'default'
-    case 'bad': return 'info'
-    case 'really bad': return 'warning'
-    case 'ultimate sin': return 'danger'
-  }
-}
-
 const getInitialState = entries =>
-  entries.reduce((initialState, entry) => ({
-    ...initialState,
-    [entry.id]: 1,
-  }), {})
+  entries.reduce((initialState, entry) => {
+    return {
+      ...initialState,
+      [entry.id]: {
+        'multiplier': 1,
+        'value': 1,
+        measurement: measurements[entry.type][entry.category],
+      },
+    }
+  }, {})
 
-export default class Habit extends Component {
+const checkRecord = (entry, oldEntry) => ({
+  value: entry.value > oldEntry.best.value ? entry.value : oldEntry.best.value,
+  date: entry.value > oldEntry.best.value ? moment() : oldEntry.best.date,
+})
+
+export default class Exercise extends Component {
   static propTypes = {
     type: PropTypes.string.isRequired,
     entries: PropTypes.array.isRequired,
     submitEdit: PropTypes.func.isRequired,
     // redux functions
     editItem: PropTypes.func.isRequired,
+  }
+
+  static defaultProps = {
+    entries: [],
   }
 
   state = {
@@ -48,17 +54,35 @@ export default class Habit extends Component {
   updateEntryIdMap = (entries = this.props.entries) =>
     this.setState({ ...getInitialState(entries)})
 
-  recordHabit = (entry) => {
+  recordExercise = (entry) => {
+    let content = JSON.parse(entry.content)
     this.props.submitEdit({
-      content: parseInt(entry.content) + parseInt(this.state[entry.id]),
       tally: true,
-      value: this.state[entry.id],
+      value: {
+        multiplier: this.state[entry.id].multiplier,
+        value: this.state[entry.id].value,
+        total: this.state[entry.id].value * this.state[entry.id].multiplier,
+      },
+      content: {
+        best: checkRecord(this.state[entry.id], content),
+        total: (
+          content.total + (
+            this.state[entry.id].value * this.state[entry.id].multiplier
+          )
+        ),
+      },
     }, entry)
     this.updateEntryIdMap()
   }
 
   handleChange = (whatToChange, change) =>
     this.setState({ [whatToChange]: change })
+
+  handleComplexInput = (id, whatToChange, change) => {
+    let update = this.state[id]
+    update[whatToChange] = change
+    this.setState({ [id]: update })
+  }
 
   render() {
     const { category, filter } = this.state
@@ -71,6 +95,7 @@ export default class Habit extends Component {
     const filteredEntries = filter ? sortedEntries.filter(entry =>
       entry.category === category
     ) : sortedEntries
+
     return (
       <div>
         <style type="text/css">{`
@@ -94,7 +119,7 @@ export default class Habit extends Component {
             id={`${type}-selector`}
             title={
               this.state.category ? this.state.category
-                : 'Impact'
+                : 'Form'
             }
           >
             {categories[type].map((category, i) =>
@@ -121,8 +146,10 @@ export default class Habit extends Component {
             <tr>
               <td>Title</td>
               <td>Category</td>
-              <td>Current</td>
-              <td>Track</td>
+              <td>Total</td>
+              <td>Best</td>
+              <td>Units</td>
+              <td>Add</td>
               <td>Edit</td>
             </tr>
           </thead>
@@ -131,21 +158,39 @@ export default class Habit extends Component {
               <tr key={i}>
                 <td>{entry.title}</td>
                 <td>
-                  <Label bsStyle={mapCategoryToStyle(entry.category)}>
+                  <Label>
                     {entry.category}
                   </Label>
                 </td>
-                <td>{entry.content}</td>
-                <td className="input-with-button">
-                  <FormControl
-                    className="minput"
-                    type="number"
-                    value={this.state[entry.id]}
-                    onChange={(e) => this.setState({ [entry.id] : e.target.value})}
-                  />
+                <td>{JSON.parse(entry.content)['total']}</td>
+                <td>{JSON.parse(entry.content)['best'].value}</td>
+                <td>
+                  <InputGroup>
+                    <FormControl
+                      className="minput"
+                      type="number"
+                      value={this.state[entry.id].multiplier}
+                      onChange={(e) => this.handleComplexInput(
+                        entry.id, 'multiplier', e.target.value
+                      )}
+                    />
+                    <FormControl
+                      className="minput"
+                      type="number"
+                      value={this.state[entry.id].value}
+                      onChange={(e) => this.handleComplexInput(
+                        entry.id, 'value', e.target.value
+                      )}
+                    />
+                    <InputGroup.Addon>
+                      {this.state[entry.id].measurement}
+                    </InputGroup.Addon>
+                  </InputGroup>
+                </td>
+                <td>
                   <Button
                     block={isMobile}
-                    bsSize="xsmall" onClick={() => this.recordHabit(entry)}>
+                    onClick={() => this.recordExercise(entry)}>
                     <Glyphicon glyph="plus"/>
                   </Button>
                 </td>

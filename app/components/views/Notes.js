@@ -4,8 +4,8 @@ import {
   Table, Button, Glyphicon, DropdownButton, MenuItem, Label,
 } from 'react-bootstrap'
 
-import { categories } from '../lib/schema'
-import { isMobile } from '../lib/helpers'
+import { categories } from '../../lib/schema'
+import { isMobile } from '../../lib/helpers'
 
 const mapPrioStyle = (prio) => {
   switch (prio) {

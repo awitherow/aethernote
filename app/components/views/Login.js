@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 
-import { checkAuth } from '../api/security'
+import { checkAuth } from '../../api/security'
 
-import FlexibleInput from '../components/atoms/FlexibleInput'
+import FlexibleInput from '../elements/FlexibleInput'
 
 export default class Login extends Component {
   static propTypes = {

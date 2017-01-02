@@ -3,8 +3,6 @@ import './list-item.scss'
 
 import { Label, Button, Glyphicon } from 'react-bootstrap'
 
-import { isMobile } from '../../../lib/helpers'
-
 const mapCategoryToStyle = (cat) => {
   switch (cat) {
     case 'godmode': return 'primary'
@@ -18,6 +16,7 @@ const mapCategoryToStyle = (cat) => {
 
 export default class Habit extends Component {
   static propTypes = {
+    isMobile: PropTypes.bool.isRequired,
     item: PropTypes.object.isRequired,
     edit: PropTypes.func.isRequired,
     submitEdit: PropTypes.func.isRequired,
@@ -41,12 +40,12 @@ export default class Habit extends Component {
           {this.props.item.category}
         </Label>
         <Button
-          block={isMobile}
+          block={this.props.isMobile}
           bsSize="xsmall" onClick={this.recordHabit}>
           <Glyphicon glyph="plus"/>
         </Button>
         <Button
-          block={isMobile}
+          block={this.props.isMobile}
           bsSize="xsmall"
           onClick={() => this.props.edit(this.props.item.id)}
         >

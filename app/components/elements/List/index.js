@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react'
-import ListItem from '../ListItem'
+import ListItem from './ListItem'
+
+import { isMobile } from '../../../lib/helpers'
 
 export default function List({
   entries,
@@ -10,6 +12,7 @@ export default function List({
     <ul className="List">
       {entries.map(entry =>
         <ListItem
+          isMobile={isMobile}
           key={entry.id}
           item={entry}
           edit={edit}
