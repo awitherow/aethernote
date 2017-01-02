@@ -192,7 +192,7 @@ class Aether extends Component {
               </div>
             </div>
             }>
-            {editor.hidden ? this.route() : null}
+            {this.route()}
           </Panel>
 
         </div>
