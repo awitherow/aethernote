@@ -31,7 +31,7 @@ export const doingReminder = (
               )}
             </ol>
           </Span>
-        ) : <Span fontSize={16}>no affirmations set!</Span>}
+        ) : <Span fontSize={16}>Aspirations provide good inspiration, write a few!</Span>}
       </Item>
       <Item>
           {goals.length > 0 ? (
@@ -45,7 +45,7 @@ export const doingReminder = (
                 )}
               </ol>
             </Span>
-          ) : <Span fontSize={16}>no goals set, set them tonight!</Span>}
+          ) : <Span fontSize={16}>Setting goals for tomorrow before you go to sleep is an excellent practice!</Span>}
       </Item>
       <Item>
         {tasks.length > 0 ? (
