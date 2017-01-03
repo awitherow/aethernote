@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 import { checkAuth } from '../../api/security'
 
-import FlexibleInput from '../elements/FlexibleInput'
+import { Form, Button, FormControl, FormGroup, ControlLabel } from 'react-bootstrap'
 
 export default class Login extends Component {
   static propTypes = {
@@ -38,23 +38,44 @@ export default class Login extends Component {
   render() {
     const { userId, userKey } = this.state
     return (
-      <form onSubmit={this.authenticateLoginAttempt}>
-        <FlexibleInput
-          id="userId"
-          label="Username"
-          type="text"
-          value={userId}
-          onChange={(e) => this.setState({ userId: e.target.value })}
-          />
-        <FlexibleInput
-          id="userKey"
-          label="Password"
-          type="password"
-          value={userKey}
-          onChange={(e) => this.setState({ userKey: e.target.value })}
-          />
-        <button>Submit</button>
-      </form>
+      <div>
+        <style type="text/css">{`
+          .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            width: 500px;
+            margin: 0 auto;
+          }
+        `}</style>
+        <Form className="login-container">
+          <FormGroup>
+            <ControlLabel>Username: </ControlLabel>
+            <FormControl
+              id="userId"
+              value={userId}
+              onChange={(e) => this.setState({ userId: e.target.value })}
+              />
+          </FormGroup>
+          <FormGroup>
+            <ControlLabel>Password: </ControlLabel>
+            <FormControl
+              id="userKey"
+              value={userKey}
+              onChange={(e) => this.setState({ userKey: e.target.value })}
+            />
+          </FormGroup>
+
+          <Button
+            onClick={this.authenticateLoginAttempt}
+            bsStyle="primary"
+            >
+            Login
+          </Button>
+        </Form>
+      </div>
     )
   }
 }

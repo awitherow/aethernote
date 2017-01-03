@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import Fuse from 'fuse.js'
 
-import FlexibleInput from '../elements/FlexibleInput'
+import { FormControl } from 'react-bootstrap'
 import List from '../elements/List'
 
 class Search extends Component {
@@ -38,22 +38,23 @@ class Search extends Component {
         <style type="text/css">{`
           .search-results-list {
             position: relative;
-            max-height: 85vh;
+            max-height: 50vh;
             overflow-y: scroll;
           }
           .search-view {
             color: black;
             flex-direction: column;
+            display: flex;
+            margin: 0 auto;
+            padding: 25px;
           }
         `}</style>
         <div className="overlay search-view">
-          <FlexibleInput
+          <FormControl
             id="search"
-            label="What you lookin' fo?"
-            type="text"
             value={this.state.entry}
             onChange={(e) => this.setState({entry: e.target.value})}
-            autofocus
+            autoFocus
             />
 
           <List
