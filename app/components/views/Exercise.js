@@ -22,6 +22,7 @@ const getInitialState = entries =>
   }, {})
 
 const checkRecord = (entry, oldEntry) => ({
+  multiplier: entry.value > oldEntry.best.value ? entry.multiplier : oldEntry.best.multiplier,
   value: entry.value > oldEntry.best.value ? entry.value : oldEntry.best.value,
   date: entry.value > oldEntry.best.value ? moment() : oldEntry.best.date,
 })
@@ -134,12 +135,13 @@ export default class Exercise extends Component {
               </MenuItem>
             )}
           </DropdownButton>
-          <Button
-            disabled={!filter}
-            bsStyle="primary"
-            onClick={() => this.setState({ filter: !filter, category: null })}>
-            <Glyphicon glyph="remove" />
-          </Button>
+          {filter ? (
+            <Button
+              bsStyle="primary"
+              onClick={() => this.setState({ filter: !filter, category: null })}>
+              <Glyphicon glyph="remove" />
+            </Button>
+          ) : null}
         </div>
         <Table striped hover responsive={isMobile} condensed={isMobile}>
           <thead>
@@ -154,55 +156,62 @@ export default class Exercise extends Component {
             </tr>
           </thead>
           <tbody>
-            {filteredEntries.map((entry, i) =>
-              <tr key={i}>
-                <td>{entry.title}</td>
-                <td>
-                  <Label>
-                    {entry.category}
-                  </Label>
-                </td>
-                <td>{JSON.parse(entry.content)['total']}</td>
-                <td>{JSON.parse(entry.content)['best'].value}</td>
-                <td>
-                  <InputGroup>
-                    <FormControl
-                      className="minput"
-                      type="number"
-                      value={this.state[entry.id].multiplier}
-                      onChange={(e) => this.handleComplexInput(
-                        entry.id, 'multiplier', e.target.value
-                      )}
-                    />
-                    <FormControl
-                      className="minput"
-                      type="number"
-                      value={this.state[entry.id].value}
-                      onChange={(e) => this.handleComplexInput(
-                        entry.id, 'value', e.target.value
-                      )}
-                    />
-                    <InputGroup.Addon>
-                      {this.state[entry.id].measurement}
-                    </InputGroup.Addon>
-                  </InputGroup>
-                </td>
-                <td>
-                  <Button
-                    block={isMobile}
-                    onClick={() => this.recordExercise(entry)}>
-                    <Glyphicon glyph="plus"/>
-                  </Button>
-                </td>
-                <td>
-                  <Button
-                    block={isMobile}
-                    onClick={() => editItem(entry.id)}>
-                    <Glyphicon glyph="edit" />
-                  </Button>
-                </td>
-              </tr>
-            )}
+            {filteredEntries.map((entry, i) => {
+              const content = typeof entry.content === "string"
+                ? JSON.parse(entry.content)
+                : entry.content
+              return (
+                <tr key={i}>
+                  <td>{entry.title}</td>
+                  <td>
+                    <Label>
+                      {entry.category}
+                    </Label>
+                  </td>
+                  <td>{content['total']}</td>
+                  <td>
+                    {`${content['best'].multiplier} x ${content['best'].value}`}
+                  </td>
+                  <td>
+                    <InputGroup>
+                      <FormControl
+                        className="minput"
+                        type="number"
+                        value={this.state[entry.id].multiplier}
+                        onChange={(e) => this.handleComplexInput(
+                          entry.id, 'multiplier', e.target.value
+                        )}
+                      />
+                      <FormControl
+                        className="minput"
+                        type="number"
+                        value={this.state[entry.id].value}
+                        onChange={(e) => this.handleComplexInput(
+                          entry.id, 'value', e.target.value
+                        )}
+                      />
+                      <InputGroup.Addon>
+                        {this.state[entry.id].measurement}
+                      </InputGroup.Addon>
+                    </InputGroup>
+                  </td>
+                  <td>
+                    <Button
+                      block={isMobile}
+                      onClick={() => this.recordExercise(entry)}>
+                      <Glyphicon glyph="plus"/>
+                    </Button>
+                  </td>
+                  <td>
+                    <Button
+                      block={isMobile}
+                      onClick={() => editItem(entry.id)}>
+                      <Glyphicon glyph="edit" />
+                    </Button>
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </Table>
       </div>

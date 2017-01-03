@@ -109,12 +109,13 @@ export default class Habit extends Component {
               </MenuItem>
             )}
           </DropdownButton>
-          <Button
-            disabled={!filter}
-            bsStyle="primary"
-            onClick={() => this.setState({ filter: !filter, category: null })}>
-            <Glyphicon glyph="remove" />
-          </Button>
+          {filter ? (
+            <Button
+              bsStyle="primary"
+              onClick={() => this.setState({ filter: !filter, category: null })}>
+              <Glyphicon glyph="remove" />
+            </Button>
+          ) : null}
         </div>
         <Table striped hover responsive={isMobile} condensed={isMobile}>
           <thead>
