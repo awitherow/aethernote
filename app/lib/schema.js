@@ -14,7 +14,6 @@ export const categories  = {
   journal : [
     'dream',
     'reflection',
-    'recap',
     'aspirations',
     'gratitude',
   ],
@@ -57,6 +56,7 @@ export const contexts = [
   'health',
   'mental',
   'people',
+  'productivity',
   'psychonaut',
   'reading',
   'self-image',
