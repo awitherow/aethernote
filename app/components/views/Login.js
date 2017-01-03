@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
-import { checkAuth } from '../../api/security'
+import { attemptLogin } from '../../api/security'
 
 import { Form, Button, FormControl, FormGroup, ControlLabel } from 'react-bootstrap'
 
@@ -19,7 +19,7 @@ export default class Login extends Component {
     e.preventDefault()
     const { userId, userKey, failureAttempts } = this.state
 
-    checkAuth(userId, userKey, check => {
+    attemptLogin(userId, userKey, check => {
       if (!check) {
         if (failureAttempts >= 3) {
           // set locked cookie.

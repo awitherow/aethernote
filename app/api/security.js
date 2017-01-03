@@ -1,5 +1,5 @@
-export function checkAuth(id, key, cb) {
-  fetch(`/api/auth?id=${id}&key=${key}`)
+export function attemptLogin(id, key, cb) {
+  fetch(`/api/auth/login?id=${id}&key=${key}`)
     .then(r => r.json())
     .then(res => {
       cb(res.data)
