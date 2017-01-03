@@ -38,7 +38,7 @@ export default class Login extends Component {
   render() {
     const { userId, userKey } = this.state
     return (
-      <div>
+      <div style={{height: '100%'}}>
         <style type="text/css">{`
           .login-container {
             display: flex;
@@ -46,7 +46,7 @@ export default class Login extends Component {
             justify-content: center;
             flex-direction: column;
             height: 100vh;
-            width: 500px;
+            max-width: 500px;
             margin: 0 auto;
           }
         `}</style>
