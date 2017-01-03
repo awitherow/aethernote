@@ -64,14 +64,14 @@ export default class Login extends Component {
             <FormControl
               id="userKey"
               value={userKey}
+              type="password"
               onChange={(e) => this.setState({ userKey: e.target.value })}
             />
           </FormGroup>
 
           <Button
             onClick={this.authenticateLoginAttempt}
-            bsStyle="primary"
-            >
+            bsStyle="primary">
             Login
           </Button>
         </Form>
