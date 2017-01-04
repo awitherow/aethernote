@@ -9,6 +9,7 @@ export const categories  = {
     'reference',
     'affirmation',
     'vision',
+    'worksheet'
     'strategic planning',
   ],
   journal : [
