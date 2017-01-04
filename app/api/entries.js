@@ -35,6 +35,7 @@ function add(entry, cb) {
         best: {
           date: moment(),
           value: 0,
+          multiplier: 0,
         },
       }
     }

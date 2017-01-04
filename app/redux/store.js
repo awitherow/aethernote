@@ -14,7 +14,7 @@ function checkAuthentication() {
 const initialState = {
   loading: false,
   authenticated: checkAuthentication(),
-  currentType: 'note',
+  currentType: 'exercise',
   editor: {
     hidden: true,
     note: {},

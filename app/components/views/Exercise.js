@@ -14,17 +14,17 @@ const getInitialState = entries =>
     return {
       ...initialState,
       [entry.id]: {
-        'multiplier': 1,
-        'value': 1,
+        multiplier: 1,
+        value: 1,
         measurement: measurements[entry.type][entry.category],
       },
     }
   }, {})
 
-const checkRecord = (entry, oldEntry) => ({
-  multiplier: entry.value > oldEntry.best.value ? entry.multiplier : oldEntry.best.multiplier,
-  value: entry.value > oldEntry.best.value ? entry.value : oldEntry.best.value,
-  date: entry.value > oldEntry.best.value ? moment() : oldEntry.best.date,
+const checkRecord = (a, b) => ({
+  multiplier: parseInt(a.value) > parseInt(b.value) ? a.multiplier : b.multiplier,
+  value: parseInt(a.value) > parseInt(b.value) ? a.value : b.value,
+  date: parseInt(a.value) > parseInt(b.value) ? moment() : b.date,
 })
 
 export default class Exercise extends Component {
@@ -65,7 +65,7 @@ export default class Exercise extends Component {
         total: this.state[entry.id].value * this.state[entry.id].multiplier,
       },
       content: {
-        best: checkRecord(this.state[entry.id], content),
+        best: checkRecord(this.state[entry.id], content.best),
         total: (
           content.total + (
             this.state[entry.id].value * this.state[entry.id].multiplier
@@ -156,12 +156,12 @@ export default class Exercise extends Component {
             </tr>
           </thead>
           <tbody>
-            {filteredEntries.map((entry, i) => {
+            {filteredEntries.map(entry => {
               const content = typeof entry.content === "string"
                 ? JSON.parse(entry.content)
                 : entry.content
               return (
-                <tr key={i}>
+                <tr key={entry.id}>
                   <td>{entry.title}</td>
                   <td>
                     <Label>
