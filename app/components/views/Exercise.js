@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
 
-import { isMobile } from '../../lib/helpers'
+import { isMobile, sortByCategoryAndId } from '../../lib/helpers'
 import { categories, measurements } from '../../lib/schema'
 
 import {
@@ -88,11 +88,7 @@ export default class Exercise extends Component {
   render() {
     const { category, filter } = this.state
     const { entries, type, editItem } = this.props
-    let sortedEntries = entries.sort(function(a, b){
-      if (a.category < b.category) return 1
-      if (a.category > b.category) return -1
-      return 0
-    })
+    let sortedEntries = sortByCategoryAndId(entries)
     const filteredEntries = filter ? sortedEntries.filter(entry =>
       entry.category === category
     ) : sortedEntries
