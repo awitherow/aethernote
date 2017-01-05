@@ -39,6 +39,7 @@ export default class Editor extends Component {
   }
 
   onSubmit = (e) => {
+    this.props.toggleLoading(true)
     e.preventDefault()
     let update = this.state
     delete update.formUpdated

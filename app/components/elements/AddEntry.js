@@ -5,9 +5,9 @@ import {
   MenuItem,
 } from 'react-bootstrap'
 
-import * as entryService from '../../../api/entries'
-import { categories } from '../../../lib/schema'
-import { isMobile } from '../../../lib/helpers'
+import * as entryService from '../../api/entries'
+import { categories } from '../../lib/schema'
+import { isMobile } from '../../lib/helpers'
 
 const initialState = {
   content: '',
