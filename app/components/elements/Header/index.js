@@ -24,7 +24,7 @@ const Header = ({ toggleSearch }) => {
 
 Header.propTypes = {
   currentType: PropTypes.string.isRequired,
-  routeTo: PropTypes.func.isRequired,
+  setType: PropTypes.func.isRequired,
   toggleSearch: PropTypes.func.isRequired,
 }
 

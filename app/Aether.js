@@ -23,7 +23,7 @@ import { Panel, Glyphicon, Button, DropdownButton, MenuItem } from 'react-bootst
 import {
   toggleLoading,
   grantAuthority,
-  routeTo,
+  setType,
   openEditor,
   closeEditor,
   toggleSearch,
@@ -40,7 +40,7 @@ class Aether extends Component {
     toggleLoading: PropTypes.func.isRequired,
     toggleSearch: PropTypes.func.isRequired,
     closeEditor: PropTypes.func.isRequired,
-    routeTo: PropTypes.func.isRequired,
+    setType: PropTypes.func.isRequired,
     openEditor: PropTypes.func.isRequired,
     // redux state
     currentType: PropTypes.string.isRequired,
@@ -128,7 +128,7 @@ class Aether extends Component {
 
         <Header
           currentType={currentType}
-          routeTo={this.props.routeTo}
+          setType={this.props.setType}
           toggleSearch={this.props.toggleSearch}
           />
 
@@ -177,7 +177,9 @@ class Aether extends Component {
                     <MenuItem
                       key={i}
                       active={currentType === type}
-                      onSelect={() => this.props.routeTo(type)}
+                      onSelect={() => {
+                        this.props.setType(type)
+                      }}
                     >
                       {toTitleCase(type)}
                     </MenuItem>
@@ -207,7 +209,7 @@ const mapDispatchToProps = dispatch => ({
   toggleLoading: (v) => dispatch(toggleLoading(v)),
   toggleSearch: (v) => dispatch(toggleSearch(v)),
   grantAuthority: (v) => dispatch(grantAuthority(v)),
-  routeTo: (v) => dispatch(routeTo(v)),
+  setType: (v) => dispatch(setType(v)),
   openEditor: (v) => dispatch(openEditor(v)),
   closeEditor: (v) => dispatch(closeEditor(v)),
 })

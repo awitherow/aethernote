@@ -26,6 +26,12 @@ export default class AddEntry extends Component {
     type: this.props.type,
   }
 
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps.type !== this.state.props) {
+      this.setState({ type: nextProps.type })
+    }
+  }
+
   resetState = () => {
     for (let thing in this.state) {
       if (thing) {

@@ -1,5 +1,5 @@
 import {
-  LOADING, GRANT_AUTHORITY, HANDLE_ROUTE, OPEN_EDITOR, CLOSE_EDITOR, TOGGLE_SEARCH,
+  LOADING, GRANT_AUTHORITY, SET_TYPE, OPEN_EDITOR, CLOSE_EDITOR, TOGGLE_SEARCH,
 } from './constants'
 
 function checkAuthentication() {
@@ -32,7 +32,7 @@ const Store = (state, action) => {
       ...state,
       authenticated: action.data,
     }
-    case HANDLE_ROUTE: return {
+    case SET_TYPE: return {
       ...state,
       currentType: action.data,
     }
