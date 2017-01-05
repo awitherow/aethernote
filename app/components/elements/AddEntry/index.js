@@ -42,10 +42,11 @@ export default class AddEntry extends Component {
   }
 
   addNote = (e) => {
+    this.props.toggleLoading(true)
     e.preventDefault()
     entryService.add({
       ...this.state,
-      type: this.state.type ? this.state.type : this.props.type,
+      type: this.state.type,
     }, () => {
       this.resetState()
       this.props.getEntries()
@@ -88,7 +89,7 @@ export default class AddEntry extends Component {
               style={{ width: isMobile && '100%' }}
               id="prio-selector"
               title={
-                prio ? prio : 'Prio'
+                prio ? prio : 'prio'
               }
             >
               {[1, 2, 3].map(prio =>

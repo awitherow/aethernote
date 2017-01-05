@@ -61,7 +61,7 @@ class Aether extends Component {
     this.getEntries()
 
   getEntries = () => {
-    this.props.toggleLoading(true)
+    !this.props.loading && this.props.toggleLoading(true)
     entryService.get(entries => {
       this.setState({ entries })
       this.props.loading && this.props.toggleLoading(false)
