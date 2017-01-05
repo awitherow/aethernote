@@ -40,7 +40,7 @@ export const doingReminder = (
               <ol>
                 {goals.map(goal =>
                   <li key={goal.title}>
-                    <Span {...taskStyles({ prio: 3 })}>{goal.title}</Span>
+                    <Span {...taskStyles({ prio: 3 })}>{goal.content}</Span>
                   </li>
                 )}
               </ol>
