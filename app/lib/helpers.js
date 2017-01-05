@@ -20,11 +20,11 @@ export const toTitleCase = (str) =>
 
 export const isMobile = true && window.innerWidth <= 500
 
-export const sortByCategoryAndId = (entries) => entries.sort((a, b) => {
+export const sortByCategoryAndModified = (entries) => entries.sort((a, b) => {
   if (a.category < b.category) return 1
   if (a.category > b.category) return -1
   // if the categories are equal, it will sort by id.
-  if (a.id < b.id) return 1
-  if (a.id > b.id) return -1
+  if (a.modified < b.modified) return 1
+  if (a.modified > b.modified) return -1
   return 0
 })

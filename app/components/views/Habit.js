@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
-import { isMobile, sortByCategoryAndId } from '../../lib/helpers'
+import { isMobile, sortByCategoryAndModified } from '../../lib/helpers'
 import { categories } from '../../lib/schema'
 
 import {
@@ -63,7 +63,7 @@ export default class Habit extends Component {
   render() {
     const { category, filter } = this.state
     const { entries, type, editItem } = this.props
-    let sortedEntries = sortByCategoryAndId(entries)
+    let sortedEntries = sortByCategoryAndModified(entries)
     const filteredEntries = filter ? sortedEntries.filter(entry =>
       entry.category === category
     ) : sortedEntries
