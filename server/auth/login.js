@@ -1,4 +1,4 @@
-export function checkAuth(req, res) {
+export default function attemptLogin(req, res) {
   const { id, key } = req.query
   const validUserId = process.env.USER_ID
   const validUserKey = process.env.USER_KEY

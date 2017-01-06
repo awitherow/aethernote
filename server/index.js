@@ -4,12 +4,17 @@ import favicon from 'serve-favicon'
 import {
   getNotes, getNote, createNote, updateNote, removeNote, toggleCompletion,
 } from './queries/notes'
-import * as auth from './queries/auth'
+import attemptLogin from './auth/login'
 import compression from 'compression'
+import passport from 'passport'
+import localSignupStrategy from './server/passport/local-signup'
+import localLoginStrategy from './server/passport/local-login'
+import jwtCheck from './server/auth/jwt'
 
 const app = express()
-app.use(compression())
 
+// compression
+app.use(compression())
 if (process.env.NODE_ENV === "development") {
   require('dotenv').config()
 } else {
@@ -20,6 +25,12 @@ if (process.env.NODE_ENV === "development") {
   })
 }
 
+// passport authentication
+app.use(passport.initialize())
+passport.use('local-signup', localSignupStrategy)
+passport.use('local-login', localLoginStrategy)
+
+// enable api stuff
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -32,12 +43,14 @@ app.put('/api/notes/complete/:id', toggleCompletion)
 app.delete('/api/notes/:id', removeNote)
 
 // security
-app.use('/api/auth', auth.checkAuth)
+app.use('/api/auth/login', attemptLogin)
+app.use('/api/auth/jwt', jwtCheck)
 
+// enable static site
 app.use(express.static('public'))
 app.use(favicon('public/favicon.ico'))
 
+// launch
 app.set('port', (process.env.PORT || 3333))
-
 app.listen(app.get('port'), () =>
   console.log('Aether server running at', app.get('port')))
