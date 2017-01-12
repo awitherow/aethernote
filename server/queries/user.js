@@ -17,10 +17,9 @@ export const createUser = (req, res, next) => {
     db.none('insert into users(username, password) values( ${username}, ${password})', {
         username,
         password: hash,
-    }).then(() => 
+    }).then(() =>
         res.status(200).json({
             status: 'success',
             message: 'Inserted one entry',
-        })
-    ).catch(err => next(err))
+        })).catch(err => next(err))
 }

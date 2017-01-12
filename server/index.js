@@ -2,7 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import favicon from 'serve-favicon'
 import { getNotes, getNote, createNote, updateNote, removeNote, toggleCompletion } from './queries/notes'
-import { AttemptLogin, AttemptSignup } from './queries/user'
+import * as user from './queries/auth'
 import compression from 'compression'
 
 // Apply compression
@@ -29,8 +29,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // Authentication
-app.post('/api/auth/login', AttemptLogin)
-app.post('/api/auth/signup', AttemptSignup)
+app.post('/api/auth/login', user.AttemptLogin)
+app.post('/api/auth/signup', user.AttemptSignup)
 
 // Postgres DB Routes
 app.get('/api/notes', getNotes)
