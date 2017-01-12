@@ -1,65 +1,74 @@
-const moment = require('moment')
-const jwt = require('jwt-simple')
+import moment from 'moment'
+import jwt from 'jwt-simple'
+import bcrypt from 'bcrypt'
 import { validateLoginForm, validateSignupForm } from '../validation'
-import { getUser } from './user'
+import { getUser, createUser } from './user'
+
+function comparePass(userPassword, databasePassword) {
+  const bool = bcrypt.compareSync(userPassword, databasePassword)
+  if (!bool) throw new Error('bad pass silly money')
+  else return true
+}
 
 export const encodeToken = (user) =>
   jwt.encode({
     exp: moment().add(14, 'days').unix(),
     iat: moment().unix(),
-    sub: user.id
+    sub: user.id,
   }, process.env.TOKEN_SECRET)
 
-export const decodeToken = (token, cb) =>
-  (moment().unix() > jwt.decode(token, process.env.TOKEN_SECRET).exp)
-    ? callback('Token has expired.')
-    : callback(null, payload)
+export const decodeToken = (token, cb) => {
+  const now = (moment().unix())
+  const payload = jwt.decode(token, process.env.TOKEN_SECRET).exp
+  now > payload ? cb('Token has expired.') : cb(null, payload)
+}
 
-export const AttemptLogin = (req, res, next) => {
+
+export const AttemptLogin = (req, res) => {
   const validationResult = validateLoginForm(req.body)
   validationResult
     ? res.status(400).json({
       success: false,
       message: validationResult.message,
-      errors: validationResult.errors
+      errors: validationResult.errors,
     })
     : getUser(req.body.username).then((res) => {
-      comparePass(req.body.pasword, response.password)
-      return response
+      comparePass(req.body.pasword, res.password)
+      return res
     })
-      .then((res) => localAuth.encodeToken(res))
+      .then((res) => encodeToken(res))
       .then((token) => {
         res.status(200).json({
           status: 'success',
-          token: token
+          token,
         })
-      }).catch((err) => {
+      }).catch(() => {
         res.status(500).json({
-          status: 'error'
+          status: 'error',
         })
       })
 }
 
-export const AttemptSignup = (req, res, next) => {
+export const AttemptSignup = (req, res) => {
   const validationResult = validateSignupForm(req.body)
   validationResult
     ? res.status(400).json({
       success: false,
       message: validationResult.message,
-      errors: validationResult.errors
+      errors: validationResult.errors,
     })
     : createUser(req.body.username).then((res) => {
-      comparePass(req.body.pasword, response.password)
-      return response
-    }).then((res) => localAuth.encodeToken(res))
+      comparePass(req.body.pasword, res.password)
+      return res
+    }).then((res) => encodeToken(res))
       .then((token) => {
         res.status(200).json({
           status: 'success',
-          token: token
+          token,
         })
-      }).catch((err) => {
+      }).catch(() => {
         res.status(500).json({
-          status: 'error'
+          status: 'error',
         })
       })
 }
@@ -67,23 +76,23 @@ export const AttemptSignup = (req, res, next) => {
 export const ensureAuthenticated = (req, res, next) => {
   if (!(req.headers && req.headers.authorization)) {
     return res.status(400).json({
-      status: 'Please log in'
+      status: 'Please log in',
     })
   }
 
   var header = req.headers.authorization.split(' ')
   var token = header[1]
-  localAuth.decodeToken(token, (err, payload) => {
+  decodeToken(token, (err) => {
     if (err) {
       return res.status(401).json({
-        status: 'Token has expired'
+        status: 'Token has expired',
       })
     } else {
-      getUser(req.body.username).then((user) => {
+      getUser(req.body.username).then(() => {
         next()
-      }).catch((err) => {
+      }).catch(() => {
         res.status(500).json({
-          status: 'error'
+          status: 'error',
         })
       })
     }

@@ -54,6 +54,7 @@
     "redux": "^3.6.0",
     "remarkable": "^1.7.1",
     "serve-favicon": "^2.3.2",
+    "validator": "^6.2.1",
     "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
