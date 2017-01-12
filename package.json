@@ -20,7 +20,8 @@
     "test": "npm run lint",
     "lint": "eslint . --ext .js --ext .jsx --fix",
     "dev": "NODE_ENV='development' DATABASE_URL=$(heroku config:get DATABASE_URL -a aethernote) nodemon start.js & NODE_ENV='development' webpack -d --watch --colors",
-    "dev-reminder": "NODE_ENV='development' DATABASE_URL=$(heroku config:get DATABASE_URL -a aethernote) nodemon server/tasks/doingReminder"
+    "dev-reminder": "NODE_ENV='development' DATABASE_URL=$(heroku config:get DATABASE_URL -a aethernote) nodemon server/tasks/doingReminder",
+    "update-packages": "ncu && yarn install"
   },
   "dependencies": {
     "axios": "^0.15.3",
@@ -33,7 +34,7 @@
     "body-parser": "^1.15.2",
     "classnames": "^2.2.5",
     "compression": "^1.6.2",
-    "dotenv": "^2.0.0",
+    "dotenv": "^4.0.0",
     "express": "^4.14.0",
     "fuse.js": "^2.6.1",
     "moment": "^2.17.0",
@@ -45,7 +46,7 @@
     "react-day-picker": "^3.1.1",
     "react-dom": "^15.4.1",
     "react-html-email": "^1.1.3",
-    "react-redux": "^4.4.6",
+    "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "remarkable": "^1.7.1",
     "serve-favicon": "^2.3.2",
@@ -62,15 +63,16 @@
     "eslint": "^3.10.2",
     "eslint-config-es2015": "^1.1.0",
     "eslint-plugin-react": "^6.7.1",
-    "husky": "^0.11.9",
+    "husky": "^0.12.0",
+    "node-sass": "^4.2.0",
     "nodemon": "^1.11.0",
-    "node-sass": "^3.13.0",
+    "npm-check-updates": "^2.8.9",
     "react-hot-loader": "^3.0.0-beta.6",
     "redux-devtools": "^3.3.1",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.3",
-    "yarn": "^0.17.10"
+    "yarn": "^0.18.1"
   },
   "license": "ISC",
   "bugs": {
