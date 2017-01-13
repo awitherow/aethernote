@@ -6,6 +6,10 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import store from './redux/store'
 
+import { Router, Route, hasHistory } from 'react-router'
+import routes from './routes'
+import Aether from './containers/Aether'
+
 let s = createStore(store,
   process.env.NODE_ENV === 'development' ? (
     window.__REDUX_DEVTOOLS_EXTENSION__ &&
@@ -13,11 +17,10 @@ let s = createStore(store,
   ) : null
 )
 
-import Aether from './Aether'
-
 render(
   <Provider store={s}>
-    <Aether />
+    <Router history={hasHistory} routes={routes}>
+    </Router>
   </Provider>,
   document.getElementById('app')
 )

@@ -10,8 +10,7 @@ function comparePass(userPassword, databasePassword) {
   else return true
 }
 
-export const encodeToken = (user) =>
-  jwt.encode({
+export const encodeToken = (user) => jwt.encode({
     exp: moment().add(14, 'days').unix(),
     iat: moment().unix(),
     sub: user.id,
@@ -35,8 +34,7 @@ export const AttemptLogin = (req, res) => {
     : getUser(req.body.username).then((res) => {
       comparePass(req.body.pasword, res.password)
       return res
-    })
-      .then((res) => encodeToken(res))
+    }).then((res) => encodeToken(res))
       .then((token) => {
         res.status(200).json({
           status: 'success',

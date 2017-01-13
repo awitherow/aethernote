@@ -1,22 +1,22 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import * as entryService from './api/entries'
+import * as entryService from '../api/entries'
 
-import { toTitleCase } from './lib/helpers'
-import { categories } from './lib/schema'
+import { toTitleCase } from '../lib/helpers'
+import { categories } from '../lib/schema'
 
-import Overlay from './components/elements/Overlay'
-import Header from './components/elements/Header'
-import AddEntry from './components/elements/AddEntry'
+import Overlay from '../components/elements/Overlay'
+import Header from '../components/elements/Header'
+import AddEntry from '../components/elements/AddEntry'
 
-import Editor from './components/views/Editor'
-import Notes from './components/views/Notes'
-import Journal from './components/views/Journal'
-import Login from './components/views/Login'
-import Search from './components/views/Search'
-import Habit from './components/views/Habit'
-import Exercise from './components/views/Exercise'
+import Editor from '../components/views/Editor'
+import Notes from '../components/views/Notes'
+import Journal from '../components/views/Journal'
+import Login from '../components/views/Login'
+import Search from '../components/views/Search'
+import Habit from '../components/views/Habit'
+import Exercise from '../components/views/Exercise'
 
 import { Panel, Glyphicon, Button, DropdownButton, MenuItem } from 'react-bootstrap'
 
@@ -27,7 +27,7 @@ import {
   openEditor,
   closeEditor,
   toggleSearch,
-} from './redux/actions'
+} from '..//redux/actions'
 
 class Aether extends Component {
   static childContextTypes = {
