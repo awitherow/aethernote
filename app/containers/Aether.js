@@ -66,14 +66,14 @@ class Aether extends Component {
     if (!authenticated || !user) {
       this.context.router.push('/logout')
     } else {
-      this.getEntries(user)
+      this.getEntries()
     }
   }
 
   getEntries = () => {
     !this.props.loading && this.props.toggleLoading(true)
-    entryService.get(entries => {
-      this.setState({ entries })
+    entryService.get(this.props.user, ({ data }) => {
+      this.setState({ entries: data })
       this.props.loading && this.props.toggleLoading(false)
     })
   }

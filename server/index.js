@@ -29,8 +29,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // Authentication
-app.post('/api/auth/login', AttemptLogin)
-app.post('/api/auth/signup', AttemptSignup)
+app.post('/auth/login', AttemptLogin)
+app.post('/auth/signup', AttemptSignup)
+
+app.use('/api', require('./validation/auth-check'))
 
 // Postgres DB Routes
 app.get('/api/notes', getNotes)

@@ -6,7 +6,7 @@ export const login = (username, password, cb) =>
   axios({
     method: 'post',
     headers: sharedHeaders,
-    url: '/api/auth/login',
+    url: '/auth/login',
     data: {
       username,
       password,
@@ -17,7 +17,7 @@ export const signup = (username, password, cb) =>
   axios({
     method: 'post',
     headers: sharedHeaders,
-    url: '/api/auth/signup',
+    url: '/auth/signup',
     data: {
       username,
       password,

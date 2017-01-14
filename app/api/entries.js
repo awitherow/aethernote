@@ -1,16 +1,24 @@
 import { categories } from '../lib/schema'
 import moment from 'moment'
+import axios from 'axios'
 
 import { sharedHeaders } from './_helpers'
 
-function get(cb) {
-  fetch('/api/notes')
-    .then(r => r.json())
-    .then(res => {
-      cb(res.data)
-    })
+import { getToken } from './security'
+
+const get = (username, cb) => {
+  const token = getToken()
+  axios({
+    url: '/api/notes',
+    method: 'GET',
+    params: {
+      username,
+      token,
+    },
+  }).then(r => cb(r.data))
     .catch(e => console.log(e))
 }
+  
 
 function add(entry, cb) {
   if (!entry.category) {

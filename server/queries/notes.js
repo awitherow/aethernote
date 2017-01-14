@@ -1,17 +1,18 @@
 import db from '../db'
 
 import { trackHabit, trackExercise } from './tracking'
-export const getNotes = (req, res, next) => {
-  db.any('select * from entries ORDER BY modified desc')
-  .then(data => {
+
+export const getNotes = (req, res, next) =>
+  db.any('select * FROM entries WHERE username=${username} ORDER BY modified desc', { 
+    username: req.query.username,
+  }).then(data => 
     res.status(200)
-    .json({
-      status: 'success',
-      data,
-      message: 'Retrieved all tasks',
-    })
-  }).catch(err => next(err))
-}
+      .json({
+        status: 'success',
+        data,
+        message: 'Retrieved entry',
+      })
+  ).catch(err => next(err))
 
 export const getNote = (req, res, next) => {
   const { id } = req.params
