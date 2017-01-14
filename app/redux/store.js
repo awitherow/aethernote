@@ -2,19 +2,10 @@ import {
   LOADING, GRANT_AUTHORITY, SET_TYPE, OPEN_EDITOR, CLOSE_EDITOR, TOGGLE_SEARCH, SET_USERNAME,
 } from './constants'
 
-function checkAuthentication() {
-  if (process.env.NODE_ENV === 'development') {
-    return true
-  } else {
-    // check cookies?
-    return false
-  }
-}
-
 const initialState = {
   user: null,
   loading: false,
-  authenticated: checkAuthentication(),
+  authenticated: false,
   currentType: 'note',
   editor: {
     hidden: true,

@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import db from '../db'
 
-export const getUser = (username, ...params) =>
+export const getUser = (username) =>
  db.one('SELECT * from users WHERE username = ${username}', { username })
   .catch(e => console.log(e))
 

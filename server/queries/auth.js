@@ -27,10 +27,10 @@ export const AttemptLogin = (req, res) => {
   const validationResult = validateLoginForm(req.body)
   !validationResult.success
     ? res.status(400).json({
-        success: false,
-        message: validationResult.message,
-        errors: validationResult.errors,
-      })
+      success: false,
+      message: validationResult.message,
+      errors: validationResult.errors,
+    })
     : getUser(req.body.username).then((res) => {
       comparePass(req.body.password, res.password)
       return res
