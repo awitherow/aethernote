@@ -113,10 +113,6 @@ class Aether extends Component {
   render() {
     const { loading, editor, authenticated, currentType, searching } = this.props
 
-    if (!authenticated) {
-      this.context.router.replace('/login')
-    }
-
     return (
       <div className="aether">
 
