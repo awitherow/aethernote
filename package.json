@@ -61,7 +61,6 @@
     "babel-plugin-transform-class-properties": "^6.19.0",
     "babel-plugin-transform-object-rest-spread": "^6.19.0",
     "babel-preset-latest": "^6.16.0",
-    "chai": "^3.5.0",
     "compression-webpack-plugin": "^0.3.2",
     "css-loader": "^0.26.0",
     "eslint": "^3.10.2",

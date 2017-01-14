@@ -1,10 +1,10 @@
 import Aether from './containers/Aether'
 import Portal from './containers/Portal'
-import Guardhouse from './containers/Guardhouse'
+import Membrane from './containers/Membrane'
 import { isUserAuthenticated, deauthenticateUser } from './api/security'
 
 export default {
-  component: Guardhouse,
+  component: Membrane,
   childRoutes: [
     {
       path: '/',

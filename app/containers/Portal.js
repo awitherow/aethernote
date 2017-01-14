@@ -9,26 +9,21 @@ import {
 } from '../redux/actions'
 
 class Portal extends Component {
-  constructor(props) {
-    super(props)
-    const storedMessage = localStorage.getItem('successMessage')
-    let successMessage = ''
-
-    if (storedMessage) {
-      successMessage = storedMessage
-      localStorage.removeItem('successMessage')
-    }
-
-    this.state = {
-      errors: {},
-      successMessage,
-      username: '',
-      password: '',
-    }
+  state = {
+    errors: {},
+    username: '',
+    password: '',
   }
 
   static contextTypes = {
     router: PropTypes.object.isRequired,
+  }
+
+  pass = (token, username) => {
+    authenticateUser(token)
+    this.props.grantAuthority(true)
+    this.props.setUser(username)
+    this.context.router.replace('/')
   }
 
   authenticateLoginAttempt = (e) => {
@@ -47,11 +42,7 @@ class Portal extends Component {
           })
         }
       } else {
-        authenticateUser(data.token)
-        this.props.grantAuthority(true)
-        this.props.setUser(username)
-        console.log(username)
-        this.context.router.replace('/')
+        this.pass(data.token, username)
       }
     })
   }
@@ -62,10 +53,7 @@ class Portal extends Component {
 
     signup(encodeURIComponent(username), encodeURIComponent(password), ({ data }) => {
       if (data) {
-        authenticateUser(data.token)
-        this.props.grantAuthority(true)
-        this.props.setUser(username)
-        this.context.router.replace('/')
+        this.pass(data.token, username)
       } // TODO: add else for failures
     })
   }

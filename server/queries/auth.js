@@ -70,29 +70,3 @@ export const AttemptSignup = (req, res) => {
         })
       })
 }
-
-export const ensureAuthenticated = (req, res, next) => {
-  if (!(req.headers && req.headers.authorization)) {
-    return res.status(400).json({
-      status: 'Please log in',
-    })
-  }
-
-  var header = req.headers.authorization.split(' ')
-  var token = header[1]
-  decodeToken(token, (err) => {
-    if (err) {
-      return res.status(401).json({
-        status: 'Token has expired',
-      })
-    } else {
-      getUser(req.body.username).then(() => {
-        next()
-      }).catch(() => {
-        res.status(500).json({
-          status: 'error',
-        })
-      })
-    }
-  })
-}

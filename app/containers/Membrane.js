@@ -1,13 +1,13 @@
 import React from 'react'
 
-export default function Guardhouse({ children }) {
+export default function Membrane({ children }) {
   return (
-        <div>
+        <div className="membrane">
             {children}
         </div>
   )
 }
 
-Guardhouse.propTypes = {
+Membrane.propTypes = {
   children: React.PropTypes.element.isRequired,
 }
