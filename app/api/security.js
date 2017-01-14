@@ -1,12 +1,11 @@
 import axios from 'axios'
 
+import { sharedHeaders } from './_helpers'
+
 export const login = (username, password, cb) =>
   axios({
     method: 'post',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
+    headers: sharedHeaders,
     url: '/api/auth/login',
     data: {
       username,
@@ -17,10 +16,7 @@ export const login = (username, password, cb) =>
 export const signup = (username, password, cb) =>
   axios({
     method: 'post',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
+    headers: sharedHeaders,
     url: '/api/auth/signup',
     data: {
       username,

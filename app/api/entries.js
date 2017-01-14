@@ -1,10 +1,7 @@
 import { categories } from '../lib/schema'
 import moment from 'moment'
 
-const sharedHeaders = {
-  'Accept': 'application/json',
-  'Content-Type': 'application/json',
-}
+import { sharedHeaders } from './_helpers'
 
 function get(cb) {
   fetch('/api/notes')
