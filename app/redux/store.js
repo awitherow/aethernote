@@ -3,7 +3,7 @@ import {
 } from './constants'
 
 const initialState = {
-  user: null,
+  user: '',
   loading: false,
   authenticated: false,
   currentType: 'note',

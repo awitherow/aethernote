@@ -48,6 +48,7 @@ class Aether extends Component {
     // redux state
     currentType: PropTypes.string.isRequired,
     authenticated: PropTypes.bool.isRequired,
+    user: PropTypes.string.isRequired,
     editor: PropTypes.shape({
       hidden: PropTypes.bool.isRequired,
       note: PropTypes.object.isRequired,
@@ -60,8 +61,14 @@ class Aether extends Component {
     entries: [],
   }
 
-  componentDidMount = () =>
-    this.getEntries()
+  componentDidMount = () => {
+    const { authenticated, user } = this.props
+    if (!authenticated || !user) {
+      this.context.router.push('/logout')
+    } else {
+      this.getEntries(user)
+    }
+  }
 
   getEntries = () => {
     !this.props.loading && this.props.toggleLoading(true)
@@ -111,7 +118,7 @@ class Aether extends Component {
   }
 
   render() {
-    const { loading, editor, authenticated, currentType, searching } = this.props
+    const { loading, editor, currentType, searching } = this.props
 
     return (
       <div className="aether">
@@ -217,10 +224,11 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mapStateToProps = ({
-  currentType, authenticated, editor, loading, searching,
+  currentType, authenticated, user, editor, loading, searching,
 }) => ({
   currentType,
   authenticated,
+  user,
   editor,
   loading,
   searching,

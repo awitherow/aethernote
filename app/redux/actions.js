@@ -14,5 +14,5 @@ export const closeEditor = () => ({ type: CLOSE_EDITOR })
 export const toggleSearch = (data) => ({ type: TOGGLE_SEARCH, data })
 
 // user
-export const grantAuthority = (data) => ({ type: SET_USERNAME, data })
-export const setUser = (data) => ({ type: GRANT_AUTHORITY, data })
+export const grantAuthority = (data) => ({ type: GRANT_AUTHORITY, data })
+export const setUser = (data) => ({ type: SET_USERNAME, data })

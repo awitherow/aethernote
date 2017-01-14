@@ -48,9 +48,10 @@ class Portal extends Component {
         }
       } else {
         authenticateUser(data.token)
-        this.context.router.replace('/')
         this.props.grantAuthority(true)
         this.props.setUser(username)
+        console.log(username)
+        this.context.router.replace('/')
       }
     })
   }
@@ -62,9 +63,9 @@ class Portal extends Component {
     signup(encodeURIComponent(username), encodeURIComponent(password), ({ data }) => {
       if (data) {
         authenticateUser(data.token)
-        this.context.router.replace('/')
         this.props.grantAuthority(true)
         this.props.setUser(username)
+        this.context.router.replace('/')
       } // TODO: add else for failures
     })
   }
