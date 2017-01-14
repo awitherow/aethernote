@@ -1,5 +1,3 @@
-import validator from 'validator'
-
 export function validateSignupForm(payload) {
   const errors = {}
   let isFormValid = true

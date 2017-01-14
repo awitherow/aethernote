@@ -11,7 +11,7 @@ export const login = (username, password, cb) =>
     data: {
       username,
       password,
-    }
+    },
   }).then(data => cb(data)).catch(e => cb(e))
 
 export const signup = (username, password, cb) =>
@@ -25,7 +25,7 @@ export const signup = (username, password, cb) =>
     data: {
       username,
       password,
-    }
+    },
   }).then(data => cb(data)).catch(e => cb(e))
 
 

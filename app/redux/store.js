@@ -35,7 +35,7 @@ const Store = (state, action) => {
     }
     case SET_USERNAME: return {
       ...state,
-      user: acton.data,
+      user: action.data,
     }
     case SET_TYPE: return {
       ...state,

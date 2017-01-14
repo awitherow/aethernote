@@ -1,7 +1,7 @@
-import Aether from './containers/Aether';
-import Portal from './containers/Portal';
-import Guardhouse from './containers/Guardhouse';
-import { isUserAuthenticated, deauthenticateUser } from './api/security';
+import Aether from './containers/Aether'
+import Portal from './containers/Portal'
+import Guardhouse from './containers/Guardhouse'
+import { isUserAuthenticated, deauthenticateUser } from './api/security'
 
 export default {
   component: Guardhouse,
@@ -10,22 +10,22 @@ export default {
       path: '/',
       getComponent: (location, callback) => {
         if (isUserAuthenticated()) {
-          callback(null, Aether);
+          callback(null, Aether)
         } else {
-          callback(null, Portal);
+          callback(null, Portal)
         }
-      }
+      },
     },
     {
       path: '/portal',
-      component: Portal
+      component: Portal,
     },
     {
       path: '/logout',
       onEnter: (nextState, replace) => {
-        deauthenticateUser();
-        replace('/');
-      }
-    }
-  ]
+        deauthenticateUser()
+        replace('/')
+      },
+    },
+  ],
 }

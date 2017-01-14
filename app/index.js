@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import store from './redux/store'
 
-import { Router, Route, hashHistory } from 'react-router'
+import { Router, hashHistory } from 'react-router'
 import routes from './routes'
 
 let s = createStore(store,

@@ -1,6 +1,13 @@
 import React from 'react'
 
-export default ({ children }) =>
-    <div>
-        {children}
-    </div>
+export default function Guardhouse({ children }) {
+  return (
+        <div>
+            {children}
+        </div>
+  )
+}
+
+Guardhouse.propTypes = {
+  children: React.PropTypes.element.isRequired,
+}

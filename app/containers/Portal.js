@@ -9,70 +9,69 @@ import {
 } from '../redux/actions'
 
 class Portal extends Component {
-    constructor(props, context) {
-        super(props)
-        const storedMessage = localStorage.getItem('successMessage')
-        let successMessage = ''
+  constructor(props) {
+    super(props)
+    const storedMessage = localStorage.getItem('successMessage')
+    let successMessage = ''
 
-        if (storedMessage) {
-            successMessage = storedMessage
-            localStorage.removeItem('successMessage');
-        }
-
-        this.state = {
-            errors: {},
-            successMessage,
-            username: '',
-            password: ''
-        }
+    if (storedMessage) {
+      successMessage = storedMessage
+      localStorage.removeItem('successMessage')
     }
 
-    static contextTypes = {
-        router: PropTypes.object.isRequired,
+    this.state = {
+      errors: {},
+      successMessage,
+      username: '',
+      password: '',
     }
+  }
 
-    authenticateLoginAttempt = (e) => {
-        e.preventDefault()
-        const { username, password, failureAttempts } = this.state
+  static contextTypes = {
+    router: PropTypes.object.isRequired,
+  }
 
-        login(encodeURIComponent(username), encodeURIComponent(password), ({ data }) => {
-            if (!data) {
-                if (failureAttempts >= 3) {
+  authenticateLoginAttempt = (e) => {
+    e.preventDefault()
+    const { username, password, failureAttempts } = this.state
+
+    login(encodeURIComponent(username), encodeURIComponent(password), ({ data }) => {
+      if (!data) {
+        if (failureAttempts >= 3) {
                     // set locked cookie.
                     // redirect to some messed up website.
-                } else {
-                    this.setState({
-                        error: 'User not found',
-                        failureAttempts: failureAttempts + 1,
-                    })
-                }
-            } else {
-                authenticateUser(data.token);
-                this.context.router.replace('/');
-                this.props.grantAuthority(true)
-                this.props.setUser(username)
-            }
-        })
-    }
+        } else {
+          this.setState({
+            error: 'User not found',
+            failureAttempts: failureAttempts + 1,
+          })
+        }
+      } else {
+        authenticateUser(data.token)
+        this.context.router.replace('/')
+        this.props.grantAuthority(true)
+        this.props.setUser(username)
+      }
+    })
+  }
 
-    authenticateSignupAttempt = (e) => {
-        e.preventDefault()
-        const { username, password, failureAttempts } = this.state
+  authenticateSignupAttempt = (e) => {
+    e.preventDefault()
+    const { username, password } = this.state
 
-        signup(encodeURIComponent(username), encodeURIComponent(password), ({ data }) => {
-            if (!data) {
-            } else {
-                authenticateUser(data.token);
-                this.context.router.replace('/');
-                this.props.grantAuthority(true)
-                this.props.setUser(username)
-            }
-        })
-    }
+    signup(encodeURIComponent(username), encodeURIComponent(password), ({ data }) => {
+      if (data) {
+        authenticateUser(data.token)
+        this.context.router.replace('/')
+        this.props.grantAuthority(true)
+        this.props.setUser(username)
+      } // TODO: add else for failures
+    })
+  }
 
-    render() {
-        const { username, password } = this.state
-        return (
+  render() {
+    const { username, password } = this.state
+    return (
             <div style={{ height: '100%' }}>
                 <style type="text/css">{`
                 .login-container {
@@ -114,8 +113,13 @@ class Portal extends Component {
                     </ButtonGroup>
                 </Form>
             </div>
-        )
-    }
+    )
+  }
+}
+
+Portal.propTypes = {
+  grantAuthority: PropTypes.func.isRequired,
+  setUser: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = ({
@@ -125,8 +129,8 @@ const mapStateToProps = ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    grantAuthority: (v) => dispatch(grantAuthority(v)),
-    setUser: (v) => dispatch(setUser(v)),
+  grantAuthority: (v) => dispatch(grantAuthority(v)),
+  setUser: (v) => dispatch(setUser(v)),
 })
 
 const ConnectedPortal = connect(
