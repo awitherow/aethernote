@@ -33,6 +33,10 @@ class Aether extends Component {
     getEntries: PropTypes.func,
   }
 
+  static contextTypes = {
+    router: PropTypes.object.isRequired,
+  }
+
   static propTypes = {
     // redux dispatchers
     grantAuthority: PropTypes.func.isRequired,
@@ -110,7 +114,7 @@ class Aether extends Component {
     const { loading, editor, authenticated, currentType, searching } = this.props
 
     if (!authenticated) {
-      this.context.router.replace('/login');
+      this.context.router.replace('/login')
     }
 
     return (
@@ -131,6 +135,7 @@ class Aether extends Component {
           currentType={currentType}
           setType={this.props.setType}
           toggleSearch={this.props.toggleSearch}
+          logout={() => this.context.router.push('/logout')}
           />
 
         <div className="inner">
