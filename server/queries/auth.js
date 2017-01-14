@@ -4,8 +4,8 @@ import bcrypt from 'bcrypt'
 import { validateLoginForm, validateSignupForm } from '../validation'
 import { getUser, createUser } from './user'
 
-function comparePass(userPassword, databasePassword) {
-  const bool = bcrypt.compareSync(userPassword, databasePassword)
+function comparePass(userPassword, hash) {
+  const bool = bcrypt.compareSync(userPassword, hash)
   if (!bool) throw new Error('bad pass silly money')
   else return true
 }
@@ -27,24 +27,24 @@ export const AttemptLogin = (req, res) => {
   const validationResult = validateLoginForm(req.body)
   !validationResult.success
     ? res.status(400).json({
-      success: false,
-      message: validationResult.message,
-      errors: validationResult.errors,
-    })
+        success: false,
+        message: validationResult.message,
+        errors: validationResult.errors,
+      })
     : getUser(req.body.username).then((res) => {
       comparePass(req.body.password, res.password)
       return res
-    }).then((res) =>
+    }).then((res) => encodeToken(res)).then((token) => 
       res.status(200).json({
         status: 'success',
-        token: encodeToken(res),
+        token,
       })
-    ).catch((error) => {
+    ).catch((error) => 
       res.status(500).json({
         status: 'error',
         error,
       })
-    })
+    )
 }
 
 export const AttemptSignup = (req, res) => {
