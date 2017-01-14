@@ -6,9 +6,8 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import store from './redux/store'
 
-import { Router, Route, hasHistory } from 'react-router'
+import { Router, Route, hashHistory } from 'react-router'
 import routes from './routes'
-import Aether from './containers/Aether'
 
 let s = createStore(store,
   process.env.NODE_ENV === 'development' ? (
@@ -19,8 +18,7 @@ let s = createStore(store,
 
 render(
   <Provider store={s}>
-    <Router history={hasHistory} routes={routes}>
-    </Router>
+    <Router history={hashHistory} routes={routes} />
   </Provider>,
   document.getElementById('app')
 )

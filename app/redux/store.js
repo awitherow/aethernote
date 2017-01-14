@@ -1,5 +1,5 @@
 import {
-  LOADING, GRANT_AUTHORITY, SET_TYPE, OPEN_EDITOR, CLOSE_EDITOR, TOGGLE_SEARCH,
+  LOADING, GRANT_AUTHORITY, SET_TYPE, OPEN_EDITOR, CLOSE_EDITOR, TOGGLE_SEARCH, SET_USERNAME,
 } from './constants'
 
 function checkAuthentication() {
@@ -12,6 +12,7 @@ function checkAuthentication() {
 }
 
 const initialState = {
+  user: null,
   loading: false,
   authenticated: checkAuthentication(),
   currentType: 'note',
@@ -31,6 +32,10 @@ const Store = (state, action) => {
     case GRANT_AUTHORITY: return {
       ...state,
       authenticated: action.data,
+    }
+    case SET_USERNAME: return {
+      ...state,
+      user: acton.data,
     }
     case SET_TYPE: return {
       ...state,

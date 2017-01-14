@@ -4,13 +4,13 @@ import Guardhouse from './containers/Guardhouse';
 import { isUserAuthenticated, deauthenticateUser } from './api/security';
 
 export default {
-  component: Aether,
+  component: Guardhouse,
   childRoutes: [
     {
       path: '/',
       getComponent: (location, callback) => {
         if (isUserAuthenticated()) {
-          callback(null, Reality);
+          callback(null, Aether);
         } else {
           callback(null, Portal);
         }
@@ -18,7 +18,7 @@ export default {
     },
     {
       path: '/portal',
-      component: LoginPage
+      component: Portal
     },
     {
       path: '/logout',

@@ -5,19 +5,14 @@ export function validateSignupForm(payload) {
   let isFormValid = true
   let message = ''
 
-  if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {
+  if (!payload || typeof payload.username !== 'string' || payload.username.length < 3) {
     isFormValid = false
-    errors.email = 'Please provide a correct email address.'
+    errors.username = 'Usernames must be longer than 4 characters'
   }
 
-  if (!payload || payload.password.search(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{4,8}$/)) {
+  if (!payload || payload.password.length < 30) {
     isFormValid = false
-    errors.password = 'Password expresion that requires one lower case letter, one upper case letter, one digit, 6-13 length, and no spaces. Your data is sacred, guard it well.'
-  }
-
-  if (!payload || typeof payload.name !== 'string' || payload.name.trim().length === 0) {
-    isFormValid = false
-    errors.name = 'Please provide your name.'
+    errors.password = 'Generate a password above 30 characters. Your data is sacred, guard it well.'
   }
 
   if (!isFormValid) {
@@ -36,9 +31,9 @@ export function validateLoginForm(payload) {
   let isFormValid = true
   let message = ''
 
-  if (!payload || typeof payload.email !== 'string' || payload.email.trim().length === 0) {
+  if (!payload || typeof payload.username !== 'string' || payload.username.trim().length === 0) {
     isFormValid = false
-    errors.email = 'Please provide your email address.'
+    errors.username = 'Please provide your username address.'
   }
 
   if (!payload || typeof payload.password !== 'string' || payload.password.trim().length === 0) {

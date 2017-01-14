@@ -1,5 +1,6 @@
 import React from 'react'
 
-export default function() {
-    return <p>Hello!</p>
-}
+export default ({ children }) =>
+    <div>
+        {children}
+    </div>

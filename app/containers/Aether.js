@@ -13,7 +13,6 @@ import AddEntry from '../components/elements/AddEntry'
 import Editor from '../components/views/Editor'
 import Notes from '../components/views/Notes'
 import Journal from '../components/views/Journal'
-import Login from '../components/views/Login'
 import Search from '../components/views/Search'
 import Habit from '../components/views/Habit'
 import Exercise from '../components/views/Exercise'
@@ -27,7 +26,7 @@ import {
   openEditor,
   closeEditor,
   toggleSearch,
-} from '..//redux/actions'
+} from '../redux/actions'
 
 class Aether extends Component {
   static childContextTypes = {
@@ -110,9 +109,11 @@ class Aether extends Component {
   render() {
     const { loading, editor, authenticated, currentType, searching } = this.props
 
-    return !authenticated ? (
-      <Login grantAuthority={this.props.grantAuthority} />
-      ) : (
+    if (!authenticated) {
+      this.context.router.replace('/login');
+    }
+
+    return (
       <div className="aether">
 
         { loading ? <Overlay type="loading" /> : null }
