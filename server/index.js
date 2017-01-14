@@ -32,8 +32,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.post('/auth/login', AttemptLogin)
 app.post('/auth/signup', AttemptSignup)
 
+// Authentication Check for all api routes
 app.use('/api', require('./validation/auth-check'))
-
 // Postgres DB Routes
 app.get('/api/notes', getNotes)
 app.get('/api/notes/:id', getNote)
