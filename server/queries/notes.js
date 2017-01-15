@@ -1,17 +1,18 @@
 import db from '../db'
 
 import { trackHabit, trackExercise } from './tracking'
-export const getNotes = (req, res, next) => {
-  db.any('select * from entries ORDER BY modified desc')
-  .then(data => {
+
+export const getNotes = (req, res, next) =>
+  db.any('select * FROM entries WHERE username=${username} ORDER BY modified desc', { 
+    username: req.query.username,
+  }).then(data => 
     res.status(200)
-    .json({
-      status: 'success',
-      data,
-      message: 'Retrieved all tasks',
-    })
-  }).catch(err => next(err))
-}
+      .json({
+        status: 'success',
+        data,
+        message: 'Retrieved entry',
+      })
+  ).catch(err => next(err))
 
 export const getNote = (req, res, next) => {
   const { id } = req.params
@@ -27,10 +28,11 @@ export const getNote = (req, res, next) => {
 }
 
 export const createNote = (req, res, next) => {
-  if (!req.body.type) { req.body.type = 'note' }
-  db.none('insert into entries(title, content, category, type, prio)' +
-      'values( ${title}, ${content}, ${category}, ${type}, ${prio})',
-    req.body)
+  const { title, content, category, type, prio } = req.body.entry
+  const { username } = req.query
+  db.none('insert into entries(title, content, category, type, prio, username)' +
+      'values($1, $2, $3, $4, $5, $6)',
+    [title, content, category, type, prio, username])
   .then(() => {
     res.status(200)
     .json({
@@ -41,19 +43,28 @@ export const createNote = (req, res, next) => {
 }
 
 export const updateNote = (req, res, next) => {
+  if (req.body.update.username !== req.query.username) {
+    res.status(400).json({
+      status: 'failure',
+      message: 'You cannot update notes that are not yours',
+    })
+  }
   const {
     id, title, content, prio, category, context, type, tally, value,
   } = req.body.update
+  const { username } = req.query
   // TODO !! handle changed habit names/exercise names for linked db. use ID?
   if (tally) {
     switch(type) {
       case 'habit': trackHabit({
         name: title,
         value,
+        username,
       }); break
       case 'exercise': trackExercise({
         exercise: id,
         value,
+        username,
       })
     }
   }
@@ -73,8 +84,11 @@ export const updateNote = (req, res, next) => {
 
 export const removeNote = (req, res, next) => {
   const id = parseInt(req.params.id)
-  db.result(`delete from entries where id = ${id}`)
-  .then(result => {
+  const username = req.query.username
+  db.result('delete from entries where id = ${id} AND username = ${username}',{ 
+    id,
+    username,
+  }).then(result => {
     res.status(200)
     .json({
       status: 'success',
@@ -84,9 +98,9 @@ export const removeNote = (req, res, next) => {
 }
 
 export const toggleCompletion = (req, res, next) => {
-  const { complete, id } = req.body
-  console.log(req.body)
-  db.none('update entries set complete=$1 where id=$2', [complete, id])
+  const { complete, id } = req.body.entry
+  const { username } = req.query
+  db.none('update entries set complete=$1 where id=$2 AND username=$3', [complete, id, username])
     .then(() => {
       res.status(200)
       .json({

@@ -18,6 +18,7 @@ export default class Journal extends Component {
   static propTypes = {
     type: PropTypes.string.isRequired,
     entries: PropTypes.array.isRequired,
+    user: PropTypes.string.isRequired,
     // redux
     editItem: PropTypes.func.isRequired,
     getEntries: PropTypes.func.isRequired,
@@ -34,6 +35,9 @@ export default class Journal extends Component {
       (thing.category === category)
     )
   }
+
+  toggle = (entry) =>
+    toggleCompletion(entry, this.props.user, () => this.props.getEntries())
 
   render = () =>
     <div className="journal" key="journal-page">
@@ -66,7 +70,7 @@ export default class Journal extends Component {
                             className="button-margin"
                             bsSize="xsmall"
                             bsStyle={entry.complete ? "success" : "danger"}
-                            onClick={() => toggleCompletion(entry, () => this.props.getEntries())}
+                            onClick={() => this.toggle(event)}
                           >
                             <Glyphicon glyph={entry.complete ? "ok" : "remove"} />
                           </Button>

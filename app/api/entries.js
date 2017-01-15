@@ -1,21 +1,23 @@
 import { categories } from '../lib/schema'
 import moment from 'moment'
+import axios from 'axios'
 
-const sharedHeaders = {
-  'Accept': 'application/json',
-  'Content-Type': 'application/json',
+import { sharedHeaders } from './_helpers'
+import { getToken } from './security'
+
+export const get = (username, cb) => {
+  const token = getToken()
+  axios({
+    url: '/api/notes',
+    method: 'GET',
+    params: {
+      username,
+      token,
+    },
+  }).then(r => cb(r.data)).catch(e => console.log(e))
 }
 
-function get(cb) {
-  fetch('/api/notes')
-    .then(r => r.json())
-    .then(res => {
-      cb(res.data)
-    })
-    .catch(e => console.log(e))
-}
-
-function add(entry, cb) {
+export const add = (entry, username, cb) => {
   if (!entry.category) {
     entry.category = categories[entry.type][0]
   }
@@ -44,45 +46,63 @@ function add(entry, cb) {
     entry.content = 0
   }
 
-  fetch('/api/notes', {
+  const token = getToken()
+  axios({
+    url: '/api/notes',
     method: 'POST',
-    headers: sharedHeaders,
-    body: JSON.stringify(entry),
-  }).then(cb)
+    params: {
+      username,
+      token,
+    },
+    data: {
+      entry,
+    },
+  }).then(r => cb(r)).catch(e => console.log(e))
 }
 
-function remove(id, cb) {
-  fetch(`/api/notes/${id}`, {
+export const remove = (id, username, cb) => {
+  const token = getToken()
+  axios({
+    url: `/api/notes/${id}`,
     method: 'DELETE',
-  }).then(cb)
+    params: {
+      username,
+      token,
+    },
+  }).then(r => cb(r)).catch(e => console.log(e))
 }
 
-function update(orig, diff, cb) {
-  const update = Object.assign(orig, diff)
-  fetch(`/api/notes/${orig.id}`, {
+export const update = (update, username, cb) => {
+  const token = getToken()
+  axios({
+    url: `/api/notes/${update.id}`,
     method: 'PUT',
     headers: sharedHeaders,
-    body: JSON.stringify({
+    params: {
+      username,
+      token,
+    },
+    data: {
       update,
-    }),
-  }).then(cb)
+    },
+  }).then(r => cb(r)).catch(e => console.log(e))
 }
 
-function toggleCompletion(entry, cb) {
-  fetch(`/api/notes/complete/${entry.id}`, {
+export const  toggleCompletion = (entry, username, cb) => {
+  const token = getToken()
+  axios({
+    url: `/api/notes/complete/${entry.id}`,
     method: 'PUT',
     headers: sharedHeaders,
-    body: JSON.stringify({
-      complete: !entry.complete,
-      id: entry.id,
-    }),
-  }).then(cb)
-}
-
-export {
-  get,
-  add,
-  remove,
-  update,
-  toggleCompletion,
+    params: {
+      username,
+      token,
+    },
+    data: {
+      entry: {
+        complete: !entry.complete,
+        id: entry.id,
+      },
+    },
+  }).then(r => cb(r)).catch(e => console.log(e))
 }

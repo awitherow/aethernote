@@ -1,12 +1,12 @@
 import db from '../db'
 
-export const trackHabit = ({name, value}) => {
-  db.none('insert into habits(name, value)values( ${name}, ${value})',
-  { name, value }).catch(err => console.log(err))
+export const trackHabit = ({name, value, username}) => {
+  db.none('insert into habits(name, value, username)values( ${name}, ${value}, ${username})',
+  { name, value, username }).catch(err => console.log(err))
 }
 
-export const trackExercise = ({exercise, value}) => {
+export const trackExercise = ({exercise, value, username}) => {
   db.none(
-    'insert into exercises(exercise, value)values( ${exercise}, ${value})'
-    , { exercise, value }).catch(err => console.log(err))
+    'insert into exercises(exercise, value, username)values( ${exercise}, ${value}, ${username})'
+    , { exercise, value, username }).catch(err => console.log(err))
 }

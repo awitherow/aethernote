@@ -1,19 +1,11 @@
 import {
-  LOADING, GRANT_AUTHORITY, SET_TYPE, OPEN_EDITOR, CLOSE_EDITOR, TOGGLE_SEARCH,
+  LOADING, GRANT_AUTHORITY, SET_TYPE, OPEN_EDITOR, CLOSE_EDITOR, TOGGLE_SEARCH, SET_USERNAME,
 } from './constants'
 
-function checkAuthentication() {
-  if (process.env.NODE_ENV === 'development') {
-    return true
-  } else {
-    // check cookies?
-    return false
-  }
-}
-
 const initialState = {
+  user: '',
   loading: false,
-  authenticated: checkAuthentication(),
+  authenticated: false,
   currentType: 'note',
   editor: {
     hidden: true,
@@ -31,6 +23,10 @@ const Store = (state, action) => {
     case GRANT_AUTHORITY: return {
       ...state,
       authenticated: action.data,
+    }
+    case SET_USERNAME: return {
+      ...state,
+      user: action.data,
     }
     case SET_TYPE: return {
       ...state,

@@ -16,6 +16,7 @@ const initialState = {
 export default class AddEntry extends Component {
   static propTypes = {
     type: PropTypes.string.isRequired,
+    user: PropTypes.string.isRequired,
     // redux functions
     toggleLoading: PropTypes.func.isRequired,
     getEntries: PropTypes.func.isRequired,
@@ -47,7 +48,7 @@ export default class AddEntry extends Component {
     entryService.add({
       ...this.state,
       type: this.state.type,
-    }, () => {
+    }, this.props.user, () => {
       this.resetState()
       this.props.getEntries()
     })

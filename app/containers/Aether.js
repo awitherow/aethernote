@@ -1,22 +1,21 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import * as entryService from './api/entries'
+import * as entryService from '../api/entries'
 
-import { toTitleCase } from './lib/helpers'
-import { categories } from './lib/schema'
+import { toTitleCase } from '../lib/helpers'
+import { categories } from '../lib/schema'
 
-import Overlay from './components/elements/Overlay'
-import Header from './components/elements/Header'
-import AddEntry from './components/elements/AddEntry'
+import Overlay from '../components/elements/Overlay'
+import Header from '../components/elements/Header'
+import AddEntry from '../components/elements/AddEntry'
 
-import Editor from './components/views/Editor'
-import Notes from './components/views/Notes'
-import Journal from './components/views/Journal'
-import Login from './components/views/Login'
-import Search from './components/views/Search'
-import Habit from './components/views/Habit'
-import Exercise from './components/views/Exercise'
+import Editor from '../components/views/Editor'
+import Notes from '../components/views/Notes'
+import Journal from '../components/views/Journal'
+import Search from '../components/views/Search'
+import Habit from '../components/views/Habit'
+import Exercise from '../components/views/Exercise'
 
 import { Panel, Glyphicon, Button, DropdownButton, MenuItem } from 'react-bootstrap'
 
@@ -27,11 +26,15 @@ import {
   openEditor,
   closeEditor,
   toggleSearch,
-} from './redux/actions'
+} from '../redux/actions'
 
 class Aether extends Component {
   static childContextTypes = {
     getEntries: PropTypes.func,
+  }
+
+  static contextTypes = {
+    router: PropTypes.object.isRequired,
   }
 
   static propTypes = {
@@ -45,6 +48,7 @@ class Aether extends Component {
     // redux state
     currentType: PropTypes.string.isRequired,
     authenticated: PropTypes.bool.isRequired,
+    user: PropTypes.string.isRequired,
     editor: PropTypes.shape({
       hidden: PropTypes.bool.isRequired,
       note: PropTypes.object.isRequired,
@@ -57,20 +61,25 @@ class Aether extends Component {
     entries: [],
   }
 
-  componentDidMount = () =>
-    this.getEntries()
+  componentDidMount = () => {
+    const { authenticated, user } = this.props
+    if (!authenticated || !user) {
+      this.context.router.push('/logout')
+    } else {
+      this.getEntries()
+    }
+  }
 
   getEntries = () => {
     !this.props.loading && this.props.toggleLoading(true)
-    entryService.get(entries => {
-      this.setState({ entries })
+    entryService.get(this.props.user, ({ data }) => {
+      this.setState({ entries: data })
       this.props.loading && this.props.toggleLoading(false)
     })
   }
 
-  removeItem = (id) => {
-    entryService.remove(id, () => this.getEntries())
-  }
+  removeItem = (id) => 
+    entryService.remove(id, this.props.user, () => this.getEntries())
 
   editItem = (id) => {
     const { entries } = this.state
@@ -79,17 +88,17 @@ class Aether extends Component {
     this.props.openEditor(note)
   }
 
-  submitEdit = (edits, orig = this.props.editor.note) => {
-    entryService.update(orig, edits, () => {
+  submitEdit = (edits, orig = this.props.editor.note) => 
+    entryService.update(Object.assign(orig, edits), this.props.user, () => 
       this.getEntries()
-    })
-  }
+    )
 
   route = () => {
     const { entries } = this.state
-    const { currentType } = this.props
+    const { currentType, user } = this.props
     const sharedProps = {
       type: currentType,
+      user,
       entries: entries.filter(entry => entry.type === currentType),
       editItem: this.editItem,
       getEntries: this.getEntries,
@@ -108,11 +117,9 @@ class Aether extends Component {
   }
 
   render() {
-    const { loading, editor, authenticated, currentType, searching } = this.props
+    const { loading, editor, currentType, searching } = this.props
 
-    return !authenticated ? (
-      <Login grantAuthority={this.props.grantAuthority} />
-      ) : (
+    return (
       <div className="aether">
 
         { loading ? <Overlay type="loading" /> : null }
@@ -130,6 +137,7 @@ class Aether extends Component {
           currentType={currentType}
           setType={this.props.setType}
           toggleSearch={this.props.toggleSearch}
+          logout={() => this.context.router.push('/logout')}
           />
 
         <div className="inner">
@@ -145,6 +153,7 @@ class Aether extends Component {
                 type={currentType}
                 toggleLoading={this.props.toggleLoading}
                 getEntries={this.getEntries}
+                user={this.props.user}
                 />
             </div>
           </div>
@@ -215,10 +224,11 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mapStateToProps = ({
-  currentType, authenticated, editor, loading, searching,
+  currentType, authenticated, user, editor, loading, searching,
 }) => ({
   currentType,
   authenticated,
+  user,
   editor,
   loading,
   searching,
