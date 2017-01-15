@@ -61,10 +61,16 @@ function add(entry, username, cb) {
   }).then(r => cb(r)).catch(e => console.log(e))
 }
 
-function remove(id, cb) {
-  fetch(`/api/notes/${id}`, {
+function remove(id, username, cb) {
+  const token = getToken()
+  axios({
+    url: `/api/notes/${id}`,
     method: 'DELETE',
-  }).then(cb)
+    params: {
+      username,
+      token,
+    },
+  }).then(r => cb(r)).catch(e => console.log(e))
 }
 
 function update(orig, diff, cb) {

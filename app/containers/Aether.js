@@ -79,7 +79,7 @@ class Aether extends Component {
   }
 
   removeItem = (id) => {
-    entryService.remove(id, () => this.getEntries())
+    entryService.remove(id, this.props.user, () => this.getEntries())
   }
 
   editItem = (id) => {

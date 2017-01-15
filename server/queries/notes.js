@@ -75,8 +75,11 @@ export const updateNote = (req, res, next) => {
 
 export const removeNote = (req, res, next) => {
   const id = parseInt(req.params.id)
-  db.result(`delete from entries where id = ${id}`)
-  .then(result => {
+  const username = req.query.username
+  db.result('delete from entries where id = ${id} AND username = ${username}',{ 
+    id,
+    username,
+  }).then(result => {
     res.status(200)
     .json({
       status: 'success',
