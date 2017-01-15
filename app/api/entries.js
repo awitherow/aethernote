@@ -103,7 +103,7 @@ function toggleCompletion(entry, username, cb) {
       entry: {
         complete: !entry.complete,
         id: entry.id,
-      }
+      },
     },
   }).then(r => cb(r)).catch(e => console.log(e))
 }

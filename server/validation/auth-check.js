@@ -8,14 +8,14 @@ module.exports = (req, res, next) => {
     })
   }
 
-  return decodeToken(req.query.token, err => {
+  return decodeToken(req.query.token, (err, payload) => {
     if (err) {
       return res.status(401).json({
         status: 'Token has expired',
       })  
     } else {
       return getUser(req.query.username).then(user => {
-        if (!user) {
+        if (!user || payload.sub !== user.id) {
           return res.status(400).json({
             status: 'Please log in',
           })

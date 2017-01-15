@@ -19,8 +19,9 @@ export const encodeToken = (user) =>
 
 export const decodeToken = (token, cb) => {
   const now = (moment().unix())
-  const payload = jwt.decode(token, process.env.TOKEN_SECRET).exp
-  now > payload ? cb('Token has expired.') : cb(null, payload)
+  const payload = jwt.decode(token, process.env.TOKEN_SECRET)
+  const exp = payload.exp
+  now > exp ? cb('Token has expired.') : cb(null, payload)
 }
 
 export const AttemptLogin = (req, res) => {
