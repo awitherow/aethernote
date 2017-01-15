@@ -36,6 +36,9 @@ export default class Journal extends Component {
     )
   }
 
+  toggle = (entry) =>
+    toggleCompletion(entry, this.props.user, () => this.props.getEntries())
+
   render = () =>
     <div className="journal" key="journal-page">
       <style type="text/css">{`
@@ -67,9 +70,7 @@ export default class Journal extends Component {
                             className="button-margin"
                             bsSize="xsmall"
                             bsStyle={entry.complete ? "success" : "danger"}
-                            onClick={() =>
-                              toggleCompletion(entry, this.props.user, () => this.props.getEntries())
-                            }
+                            onClick={() => this.toggle(event)}
                           >
                             <Glyphicon glyph={entry.complete ? "ok" : "remove"} />
                           </Button>
