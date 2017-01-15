@@ -78,9 +78,8 @@ class Aether extends Component {
     })
   }
 
-  removeItem = (id) => {
+  removeItem = (id) => 
     entryService.remove(id, this.props.user, () => this.getEntries())
-  }
 
   editItem = (id) => {
     const { entries } = this.state
@@ -89,11 +88,10 @@ class Aether extends Component {
     this.props.openEditor(note)
   }
 
-  submitEdit = (edits, orig = this.props.editor.note) => {
-    entryService.update(orig, edits, () => {
+  submitEdit = (edits, orig = this.props.editor.note) => 
+    entryService.update(Object.assign(orig, edits), this.props.user, () => 
       this.getEntries()
-    })
-  }
+    )
 
   route = () => {
     const { entries } = this.state

@@ -73,15 +73,20 @@ function remove(id, username, cb) {
   }).then(r => cb(r)).catch(e => console.log(e))
 }
 
-function update(orig, diff, cb) {
-  const update = Object.assign(orig, diff)
-  fetch(`/api/notes/${orig.id}`, {
+function update(update, username, cb) {
+  const token = getToken()
+  axios({
+    url: `/api/notes/${update.id}`,
     method: 'PUT',
     headers: sharedHeaders,
-    body: JSON.stringify({
+    params: {
+      username,
+      token,
+    },
+    data: {
       update,
-    }),
-  }).then(cb)
+    },
+  }).then(r => cb(r)).catch(e => console.log(e))
 }
 
 function toggleCompletion(entry, cb) {

@@ -43,19 +43,28 @@ export const createNote = (req, res, next) => {
 }
 
 export const updateNote = (req, res, next) => {
+  if (req.body.update.username !== req.query.username) {
+    res.status(400).json({
+      status: 'failure',
+      message: 'You cannot update notes that are not yours',
+    })
+  }
   const {
     id, title, content, prio, category, context, type, tally, value,
   } = req.body.update
+  const { username } = req.query
   // TODO !! handle changed habit names/exercise names for linked db. use ID?
   if (tally) {
     switch(type) {
       case 'habit': trackHabit({
         name: title,
         value,
+        username,
       }); break
       case 'exercise': trackExercise({
         exercise: id,
         value,
+        username,
       })
     }
   }
