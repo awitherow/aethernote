@@ -95,9 +95,10 @@ class Aether extends Component {
 
   route = () => {
     const { entries } = this.state
-    const { currentType } = this.props
+    const { currentType, user } = this.props
     const sharedProps = {
       type: currentType,
+      user,
       entries: entries.filter(entry => entry.type === currentType),
       editItem: this.editItem,
       getEntries: this.getEntries,

@@ -98,8 +98,9 @@ export const removeNote = (req, res, next) => {
 }
 
 export const toggleCompletion = (req, res, next) => {
-  const { complete, id } = req.body
-  db.none('update entries set complete=$1 where id=$2', [complete, id])
+  const { complete, id } = req.body.entry
+  const { username } = req.query
+  db.none('update entries set complete=$1 where id=$2 AND username=$3', [complete, id, username])
     .then(() => {
       res.status(200)
       .json({

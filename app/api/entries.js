@@ -89,15 +89,23 @@ function update(update, username, cb) {
   }).then(r => cb(r)).catch(e => console.log(e))
 }
 
-function toggleCompletion(entry, cb) {
-  fetch(`/api/notes/complete/${entry.id}`, {
+function toggleCompletion(entry, username, cb) {
+  const token = getToken()
+  axios({
+    url: `/api/notes/complete/${entry.id}`,
     method: 'PUT',
     headers: sharedHeaders,
-    body: JSON.stringify({
-      complete: !entry.complete,
-      id: entry.id,
-    }),
-  }).then(cb)
+    params: {
+      username,
+      token,
+    },
+    data: {
+      entry: {
+        complete: !entry.complete,
+        id: entry.id,
+      }
+    },
+  }).then(r => cb(r)).catch(e => console.log(e))
 }
 
 export {
