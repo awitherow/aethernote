@@ -3,10 +3,9 @@ import moment from 'moment'
 import axios from 'axios'
 
 import { sharedHeaders } from './_helpers'
-
 import { getToken } from './security'
 
-const get = (username, cb) => {
+export const get = (username, cb) => {
   const token = getToken()
   axios({
     url: '/api/notes',
@@ -18,7 +17,7 @@ const get = (username, cb) => {
   }).then(r => cb(r.data)).catch(e => console.log(e))
 }
 
-function add(entry, username, cb) {
+export const add = (entry, username, cb) => {
   if (!entry.category) {
     entry.category = categories[entry.type][0]
   }
@@ -61,7 +60,7 @@ function add(entry, username, cb) {
   }).then(r => cb(r)).catch(e => console.log(e))
 }
 
-function remove(id, username, cb) {
+export const remove = (id, username, cb) => {
   const token = getToken()
   axios({
     url: `/api/notes/${id}`,
@@ -73,7 +72,7 @@ function remove(id, username, cb) {
   }).then(r => cb(r)).catch(e => console.log(e))
 }
 
-function update(update, username, cb) {
+export const update = (update, username, cb) => {
   const token = getToken()
   axios({
     url: `/api/notes/${update.id}`,
@@ -89,7 +88,7 @@ function update(update, username, cb) {
   }).then(r => cb(r)).catch(e => console.log(e))
 }
 
-function toggleCompletion(entry, username, cb) {
+export const  toggleCompletion = (entry, username, cb) => {
   const token = getToken()
   axios({
     url: `/api/notes/complete/${entry.id}`,
@@ -106,12 +105,4 @@ function toggleCompletion(entry, username, cb) {
       },
     },
   }).then(r => cb(r)).catch(e => console.log(e))
-}
-
-export {
-  get,
-  add,
-  remove,
-  update,
-  toggleCompletion,
 }
