@@ -15,12 +15,10 @@ const get = (username, cb) => {
       username,
       token,
     },
-  }).then(r => cb(r.data))
-    .catch(e => console.log(e))
+  }).then(r => cb(r.data)).catch(e => console.log(e))
 }
-  
 
-function add(entry, cb) {
+function add(entry, username, cb) {
   if (!entry.category) {
     entry.category = categories[entry.type][0]
   }
@@ -49,11 +47,18 @@ function add(entry, cb) {
     entry.content = 0
   }
 
-  fetch('/api/notes', {
+  const token = getToken()
+  axios({
+    url: '/api/notes',
     method: 'POST',
-    headers: sharedHeaders,
-    body: JSON.stringify(entry),
-  }).then(cb)
+    params: {
+      username,
+      token,
+    },
+    data: {
+      entry,
+    },
+  }).then(r => cb(r)).catch(e => console.log(e))
 }
 
 function remove(id, cb) {

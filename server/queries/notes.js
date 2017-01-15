@@ -28,10 +28,11 @@ export const getNote = (req, res, next) => {
 }
 
 export const createNote = (req, res, next) => {
-  if (!req.body.type) { req.body.type = 'note' }
-  db.none('insert into entries(title, content, category, type, prio)' +
-      'values( ${title}, ${content}, ${category}, ${type}, ${prio})',
-    req.body)
+  const { title, content, category, type, prio } = req.body.entry
+  const { username } = req.query
+  db.none('insert into entries(title, content, category, type, prio, username)' +
+      'values($1, $2, $3, $4, $5, $6)',
+    [title, content, category, type, prio, username])
   .then(() => {
     res.status(200)
     .json({

@@ -154,6 +154,7 @@ class Aether extends Component {
                 type={currentType}
                 toggleLoading={this.props.toggleLoading}
                 getEntries={this.getEntries}
+                user={this.props.user}
                 />
             </div>
           </div>
