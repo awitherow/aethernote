@@ -4,7 +4,7 @@ var CompressionPlugin = require('compression-webpack-plugin')
 var nodeEnv = process.env.NODE_ENV
 
 var config = {
-  devtool: nodeEnv === 'production' ? 'inline-eval-cheap-source-map' : 'source-map',
+  devtool: nodeEnv === 'production' ? 'cheap-module-source-map' : 'inline-eval-cheap-source-map',
   entry: [
     'promise-polyfill',
     'whatwg-fetch',
