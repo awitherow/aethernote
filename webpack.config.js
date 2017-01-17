@@ -7,7 +7,6 @@ var config = {
   devtool: nodeEnv === 'production' ? 'cheap-module-source-map' : 'inline-eval-cheap-source-map',
   entry: [
     'promise-polyfill',
-    'whatwg-fetch',
     './app/index.js',
   ],
   output: {
@@ -19,7 +18,7 @@ var config = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
+        loaders: ['babel-loader'],
       },
       {
         test: /\.scss$/,
@@ -35,6 +34,19 @@ var config = {
       'process.env': { NODE_ENV: JSON.stringify(nodeEnv) },
     }),
   ],
+}
+
+if (nodeEnv === 'dev') {
+  config.entry.unshift(
+    'webpack-dev-server/client?http://localhost:8080',
+    'webpack/hot/only-dev-server'
+  )
+
+  config.plugins = config.plugins.concat([
+    new webpack.HotModuleReplacementPlugin()
+  ])
+
+  config.module.loaders[0].loaders.unshift('react-hot')
 }
 
 if (nodeEnv === 'production') {
