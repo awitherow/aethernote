@@ -1,4 +1,5 @@
 var webpack = require('webpack')
+var path = require('path')
 var CompressionPlugin = require('compression-webpack-plugin')
 
 var nodeEnv = process.env.NODE_ENV
@@ -10,8 +11,9 @@ var config = {
     './app/index.js',
   ],
   output: {
-    path: 'public',
+    path: path.join(__dirname, 'public'),
     filename: 'index.js',
+    publicPath: '/public/',
   },
   module: {
     loaders: [

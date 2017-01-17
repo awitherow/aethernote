@@ -12,17 +12,32 @@ app.use(compression())
 // Development environment checks
 if (process.env.NODE_ENV === "development") {
   require('dotenv').config()
+  const webpack = require('webpack')
+  const webpackDevServer = require('webpack-dev-server')
+  const config = require('../webpack.config')
+
+  new webpackDevServer(webpack(config), {
+    publicPath: config.output.publicPath,
+    hot: true,
+    historyApiFallback: true,
+    proxy: {
+      '*': 'http://localhost:3333',
+    },
+  }).listen(8080, 'localhost', err =>
+    console.log(err ? err : 'hot loading at 8080')
+  )
 } else {
+  // Serve webpack build PRODUCTION
+  app.use(express.static('public'))
+  app.use(favicon('public/favicon.ico'))
+
+  // serve gzipped javascript bundle
   app.get('*.js', function (req, res, next) {
     req.url = req.url + '.gz'
     res.set('Content-Encoding', 'gzip')
     next()
   })
 }
-
-// Serve webpack build PRODUCTION
-app.use(express.static('public'))
-app.use(favicon('public/favicon.ico'))
 
 // Enable handling of REST responses
 app.use(bodyParser.json())
