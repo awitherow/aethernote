@@ -1,11 +1,10 @@
 var webpack = require('webpack')
 var path = require('path')
-var CompressionPlugin = require('compression-webpack-plugin')
 
 var nodeEnv = process.env.NODE_ENV
 
 var config = {
-  devtool: nodeEnv === 'production' ? 'cheap-module-source-map' : 'inline-eval-cheap-source-map',
+  devtool: 'inline-eval-cheap-source-map',
   entry: [
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
