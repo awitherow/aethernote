@@ -2,20 +2,10 @@ const { resolve } = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
+const webpackMerge = require('webpack-merge')
 
-const nodeEnv = process.env.NODE_ENV
-
-module.exports = function(env) {
-  return env === 'dev' ? {
-    devtool: 'cheap-module-source-map',
-    entry: [
-      'promise-polyfill',
-      './app/index.js',
-    ],
-    output: {
-      path: 'public',
-      filename: 'index.js',
-    },
+const baseConfig = function(env) {
+  return {
     module: {
       rules: [
         {
@@ -38,13 +28,24 @@ module.exports = function(env) {
     },
     plugins: [
       new webpack.DefinePlugin({
-        'process.env': { NODE_ENV: JSON.stringify(nodeEnv) },
+        'process.env': { NODE_ENV: JSON.stringify(env) },
       }),
       new ExtractTextPlugin({
         filename: "bundle.css",
         disable: false,
         allChunks: true,
       }),
+    ],
+  }
+}
+
+const prodConfig = function(env) {
+  return webpackMerge(baseConfig(env), {
+    devtool: 'inline-source-map',
+    entry: [
+      './app/index.js',
+    ],
+    plugins: [
       new webpack.optimize.UglifyJsPlugin({
         comments: false,
       }),
@@ -60,58 +61,33 @@ module.exports = function(env) {
         minRatio: 0.8,
       }),
     ],
-  } : {
-    devtool: 'inline-source-map',
+  })
+}
+
+const devConfig = function(env) {
+  return webpackMerge(baseConfig(env), {
+    devtool: 'cheap-module-source-map',
     entry: [
       'react-hot-loader/patch',
       'webpack-dev-server/client?http://localhost:8080',
       'webpack/hot/only-dev-server',
       './app/index.js',
     ],
-    output: {
-      filename: 'index.js',
-      path: 'public',
-      publicPath: '/',
-    },
     devServer: {
       hot: true,
       contentBase: resolve(__dirname, 'dist'),
       publicPath: '/',
-    },
-    proxy: {
-      "/api": "http://localhost:3333",
-    },
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          use: ['babel-loader'],
-        },
-        {
-          test: /\.css$/,
-          loader: ExtractTextPlugin.extract({
-            fallbackLoader: "style-loader",
-            loader: "css-loader",
-            publicPath: "/public",
-          }),
-        },
-      ],
-    },
-    resolve: {
-      extensions: ['.js', '.css'],
+      proxy: {
+        "/api": "http://localhost:3333",
+      },
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NamedModulesPlugin(),
-      new webpack.DefinePlugin({
-        'process.env': { NODE_ENV: JSON.stringify(nodeEnv) },
-      }),
-      new ExtractTextPlugin({
-        filename: "bundle.css",
-        disable: false,
-        allChunks: true,
-      }),
     ],
-  }
+  })
+}
+
+module.exports = function(env) {
+  return env === 'dev' ? devConfig(env) : prodConfig(env)
 }
