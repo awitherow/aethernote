@@ -1,5 +1,6 @@
 var webpack = require('webpack')
 var CompressionPlugin = require('compression-webpack-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var nodeEnv = process.env.NODE_ENV
 
@@ -7,7 +8,6 @@ var config = {
   devtool: nodeEnv === 'production' ? 'cheap-module-source-map' : 'inline-eval-cheap-source-map',
   entry: [
     'promise-polyfill',
-    'whatwg-fetch',
     './app/index.js',
   ],
   output: {
@@ -22,8 +22,12 @@ var config = {
         use: ['babel-loader'],
       },
       {
-        test: /\.scss$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: "style-loader",
+          loader: "css-loader",
+          publicPath: "/public",
+        }),
       },
     ],
   },
@@ -33,6 +37,11 @@ var config = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify(nodeEnv) },
+    }),
+    new ExtractTextPlugin({
+      filename: "bundle.css",
+      disable: false,
+      allChunks: true,
     }),
   ],
 }

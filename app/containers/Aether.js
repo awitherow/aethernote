@@ -1,3 +1,4 @@
+import './Aether.css'
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
@@ -79,7 +80,7 @@ class Aether extends Component {
     })
   }
 
-  removeItem = (id) => 
+  removeItem = (id) =>
     entryService.remove(id, this.props.user, () => this.getEntries())
 
   editItem = (id) => {
@@ -89,8 +90,8 @@ class Aether extends Component {
     this.props.openEditor(note)
   }
 
-  submitEdit = (edits, orig = this.props.editor.note) => 
-    entryService.update(Object.assign(orig, edits), this.props.user, () => 
+  submitEdit = (edits, orig = this.props.editor.note) =>
+    entryService.update(Object.assign(orig, edits), this.props.user, () =>
       this.getEntries()
     )
 
@@ -144,20 +145,13 @@ class Aether extends Component {
 
         <div className="inner">
 
-          <div>
-            <style type="text/css">{`
-              #quick-input {
-                margin-bottom: 25px;
-              }
-            `}</style>
-            <div id="quick-input">
-              <AddEntry
-                type={currentType}
-                toggleLoading={this.props.toggleLoading}
-                getEntries={this.getEntries}
-                user={this.props.user}
-                />
-            </div>
+          <div id="quick-input">
+            <AddEntry
+              type={currentType}
+              toggleLoading={this.props.toggleLoading}
+              getEntries={this.getEntries}
+              user={this.props.user}
+              />
           </div>
 
           <Editor
@@ -171,14 +165,6 @@ class Aether extends Component {
 
           <Panel style={{display: !editor.hidden && 'none'}} header={
             <div>
-              <style type="text/css">{`
-                .spread-icon-right {
-                  display: flex;
-                }
-                .float-btn {
-                  margin-left: auto;
-                }
-              `}</style>
               <div className="spread-icon-right">
                 <DropdownButton
                   title={toTitleCase(currentType)}

@@ -1,3 +1,4 @@
+import './Search.css'
 import React, { PropTypes, Component } from 'react'
 import Fuse from 'fuse.js'
 
@@ -34,37 +35,21 @@ class Search extends Component {
 
   render() {
     return (
-      <div>
-        <style type="text/css">{`
-          .search-results-list {
-            position: relative;
-            max-height: 50vh;
-            overflow-y: scroll;
-          }
-          .search-view {
-            color: black;
-            flex-direction: column;
-            display: flex;
-            margin: 0 auto;
-            padding: 25px;
-          }
-        `}</style>
-        <div className="overlay search-view">
-          <FormControl
-            id="search"
-            value={this.state.entry}
-            onChange={(e) => this.setState({entry: e.target.value})}
-            autoFocus
-            />
-
-          <List
-            type={null}
-            entries={this.fuse.search(this.state.entry)}
-            classModifier="search-results-list"
-            edit={this.props.editItem}
-            submitEdit={this.props.submitEdit}
+      <div className="overlay search-view">
+        <FormControl
+          id="search"
+          value={this.state.entry}
+          onChange={(e) => this.setState({entry: e.target.value})}
+          autoFocus
           />
-        </div>
+
+        <List
+          type={null}
+          entries={this.fuse.search(this.state.entry)}
+          classModifier="search-results-list"
+          edit={this.props.editItem}
+          submitEdit={this.props.submitEdit}
+        />
       </div>
     )
   }

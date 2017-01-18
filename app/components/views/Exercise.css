@@ -1,0 +1,14 @@
+.note-list-modifer {
+  margin-bottom: 10px;
+}
+.input-with-button {
+  display: flex;
+}
+.table>thead>tr>td,
+.table>tbody>tr>td {
+  text-align: center;
+  vertical-align: middle;
+}
+.minput {
+  min-width: 100px;
+}

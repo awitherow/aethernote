@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import './list-item.scss'
+import './list-item.css'
 
 import { Label, Button, Glyphicon } from 'react-bootstrap'
 

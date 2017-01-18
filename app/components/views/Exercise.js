@@ -1,3 +1,4 @@
+import './Exercise.css'
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
 
@@ -95,22 +96,6 @@ export default class Exercise extends Component {
 
     return (
       <div>
-        <style type="text/css">{`
-          .note-list-modifer {
-            margin-bottom: 10px;
-          }
-          .input-with-button {
-            display: flex;
-          }
-          .table>thead>tr>td,
-          .table>tbody>tr>td {
-            text-align: center;
-            vertical-align: middle;
-          }
-          .minput {
-            min-width: 100px;
-          }
-        `}</style>
         <div className="note-list-modifer">
           <DropdownButton
             id={`${type}-selector`}

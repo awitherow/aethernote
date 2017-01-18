@@ -1,3 +1,4 @@
+import './Portal.css'
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { login, signup, authenticateUser } from '../api/security'
@@ -61,47 +62,36 @@ class Portal extends Component {
   render() {
     const { username, password } = this.state
     return (
-            <div style={{ height: '100%' }}>
-                <style type="text/css">{`
-                .login-container {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex-direction: column;
-                    height: 100vh;
-                    max-width: 500px;
-                    margin: 0 auto;
-                }
-                `}</style>
-                <Form className="login-container">
-                    <FormGroup>
-                        <ControlLabel>Username: </ControlLabel>
-                        <FormControl
-                            id="username"
-                            value={username}
-                            onChange={(e) => this.setState({ username: e.target.value })}
-                            />
-                    </FormGroup>
-                    <FormGroup>
-                        <ControlLabel>Password: </ControlLabel>
-                        <FormControl
-                            id="password"
-                            value={password}
-                            type="password"
-                            onChange={(e) => this.setState({ password: e.target.value })}
-                            />
-                    </FormGroup>
+      <div style={{ height: '100%' }}>
+          <Form className="login-container">
+              <FormGroup>
+                  <ControlLabel>Username: </ControlLabel>
+                  <FormControl
+                      id="username"
+                      value={username}
+                      onChange={(e) => this.setState({ username: e.target.value })}
+                      />
+              </FormGroup>
+              <FormGroup>
+                  <ControlLabel>Password: </ControlLabel>
+                  <FormControl
+                      id="password"
+                      value={password}
+                      type="password"
+                      onChange={(e) => this.setState({ password: e.target.value })}
+                      />
+              </FormGroup>
 
-                    <ButtonGroup>
-                        <Button onClick={this.authenticateLoginAttempt} bsStyle="primary">
-                            Login
-                        </Button>
-                        <Button onClick={this.authenticateSignupAttempt}>
-                            Signup
-                        </Button>
-                    </ButtonGroup>
-                </Form>
-            </div>
+              <ButtonGroup>
+                  <Button onClick={this.authenticateLoginAttempt} bsStyle="primary">
+                      Login
+                  </Button>
+                  <Button onClick={this.authenticateSignupAttempt}>
+                      Signup
+                  </Button>
+              </ButtonGroup>
+          </Form>
+      </div>
     )
   }
 }
