@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === "development") {
   require('dotenv').config()
   const webpack = require('webpack')
   const webpackDevServer = require('webpack-dev-server')
-  const config = require('../webpack.config')
+  const config = require('../webpack.config.dev')
 
   new webpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
