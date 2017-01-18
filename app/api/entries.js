@@ -41,6 +41,8 @@ export const add = (entry, username, cb) => {
         },
       }
     }
+  } else if (entry.type === 'finance') {
+    entry.title = `${entry.content.description.substring(0, 32)}`
   } else {
     entry.title = entry.content
     entry.content = 0

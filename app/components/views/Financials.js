@@ -106,7 +106,7 @@ export default class Habit extends Component {
                           {entry.category}
                         </Label>
                       </td>
-                      <td>{content.description}</td>
+                      <td>{entry.title}</td>
                       <td>
                         {`${content.value} ${content.currency.toUpperCase()}`}
                       </td>
