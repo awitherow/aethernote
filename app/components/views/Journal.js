@@ -70,7 +70,7 @@ export default class Journal extends Component {
                             className="button-margin"
                             bsSize="xsmall"
                             bsStyle={entry.complete ? "success" : "danger"}
-                            onClick={() => this.toggle(event)}
+                            onClick={() => this.toggle(entry)}
                           >
                             <Glyphicon glyph={entry.complete ? "ok" : "remove"} />
                           </Button>
