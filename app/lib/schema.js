@@ -35,6 +35,11 @@ export const categories  = {
     'sport',
     'activity',
   ],
+  finance: [
+    'purchase',
+    'income',
+    'investment',
+  ],
 }
 
 export const measurements = {
@@ -69,3 +74,5 @@ export const contexts = [
   'travel',
   'wealth',
 ]
+
+export const currencies = ['EUR', 'USD', 'CAD']

@@ -26,7 +26,9 @@ export const add = (entry, username, cb) => {
     entry.prio = 1
   }
 
-  if (entry.type !== 'habit') {
+  if (entry.type === 'finance') {
+    entry.title = `${entry.content.description.substring(0, 32)}`
+  } else if (entry.type !== 'habit') {
     entry.title = `${entry.content.substring(0, 32)}`
 
     if (entry.type === 'exercise') {
