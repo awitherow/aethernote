@@ -30,10 +30,7 @@ export const categories  = {
   ],
   exercise: [
     'bodyweight',
-    'cardio',
     'weights',
-    'sport',
-    'activity',
   ],
   finance: [
     'purchase',
