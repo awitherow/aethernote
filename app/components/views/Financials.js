@@ -15,7 +15,7 @@ const mapCategoryToStyle = (cat) => {
   }
 }
 
-export default class Habit extends Component {
+export default class Financials extends Component {
   static propTypes = {
     type: PropTypes.string.isRequired,
     entries: PropTypes.array.isRequired,
@@ -56,73 +56,74 @@ export default class Habit extends Component {
           .minput {
             min-width: 100px;
           }
-          `}</style>
-          <div className="note-list-modifer">
-            <DropdownButton
-              id={`${type}-selector`}
-              title={
-                this.state.category ? this.state.category
-                : 'Financial Type'
-              }
-              >
-                {categories[type].map((category, i) =>
-                  <MenuItem
-                    key={i}
-                    onSelect={() => {
-                      const state = { category }
-                      if (!filter) state.filter = true
-                      this.setState(state)
-                    }}>
-                    {category}
-                  </MenuItem>
-                )}
-              </DropdownButton>
-              {filter ? (
-                <Button
-                  bsStyle="primary"
-                  onClick={() => this.setState({ filter: !filter, category: null })}>
-                  <Glyphicon glyph="remove" />
-                </Button>
-              ) : null}
-            </div>
-            <Table striped hover responsive={isMobile} condensed={isMobile}>
-              <thead>
-                <tr>
-                  <td>Category</td>
-                  <td>Title</td>
-                  <td>Amount</td>
-                  <td>Edit</td>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredEntries.map((entry, i) => {
-                  const content = typeof entry.content === "string"
-                    ? JSON.parse(entry.content)
-                    : entry.content
-                  return (
-                    <tr key={i}>
-                      <td>
-                        <Label bsStyle={mapCategoryToStyle(entry.category)}>
-                          {entry.category}
-                        </Label>
-                      </td>
-                      <td>{entry.title}</td>
-                      <td>
-                        {`${content.value} ${content.currency.toUpperCase()}`}
-                      </td>
-                      <td>
-                        <Button
-                          block={isMobile}
-                          onClick={() => editItem(entry.id)}>
-                          <Glyphicon glyph="edit" />
-                        </Button>
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </Table>
+          `}
+        </style>
+        <div className="note-list-modifer">
+          <DropdownButton
+            id={`${type}-selector`}
+            title={
+              this.state.category ? this.state.category
+              : 'Financial Type'
+            }
+            >
+              {categories[type].map((category, i) =>
+                <MenuItem
+                  key={i}
+                  onSelect={() => {
+                    const state = { category }
+                    if (!filter) state.filter = true
+                    this.setState(state)
+                  }}>
+                  {category}
+                </MenuItem>
+              )}
+            </DropdownButton>
+            {filter ? (
+              <Button
+                bsStyle="primary"
+                onClick={() => this.setState({ filter: !filter, category: null })}>
+                <Glyphicon glyph="remove" />
+              </Button>
+            ) : null}
           </div>
-        )
-      }
-    }
+          <Table striped hover responsive={isMobile} condensed={isMobile}>
+            <thead>
+              <tr>
+                <td>Category</td>
+                <td>Title</td>
+                <td>Amount</td>
+                <td>Edit</td>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredEntries.map((entry, i) => {
+                const content = typeof entry.content === "string"
+                ? JSON.parse(entry.content)
+                : entry.content
+                return (
+                  <tr key={i}>
+                    <td>
+                      <Label bsStyle={mapCategoryToStyle(entry.category)}>
+                        {entry.category}
+                      </Label>
+                    </td>
+                    <td>{entry.title}</td>
+                    <td>
+                      {`${content.value} ${content.currency.toUpperCase()}`}
+                    </td>
+                    <td>
+                      <Button
+                        block={isMobile}
+                        onClick={() => editItem(entry.id)}>
+                        <Glyphicon glyph="edit" />
+                      </Button>
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </Table>
+        </div>
+    )
+  }
+}

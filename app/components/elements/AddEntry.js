@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react'
 
 import {
   Button, Glyphicon, Form, FormControl, FormGroup, DropdownButton,
-  MenuItem,
+  MenuItem, InputGroup,
 } from 'react-bootstrap'
 
 import * as entryService from '../../api/entries'
-import { categories } from '../../lib/schema'
+import { categories, currencies } from '../../lib/schema'
 import { isMobile } from '../../lib/helpers'
 
 const initialState = {
@@ -31,6 +31,16 @@ export default class AddEntry extends Component {
     if (nextProps.type !== this.state.props) {
       this.setState({ type: nextProps.type })
     }
+
+    if (nextProps.type === 'finance') {
+      this.setState({ content: {
+        description: '',
+        currency: currencies[0],
+        value: '',
+      } })
+    } else {
+      this.setState({ content: '' })
+    }
   }
 
   resetState = () => {
@@ -54,7 +64,15 @@ export default class AddEntry extends Component {
     })
   }
 
-  handleChange = (type, val) => this.setState({ [type]: val })
+  handleChange = (type, val) => {
+    if (type === 'value' || type === 'currency' || type === 'description') {
+      const snapshot = this.state
+      snapshot.content[type] = val
+      this.setState(snapshot)
+    } else {
+      this.setState({ [type]: val })
+    }
+  }
 
   render() {
     const { category, content, type, prio } = this.state
@@ -119,11 +137,41 @@ export default class AddEntry extends Component {
             </DropdownButton>
           )}
 
-          <FormControl
-            type="text"
-            value={content}
-            onChange={(e) => this.handleChange('content', e.target.value)}
-          />
+          {type === 'finance' ? (
+            <div>
+              <InputGroup>
+                <FormControl
+                  onChange={(e) => this.handleChange('value', e.target.value)}
+                  value={content.money} type="number"
+                  />
+                <DropdownButton
+                  componentClass={InputGroup.Button}
+                  id="input-dropdown-addon"
+                  title={content.currency}
+                >
+                  {currencies.map((currency, i) =>
+                    <MenuItem
+                      key={i}
+                      onSelect={() => this.handleChange('currency', currency)}>
+                      {currency}
+                    </MenuItem>
+                  )}
+                </DropdownButton>
+              </InputGroup>
+              <FormControl
+                  type="text"
+                  value={content.description}
+                  onChange={(e) => this.handleChange('description', e.target.value)}
+              />
+            </div>
+          ) : (
+            <FormControl
+                type="text"
+                value={content}
+                onChange={(e) => this.handleChange('content', e.target.value)}
+            />
+          )}
+
           <Button
             block={isMobile}
             bsStyle="primary" onClick={this.addNote}>
