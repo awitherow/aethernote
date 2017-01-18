@@ -74,3 +74,5 @@ export const contexts = [
   'travel',
   'wealth',
 ]
+
+export const currencies = ['EUR', 'USD', 'CAD']
