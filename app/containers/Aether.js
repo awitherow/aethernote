@@ -16,6 +16,7 @@ import Journal from '../components/views/Journal'
 import Search from '../components/views/Search'
 import Habit from '../components/views/Habit'
 import Exercise from '../components/views/Exercise'
+import Financials from '../components/views/Financials'
 
 import { Panel, Glyphicon, Button, DropdownButton, MenuItem } from 'react-bootstrap'
 
@@ -107,6 +108,7 @@ class Aether extends Component {
     switch(currentType) {
       case 'note': return <Notes {...sharedProps} />
       case 'journal': return <Journal {...sharedProps} />
+      case 'finance': return <Financials {...sharedProps} />
       case 'habit': return (
         <Habit {...sharedProps} submitEdit={this.submitEdit} />
       )

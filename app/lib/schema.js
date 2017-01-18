@@ -35,6 +35,11 @@ export const categories  = {
     'sport',
     'activity',
   ],
+  finance: [
+    'purchase',
+    'income',
+    'investment',
+  ],
 }
 
 export const measurements = {
