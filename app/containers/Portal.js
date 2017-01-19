@@ -16,15 +16,10 @@ class Portal extends Component {
     password: '',
   }
 
-  static contextTypes = {
-    router: PropTypes.object.isRequired,
-  }
-
   pass = (token, username) => {
     authenticateUser(token)
     this.props.grantAuthority(true)
     this.props.setUser(username)
-    this.context.router.replace('/')
   }
 
   authenticateLoginAttempt = (e) => {
