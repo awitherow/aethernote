@@ -3,7 +3,7 @@ import Portal from './containers/Portal'
 import Membrane from './containers/Membrane'
 import { isUserAuthenticated, deauthenticateUser } from './api/security'
 
-export default {
+let routes = {
   component: Membrane,
   childRoutes: [
     {
@@ -29,3 +29,13 @@ export default {
     },
   ],
 }
+
+if (module.hot) {
+  let oldRoutes = module.hot.data && module.hot.data.routes
+  if (oldRoutes) {
+    routes = oldRoutes
+  }
+  module.hot.dispose(data => data.routes = routes)
+}
+
+export default routes

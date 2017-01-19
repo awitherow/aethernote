@@ -16,13 +16,6 @@ if (process.env.NODE_ENV === 'development') {
   }
 
   hotRender(App)
-
-  if (module.hot) {
-    module.hot.accept('./App', () => {
-      const NewApp = require('./App').default
-      hotRender(NewApp)
-    })
-  }
 } else {
   render(App, document.getElementById('app'))
 }
