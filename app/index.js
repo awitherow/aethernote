@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === 'dev') {
 
   if (module.hot) {
     module.hot.accept('./App', () => {
-      render(
+      hotRender(
         <AppContainer>
            <App />
         </AppContainer>,
