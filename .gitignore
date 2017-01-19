@@ -7,8 +7,8 @@ npm-debug.log
 yarn-error.log
 public/index.js
 public/index.js.map
-public/index.css.map
-public/index.css
+public/bundle.css.map
+public/bundle.css
 public/bundle.js
 public/bundle.js.map
 *.orig
