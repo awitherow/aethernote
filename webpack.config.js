@@ -1,4 +1,3 @@
-const { resolve } = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
@@ -6,6 +5,11 @@ const webpackMerge = require('webpack-merge')
 
 const baseConfig = function(env) {
   return {
+    output: {
+      path: 'public',
+      filename: 'index.js',
+      publicPath: '/',
+    },
     module: {
       rules: [
         {
@@ -18,7 +22,7 @@ const baseConfig = function(env) {
           loader: ExtractTextPlugin.extract({
             fallbackLoader: "style-loader",
             loader: "css-loader",
-            publicPath: "/public",
+            publicPath: "/",
           }),
         },
       ],
@@ -75,10 +79,10 @@ const devConfig = function(env) {
     ],
     devServer: {
       hot: true,
-      contentBase: resolve(__dirname, 'dist'),
-      publicPath: '/',
+      publicPath: '/public/',
       proxy: {
-        "/api": "http://localhost:3333",
+        "/api/": "http://localhost:3333",
+        "/auth/": "http://localhost:3333",
       },
     },
     plugins: [
@@ -89,5 +93,6 @@ const devConfig = function(env) {
 }
 
 module.exports = function(env) {
+  console.log(env)
   return env === 'dev' ? devConfig(env) : prodConfig(env)
 }
