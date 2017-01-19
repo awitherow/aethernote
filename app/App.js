@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import store from './redux/store'
@@ -13,10 +13,12 @@ let s = createStore(store,
   ) : null
 )
 
-const App = () => (
-  <Provider store={s}>
-    <Router history={hashHistory} routes={routes} />
-  </Provider>
-)
-
-export default App
+export default class App extends Component {
+  render() {
+    return (
+      <Provider store={s}>
+        <Router history={hashHistory} routes={routes} />
+      </Provider>
+    )
+  }
+}

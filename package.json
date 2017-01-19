@@ -72,7 +72,7 @@
     "redux-devtools": "^3.3.2",
     "style-loader": "^0.13.1",
     "webpack": "2.2",
-    "webpack-dev-server": "2.1.0-beta.0",
+    "webpack-dev-server": "2.2",
     "webpack-merge": "^2.4.0",
     "yarn": "^0.19.1"
   },

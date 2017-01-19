@@ -6,9 +6,9 @@ const webpackMerge = require('webpack-merge')
 const baseConfig = function(env) {
   return {
     output: {
-      path: 'public',
+      path: '/public/',
       filename: 'index.js',
-      publicPath: '/',
+      publicPath: '/public/',
     },
     module: {
       rules: [
@@ -22,7 +22,7 @@ const baseConfig = function(env) {
           loader: ExtractTextPlugin.extract({
             fallbackLoader: "style-loader",
             loader: "css-loader",
-            publicPath: "/",
+            publicPath: "/public/",
           }),
         },
       ],
