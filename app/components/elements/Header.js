@@ -8,7 +8,7 @@ const Header = ({ toggleSearch, logout }) => {
   return (
     <Navbar collapseOnSelect>
       <Navbar.Header>
-        <Navbar.Brand>A</Navbar.Brand>
+        <Navbar.Brand>Aether</Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
