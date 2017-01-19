@@ -52,9 +52,6 @@ if (nodeEnv === 'production') {
     new webpack.optimize.UglifyJsPlugin({
       comments: false,
     }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-    }),
     new webpack.optimize.AggressiveMergingPlugin(),
     new CompressionPlugin({
       asset: "[path].gz[query]",
