@@ -4,18 +4,32 @@ import { render } from 'react-dom'
 
 import App from './App'
 
-if (process.env.NODE_ENV === 'development') {
+const rootEl = document.getElementById('app')
+
+if (process.env.NODE_ENV === 'dev') {
   const { AppContainer } = require('react-hot-loader')
   const hotRender = (Component) => {
     render(
       <AppContainer>
         <Component/>
       </AppContainer>,
-      document.getElementById('root')
+      rootEl,
     )
   }
 
   hotRender(App)
+
+  if (module.hot) {
+    module.hot.accept('./App', () => {
+      render(
+        <AppContainer>
+           <App />
+        </AppContainer>,
+        rootEl
+      )
+    })
+  }
+
 } else {
-  render(App, document.getElementById('app'))
+  render(App, rootEl)
 }

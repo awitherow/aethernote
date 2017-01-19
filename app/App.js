@@ -15,7 +15,7 @@ let s = createStore(store,
 
 const App = () => (
   <Provider store={s}>
-    <Router history={hashHistory} routes={routes} />
+    <Router history={hashHistory} routes={routes} key={Math.random()} />
   </Provider>
 )
 
