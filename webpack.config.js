@@ -81,8 +81,8 @@ const devConfig = function(env) {
       hot: true,
       publicPath: '/public/',
       proxy: {
-        "/api/": "http://localhost:3333",
-        "/auth/": "http://localhost:3333",
+        "/api/**": "http://localhost:3333",
+        "/auth/**": "http://localhost:3333",
       },
     },
     plugins: [
