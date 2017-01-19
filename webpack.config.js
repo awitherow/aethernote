@@ -93,6 +93,5 @@ const devConfig = function(env) {
 }
 
 module.exports = function(env) {
-  console.log(env)
   return env === 'dev' ? devConfig(env) : prodConfig(env)
 }
