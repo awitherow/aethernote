@@ -142,7 +142,8 @@ export default class AddEntry extends Component {
               <InputGroup>
                 <FormControl
                   onChange={(e) => this.handleChange('value', e.target.value)}
-                  value={content.money} type="number"
+                  value={content.value}
+                  type="number"
                   />
                 <DropdownButton
                   componentClass={InputGroup.Button}
