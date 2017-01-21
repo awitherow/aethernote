@@ -50,7 +50,9 @@
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "remarkable": "^1.7.1",
-    "serve-favicon": "^2.3.2"
+    "serve-favicon": "^2.3.2",
+    "webpack": "2.2",
+    "webpack-merge": "^2.4.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
@@ -70,9 +72,7 @@
     "react-hot-loader": "3.0.0-beta.6",
     "redux-devtools": "^3.3.2",
     "style-loader": "^0.13.1",
-    "webpack": "2.2",
     "webpack-dev-server": "2.2",
-    "webpack-merge": "^2.4.0",
     "yarn": "^0.19.1"
   },
   "license": "ISC",
