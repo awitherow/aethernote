@@ -1,0 +1,11 @@
+.flexi-form {
+  display: flex;
+  flex-direction: column;
+  width: 100;
+}
+
+@media(min-width: 500px) {
+  .flexi-form {
+    flex-direction: row;
+  }
+}

@@ -1,3 +1,4 @@
+import './AddEntry.css'
 import React, { Component, PropTypes } from 'react'
 
 import {
@@ -78,16 +79,6 @@ export default class AddEntry extends Component {
     const { category, content, type, prio } = this.state
     return (
       <Form inline>
-        <style type="text/css">{`
-          .flexi-form {
-            display: flex;
-            flex-direction: column;
-            width: 100;
-          }
-          @media(min-width: 500px) {
-            flex-direction: row;
-          }
-        `}</style>
         <FormGroup id="new-entry-input-form" className="flexi-form">
           <DropdownButton
             style={{ width: isMobile && '100%' }}

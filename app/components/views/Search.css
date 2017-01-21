@@ -1,0 +1,12 @@
+.search-results-list {
+  position: relative;
+  max-height: 50vh;
+  overflow-y: scroll;
+}
+.search-view {
+  color: black;
+  flex-direction: column;
+  display: flex;
+  margin: 0 auto;
+  padding: 25px;
+}

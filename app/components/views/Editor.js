@@ -1,3 +1,4 @@
+import './Editor.css'
 import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 import moment from 'moment'
@@ -99,14 +100,6 @@ export default class Editor extends Component {
     return (
       <Panel header={
         <div>
-          <style type="text/css">{`
-            .spread-icon-right {
-              display: flex;
-            }
-            .float-btn {
-              margin-left: auto;
-            }
-          `}</style>
           <div className="spread-icon-right">
             <span>Edit #{id} | {title}</span>
             <Button className="float-btn" bsSize="small" onClick={this.closeEditor}>
@@ -115,32 +108,6 @@ export default class Editor extends Component {
           </div>
         </div>
       }>
-        <style type="text/css">{`
-          .editor-title-bar {
-            position: relative;
-          }
-          .content-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-          }
-          .content-view,
-          .content-field {
-            padding-left: 5px;
-            width: 100%;
-          }
-          .content-field {
-            min-height: 50vh;
-          }
-          @media(min-width: 768px) {
-            .content-container {
-              flex-direction: row;
-            }
-          }
-          .extra-margin {
-            margin: 10px auto;
-          }
-        `}</style>
 
         <div className="editor-subheader">
            <ul>

@@ -9,7 +9,7 @@ export default function List({
   submitEdit,
 }) {
   return (
-    <ul className="List">
+    <ul className="list">
       {entries.map(entry =>
         <ListItem
           isMobile={isMobile}

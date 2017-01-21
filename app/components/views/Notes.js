@@ -1,3 +1,4 @@
+import './Notes.css'
 import React, { Component, PropTypes } from 'react'
 
 import {
@@ -40,11 +41,6 @@ class Notes extends Component {
     const { category } = this.state
     return (
       <div className="note-view" key="note-page">
-        <style type="text/css">{`
-          .note-list-modifer {
-            margin-bottom: 10px;
-          }
-        `}</style>
           <div className="note-list-modifer">
             <DropdownButton
               id={`${type}-selector`}

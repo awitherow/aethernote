@@ -1,0 +1,24 @@
+.editor-title-bar {
+  position: relative;
+}
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.content-view,
+.content-field {
+  padding-left: 5px;
+  width: 100%;
+}
+.content-field {
+  min-height: 50vh;
+}
+@media(min-width: 768px) {
+  .content-container {
+    flex-direction: row;
+  }
+}
+.extra-margin {
+  margin: 10px auto;
+}

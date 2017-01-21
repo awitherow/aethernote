@@ -1,3 +1,5 @@
+import './Aether.css'
+import Portal from './Portal'
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
@@ -23,24 +25,24 @@ import { Panel, Glyphicon, Button, DropdownButton, MenuItem } from 'react-bootst
 import {
   toggleLoading,
   grantAuthority,
+  setUser,
   setType,
   openEditor,
   closeEditor,
   toggleSearch,
 } from '../redux/actions'
 
+import { isUserAuthenticated, deauthenticateUser } from '../api/security'
+
 class Aether extends Component {
   static childContextTypes = {
     getEntries: PropTypes.func,
   }
 
-  static contextTypes = {
-    router: PropTypes.object.isRequired,
-  }
-
   static propTypes = {
     // redux dispatchers
     grantAuthority: PropTypes.func.isRequired,
+    setUser: PropTypes.func.isRequired,
     toggleLoading: PropTypes.func.isRequired,
     toggleSearch: PropTypes.func.isRequired,
     closeEditor: PropTypes.func.isRequired,
@@ -64,9 +66,7 @@ class Aether extends Component {
 
   componentDidMount = () => {
     const { authenticated, user } = this.props
-    if (!authenticated || !user) {
-      this.context.router.push('/logout')
-    } else {
+    if (authenticated && user) {
       this.getEntries()
     }
   }
@@ -79,7 +79,7 @@ class Aether extends Component {
     })
   }
 
-  removeItem = (id) => 
+  removeItem = (id) =>
     entryService.remove(id, this.props.user, () => this.getEntries())
 
   editItem = (id) => {
@@ -89,8 +89,8 @@ class Aether extends Component {
     this.props.openEditor(note)
   }
 
-  submitEdit = (edits, orig = this.props.editor.note) => 
-    entryService.update(Object.assign(orig, edits), this.props.user, () => 
+  submitEdit = (edits, orig = this.props.editor.note) =>
+    entryService.update(Object.assign(orig, edits), this.props.user, () =>
       this.getEntries()
     )
 
@@ -119,9 +119,9 @@ class Aether extends Component {
   }
 
   render() {
-    const { loading, editor, currentType, searching } = this.props
+    const { user, authenticated, loading, editor, currentType, searching } = this.props
 
-    return (
+    return !(isUserAuthenticated && user && authenticated) ? <Portal /> : (
       <div className="aether">
 
         { loading ? <Overlay type="loading" /> : null }
@@ -139,25 +139,22 @@ class Aether extends Component {
           currentType={currentType}
           setType={this.props.setType}
           toggleSearch={this.props.toggleSearch}
-          logout={() => this.context.router.push('/logout')}
+          logout={() => {
+            deauthenticateUser()
+            this.props.setUser(null)
+            this.props.grantAuthority(false)
+          }}
           />
 
         <div className="inner">
 
-          <div>
-            <style type="text/css">{`
-              #quick-input {
-                margin-bottom: 25px;
-              }
-            `}</style>
-            <div id="quick-input">
-              <AddEntry
-                type={currentType}
-                toggleLoading={this.props.toggleLoading}
-                getEntries={this.getEntries}
-                user={this.props.user}
-                />
-            </div>
+          <div id="quick-input">
+            <AddEntry
+              type={currentType}
+              toggleLoading={this.props.toggleLoading}
+              getEntries={this.getEntries}
+              user={this.props.user}
+              />
           </div>
 
           <Editor
@@ -171,14 +168,6 @@ class Aether extends Component {
 
           <Panel style={{display: !editor.hidden && 'none'}} header={
             <div>
-              <style type="text/css">{`
-                .spread-icon-right {
-                  display: flex;
-                }
-                .float-btn {
-                  margin-left: auto;
-                }
-              `}</style>
               <div className="spread-icon-right">
                 <DropdownButton
                   title={toTitleCase(currentType)}
@@ -220,6 +209,7 @@ const mapDispatchToProps = dispatch => ({
   toggleLoading: (v) => dispatch(toggleLoading(v)),
   toggleSearch: (v) => dispatch(toggleSearch(v)),
   grantAuthority: (v) => dispatch(grantAuthority(v)),
+  setUser: (v) => dispatch(setUser(v)),
   setType: (v) => dispatch(setType(v)),
   openEditor: (v) => dispatch(openEditor(v)),
   closeEditor: (v) => dispatch(closeEditor(v)),

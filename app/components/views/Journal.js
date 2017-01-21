@@ -1,3 +1,4 @@
+import './Journal.css'
 import React, { Component, PropTypes } from 'react'
 import moment from 'moment'
 
@@ -41,11 +42,6 @@ export default class Journal extends Component {
 
   render = () =>
     <div className="journal" key="journal-page">
-      <style type="text/css">{`
-        .button-margin {
-          margin-right: 5px;
-        }
-      `}</style>
       <h2>{moment(this.state.day).format('MMM Do YY')}</h2>
 
       <ListGroup>
