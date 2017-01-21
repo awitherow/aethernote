@@ -43,8 +43,28 @@ const baseConfig = function(env) {
   }
 }
 
-const prodConfig = function(env) {
-  return webpackMerge(baseConfig(env), {
+module.exports = function(env) {
+  return webpackMerge(baseConfig(env), env === 'dev' ? {
+    devtool: 'cheap-module-source-map',
+    entry: [
+      'react-hot-loader/patch',
+      'webpack-dev-server/client?http://localhost:8080',
+      'webpack/hot/only-dev-server',
+      './app/index.js',
+    ],
+    devServer: {
+      hot: true,
+      publicPath: '/public/',
+      proxy: {
+        "/api/**": "http://localhost:3333",
+        "/auth/**": "http://localhost:3333",
+      },
+    },
+    plugins: [
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NamedModulesPlugin(),
+    ],
+  } : {
     devtool: 'inline-source-map',
     entry: [
       './app/index.js',
@@ -66,32 +86,4 @@ const prodConfig = function(env) {
       }),
     ],
   })
-}
-
-const devConfig = function(env) {
-  return webpackMerge(baseConfig(env), {
-    devtool: 'cheap-module-source-map',
-    entry: [
-      'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:8080',
-      'webpack/hot/only-dev-server',
-      './app/index.js',
-    ],
-    devServer: {
-      hot: true,
-      publicPath: '/public/',
-      proxy: {
-        "/api/**": "http://localhost:3333",
-        "/auth/**": "http://localhost:3333",
-      },
-    },
-    plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NamedModulesPlugin(),
-    ],
-  })
-}
-
-module.exports = function(env) {
-  return env === 'dev' ? devConfig(env) : prodConfig(env)
 }
