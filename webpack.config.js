@@ -6,7 +6,7 @@ const webpackMerge = require('webpack-merge')
 const baseConfig = function(env) {
   return {
     output: {
-      path: '/public/',
+      path: '/',
       filename: 'index.js',
       publicPath: '/public/',
     },
