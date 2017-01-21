@@ -5,8 +5,14 @@
     "react"
   ],
   "plugins": [
-    "react-hot-loader/babel",
     "transform-class-properties",
     "transform-object-rest-spread"
-  ]
+  ],
+  "env": {
+    "dev": {
+      "plugins": [
+        "react-hot-loader/babel"
+      ]
+    }
+  }
 }
