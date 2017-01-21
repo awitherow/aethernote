@@ -44,7 +44,7 @@ const baseConfig = function(env) {
 }
 
 const prodConfig = function(env) {
-  const config = webpackMerge(baseConfig(env), {
+  return webpackMerge(baseConfig(env), {
     devtool: 'inline-source-map',
     entry: [
       './app/index.js',
@@ -66,9 +66,6 @@ const prodConfig = function(env) {
       }),
     ],
   })
-
-  console.log(config)
-  return config
 }
 
 const devConfig = function(env) {
