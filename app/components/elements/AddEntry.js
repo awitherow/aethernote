@@ -9,8 +9,16 @@ import * as entryService from '../../api/entries'
 import { categories, currencies } from '../../lib/schema'
 import { isMobile } from '../../lib/helpers'
 
-const initialState = {
+const initialContent = {
   content: '',
+}
+
+const financeInitialState = {
+  content: {
+    description: '',
+    currency: currencies[0],
+    value: '',
+  },
 }
 
 export default class AddEntry extends Component {
@@ -23,7 +31,7 @@ export default class AddEntry extends Component {
   }
 
   state = {
-    ...initialState,
+    ...initialContent,
     type: this.props.type,
   }
 
@@ -31,15 +39,15 @@ export default class AddEntry extends Component {
     if (nextProps.type !== this.state.props) {
       this.setState({ type: nextProps.type })
     }
+    this.updateStateContent(nextProps.type)
+  }
 
-    if (nextProps.type === 'finance') {
-      this.setState({ content: {
-        description: '',
-        currency: currencies[0],
-        value: '',
-      } })
+  // sets structure of state properly to accept incoming changes from user.
+  updateStateContent = (type) => {
+    if (type === 'finance') {
+      this.setState(financeInitialState)
     } else {
-      this.setState({ content: '' })
+      this.setState(initialContent)
     }
   }
 
@@ -49,7 +57,7 @@ export default class AddEntry extends Component {
         delete this.state[thing]
       }
     }
-    this.setState(...this.state, initialState)
+    this.setState(...this.state, initialContent)
   }
 
   addNote = (e) => {
@@ -66,10 +74,16 @@ export default class AddEntry extends Component {
 
   handleChange = (type, val) => {
     if (type === 'value' || type === 'currency' || type === 'description') {
+      // financial state updates require specific structure.
       const snapshot = this.state
       snapshot.content[type] = val
       this.setState(snapshot)
+    } else if (type === 'type' && val === 'finance') {
+      // state reset to structure content (as above) required, when setting.
+      this.updateStateContent(val)
+      this.setState({ [type]: val })
     } else {
+      // handle all other input types to the state.
       this.setState({ [type]: val })
     }
   }
