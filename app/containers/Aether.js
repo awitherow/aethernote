@@ -66,17 +66,23 @@ class Aether extends Component {
 
   componentDidMount = () => {
     const { authenticated, user } = this.props
-    if (authenticated && user) {
-      this.getEntries()
-    }
+    this.getEntries(authenticated, user)
+
   }
 
-  getEntries = () => {
-    !this.props.loading && this.props.toggleLoading(true)
-    entryService.get(this.props.user, ({ data }) => {
-      this.setState({ entries: data })
-      this.props.loading && this.props.toggleLoading(false)
-    })
+  componentWillRecieveProps(nextProps) {
+    const { authenticated, user } = nextProps
+    this.getEntries(authenticated, user)
+  }
+
+  getEntries = (authenticated, user) => {
+    if (authenticated && user) {
+      !this.props.loading && this.props.toggleLoading(true)
+      entryService.get(this.props.user, ({ data }) => {
+        this.setState({ entries: data })
+        this.props.loading && this.props.toggleLoading(false)
+      })
+    }
   }
 
   removeItem = (id) =>
