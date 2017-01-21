@@ -14,7 +14,7 @@
     "browser": true
   },
   "scripts": {
-    "start": "webpack --env=prod & node start.js",
+    "start": "webpack --env=production & node start.js",
     "doing-reminder": "node server/tasks/doingReminder",
     "prepush": "npm run test",
     "test": "npm run lint",
