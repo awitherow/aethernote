@@ -52,7 +52,8 @@ export const add = (entry, username, cb) => {
   axios({
     url: '/api/notes',
     method: 'POST',
-    params: {
+    headers: {
+      ...sharedHeaders,
       username,
       token,
     },
@@ -67,7 +68,8 @@ export const remove = (id, username, cb) => {
   axios({
     url: `/api/notes/${id}`,
     method: 'DELETE',
-    params: {
+    headers: {
+      ...sharedHeaders,
       username,
       token,
     },
@@ -79,8 +81,8 @@ export const update = (update, username, cb) => {
   axios({
     url: `/api/notes/${update.id}`,
     method: 'PUT',
-    headers: sharedHeaders,
-    params: {
+    headers: {
+      ...sharedHeaders,
       username,
       token,
     },
@@ -90,13 +92,13 @@ export const update = (update, username, cb) => {
   }).then(r => cb(r)).catch(e => console.log(e))
 }
 
-export const  toggleCompletion = (entry, username, cb) => {
+export const toggleCompletion = (entry, username, cb) => {
   const token = getToken()
   axios({
     url: `/api/notes/complete/${entry.id}`,
     method: 'PUT',
-    headers: sharedHeaders,
-    params: {
+    headers: {
+      ...sharedHeaders,
       username,
       token,
     },

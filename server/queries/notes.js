@@ -29,7 +29,7 @@ export const getNote = (req, res, next) => {
 
 export const createNote = (req, res, next) => {
   const { title, content, category, type, prio } = req.body.entry
-  const { username } = req.query
+  const { username } = req.headers
   db.none('insert into entries(title, content, category, type, prio, username)' +
       'values($1, $2, $3, $4, $5, $6)',
     [title, content, category, type, prio, username])
@@ -43,7 +43,7 @@ export const createNote = (req, res, next) => {
 }
 
 export const updateNote = (req, res, next) => {
-  if (req.body.update.username !== req.query.username) {
+  if (req.body.update.username !== req.headers.username) {
     res.status(400).json({
       status: 'failure',
       message: 'You cannot update notes that are not yours',
@@ -52,7 +52,7 @@ export const updateNote = (req, res, next) => {
   const {
     id, title, content, prio, category, context, type, tally, value,
   } = req.body.update
-  const { username } = req.query
+  const { username } = req.headers
   // TODO !! handle changed habit names/exercise names for linked db. use ID?
   if (tally) {
     switch(type) {
@@ -84,7 +84,7 @@ export const updateNote = (req, res, next) => {
 
 export const removeNote = (req, res, next) => {
   const id = parseInt(req.params.id)
-  const username = req.query.username
+  const username = req.headers.username
   db.result('delete from entries where id = ${id} AND username = ${username}',{ 
     id,
     username,
@@ -99,7 +99,7 @@ export const removeNote = (req, res, next) => {
 
 export const toggleCompletion = (req, res, next) => {
   const { complete, id } = req.body.entry
-  const { username } = req.query
+  const { username } = req.headers
   db.none('update entries set complete=$1 where id=$2 AND username=$3', [complete, id, username])
     .then(() => {
       res.status(200)
