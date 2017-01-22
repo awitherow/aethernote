@@ -1,16 +1,16 @@
-import Aether from './containers/Aether'
+import CMS from './containers/CMS'
 import Portal from './containers/Portal'
-import Membrane from './containers/Membrane'
+import Aether from './Aether'
 import { isUserAuthenticated, deauthenticateUser } from './api/security'
 
 export default {
-  component: Membrane,
+  component: Aether,
   childRoutes: [
     {
       path: '/',
       getComponent: (location, callback) => {
         if (isUserAuthenticated()) {
-          callback(null, Aether)
+          callback(null, CMS)
         } else {
           callback(null, Portal)
         }

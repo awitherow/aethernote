@@ -29,7 +29,7 @@ import {
   toggleSearch,
 } from '../redux/actions'
 
-class Aether extends Component {
+class CMS extends Component {
   static childContextTypes = {
     getEntries: PropTypes.func,
   }
@@ -122,7 +122,7 @@ class Aether extends Component {
     const { loading, editor, currentType, searching } = this.props
 
     return (
-      <div className="aether">
+      <div className="cms">
 
         { loading ? <Overlay type="loading" /> : null }
 
@@ -236,9 +236,9 @@ const mapStateToProps = ({
   searching,
 })
 
-const ConnectedAether = connect(
+const ConnectedCMS = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Aether)
+)(CMS)
 
-export default ConnectedAether
+export default ConnectedCMS
