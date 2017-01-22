@@ -4,7 +4,7 @@ import { trackHabit, trackExercise } from './tracking'
 
 export const getNotes = (req, res, next) =>
   db.any('select * FROM entries WHERE username=${username} ORDER BY modified desc', { 
-    username: req.query.username,
+    username: req.headers.username,
   }).then(data => 
     res.status(200)
       .json({

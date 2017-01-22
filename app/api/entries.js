@@ -10,9 +10,9 @@ export const get = (username, cb) => {
   axios({
     url: '/api/notes',
     method: 'GET',
-    params: {
-      username,
+    headers: {
       token,
+      username,
     },
   }).then(r => cb(r.data)).catch(e => console.log(e))
 }
