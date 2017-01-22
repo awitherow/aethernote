@@ -52,7 +52,8 @@
     "redux": "^3.6.0",
     "remarkable": "^1.7.1",
     "serve-favicon": "^2.3.2",
-    "whatwg-fetch": "^2.0.1"
+    "whatwg-fetch": "^2.0.1",
+    "webpack": "^1.13.3"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
@@ -73,7 +74,6 @@
     "redux-devtools": "^3.3.1",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.3",
     "yarn": "^0.18.1"
   },
   "license": "ISC",
