@@ -22,6 +22,16 @@ export default {
       component: Portal,
     },
     {
+      path: '/planner',
+      getComponent: (location, callback) => {
+        if (isUserAuthenticated()) {
+          callback(null, Planner)
+        } else {
+          callback(null, Portal)
+        }
+      },
+    },
+    {
       path: '/logout',
       onEnter: (nextState, replace) => {
         deauthenticateUser()
