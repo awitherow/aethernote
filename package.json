@@ -29,6 +29,8 @@
     "babel-polyfill": "^6.16.0",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
+    "babel-plugin-transform-class-properties": "^6.19.0",
+    "babel-plugin-transform-object-rest-spread": "^6.19.0",
     "babel-register": "^6.18.0",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.15.2",
@@ -58,8 +60,6 @@
   "devDependencies": {
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.9",
-    "babel-plugin-transform-class-properties": "^6.19.0",
-    "babel-plugin-transform-object-rest-spread": "^6.19.0",
     "babel-preset-latest": "^6.16.0",
     "compression-webpack-plugin": "^0.3.2",
     "css-loader": "^0.26.0",
