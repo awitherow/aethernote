@@ -15,9 +15,9 @@ export const categories  = {
   ],
   journal : [
     'dream',
+    'gratitude',
     'reflection',
     'aspirations',
-    'gratitude',
   ],
   habit: [
     'godmode',

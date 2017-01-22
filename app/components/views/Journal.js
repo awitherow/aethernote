@@ -14,9 +14,22 @@ import {
   Table, ListGroup, ListGroupItem, Button, Glyphicon,
 } from 'react-bootstrap'
 
+const titleCatMap = {
+  dream: 'Dream',
+  reflection: 'Where could you improve?',
+  aspirations: 'What will you do better tomorrow?',
+  gratitude: 'What was great today?',
+}
+
+function mapTitlesToCategories(cat) {
+  return toTitleCase(titleCatMap[cat])
+}
+
 export default class Journal extends Component {
   static propTypes = {
-    type: PropTypes.string.isRequired,
+    type: PropTypes.string
+    
+    .isRequired,
     entries: PropTypes.array.isRequired,
     user: PropTypes.string.isRequired,
     // redux
@@ -50,7 +63,7 @@ export default class Journal extends Component {
 
       <ListGroup>
         {categories.journal.map((category, i) =>
-          <ListGroupItem key={i} header={toTitleCase(category)}>
+          <ListGroupItem key={i} header={mapTitlesToCategories(category)}>
             {this.filterEntries(category).length ? (
               <Table key={i} striped hover>
                 <thead>
