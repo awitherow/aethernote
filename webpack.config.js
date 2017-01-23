@@ -32,7 +32,7 @@ var config = {
     ],
   },
   resolve: {
-    extensions: ['', '.js', '.css'],
+    extensions: ['.js', '.css'],
   },
   plugins: [
     new webpack.DefinePlugin({
