@@ -15,7 +15,7 @@ var config = {
     filename: 'index.js',
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -23,7 +23,11 @@ var config = {
       },
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"],
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader",
+        ],
       },
     ],
   },
@@ -42,8 +46,6 @@ if (nodeEnv === 'production') {
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(true),
     new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-      sourceMap: false,
       comments: false,
     }),
     new webpack.optimize.AggressiveMergingPlugin(),
