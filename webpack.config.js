@@ -1,3 +1,4 @@
+var path = require('path')
 var webpack = require('webpack')
 var CompressionPlugin = require('compression-webpack-plugin')
 
@@ -10,7 +11,7 @@ module.exports = function(env) {
       './app/index.js',
     ],
     output: {
-      path: 'public',
+      path: path.resolve(__dirname, 'public'),
       filename: 'index.js',
     },
     module: {
