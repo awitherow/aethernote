@@ -3,6 +3,7 @@ var webpack = require('webpack')
 var CompressionPlugin = require('compression-webpack-plugin')
 
 module.exports = function(env) {
+  console.log(env)
   var config = {
     devtool: env === 'production' ? 'cheap-module-source-map' : 'inline-eval-cheap-source-map',
     entry: [
@@ -42,8 +43,7 @@ module.exports = function(env) {
   }
 
   if (env === 'production') {
-    config.plugins.concat([
-      new webpack.optimize.DedupePlugin(),
+    config.plugins = config.plugins.concat([
       new webpack.optimize.OccurrenceOrderPlugin(true),
       new webpack.optimize.UglifyJsPlugin({
         comments: false,
