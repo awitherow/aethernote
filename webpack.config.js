@@ -3,12 +3,9 @@ var webpack = require('webpack')
 var CompressionPlugin = require('compression-webpack-plugin')
 
 module.exports = function(env) {
-  console.log(env)
   var config = {
     devtool: env === 'production' ? 'cheap-module-source-map' : 'inline-eval-cheap-source-map',
     entry: [
-      'promise-polyfill',
-      'whatwg-fetch',
       './app/index.js',
     ],
     output: {
