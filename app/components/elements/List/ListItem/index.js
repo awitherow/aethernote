@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import './list-item.scss'
+import './list-item.css'
 
 import Basic from './basic'
 import Habit from './habit'
