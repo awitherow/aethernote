@@ -1,30 +1,9 @@
-# aether
+# aether-prototype
 
-where thoughts come from
+a prototype note taking, journaling, habit tracking, etc application
 
 ## introduction
 
-an attempt to learn more about myself through gathering entries of many types.
+an attempt to learn more about myself through gathering entries of many types, as well as learning javascript, nodejs and react.
 
-currently defined schemas for entries
 
-- notes
-- journals
-
-### to come
-
-- todo (split notes)
-- habits
-
-## development
-
-```sh
-$ yarn install
-$ yarn dev
-```
-
-Your app should now be running on [localhost:3333](http://localhost:3333/).
-
-## third party use
-
-- [fuse.js](https://github.com/krisk/fuse#options)
