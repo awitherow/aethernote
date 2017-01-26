@@ -7,6 +7,7 @@ npm-debug.log
 yarn-error.log
 public/index.js
 public/index.js.map
+public/index.js.gz
 public/bundle.css.map
 public/bundle.css
 public/bundle.js
