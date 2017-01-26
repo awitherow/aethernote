@@ -4,5 +4,19 @@
   "repository": "https://github.com/heroku/node-js-getting-started",
   "logo": "http://node-js-sample.herokuapp.com/node.svg",
   "keywords": ["node", "express", "static"],
-  "image": "heroku/nodejs"
+  "image": "heroku/nodejs",
+  "env": {
+     "DATABASE_URL": {
+       "required": true
+     },
+     "NODE_ENV": {
+       "required": true
+     },
+     "PAPERTRAIL_API_TOKEN": {
+       "required": true
+     },
+     "TOKEN_SECRET": {
+       "required": true
+     }
+   }
 }
