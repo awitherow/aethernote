@@ -16,10 +16,6 @@ const initialState = {
 
 const Store = (state, action) => {
   switch(action.type) {
-    case LOADING: return {
-      ...state,
-      loading: action.data,
-    }
     case GRANT_AUTHORITY: return {
       ...state,
       authenticated: action.data,
@@ -27,6 +23,10 @@ const Store = (state, action) => {
     case SET_USERNAME: return {
       ...state,
       user: action.data,
+    }
+    case LOADING: return {
+      ...state,
+      loading: action.data,
     }
     case SET_TYPE: return {
       ...state,
