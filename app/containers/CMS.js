@@ -22,7 +22,6 @@ import { Panel, Glyphicon, Button, DropdownButton, MenuItem } from 'react-bootst
 
 import {
   toggleLoading,
-  grantAuthority,
   setType,
   openEditor,
   closeEditor,
@@ -40,7 +39,6 @@ class CMS extends Component {
 
   static propTypes = {
     // redux dispatchers
-    grantAuthority: PropTypes.func.isRequired,
     toggleLoading: PropTypes.func.isRequired,
     toggleSearch: PropTypes.func.isRequired,
     closeEditor: PropTypes.func.isRequired,
@@ -65,7 +63,7 @@ class CMS extends Component {
   componentDidMount = () => {
     const { authenticated, user } = this.props
     if (!authenticated || !user) {
-      this.context.router.push('/logout')
+      // LOGOUT
     } else {
       this.getEntries()
     }
@@ -219,18 +217,15 @@ class CMS extends Component {
 const mapDispatchToProps = dispatch => ({
   toggleLoading: (v) => dispatch(toggleLoading(v)),
   toggleSearch: (v) => dispatch(toggleSearch(v)),
-  grantAuthority: (v) => dispatch(grantAuthority(v)),
   setType: (v) => dispatch(setType(v)),
   openEditor: (v) => dispatch(openEditor(v)),
   closeEditor: (v) => dispatch(closeEditor(v)),
 })
 
 const mapStateToProps = ({
-  currentType, authenticated, user, editor, loading, searching,
+  currentType, editor, loading, searching,
 }) => ({
   currentType,
-  authenticated,
-  user,
   editor,
   loading,
   searching,
