@@ -1,10 +1,10 @@
-import React, { Component, PropTypes, cloneElement } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 class Aether extends Component{
   render() {
     return (
       <div className="aether">
-        {cloneElement(this.props.children, null)}
+        {this.props.children}
       </div>
     )
   }

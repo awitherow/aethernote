@@ -1,5 +1,5 @@
 import './lib/styles.css'
-import React from 'react'
+import React, { Component } from 'react'
 import { render } from 'react-dom'
 
 import { Provider } from 'react-redux'
@@ -18,7 +18,11 @@ let s = createStore(store,
   ) : null
 )
 
-const App = <Router history={hashHistory} routes={routes} />
+class App extends Component {
+  render() {
+    return <Router history={hashHistory} routes={routes} />
+  }
+}
 
 if (process.env.NODE_ENV === 'development') {
   const { AppContainer } = require('react-hot-loader')
@@ -26,7 +30,7 @@ if (process.env.NODE_ENV === 'development') {
     render(
       <AppContainer>
         <Provider store={s}>
-          {Component}
+          <Component />
         </Provider>
       </AppContainer>,
       rootEl,
