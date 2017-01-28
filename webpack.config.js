@@ -45,7 +45,7 @@ const baseConfig = function(env) {
 }
 
 module.exports = function(env) {
-  return webpackMerge(baseConfig(env), env === 'dev' ? {
+  return webpackMerge(baseConfig(env), env === 'development' ? {
     devtool: 'cheap-module-source-map',
     entry: [
       'react-hot-loader/patch',
@@ -55,10 +55,10 @@ module.exports = function(env) {
     ],
     devServer: {
       hot: true,
-      publicPath: '/',
+      publicPath: '/public/',
       proxy: {
-        "/api": "http://localhost:3333",
-        "/auth": "http://localhost:3333",
+        "/api/**": "http://localhost:3333",
+        "/auth/**": "http://localhost:3333",
       },
     },
     plugins: [

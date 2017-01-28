@@ -18,18 +18,16 @@ let s = createStore(store,
   ) : null
 )
 
-const App = (
-  <Provider store={s}>
-    <Router history={hashHistory} routes={routes} />
-  </Provider>
-)
+const App = <Router history={hashHistory} routes={routes} />
 
-if (process.env.NODE_ENV === 'dev') {
+if (process.env.NODE_ENV === 'development') {
   const { AppContainer } = require('react-hot-loader')
   const hotRender = (Component) => {
     render(
       <AppContainer>
-        <Component />
+        <Provider store={s}>
+          {Component}
+        </Provider>
       </AppContainer>,
       rootEl,
     )
@@ -38,7 +36,7 @@ if (process.env.NODE_ENV === 'dev') {
   hotRender(App)
 
   if (module.hot) {
-    module.hot.accept('./containers/Aether', () => {
+    module.hot.accept('./Aether', () => {
       module.hot.accept('./redux/store', () => s.replaceReducer(store))
       hotRender(App)
     })
