@@ -55,7 +55,8 @@ module.exports = function(env) {
     ],
     devServer: {
       hot: true,
-      publicPath: '/public/',
+      publicPath: '/',
+      contentBase: path.join(__dirname, 'public'),
       proxy: {
         "/api/**": "http://localhost:3333",
         "/auth/**": "http://localhost:3333",
