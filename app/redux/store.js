@@ -20,7 +20,7 @@ const initialState = {
   searching: false,
   planner: {
     day: moment.now(),
-  }
+  },
 }
 
 const Store = (state = initialState, action) => {

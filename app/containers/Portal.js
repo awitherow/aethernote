@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
-import { getToken, getAuth, getUser, login, signup, authenticateUser } from '../api/security'
+import { login, signup, authenticateUser } from '../api/security'
 import { Form, Button, FormControl, FormGroup, ControlLabel, ButtonGroup } from 'react-bootstrap'
 
 import {
