@@ -51,11 +51,12 @@ module.exports = function(env) {
       'react-hot-loader/patch',
       'webpack-dev-server/client?http://localhost:8080',
       'webpack/hot/only-dev-server',
-      './app/index.js',
+      path.join(__dirname, 'app/index.js'),
     ],
     devServer: {
       hot: true,
       publicPath: '/',
+      historyApiFallback: true,
       contentBase: path.join(__dirname, 'public'),
       proxy: {
         "/api/**": "http://localhost:3333",
@@ -69,7 +70,7 @@ module.exports = function(env) {
   } : {
     devtool: 'inline-source-map',
     entry: [
-      './app/index.js',
+      path.join(__dirname, 'app/index.js'),
     ],
     plugins: [
       new webpack.optimize.UglifyJsPlugin({
