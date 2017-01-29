@@ -18,11 +18,8 @@ const Store = (state, action) => {
   switch(action.type) {
     case GRANT_AUTHORITY: return {
       ...state,
-      authenticated: action.data,
-    }
-    case SET_USERNAME: return {
-      ...state,
-      user: action.data,
+      authenticated: action.data.authenticated,
+      user: action.data.username,
     }
     case LOADING: return {
       ...state,

@@ -1,10 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router'
 
 import * as entryService from '../api/entries'
 
 import { toTitleCase } from '../lib/helpers'
 import { categories } from '../lib/schema'
+
+import { deauthenticateUser } from '../api/security'
 
 import Overlay from '../components/elements/Overlay'
 import Header from '../components/elements/Header'
@@ -22,6 +25,7 @@ import { Panel, Glyphicon, Button, DropdownButton, MenuItem } from 'react-bootst
 
 import {
   toggleLoading,
+  grantAuthority,
   setType,
   openEditor,
   closeEditor,
@@ -39,6 +43,7 @@ class CMS extends Component {
 
   static propTypes = {
     // redux dispatchers
+    grantAuthority: PropTypes.func.isRequired,
     toggleLoading: PropTypes.func.isRequired,
     toggleSearch: PropTypes.func.isRequired,
     closeEditor: PropTypes.func.isRequired,
@@ -62,9 +67,7 @@ class CMS extends Component {
 
   componentDidMount = () => {
     const { authenticated, user } = this.props
-    if (!authenticated || !user) {
-      // LOGOUT
-    } else {
+    if (authenticated && user) {
       this.getEntries()
     }
   }
@@ -117,7 +120,12 @@ class CMS extends Component {
   }
 
   render() {
-    const { loading, editor, currentType, searching } = this.props
+    const { authenticated, user, loading, editor, currentType, searching } = this.props
+
+    if (!authenticated && !user) {
+      deauthenticateUser()
+      return <Redirect to="/portal" />
+    }
 
     return (
       <div className="cms">
@@ -137,7 +145,13 @@ class CMS extends Component {
           currentType={currentType}
           setType={this.props.setType}
           toggleSearch={this.props.toggleSearch}
-          logout={() => this.context.router.push('/logout')}
+          logout={() => {
+            deauthenticateUser()
+            this.props.grantAuthority({
+              authenticated: false,
+              username: '',
+            })
+          }}
           />
 
         <div className="inner">
@@ -216,6 +230,7 @@ class CMS extends Component {
 
 const mapDispatchToProps = dispatch => ({
   toggleLoading: (v) => dispatch(toggleLoading(v)),
+  grantAuthority: (v) => dispatch(grantAuthority(v)),
   toggleSearch: (v) => dispatch(toggleSearch(v)),
   setType: (v) => dispatch(setType(v)),
   openEditor: (v) => dispatch(openEditor(v)),
@@ -223,8 +238,10 @@ const mapDispatchToProps = dispatch => ({
 })
 
 const mapStateToProps = ({
-  currentType, editor, loading, searching,
+  currentType, editor, loading, searching, authenticated, user,
 }) => ({
+  authenticated,
+  user,
   currentType,
   editor,
   loading,

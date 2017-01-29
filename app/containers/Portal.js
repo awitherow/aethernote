@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router'
 import { login, signup, authenticateUser } from '../api/security'
 import { Form, Button, FormControl, FormGroup, ControlLabel, ButtonGroup } from 'react-bootstrap'
 
@@ -13,17 +14,18 @@ class Portal extends Component {
     errors: {},
     username: '',
     password: '',
-  }
-
-  static contextTypes = {
-    router: PropTypes.object.isRequired,
+    redirectToReferrer: false,
   }
 
   pass = (token, username) => {
     authenticateUser(token)
-    this.props.grantAuthority(true)
-    this.props.setUser(username)
-    this.context.router.replace('/')
+    this.props.grantAuthority({
+      authenticated: true,
+      username,
+    })
+    this.setState({
+      redirectToReferrer: true,
+    })
   }
 
   authenticateLoginAttempt = (e) => {
@@ -33,8 +35,8 @@ class Portal extends Component {
     login(encodeURIComponent(username), encodeURIComponent(password), ({ data }) => {
       if (!data) {
         if (failureAttempts >= 3) {
-                    // set locked cookie.
-                    // redirect to some messed up website.
+          // set locked cookie.
+          // redirect to some messed up website.
         } else {
           this.setState({
             error: 'User not found',
@@ -59,49 +61,51 @@ class Portal extends Component {
   }
 
   render() {
-    const { username, password } = this.state
-    return (
-            <div style={{ height: '100%' }}>
-                <style type="text/css">{`
-                .login-container {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    flex-direction: column;
-                    height: 100vh;
-                    max-width: 500px;
-                    margin: 0 auto;
-                }
-                `}</style>
-                <Form className="login-container">
-                    <FormGroup>
-                        <ControlLabel>Username: </ControlLabel>
-                        <FormControl
-                            id="username"
-                            value={username}
-                            onChange={(e) => this.setState({ username: e.target.value })}
-                            />
-                    </FormGroup>
-                    <FormGroup>
-                        <ControlLabel>Password: </ControlLabel>
-                        <FormControl
-                            id="password"
-                            value={password}
-                            type="password"
-                            onChange={(e) => this.setState({ password: e.target.value })}
-                            />
-                    </FormGroup>
+    const { username, password, redirectToReferrer } = this.state
+    return redirectToReferrer ? (
+      <Redirect to="/" />
+    ) : (
+      <div style={{ height: '100%' }}>
+          <style type="text/css">{`
+          .login-container {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-direction: column;
+              height: 100vh;
+              max-width: 500px;
+              margin: 0 auto;
+          }
+          `}</style>
+          <Form className="login-container">
+              <FormGroup>
+                  <ControlLabel>Username: </ControlLabel>
+                  <FormControl
+                      id="username"
+                      value={username}
+                      onChange={(e) => this.setState({ username: e.target.value })}
+                      />
+              </FormGroup>
+              <FormGroup>
+                  <ControlLabel>Password: </ControlLabel>
+                  <FormControl
+                      id="password"
+                      value={password}
+                      type="password"
+                      onChange={(e) => this.setState({ password: e.target.value })}
+                      />
+              </FormGroup>
 
-                    <ButtonGroup>
-                        <Button onClick={this.authenticateLoginAttempt} bsStyle="primary">
-                            Login
-                        </Button>
-                        <Button onClick={this.authenticateSignupAttempt}>
-                            Signup
-                        </Button>
-                    </ButtonGroup>
-                </Form>
-            </div>
+              <ButtonGroup>
+                  <Button onClick={this.authenticateLoginAttempt} bsStyle="primary">
+                      Login
+                  </Button>
+                  <Button onClick={this.authenticateSignupAttempt}>
+                      Signup
+                  </Button>
+              </ButtonGroup>
+          </Form>
+      </div>
     )
   }
 }
@@ -109,6 +113,7 @@ class Portal extends Component {
 Portal.propTypes = {
   grantAuthority: PropTypes.func.isRequired,
   setUser: PropTypes.func.isRequired,
+  location: PropTypes.object,
 }
 
 const mapStateToProps = ({

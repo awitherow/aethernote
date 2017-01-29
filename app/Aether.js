@@ -5,10 +5,9 @@ import { connect } from 'react-redux'
 import { isUserAuthenticated } from './api/security'
 
 import CMS from './containers/CMS'
-import Portal from './containers/CMS'
+import Portal from './containers/Portal'
 
 class Aether extends Component {
-
   render() {
     return (
       <BrowserRouter>
@@ -21,23 +20,24 @@ class Aether extends Component {
   }
 }
 
-const MatchWhenAuthorized = ({ component, ...rest }) => {
-  console.log(rest)
-  return (
-    <Match {...rest} render={props => {
-      console.log(props, rest)
-      return (
-        isUserAuthenticated() ? (
-          <component {...props} />
-        ) : (
-          <Redirect to={{
-            pathname: '/#/portal',
-            state: { from: props.location },
-          }}
-          />
-        )
-      )}}/>
-  )
+const MatchWhenAuthorized = ({ component: Component, ...rest }) => (
+  <Match {...rest} render={props => {
+    return (
+      isUserAuthenticated() ? (
+        <Component />
+      ) : (
+        <Redirect to={{
+          pathname: '/portal',
+          state: { from: props.location },
+        }}
+        />
+      )
+    )}}/>
+)
+
+MatchWhenAuthorized.propTypes = {
+  location: PropTypes.object,
+  component: PropTypes.func.isRequired,
 }
 
 Aether.propTypes = {
