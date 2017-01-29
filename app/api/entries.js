@@ -14,7 +14,7 @@ export const get = (username, cb) => {
       token,
       username,
     },
-  }).then(r => cb(r.data)).catch(e => console.log(e))
+  }).then(r => cb(r.data)).catch(e => new Error(e))
 }
 
 export const add = (entry, username, cb) => {
@@ -60,7 +60,7 @@ export const add = (entry, username, cb) => {
     data: {
       entry,
     },
-  }).then(r => cb(r)).catch(e => console.log(e))
+  }).then(r => cb(r)).catch(e => new Error(e))
 }
 
 export const remove = (id, username, cb) => {
@@ -73,7 +73,7 @@ export const remove = (id, username, cb) => {
       username,
       token,
     },
-  }).then(r => cb(r)).catch(e => console.log(e))
+  }).then(r => cb(r)).catch(e => new Error(e))
 }
 
 export const update = (update, username, cb) => {
@@ -89,7 +89,7 @@ export const update = (update, username, cb) => {
     data: {
       update,
     },
-  }).then(r => cb(r)).catch(e => console.log(e))
+  }).then(r => cb(r)).catch(e => new Error(e))
 }
 
 export const toggleCompletion = (entry, username, cb) => {
@@ -108,5 +108,5 @@ export const toggleCompletion = (entry, username, cb) => {
         id: entry.id,
       },
     },
-  }).then(r => cb(r)).catch(e => console.log(e))
+  }).then(r => cb(r)).catch(e => new Error(e))
 }

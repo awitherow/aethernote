@@ -1,17 +1,57 @@
-import React, { Component, PropTypes, cloneElement } from 'react'
+import React, { Component, PropTypes } from 'react'
+import { BrowserRouter, Match, Redirect } from 'react-router'
+import { connect } from 'react-redux'
 
-class Aether extends Component{
+import { isUserAuthenticated } from './api/security'
+
+import CMS from './containers/CMS'
+import Portal from './containers/Portal'
+
+class Aether extends Component {
   render() {
     return (
-      <div className="aether">
-        {cloneElement(this.props.children, null)}
-      </div>
+      <BrowserRouter>
+        <div id="aether">
+          <MatchWhenAuthorized pattern="/" component={CMS} />
+          <Match pattern="/portal" component={Portal} />
+        </div>
+      </BrowserRouter>
     )
   }
 }
 
-Aether.propTypes = {
-  children: PropTypes.element.isRequired,
+const MatchWhenAuthorized = ({ component: Component, ...rest }) => (
+  <Match {...rest} render={props => {
+    return (
+      isUserAuthenticated() ? (
+        <Component />
+      ) : (
+        <Redirect to={{
+          pathname: '/portal',
+          state: { from: props.location },
+        }}
+        />
+      )
+    )}}/>
+)
+
+MatchWhenAuthorized.propTypes = {
+  location: PropTypes.object,
+  component: PropTypes.func.isRequired,
 }
 
-export default Aether
+Aether.propTypes = {
+  authenticated: PropTypes.bool.isRequired,
+  user: PropTypes.string.isRequired,
+}
+
+const mapStateToProps = ({
+  authenticated, user,
+}) => ({
+  authenticated,
+  user,
+})
+
+const ConnectedAether = connect(mapStateToProps, null)(Aether)
+
+export default ConnectedAether

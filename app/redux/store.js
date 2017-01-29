@@ -1,5 +1,5 @@
 import {
-  LOADING, GRANT_AUTHORITY, SET_TYPE, OPEN_EDITOR, CLOSE_EDITOR, TOGGLE_SEARCH, SET_USERNAME,
+  LOADING, GRANT_AUTHORITY, SET_TYPE, OPEN_EDITOR, CLOSE_EDITOR, TOGGLE_SEARCH,
 } from './constants'
 
 const initialState = {
@@ -16,17 +16,14 @@ const initialState = {
 
 const Store = (state, action) => {
   switch(action.type) {
+    case GRANT_AUTHORITY: return {
+      ...state,
+      authenticated: action.data.authenticated,
+      user: action.data.username,
+    }
     case LOADING: return {
       ...state,
       loading: action.data,
-    }
-    case GRANT_AUTHORITY: return {
-      ...state,
-      authenticated: action.data,
-    }
-    case SET_USERNAME: return {
-      ...state,
-      user: action.data,
     }
     case SET_TYPE: return {
       ...state,

@@ -1,4 +1,4 @@
-import './lib/styles.scss'
+import './lib/styles.css'
 import React from 'react'
 import { render } from 'react-dom'
 
@@ -6,8 +6,9 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import store from './redux/store'
 
-import { Router, hashHistory } from 'react-router'
-import routes from './routes'
+import Aether from './Aether'
+
+const rootEl = document.getElementById('app')
 
 let s = createStore(store,
   process.env.NODE_ENV === 'development' ? (
@@ -16,9 +17,24 @@ let s = createStore(store,
   ) : null
 )
 
-render(
-  <Provider store={s}>
-    <Router history={hashHistory} routes={routes} />
-  </Provider>,
-  document.getElementById('app')
-)
+const { AppContainer } = require('react-hot-loader')
+const hotRender = (Component) => {
+  render(
+    <AppContainer>
+      <Provider store={s}>
+        <Component />
+      </Provider>
+    </AppContainer>,
+    rootEl,
+  )
+}
+
+hotRender(Aether)
+
+if (module.hot) {
+  module.hot.accept('./Aether', () => {
+    const NewRoot = require('./Aether').default
+    module.hot.accept('./redux/store', () => s.replaceReducer(store))
+    hotRender(NewRoot)
+  })
+}
