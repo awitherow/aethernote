@@ -123,7 +123,6 @@ class CMS extends Component {
     const { authenticated, user, loading, editor, currentType, searching } = this.props
 
     if (!authenticated && !user) {
-      deauthenticateUser()
       return <Redirect to="/portal" />
     }
 

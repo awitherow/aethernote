@@ -1,20 +1,30 @@
 import {
-  LOADING, GRANT_AUTHORITY, SET_TYPE, OPEN_EDITOR, CLOSE_EDITOR, TOGGLE_SEARCH,
+  LOADING, GRANT_AUTHORITY, SET_TYPE, OPEN_EDITOR, CLOSE_EDITOR, TOGGLE_SEARCH, SET_DAY, 
 } from './constants'
 
+import {
+  getUser, getAuth,
+} from '../api/security'
+
+import moment from 'moment'
+
 const initialState = {
-  user: '',
+  user: getUser(),
   loading: false,
-  authenticated: false,
+  authenticated: !!getAuth(),
   currentType: 'note',
   editor: {
     hidden: true,
     note: {},
   },
   searching: false,
+  planner: {
+    day: moment.now(),
+  }
 }
 
-const Store = (state, action) => {
+const Store = (state = initialState, action) => {
+  console.log(state, action)
   switch(action.type) {
     case GRANT_AUTHORITY: return {
       ...state,
@@ -47,6 +57,13 @@ const Store = (state, action) => {
     case TOGGLE_SEARCH: return {
       ...state,
       searching: action.data,
+    }
+    case SET_DAY: return {
+      ...state,
+      planner: {
+        ...state.planner,
+        date: action.data,
+      },
     }
     default: return initialState
   }

@@ -34,7 +34,8 @@ hotRender(Aether)
 if (module.hot) {
   module.hot.accept('./Aether', () => {
     const NewRoot = require('./Aether').default
-    module.hot.accept('./redux/store', () => s.replaceReducer(store))
+    const nextReducer = require('./redux/store').default
+    s.replaceReducer(nextReducer)
     hotRender(NewRoot)
   })
 }

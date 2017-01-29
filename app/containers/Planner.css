@@ -1,0 +1,10 @@
+#planner-page {
+    position: relative;
+    height: 100vh;
+}
+
+#planner-page .add-button-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}

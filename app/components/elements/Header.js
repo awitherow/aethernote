@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
+import { Link } from 'react-router'
+
 import {
   Navbar, Nav, NavItem, Glyphicon,
 } from 'react-bootstrap'
@@ -8,7 +10,7 @@ class Header extends Component {
   static contextTypes = {
     router: PropTypes.object.isRequired,
   }
-
+  
   render() {
     const { toggleSearch, logout } = this.props
 
@@ -26,8 +28,8 @@ class Header extends Component {
             <NavItem eventKey={2} onClick={() => logout()}>
               <Glyphicon glyph="log-out" />
             </NavItem>
-            <NavItem eventKey={3} onClick={() => this.context.router.push('/planner')}>
-              <Glyphicon glyph="calendar" />
+            <NavItem eventKey={3}>
+              <Link to="/planner"> <Glyphicon glyph="calendar" /></Link>
             </NavItem>
           </Nav>
         </Navbar.Collapse>
