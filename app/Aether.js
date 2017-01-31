@@ -13,7 +13,7 @@ class Aether extends Component {
       <BrowserRouter>
         <div id="aether">
           <MatchWhenAuthorized pattern="/" component={CMS} />
-          <Match pattern="/portal" component={Portal} />
+          <Match exactly pattern="/portal" component={Portal} />
         </div>
       </BrowserRouter>
     )
@@ -21,7 +21,7 @@ class Aether extends Component {
 }
 
 const MatchWhenAuthorized = ({ component: Component, ...rest }) => (
-  <Match {...rest} render={props => {
+  <Match exactly {...rest} render={props => {
     return (
       isUserAuthenticated() ? (
         <Component />
