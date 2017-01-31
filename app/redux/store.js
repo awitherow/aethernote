@@ -62,7 +62,7 @@ const Store = (state = initialState, action) => {
       ...state,
       planner: {
         ...state.planner,
-        date: action.data,
+        day: moment(action.data[0]),
       },
     }
     default: return initialState

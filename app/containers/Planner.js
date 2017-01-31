@@ -9,20 +9,29 @@ import {
   setDay,
 } from '../redux/actions'
 
-const Planner = ({ setDay }) => (
+const Planner = ({ setDay, planner }) => (
   <div id="planner-page">
     <div className="add-button-container">
       <button>Add Item</button>
     </div>
 
     <div className="date-picker">
-      <Flatpickr onChange={(v) => setDay(v)}/>
+      <Flatpickr options={{
+        defaultDate: planner.day,
+        altFormat: 'F j, Y',
+      }} onChange={(v) => setDay(v)}/>
+    </div>
+
+    <div className="card">
+      <p>Most Important Tasks</p>
+      
     </div>
   </div>
 )
 
 Planner.propTypes = {
   setDay: PropTypes.func.isRequired,
+  planner: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = ({ planner }) => ({

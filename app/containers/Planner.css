@@ -8,3 +8,8 @@
     bottom: 20px;
     right: 20px;
 }
+
+#planner-page .date-picker {
+    display: flex;
+    justify-content: flex-end;
+}
