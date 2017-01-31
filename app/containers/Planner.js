@@ -65,7 +65,7 @@ class Planner extends Component {
               {this.state.VIPTasks.length > 0 ? (
                 <ul>
                   {this.state.VIPTasks.map((task, i) => (
-                    <li>{task.title}</li>
+                    <li key={i}>{task.title}</li>
                   ))}
                 </ul>
               ) : (
