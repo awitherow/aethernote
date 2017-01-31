@@ -1,11 +1,11 @@
 import db from '../db'
 
 import {
-  getMostImportantTasks as MITQuery,
+  getPrioTasksQuery,
 } from '../db'
 
-export const getMostImportantTasks = (req, res, next) =>
-  db.any(MITQuery, { 
+export const getPrioTasks = (req, res, next) =>
+  db.any(getPrioTasksQuery, { 
     username: req.headers.username,
     due: req.params.due,
     category: req.params.category,

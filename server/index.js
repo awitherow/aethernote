@@ -1,7 +1,17 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import favicon from 'serve-favicon'
-import { getNotes, getNote, createNote, updateNote, removeNote, toggleCompletion } from './queries/notes'
+import {
+  getNotes,
+  getNote,
+  createNote,
+  updateNote,
+  removeNote,
+  toggleCompletion,
+} from './queries/notes'
+import {
+  getPrioTasks,
+} from './queries/planner'
 import { AttemptLogin, AttemptSignup } from './queries/auth'
 import compression from 'compression'
 
@@ -41,6 +51,7 @@ app.post('/api/notes', createNote)
 app.put('/api/notes/:id', updateNote)
 app.put('/api/notes/complete/:id', toggleCompletion)
 app.delete('/api/notes/:id', removeNote)
+app.get('/api/planner/getVIP', getPrioTasks)
 
 // Set port and listen.
 app.set('port', (process.env.PORT || 3333))
