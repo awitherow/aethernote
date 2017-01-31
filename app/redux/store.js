@@ -1,5 +1,6 @@
 import {
-  LOADING, GRANT_AUTHORITY, SET_TYPE, OPEN_EDITOR, CLOSE_EDITOR, TOGGLE_SEARCH, SET_DAY, 
+  LOADING, GRANT_AUTHORITY, SET_TYPE, OPEN_EDITOR, CLOSE_EDITOR, TOGGLE_SEARCH, SET_DAY,
+  OPEN_BATCH_EDITOR, CLOSE_BATCH_EDITOR,
 } from './constants'
 
 import {
@@ -21,10 +22,13 @@ const initialState = {
   planner: {
     day: moment.now(),
   },
+  batchEditor: {
+    hidden: true,
+  },
 }
 
 const Store = (state = initialState, action) => {
-  console.log(state, action)
+  console.log(action)
   switch(action.type) {
     case GRANT_AUTHORITY: return {
       ...state,
@@ -52,6 +56,20 @@ const Store = (state = initialState, action) => {
       editor: {
         hidden: true,
         note: {},
+      },
+    }
+    case OPEN_BATCH_EDITOR: return {
+      ...state,
+      batchEditor: {
+        hidden: false,
+        type: action.data,
+      },
+    }
+    case CLOSE_BATCH_EDITOR: return {
+      ...state,
+      batchEditor: {
+        hidden: true,
+        type: '',
       },
     }
     case TOGGLE_SEARCH: return {
