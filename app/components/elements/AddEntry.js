@@ -125,7 +125,7 @@ export default class AddEntry extends Component {
                 prio ? prio : 'prio'
               }
             >
-              {[1, 2, 3].map(prio =>
+              {[1, 2, 3, 5, 8, 13].map(prio =>
                 <MenuItem
                   key={prio}
                   onSelect={() => this.handleChange('prio', prio)}>
