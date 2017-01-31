@@ -6,6 +6,10 @@ import { connect } from 'react-redux'
 import Flatpickr from 'react-flatpickr'
 
 import {
+  Panel,
+} from 'react-bootstrap'
+
+import {
   setDay,
   toggleLoading,
 } from '../redux/actions'
@@ -52,8 +56,7 @@ class Planner extends Component {
             }} onChange={(v) => this.props.setDay(v)}/>
           </div>
 
-          <div className="card">
-            <p>Most Important Tasks</p>
+          <Panel header="Most Important Tasks">
             {this.state.VIPTasks.length > 0 ? (
               <ul>
                 {this.state.VIPTasks.map((task, i) => (
@@ -61,7 +64,7 @@ class Planner extends Component {
                 ))}
               </ul>
             ) : <p>No tasks in doing! Time to prioritize!</p>}
-          </div>
+          </Panel>
         </div>
     )
   }
