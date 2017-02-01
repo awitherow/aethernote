@@ -10,4 +10,5 @@ function sql(file) {
   })
 }
 
-export const getPrioTasksQuery = sql('./queries/sql/getPrioTasksQuery.sql')
+export const queryDueTasks = sql('./queries/sql/queryDueTasks.sql')
+export const queryOptimalTasks = sql('./queries/sql/queryOptimalTasks.sql')
