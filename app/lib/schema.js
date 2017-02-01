@@ -1,8 +1,6 @@
 export const categories  = {
   note: [
     'inbox',
-    'icebox',
-    'backlog',
     'todo',
     'doing',
     'done',
