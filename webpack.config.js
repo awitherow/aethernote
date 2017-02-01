@@ -22,7 +22,7 @@ const baseConfig = function(env) {
           test: /\.css$/,
           loader: ExtractTextPlugin.extract({
             fallbackLoader: "style-loader",
-            loader: "css-loader",
+            loader: "css-loader!postcss-loader",
             publicPath: "/public/",
           }),
         },
