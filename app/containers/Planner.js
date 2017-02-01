@@ -29,21 +29,27 @@ class Planner extends Component {
   }
 
   componentDidMount() {
-    const { authenticated, user } = this.props
-    if (authenticated && user) {
+    this.preparePlanner()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.planner.day && nextProps.planner.day !== this.props.planner.day) {
       this.preparePlanner()
     }
   }
 
   preparePlanner = () => {
-    !this.props.loading && this.props.toggleLoading(true)
-    plannerService.getPrioTasks({
-      due: this.props.planner.day,
-      username: this.props.user,
-    }, ({ data }) => {
-      this.setState({ VIPTasks: data })
-      this.props.loading && this.props.toggleLoading(false)
-    })
+    const { authenticated, user } = this.props
+    if (authenticated && user) {
+      !this.props.loading && this.props.toggleLoading(true)
+      plannerService.getPrioTasks({
+        due: this.props.planner.day,
+        username: this.props.user,
+      }, ({ data }) => {
+        this.setState({ VIPTasks: data })
+        this.props.loading && this.props.toggleLoading(false)
+      })
+    }
   }
 
   render() {
