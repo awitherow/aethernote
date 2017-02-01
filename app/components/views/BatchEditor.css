@@ -1,0 +1,12 @@
+.batch-editor {
+  opacity: 0;
+  transition: opacity 0.33s ease;
+}
+
+.batch-editor:not(.open) {
+  visibility: hidden;
+}
+
+.batch-editor.open {
+  opacity: 1;
+}

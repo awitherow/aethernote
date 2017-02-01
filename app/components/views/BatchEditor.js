@@ -1,10 +1,22 @@
+import './BatchEditor.css'
 import React, { PropTypes, Component } from 'react'
+import classnames from 'classnames'
 
 class BatchEditor extends Component {
+  renderProperBatchEditor = () => {
+    switch(this.props.type) {
+      case 'VIP_TASKS': return (
+        <p>{this.props.type}</p>
+      )
+    }
+  }
+
   render() {
     return (
-      <div>
-        {this.props.type}
+      <div className={classnames('batch-editor overlay', {
+        'open': this.props.open,
+      })}>
+        {this.renderProperBatchEditor()}
       </div>
     )
   }
@@ -12,6 +24,7 @@ class BatchEditor extends Component {
 
 BatchEditor.propTypes = {
   type: PropTypes.string.isRequired,
+  open: PropTypes.string.isRequired,
 }
 
 export default BatchEditor

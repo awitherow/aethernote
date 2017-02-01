@@ -53,8 +53,14 @@ class Planner extends Component {
   }
 
   render() {
-    return this.props.batchEditor.hidden ? (
+    return (
       <div id="planner-page">
+
+        <BatchEditor
+          open={!this.props.batchEditor.hidden}
+          type={this.props.batchEditor.type}
+        />
+
         <div className="inner">
             <div className="add-button-container">
               <button>Add Item</button>
@@ -85,8 +91,6 @@ class Planner extends Component {
             </Panel>
           </div>
       </div>
-    ) : (
-      <BatchEditor type={this.props.batchEditor.type} />
     )
   }
 }
@@ -109,7 +113,7 @@ const mapStateToProps = ({ loading, authenticated, user, planner, batchEditor })
   authenticated,
   user,
   planner,
-  batchEditor, 
+  batchEditor,
 })
 
 const mapDispatchToProps = dispatch => ({
