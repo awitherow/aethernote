@@ -125,7 +125,7 @@ export default class AddEntry extends Component {
                 prio ? prio : 'prio'
               }
             >
-              {fibonacci.map(prio =>´
+              {fibonacci.map(prio =>
                 <MenuItem
                   key={prio}
                   onSelect={() => this.handleChange('prio', prio)}>
