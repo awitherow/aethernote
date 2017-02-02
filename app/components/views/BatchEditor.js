@@ -21,6 +21,7 @@ class BatchEditor extends Component {
       loading: false,
     }
   }
+  
   componentWillReceiveProps(nextProps) {
     if (nextProps.open) {
       this.setState({ loading: true })
@@ -30,7 +31,6 @@ class BatchEditor extends Component {
 
   getOptimalChoices = (type) =>
     plannerService.getOptimalChoicesFor(type, ({ data }) => {
-      console.log('hello!')
       this.setState({
         loading: false,
         optimalChoices: data,
