@@ -1,11 +1,11 @@
 import db from '../db'
 
 import {
-  queryDueTasks, queryOptimalTasks,
+  queryDueTasks, queryOptimalTasks, queryItemAsDue,
 } from '../db'
 
 export const getDueTasks = (req, res, next) =>
-  db.any(queryDueTasks, { 
+  db.any(queryDueTasks, {
     username: req.headers.username,
     due: req.params.due,
     category: req.params.category,
@@ -19,7 +19,7 @@ export const getOptimalTasks = (req, res, next) => {
   const username = req.headers.username
   switch(req.query.type) {
     // get most important tasks, should return a maximum of 10 results.
-    case 'VIP_TASKS': return db.any(queryOptimalTasks, { 
+    case 'VIP_TASKS': return db.any(queryOptimalTasks, {
       username,
     }).then(data => res.status(200).json({
       status: 'success',
@@ -33,4 +33,17 @@ export const getOptimalTasks = (req, res, next) => {
       message: 'Retrieved entries',
     })
   }
+}
+
+export const setItemAsDue = (req, res, next) => {
+  console.log(req.query)
+  db.none(queryItemAsDue, {
+    due: req.query.due,
+    id: req.query.id,
+    username: req.query.username,
+  }).then(data => res.status(200).json({
+    status: 'success',
+    data,
+    message: 'Updated entry',
+  })).catch(err => next(err))
 }

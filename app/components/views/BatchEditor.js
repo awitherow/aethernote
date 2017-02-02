@@ -21,7 +21,7 @@ class BatchEditor extends Component {
       loading: false,
     }
   }
-  
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.open) {
       this.setState({ loading: true })
@@ -37,20 +37,30 @@ class BatchEditor extends Component {
       })
     })
 
+  setItemAsDue = (id) => {
+    // TODO: optimistic update this.setState set this choice id's due to props.due
+
+    plannerService.setItemAsDue(id, this.props.due)
+  }
+
   renderProperBatchEditor = () => {
     switch(this.props.type) {
       case 'VIP_TASKS': return (
-        <ul className="">
-          {this.state.optimalChoices.map((choice, i) => {
-            return <li key={i}>{choice.title}</li>
-          })}
+        <ul className="vip-tasks">
+          {this.state.optimalChoices.map((choice, i) => (
+            <li key={i}>
+              <Button onClick={() => this.setItemAsDue(choice.id)} className="select">
+                {choice.due === this.props.due && <Glyphicon glyph="ok" />}
+              </Button>
+              <span className="title">{choice.title}</span>
+            </li>
+          ))}
         </ul>
       )
     }
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className={classnames('batch-editor overlay', {
         'open': this.props.open,
@@ -79,6 +89,7 @@ BatchEditor.propTypes = {
   closeBatchEditor: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   open: PropTypes.bool.isRequired,
+  due: PropTypes.number.isRequired,
 }
 
 const mapDispatchToProps = dispatch => ({

@@ -12,3 +12,4 @@ function sql(file) {
 
 export const queryDueTasks = sql('./queries/sql/queryDueTasks.sql')
 export const queryOptimalTasks = sql('./queries/sql/queryOptimalTasks.sql')
+export const queryItemAsDue = sql('./queries/sql/queryItemAsDue.sql')

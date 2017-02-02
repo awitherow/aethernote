@@ -59,6 +59,7 @@ class Planner extends Component {
         <BatchEditor
           open={!this.props.batchEditor.hidden}
           type={this.props.batchEditor.type}
+          due={this.props.planner.day}
         />
 
         <div className="inner">
