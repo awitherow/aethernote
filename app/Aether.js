@@ -6,14 +6,16 @@ import { isUserAuthenticated } from './api/security'
 
 import CMS from './containers/CMS'
 import Portal from './containers/Portal'
+import Planner from './containers/Planner'
 
 class Aether extends Component {
   render() {
     return (
       <BrowserRouter>
         <div id="aether">
-          <MatchWhenAuthorized pattern="/" component={CMS} />
-          <Match exactly pattern="/portal" component={Portal} />
+          <MatchWhenAuthorized exaclty pattern="/" component={CMS} />
+          <MatchWhenAuthorized exaclty pattern="/planner" component={Planner} />
+          <Match pattern="/portal" component={Portal} />
         </div>
       </BrowserRouter>
     )

@@ -1,6 +1,15 @@
+import path from 'path'
 const pgp = require('pg-promise')()
 
 pgp.pg.defaults.ssl = true
-const db = pgp(process.env.DATABASE_URL)
+export default pgp(process.env.DATABASE_URL)
 
-export default db
+function sql(file) {
+  return new pgp.QueryFile(path.join(__dirname, file), {
+    minify: true,
+  })
+}
+
+export const queryDueTasks = sql('./queries/sql/queryDueTasks.sql')
+export const queryOptimalTasks = sql('./queries/sql/queryOptimalTasks.sql')
+export const queryItemAsDue = sql('./queries/sql/queryItemAsDue.sql')

@@ -26,13 +26,22 @@ export const signup = (username, password, cb) =>
 
 
 export const isUserAuthenticated = () =>
-  localStorage.getItem('token') !== null
+  localStorage.getItem('aether-token') !== null
 
-export const authenticateUser = (token) =>
-  localStorage.setItem('token', token)
+export const authenticateUser = (token, username) => {
+  localStorage.setItem('aether-username', username)
+  localStorage.setItem('aether-authenticated', true)
+  localStorage.setItem('aether-token', token)
+}
 
 export const deauthenticateUser = () =>
-  localStorage.removeItem('token')
+  localStorage.removeItem('aether-token')
 
-export const getToken = () =>
-  localStorage.getItem('token')
+export const getToken = () => 
+  localStorage.getItem('aether-token')
+
+export const getUser = () =>
+  localStorage.getItem('aether-username')
+
+export const getAuth = () =>
+  localStorage.getItem('aether-authenticated')

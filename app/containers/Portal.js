@@ -14,17 +14,17 @@ class Portal extends Component {
     errors: {},
     username: '',
     password: '',
-    redirectToReferrer: false,
+    redirectHome: false,
   }
 
   pass = (token, username) => {
-    authenticateUser(token)
+    authenticateUser(token, username)
     this.props.grantAuthority({
       authenticated: true,
       username,
     })
     this.setState({
-      redirectToReferrer: true,
+      redirectHome: true,
     })
   }
 
@@ -61,8 +61,8 @@ class Portal extends Component {
   }
 
   render() {
-    const { username, password, redirectToReferrer } = this.state
-    return redirectToReferrer ? (
+    const { username, password, redirectHome } = this.state
+    return redirectHome ? (
       <Redirect to="/" />
     ) : (
       <div style={{ height: '100%' }}>

@@ -1,0 +1,58 @@
+.batch-editor {
+  opacity: 0;
+  transition: opacity 0.33s ease;
+
+  flex-direction: column;
+  color: black;
+}
+
+.batch-editor:not(.open) {
+  visibility: hidden;
+}
+
+.batch-editor.open {
+  opacity: 1;
+}
+
+.batch-editor header {
+  width: 100%;
+  padding: 12px 6px;
+}
+
+.batch-editor header .btn {
+  background: none;
+  border: none;
+  color: white;
+}
+
+.batch-editor header .glyphicon {
+  font-size: 24px;
+  color: black;
+}
+
+.batch-editor content {
+  width: 100%;
+  flex-grow: 1;
+  padding: 12px 24px;
+}
+
+.batch-editor content .vip-tasks {
+  list-style: none;
+  padding: 0;
+}
+
+.batch-editor content .vip-tasks li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.batch-editor content .vip-tasks li .select {
+  padding: 0;
+  height: 25px;
+  width: 25px;
+}
+
+.batch-editor content .vip-tasks li .title {
+  font-size: 16px;
+}
