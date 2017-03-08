@@ -6,7 +6,7 @@ import {
 } from 'react-bootstrap'
 
 import * as entryService from '../../api/entries'
-import { categories, currencies } from '../../lib/schema'
+import { categories, currencies, fibonacci } from '../../lib/schema'
 import { isMobile } from '../../lib/helpers'
 
 const initialContent = {
@@ -125,7 +125,7 @@ export default class AddEntry extends Component {
                 prio ? prio : 'prio'
               }
             >
-              {[1, 2, 3].map(prio =>
+              {fibonacci.map(prio =>
                 <MenuItem
                   key={prio}
                   onSelect={() => this.handleChange('prio', prio)}>

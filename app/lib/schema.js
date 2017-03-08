@@ -1,8 +1,6 @@
 export const categories  = {
   note: [
     'inbox',
-    'icebox',
-    'backlog',
     'todo',
     'doing',
     'done',
@@ -38,6 +36,8 @@ export const categories  = {
     'investment',
   ],
 }
+
+export const fibonacci = [1, 2, 3, 5, 8, 13]
 
 export const measurements = {
   exercise: {

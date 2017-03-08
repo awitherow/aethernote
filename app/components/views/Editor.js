@@ -8,7 +8,7 @@ import {
 } from 'react-bootstrap'
 
 import { convertToMarkdown, isMobile } from '../../lib/helpers'
-import { categories, contexts } from '../../lib/schema'
+import { categories, contexts, fibonacci } from '../../lib/schema'
 
 const initialState = {
   formUpdated: false,
@@ -163,7 +163,7 @@ export default class Editor extends Component {
                 id={`prio-selector`}
                 title={this.state.prio ? this.state.prio : prio}
               >
-                {[1, 2, 3].map(prio =>
+                {fibonacci.map(prio =>
                   <MenuItem
                     key={prio}
                     onSelect={() => this.handleChange('prio', prio)}>
