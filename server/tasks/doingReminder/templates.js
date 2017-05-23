@@ -1,7 +1,7 @@
-import React from 'react'
-import ReactHTMLEmail, { Email, Item, Span, renderEmail } from 'react-html-email'
+import React from 'react';
+import ReactHTMLEmail, { Email, Item, Span, renderEmail } from 'react-html-email';
 
-ReactHTMLEmail.injectReactEmailAttributes()
+ReactHTMLEmail.injectReactEmailAttributes();
 
 export const doingReminder = (
   { quoteText, quoteAuthor},
@@ -9,7 +9,7 @@ export const doingReminder = (
   goals,
   affirmations,
 ) => {
-  return renderEmail(
+    return renderEmail(
     <Email title="Doing Reminder">
       <Item align="center">
         <Span fontSize={16}>
@@ -62,15 +62,15 @@ export const doingReminder = (
         ) : <Span fontSize={16}>Time for a backlog grooming!</Span>}
       </Item>
     </Email>
-  )
-}
+  );
+};
 
 const taskStyles = (task) => ({
-  ...task.prio > 1 && {
-    fontWeight: 'bold',
-  },
-  ...task.prio > 2 && {
-    fontWeight: 'bold',
-    color: 'red',
-  },
-})
+    ...task.prio > 1 && {
+        fontWeight: 'bold',
+    },
+    ...task.prio > 2 && {
+        fontWeight: 'bold',
+        color: 'red',
+    },
+});

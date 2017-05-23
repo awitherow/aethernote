@@ -1,4 +1,4 @@
 export const sharedHeaders = {
-  'Accept': 'application/json',
-  'Content-Type': 'application/json',
-}
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+};

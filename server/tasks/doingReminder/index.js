@@ -1,3 +1,3 @@
-require('babel-polyfill')
-require('babel-register')
-require('./doing-reminder')
+require('babel-polyfill');
+require('babel-register');
+require('./doing-reminder');
