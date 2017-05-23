@@ -1,40 +1,40 @@
-import './lib/styles.css'
-import React from 'react'
-import { render } from 'react-dom'
+import './lib/styles.css';
+import React from 'react';
+import { render } from 'react-dom';
 
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import store from './redux/store'
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import store from './redux/store';
 
-import Aether from './Aether'
+import Aether from './Aether';
 
-const rootEl = document.getElementById('app')
+const rootEl = document.getElementById('app');
 
-let s = createStore(store,
-  process.env.NODE_ENV === 'development' ? (
-    window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__()
-  ) : null
-)
+let s = createStore(
+    store,
+    process.env.NODE_ENV === 'development' &&
+        (window.__REDUX_DEVTOOLS_EXTENSION__ &&
+            window.__REDUX_DEVTOOLS_EXTENSION__()),
+);
 
-const { AppContainer } = require('react-hot-loader')
-const hotRender = (Component) => {
-  render(
-    <AppContainer>
-      <Provider store={s}>
-        <Component />
-      </Provider>
-    </AppContainer>,
-    rootEl,
-  )
-}
+const { AppContainer } = require('react-hot-loader');
+const hotRender = Component => {
+    render(
+        <AppContainer>
+            <Provider store={s}>
+                <Component />
+            </Provider>
+        </AppContainer>,
+        rootEl,
+    );
+};
 
-hotRender(Aether)
+hotRender(Aether);
 
 if (module.hot) {
-  module.hot.accept('./Aether', () => {
-    const NewRoot = require('./Aether').default
-    module.hot.accept('./redux/store', () => s.replaceReducer(store))
-    hotRender(NewRoot)
-  })
+    module.hot.accept('./Aether', () => {
+        const NewRoot = require('./Aether').default;
+        module.hot.accept('./redux/store', () => s.replaceReducer(store));
+        hotRender(NewRoot);
+    });
 }

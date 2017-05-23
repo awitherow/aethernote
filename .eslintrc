@@ -1,16 +1,33 @@
 {
   "rules": {
-    "comma-dangle": ["warn", "always-multiline"],
-    "indent": ["error", 2, {"SwitchCase": 1}],
+    "comma-dangle": [
+      "warn",
+      "always-multiline"
+    ],
+    "indent": [
+      "error",
+      4,
+      {
+        "SwitchCase": 1
+      }
+    ],
     "no-console": "warn",
-    "semi": ["error", "never"]
+    "semi": [
+      "error",
+      "always"
+    ]
   },
   "env": {
     "node": true,
     "mocha": true,
     "browser": true
   },
-  parser: "babel-eslint",
-  "plugins": ["react"],
-  "extends": ["eslint:recommended", "plugin:react/recommended"]
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ]
 }
